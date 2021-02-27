@@ -3994,13 +3994,13 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">328</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">164</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">102</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">112</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">277</XPD:ATTR>
 <XPD:REF name="Model">HFVjrCD66kGEh5PizTMhMAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="LQjJmXzJNkyaHybxWV9NGgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="GhRTIny6ekOABdA8CRuk3QAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">occupied : Asteroid</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">onAsteroid : Asteroid</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="Uj8U7OOSikSiG3s/LFb5ZgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -4017,7 +4017,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">183,231;372,231</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">183,231;377,231</XPD:ATTR>
 <XPD:REF name="Model">BDZ6vvTZ2U+O8cP1VtBYnQAA</XPD:REF>
 <XPD:REF name="Head">rc3/lksVBEyK2s8w0X1KyAAA</XPD:REF>
 <XPD:REF name="Tail">3b45wxaO9UCTFMjgra2JOAAA</XPD:REF>
@@ -4043,7 +4043,7 @@
 <XPD:REF name="HostEdge">wpMm7HDKoEWZTSVC8lsJlAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="k+zLmUOKkE24+Z9Pvh5v5wAA">
-<XPD:ATTR name="Left" type="integer">372</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">377</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">231</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">29</XPD:ATTR>
@@ -4053,7 +4053,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">372,256;183,256</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">377,256;183,256</XPD:ATTR>
 <XPD:REF name="Model">Joa2DzWb5kCzUA2ak/eKfAAA</XPD:REF>
 <XPD:REF name="Head">3b45wxaO9UCTFMjgra2JOAAA</XPD:REF>
 <XPD:REF name="Tail">rc3/lksVBEyK2s8w0X1KyAAA</XPD:REF>
@@ -4133,7 +4133,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="/bq09nOKd06nRlPWoaui9AAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">4 : GetSteppedOn(occupied, s): void</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">4 : GetSteppedOn(onAsteroid, s): void</XPD:ATTR>
 <XPD:REF name="Model">ydJylhO7tkOk2SBLT3rLUwAA</XPD:REF>
 <XPD:REF name="HostEdge">6sSPeQjiA0CYBiKBhLVj6QAA</XPD:REF>
 </XPD:OBJ>
@@ -4278,7 +4278,7 @@
 <XPD:REF name="Views[3]">X4C+T85CIE2C319BTv+VEwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[3]" type="UMLStimulus" guid="ydJylhO7tkOk2SBLT3rLUwAA">
-<XPD:ATTR name="Arguments" type="string">occupied, s</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">onAsteroid, s</XPD:ATTR>
 <XPD:REF name="Sender">GGdkIXRSgUutmu13YVsHWgAA</XPD:REF>
 <XPD:REF name="Receiver">UNLrgNOTjkyW9EcWMKvxngAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="euUPwErq4U648ki0NN5oXAAA">
@@ -4368,7 +4368,7 @@
 <XPD:REF name="ReceivingStimuli[0]">ydJylhO7tkOk2SBLT3rLUwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingInstances[3]" type="UMLObject" guid="HFVjrCD66kGEh5PizTMhMAAA">
-<XPD:ATTR name="Name" type="string">occupied</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">onAsteroid</XPD:ATTR>
 <XPD:REF name="Classifier">uOnl6bp2VkSO9rpoqbFKKwAA</XPD:REF>
 <XPD:REF name="CollaborationInstanceSet">vbPeTycS70iKbnaAlQOojQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
@@ -4489,13 +4489,13 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">328</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">164</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">102</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">112</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">277</XPD:ATTR>
 <XPD:REF name="Model">bQBYS4jhW0y9zOxw2jTqqgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="j2rw7z1zh0KSxX8P+iYi3gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="rd4AVitTZEaBCJfRIKGu7AAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">occupied : Asteroid</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">onAsteroid : Asteroid</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="Zu3bj0r9wE2try4LiGrjBgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -4512,7 +4512,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">183,231;372,231</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">183,231;377,231</XPD:ATTR>
 <XPD:REF name="Model">JHFUKvyscUyt6Ke4d/jT5wAA</XPD:REF>
 <XPD:REF name="Head">jTkSzQyol0++B3nVD0wV7gAA</XPD:REF>
 <XPD:REF name="Tail">HNkz9WlCGUqxDTJwdDA2KQAA</XPD:REF>
@@ -4538,7 +4538,7 @@
 <XPD:REF name="HostEdge">42HMH6b/GkG527X5RiW22gAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="kWZ9EiK2ZkOhugpt3DDKIwAA">
-<XPD:ATTR name="Left" type="integer">372</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">377</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">231</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">29</XPD:ATTR>
@@ -4548,7 +4548,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">372,256;183,256</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">377,256;183,256</XPD:ATTR>
 <XPD:REF name="Model">GnRedTNWXUe7kp7mVLYp/QAA</XPD:REF>
 <XPD:REF name="Head">HNkz9WlCGUqxDTJwdDA2KQAA</XPD:REF>
 <XPD:REF name="Tail">jTkSzQyol0++B3nVD0wV7gAA</XPD:REF>
@@ -4628,7 +4628,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="ifUuOm9FeUWQbfTKExY2UAAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">4 : GetSteppedOn(occupied, r): void</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">4 : GetSteppedOn(onAsteroid, r): void</XPD:ATTR>
 <XPD:REF name="Model">JajiuH55qEOnCUsaNViczwAA</XPD:REF>
 <XPD:REF name="HostEdge">CDGGf2wCDk+RSMpsjhFAawAA</XPD:REF>
 </XPD:OBJ>
@@ -4773,7 +4773,7 @@
 <XPD:REF name="Views[3]">kgqMZOkoA0KkVKZf3KXP7QAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[3]" type="UMLStimulus" guid="JajiuH55qEOnCUsaNViczwAA">
-<XPD:ATTR name="Arguments" type="string">occupied, r</XPD:ATTR>
+<XPD:ATTR name="Arguments" type="string">onAsteroid, r</XPD:ATTR>
 <XPD:REF name="Sender">58ip8f9FYUmLwCY1x20YDQAA</XPD:REF>
 <XPD:REF name="Receiver">NMH7TwDEVkypSY7Xx/pxEwAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="0hBC0A7y6EmY0rwmR5rCXgAA">
@@ -4863,7 +4863,7 @@
 <XPD:REF name="ReceivingStimuli[0]">JajiuH55qEOnCUsaNViczwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingInstances[3]" type="UMLObject" guid="bQBYS4jhW0y9zOxw2jTqqgAA">
-<XPD:ATTR name="Name" type="string">occupied</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">onAsteroid</XPD:ATTR>
 <XPD:REF name="Classifier">uOnl6bp2VkSO9rpoqbFKKwAA</XPD:REF>
 <XPD:REF name="CollaborationInstanceSet">0/Li9N878k+Z6Xmm7wbknAAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
