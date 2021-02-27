@@ -1060,7 +1060,7 @@
 <XPD:OBJ name="OwnedViews[33]" type="UMLRealizationView" guid="ax4tVVSIZ0CEw6zD35qyegAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">936,231;802,36</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">936,231;805,49</XPD:ATTR>
 <XPD:ATTR name="ShowProperty" type="boolean">True</XPD:ATTR>
 <XPD:REF name="Model">yS5zC4rXU0GLlvsPQPkm5QAA</XPD:REF>
 <XPD:REF name="Head">mBgwJ+ELaUK/wFyHoembpgAA</XPD:REF>
@@ -3284,7 +3284,7 @@
 <XPD:REF name="Views[2]">2UVqBFebLUaJcnMaMMryqwAA</XPD:REF>
 <XPD:ATTR name="#SupplierDependencies" type="integer">1</XPD:ATTR>
 <XPD:REF name="SupplierDependencies[0]">yS5zC4rXU0GLlvsPQPkm5QAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">3</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">2</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="YdnpHp9m50uDvDlD/IuJ7wAA">
 <XPD:ATTR name="Name" type="string">GetMinedBy</XPD:ATTR>
 <XPD:REF name="Owner">Wxlaw1j2lEasiK8W33pUDwAA</XPD:REF>
@@ -3300,16 +3300,6 @@
 <XPD:OBJ name="Operations[1]" type="UMLOperation" guid="821jV/rJGUaqioJQt9NUQgAA">
 <XPD:ATTR name="Name" type="string">ReactToSunNearby</XPD:ATTR>
 <XPD:REF name="Owner">Wxlaw1j2lEasiK8W33pUDwAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Operations[2]" type="UMLOperation" guid="tgIpG7lLV0ydUwB5pshxbgAA">
-<XPD:ATTR name="Name" type="string">RemoveFromStorage</XPD:ATTR>
-<XPD:REF name="Owner">Wxlaw1j2lEasiK8W33pUDwAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">1</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="cJ+Q74K+iku+59qylbcG5QAA">
-<XPD:ATTR name="Name" type="string">s</XPD:ATTR>
-<XPD:REF name="BehavioralFeature">tgIpG7lLV0ydUwB5pshxbgAA</XPD:REF>
-<XPD:REF name="Type_">g05bmjpf706lonPIclscqAAA</XPD:REF>
-</XPD:OBJ>
 </XPD:OBJ>
 <XPD:ATTR name="#TypedParameters" type="integer">5</XPD:ATTR>
 <XPD:REF name="TypedParameters[0]">vE0Oe5Ra/E6XB6dwPup8EAAA</XPD:REF>
@@ -3522,8 +3512,6 @@
 <XPD:REF name="BehavioralFeature">bqbbMhrV4kSSbpxtl8UB4gAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#TypedParameters" type="integer">1</XPD:ATTR>
-<XPD:REF name="TypedParameters[0]">cJ+Q74K+iku+59qylbcG5QAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">2</XPD:ATTR>
 <XPD:REF name="Associations[0]">E7bWpVGaGUCB3Nw6KTN96gAA</XPD:REF>
 <XPD:REF name="Associations[1]">ZuctVTeJaEqygX9FgD2A2AAA</XPD:REF>
