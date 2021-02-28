@@ -3440,11 +3440,10 @@
 <XPD:REF name="TypedParameters[4]">yeq370Mgakq+PBYxOmGnAwAA</XPD:REF>
 <XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Associations[0]">VQALx2MnE0u4RYyY/tWMEAAA</XPD:REF>
-<XPD:ATTR name="#Instances" type="integer">4</XPD:ATTR>
+<XPD:ATTR name="#Instances" type="integer">3</XPD:ATTR>
 <XPD:REF name="Instances[0]">267mJbmtUEG+N4SL1S0C4wAA</XPD:REF>
 <XPD:REF name="Instances[1]">N9ncUrWe7kyJN70DG2I+awAA</XPD:REF>
 <XPD:REF name="Instances[2]">lsUljwUSJ0Sc7H3U2KtS9gAA</XPD:REF>
-<XPD:REF name="Instances[3]">Mfm1YGJ9CUeXFN27/wNxYAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[14]" type="UMLClass" guid="4roEreC+tkmDuz757FjBAwAA">
 <XPD:ATTR name="Name" type="string">AbstractBaseResource</XPD:ATTR>
@@ -3493,6 +3492,8 @@
 </XPD:OBJ>
 <XPD:ATTR name="#Associations" type="integer">1</XPD:ATTR>
 <XPD:REF name="Associations[0]">HR7qjDGDNEyTJLVZQc3/NwAA</XPD:REF>
+<XPD:ATTR name="#Instances" type="integer">1</XPD:ATTR>
+<XPD:REF name="Instances[0]">Mfm1YGJ9CUeXFN27/wNxYAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[15]" type="UMLClass" guid="ifzGZQ7Tq0eHLNwQDE0AEwAA">
 <XPD:ATTR name="Name" type="string">Coal</XPD:ATTR>
@@ -24202,13 +24203,13 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">408</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">112</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">151</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">171</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">345</XPD:ATTR>
 <XPD:REF name="Model">Mfm1YGJ9CUeXFN27/wNxYAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="YC3Z1N2EdEuhso4FJO8pSAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="l8oToAfp5kq6YSkhxWEngQAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">resource : IAsteroidResource</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">resource : AbstractBaseResource</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="+xIG1ychjkaoXrjRl6BW/AAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -24259,7 +24260,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">324,224;476,224</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">324,224;486,224</XPD:ATTR>
 <XPD:REF name="Model">8r69LZSmekOvg1YuDxoIdwAA</XPD:REF>
 <XPD:REF name="Head">LC4nxHrXF0S3JQn10xY1ggAA</XPD:REF>
 <XPD:REF name="Tail">75kX6Bq/qEG/81lJ+4iQEgAA</XPD:REF>
@@ -24283,7 +24284,7 @@
 <XPD:REF name="HostEdge">q8wG2eMXTEOTSmRlbU3KmwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="2RniFVFSgEmg4nf3v2Is+QAA">
-<XPD:ATTR name="Left" type="integer">476</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">486</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">224</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">57</XPD:ATTR>
@@ -24293,7 +24294,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">476,261;324,261</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">486,261;324,261</XPD:ATTR>
 <XPD:REF name="Model">4gQGQ7LuiEqeaUWQIQTLHwAA</XPD:REF>
 <XPD:REF name="Head">75kX6Bq/qEG/81lJ+4iQEgAA</XPD:REF>
 <XPD:REF name="Tail">LC4nxHrXF0S3JQn10xY1ggAA</XPD:REF>
@@ -24467,7 +24468,7 @@
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingInstances[2]" type="UMLObject" guid="Mfm1YGJ9CUeXFN27/wNxYAAA">
 <XPD:ATTR name="Name" type="string">resource</XPD:ATTR>
-<XPD:REF name="Classifier">Wxlaw1j2lEasiK8W33pUDwAA</XPD:REF>
+<XPD:REF name="Classifier">4roEreC+tkmDuz757FjBAwAA</XPD:REF>
 <XPD:REF name="CollaborationInstanceSet">6Z19lnrEcUeSuF6cqnmqZgAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
 <XPD:REF name="Views[0]">ebv/vTChW0S+LcLaOy4aegAA</XPD:REF>
