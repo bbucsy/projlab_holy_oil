@@ -5,6 +5,7 @@ left to right direction
 :Player: -left-> (Settler builds TeleportGate)
 :Player: -left-> (Settler tries to build TeleportGate)
 :Player: -right-> (Settler mines Uranium)
+:Player: -right-> (Settler mines Uranium with full storage)
 
 :Player: -right-> (Settler tries to mine empty Asteroid)
 :Player: -right-> (Settler tries to mine Asteroid that still has layers)
