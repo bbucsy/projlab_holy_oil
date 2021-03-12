@@ -1,0 +1,28 @@
+@startuml Water evaporates
+
+title Water Evaporates
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Controller as controller
+participant "a:Asteroid" as a
+participant "resource: Water" as res
+
+actor Tester as tester
+
+a -> tester ++ : is sun nearby? <<input>>
+tester --> a -- : IsNearSun:bool
+
+a -> tester ++ : number of layers remaining? <<input>>
+tester --> a -- : numOfLayersRemaining
+
+controller -> a ++ :ReactToSunNearby()
+alt sun is nearby && numOfLayersRemaining == 0 && resource is not Null
+    a -> res ++: ReactToSunNearby(a)
+    res -> a ++: SetResource(null)
+    a --> res --
+    res --> a --
+end
+a --> controller
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml Settler tries to use teleport gate
+
+title Settler tries to use teleport gate without active pair
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Player as player
+
+participant "s: Settler" as s
+participant "gate: TeleportGate" as gate
+participant "pair: TeleportGate" as pair
+
+participant "targetAsteroid: Asteroid" as a2
+
+participant "onAsteroid: Asteroid" as a1
+
+
+
+
+player -> s ++ : Move(gate)
+
+s -> gate ++ : ReactToMove(onAsteroid,s)
+
+gate -> pair ++ : GetHomeAsteroid()
+pair --> gate --: targetAsteroid = null
+
+note right : pair is not activa (so it's homeAsteroid is null)
+
+alt targetAsteroid == null
+    gate --> s --
+end
+
+
+
+s --> player --
+
+@enduml
