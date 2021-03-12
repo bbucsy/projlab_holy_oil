@@ -1,0 +1,17 @@
+@startuml
+
+title "Robot dies"
+
+rectangle "r: Robot" as robot
+rectangle "RobotController" as contr
+rectangle "a: Asteroid" as asteroid
+rectangle "Skeleton" as skeleton 
+
+skeleton -up-> robot : <<create>>
+skeleton -up-> robot: SetOnAsteroid(a)
+skeleton -> contr : <<create>>
+skeleton -> contr : AddRobot(r)
+skeleton -down-> asteroid: <<create>>
+skeleton -down-> asteroid: AddCrewmate(r)
+
+@enduml

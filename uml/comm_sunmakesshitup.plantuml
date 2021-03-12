@@ -1,0 +1,13 @@
+@startuml
+
+title "Sun starts Sunstorm and pulls some Asteroids"
+
+rectangle "SunController" as controller
+rectangle "a: Asteroid" as asteroid
+rectangle "Skeleton" as skeleton
+
+skeleton -left-> asteroid : <<create>>
+skeleton -right-> controller : <<create>>
+skeleton -right-> controller:AddAsteroid(a)
+
+@enduml

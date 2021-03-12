@@ -1,0 +1,18 @@
+@startuml
+
+title "Robot moves to asteroid"
+
+rectangle "r: Robot" as settler
+rectangle "current: Asteroid" as current
+rectangle "target: Asteroid" as target
+rectangle "Skeleton" as skeleton
+
+skeleton -up-> settler : <<create>>
+skeleton -up-> settler: SetOnAsteroid(current)
+skeleton -left-> current : <<create>>
+skeleton-left-> current: AddCrewmate(r)
+skeleton -left-> current: AddNeighbourAsteroid(target)
+skeleton -right-> target: <<create>>
+skeleton -right-> target: AddNeighbourAsteroid(current)
+
+@enduml

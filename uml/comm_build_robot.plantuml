@@ -1,0 +1,22 @@
+@startuml
+
+title "Settler CAN NOT build robot"
+
+rectangle "s: Settler" as settler
+rectangle "a: Asteroid" as asteroid
+rectangle "RobotRecipe" as recipe
+rectangle "ps: PlayerStorage" as storage
+rectangle "RobotController" as controller
+rectangle "r: Robot" as robot
+rectangle "Skeleton" as skeleton
+
+skeleton -up-> settler :<<create>>
+skeleton -up-> settler : SetStorage(ps)
+skeleton -up-> settler: SetOnAsteroid(a)
+skeleton -down-> asteroid: <<create>>
+skeleton -down-> asteroid: AddCrewmate(s)
+skeleton -left-> robot :<<create>>
+skeleton -right--> storage :<<create>>
+skeleton -down--> recipe : <<create>>
+skeleton -up--> controller : <<create>>
+@enduml

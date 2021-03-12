@@ -1,0 +1,28 @@
+@startuml
+
+title "Asteroid explodes with active teleport gate on it"
+
+rectangle "exploder: Asteroid" as asteroid
+rectangle "pairAsteroid: Asteroid" as pairast
+rectangle "SunController" as sun
+rectangle "GameController" as game
+rectangle "t: TeleportGate" as teleport
+rectangle "pair: TeleportGate" as pair
+rectangle "Skeleton" as skeleton
+
+skeleton -right-> pairast: <<create>>
+skeleton -right-> pairast: SetTeleporter(pair)
+skeleton -left-> asteroid : <<create>>
+skeleton -left-> asteroid: SetTeleporter(t)
+skeleton -down-> sun : <<create>>
+skeleton -down-> sun : AddAsteroid(exploder)
+skeleton -down-> game : <<create>>
+skeleton -down-> game: AddAsteroid(exploder)
+skeleton -up--> pair : <<create>>
+skeleton -up--> pair : SetHomeAsteroid(pairAsteroid)
+skeleton -up--> pair: SetPair(t)
+skeleton -up--> teleport : <<create>>
+skeleton -up--> teleport: SetPair(pair)
+skeleton --up--> teleport : SetHomeAsteroid(exploder)
+
+@enduml

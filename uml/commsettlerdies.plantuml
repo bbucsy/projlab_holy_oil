@@ -1,0 +1,26 @@
+@startuml
+
+title "Settler dies without teleporter"
+rectangle "s: Settler" as settler
+rectangle "a: Asteroid" as asteroid
+rectangle "GameController" as game
+rectangle "ps: PlayerStorage" as storage
+rectangle "tp: TeleportGate" as teleport
+rectangle "Skeleton" as skeleton
+
+skeleton -down--> game : <<create>>
+skeleton -down--> game : AddSettler(s)
+skeleton -down--> game : AddAsteroid(a)
+skeleton -up-> asteroid : <<create>>
+skeleton -up-> asteroid : AddCrewmate(s)
+skeleton -up--> asteroid : AddTeleporter(tp)
+skeleton --> storage : <<create>>
+skeleton --> storage : AddTeleportGatePair(tp, null)
+skeleton -> teleport : <<create>>
+skeleton -> teleport : SetHomeAsteroid(a)
+skeleton -left--> settler : <<create>>
+skeleton -left--> settler : SetOnAsteroid(a)
+skeleton -left--> settler : SetStorage(ps)
+
+
+@enduml

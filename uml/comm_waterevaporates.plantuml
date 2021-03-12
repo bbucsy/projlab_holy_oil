@@ -1,0 +1,15 @@
+@startuml
+
+title "Uranium explodes near Sun"
+
+rectangle "a: Asteroid" as asteroid
+rectangle "u: Uranium" as uran
+rectangle "Skeleton" as skeleton
+
+skeleton -left-> asteroid : <<create>>
+skeleton -left-> asteroid : SetResource(u)
+skeleton -left-> asteroid : SetNumOfLayersReamining(0)
+skeleton -left-> asteroid : SetIsNearbySun(true)
+skeleton -right-> uran : <<create>>
+
+@enduml

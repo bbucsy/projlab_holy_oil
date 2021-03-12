@@ -1,0 +1,21 @@
+@startuml
+
+title "Settler tries to mine empty asteroid"
+
+rectangle "s: Settler" as settler
+rectangle "a: Asteroid" as asteroid
+rectangle "u: Uranium" as uran
+rectangle "ps: PlayerStorage" as storage
+rectangle "Skeleton" as skeleton
+
+skeleton -up-> settler : <<create>>
+skeleton -up-> settler : SetOnAsteroid(a)
+skeleton -up-> settler: SetStorage(ps)
+skeleton -down-> asteroid : <<create>>
+skeleton -down-> asteroid: AddCrewmate(s)
+skeleton -down-> asteroid: SetResource(null)
+skeleton-down-> asteroid: SetNumOfLayersRemaining(0)
+skeleton -left-> uran : <<create>>
+skeleton -right-> storage : <<create>>
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title "Settler can NOT place teleporter"
+
+rectangle "s: Settler" as settler
+rectangle "a: Asteroid" as asteroid
+rectangle "t: TeleportGate" as teleporter
+rectangle "ps: PlayerStorage" as storage
+rectangle "Skeleton" as skeleton
+
+skeleton -up-> settler : <<create>>
+skeleton -up-> settler: SetOnAsteroid(a)
+skeleton -up-> settler : SetStorage(ps)
+skeleton -down-> asteroid:<<create>>
+skeleton -down-> asteroid:AddCrewmate(s)
+skeleton -down-> asteroid : SetTeleporter(t)
+skeleton -right-> teleporter : <<create>>
+skeleton -right-> teleporter: SetHomeAsteroid()
+skeleton -left-> storage : <<create>>
+
+
+@enduml
