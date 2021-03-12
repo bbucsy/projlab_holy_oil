@@ -1,0 +1,10 @@
+@startuml
+
+title "settler fills asteroid with uranium"
+
+rectangle "s: Settler" as settler
+rectangle "onAsteroid: Asteroid" as onAsteroid
+
+settler-down->onAsteroid : SetResource(s, uranium)
+
+@enduml
