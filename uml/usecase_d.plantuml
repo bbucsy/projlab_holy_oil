@@ -8,12 +8,11 @@ left to right direction
 
 :Player: -right-> (Settler tries to mine empty Asteroid)
 :Player: -right-> (Settler tries to mine Asteroid that still has layers)
-:Player: -right-> (Settler drills Asteroid with layers)
-:Player: -right-> (Settler drills Asteroid without layers)
+:Player: -right-> (Settler drills)
 :Player: -up-> (Settler moves to Asteroid)
 
-:Player: -up-> (Settler moves to neighbouring TeleportGate)
-:Player: -up-> (Settler moves to neighbouring TeleportGate without pair)
+:Player: -up-> (Settler moves through teleport)
+:Player: -up-> (Settler tries to use teleport gate without active pair)
 :Player: -down-> (Settler places TeleportGate)
 :Player: -down-> (Settler tries to place TeleportGate)
 :Player: -down-> (Settler fills Asteroid with Uranium)
@@ -22,15 +21,16 @@ left to right direction
 newpage
 left to right direction
 :Controller: -left-> (Robot moves to Asteroid)
-:Controller: -left-> (Robot drills Asteroid with layers)
-:Controller: -left-> (Robot drills Asteroid without layers)
+:Controller: -left-> (Robot drills)
 :Controller: -right-> (Settler dies)
 
 :Controller: -right-> (Robot dies)
 :Controller: -right-> (Uranium explodes)
-:Controller: -down-> (Asteroid explodes with a robot on it)
+:Controller: -down-> (Asteroid explodes with a robot on it, moves to TeleportGate)
+:Controller: -down-> (Asteroid explodes with a robot on it, moves to Asteroid)
 :Controller: -down-> (Asteroid explodes with a settler on it)
-:Controller: -down-> (Asteroid explodes with a TeleportGate on it)
+:Controller: -down-> (Asteroid explodes with a TeleportGate on it, pair on Asteroid)
+:Controller: -down-> (Asteroid explodes with a TeleportGate on it, pair in Storage)
 
 :Controller: -right-> (Water evaporates)
 :Controller: -up-> (Sun announces next Sunstorm)
