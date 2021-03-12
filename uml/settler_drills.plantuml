@@ -1,0 +1,27 @@
+@startuml Settler Drills
+
+title Settler drills
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Player as player
+
+participant "s: Settler" as s
+participant "onAsteroid: Asteroid" as a
+actor Tester as tester
+
+
+player -> s ++ : Drill()
+
+s -> a ++ : ReactToDrill()
+
+a -> tester ++ : number of layers remaining? <<input>>
+tester --> a -- : numOfLayersRemaining
+alt numOfLayersRemaining >= 1 
+    a->a ++ : DecNumOfLAyersRemaining()
+    deactivate a
+end 
+a --> s
+s --> player --
+
+@enduml

@@ -21,6 +21,10 @@ robotRecipe -> iron ** : ctor()
 participant "bill: BillOfMaterial" as bill
 robotRecipe -> bill ** : ctor(iron, uranium, coal)
 
+actor Tester as TESTER
+robotRecipe -> TESTER ++ : What does this settler have? <<Input>
+TESTER --> robotRecipe -- : storage
+
 participant "storage: PlayerStorage" as storage
 robotRecipe -> storage ++ : HasEnoughOf(bill)
 storage --> robotRecipe -- : hasEnough
