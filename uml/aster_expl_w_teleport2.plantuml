@@ -1,7 +1,7 @@
 @startuml
 skinparam SequenceLifeLineBackgroundColor LightYellow
 
-title "Asteroid explodes with a TeleportGate on it (pair on Asteroid)"
+title "Asteroid explodes with a TeleportGate on it (pair in Storage)"
 
 actor Controller as C
 
@@ -10,7 +10,7 @@ participant ": SunController" as sun
 participant ": GameController" as game
 participant "teleporter: TeleportGate" as tport
 participant "pair: TeleportGate" as pair
-participant "homeAsteroidOfPair: Asteroid" as home1
+participant "homeStorageOfPair: PlayerStorage" as home2
 
 C -> a ++ : Explode()
 
@@ -28,11 +28,11 @@ alt teleporter is not null
     a -> tport ++ : Explode()
 
         tport -> pair ++ : ExplodePair()
-        
-            alt pair on asteroid
 
-                pair -> home1 ++ : RemoveTeleporter(pair)
-                home1 --> pair --
+            alt pair not on asteroid
+
+                pair -> home2 ++ : RemoveTeleportGate(pair)
+                home2 --> pair --
 
             end
         

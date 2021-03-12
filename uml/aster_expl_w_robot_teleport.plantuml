@@ -1,7 +1,7 @@
 @startuml
 skinparam SequenceLifeLineBackgroundColor LightYellow
 
-title "Asteroid explodes with a settler on it (moves to TeleportGate)"
+title "Asteroid explodes with a robot on it (moves to TeleportGate)"
 
 actor Controller as C
 
