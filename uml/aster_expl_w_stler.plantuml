@@ -1,0 +1,35 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Asteroid explodes with a settler on it"
+
+actor Controller as C
+
+participant "a: Asteroid" as a
+participant "s: Settler" as s
+participant ": SunController" as sun
+participant ": GameController" as game
+
+C -> a ++ : Explode()
+
+loop for all c in crewmates
+
+    a -> s ++ : ReactToAsteroidExplosion() 
+        s -> s ++ : Die()
+        deactivate s
+    s --> a --
+
+end
+
+a -> sun ++ : RemoveAsteroid(a)
+sun --> a --
+
+a -> game ++ : RemoveAsteroid(a)
+game --> a --
+
+alt teleporter is null
+end
+
+a --> C --
+
+@enduml
