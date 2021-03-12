@@ -1,0 +1,55 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "settler tries to mine asteroid that still has layers"
+
+actor User as US
+
+participant "s: Settler" as settler
+
+US -> settler ++: Mine()
+
+participant "onAsteroid: Asteroid" as onAsteroid
+
+    settler-->onAsteroid ++: ReactToMineBy(s)
+
+actor Tester as TE
+
+        onAsteroid -> TE ++: number of layers remaining? <<input>>  
+        TE --> onAsteroid --: numOfLayers
+
+alt resource is NOT NULL && numOfLayersRemaining == 0
+
+participant "uranium: Uranium" as uranium
+
+        onAsteroid -> uranium ++: ReactToMine(onAsteroid, s)
+
+participant "storage: PlayerStorage" as storage
+
+            uranium -> storage ++: GetSumResource()
+            storage --> uranium --: sumStorage
+
+alt sumResources < 10
+
+participant "bill: BillOfMaterial" as bill
+
+            uranium -> bill **: ctor()
+            uranium->bill++: AddMaterial(uranium)
+            bill --> uranium --
+            uranium->storage ++: AddBill(bill)
+            storage --> uranium --
+            uranium -> onAsteroid ++: SetResource(null)
+            onAsteroid --> uranium -- 
+
+end
+
+        uranium --> onAsteroid--
+
+end
+
+    onAsteroid --> settler --
+
+settler --> US --
+
+@enduml
