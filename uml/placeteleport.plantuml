@@ -1,0 +1,22 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Player as player
+participant "s: Settler" as settler
+participant "a: Asteroid" as asteroid
+participant "t: TeleportGate" as teleport
+participant "ps: PlayerStorage" as storage
+
+player -> settler ++: PlaceTeleporter()
+settler -> asteroid ++: GetTeleporter()
+asteroid --> settler -- : ateroid_t
+settler -> storage ++: GetOneTeleporter()
+storage --> settler -- : storage_t
+
+alt atorage_t isnt ISNULL AND asteroid_t ISNULL
+    
+end
+
+
+@enduml
