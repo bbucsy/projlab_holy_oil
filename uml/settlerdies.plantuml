@@ -1,0 +1,30 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+title "Settler dies"
+actor Controller as control
+participant "s: Settler" as settler
+participant "GameController" as game
+participant "a: Asteroid" as asteroid
+actor Tester as tester
+participant "ps: PlayerStorage" as storage
+
+control -> settler ++: Die()
+settler -> game ++: RemoveSettler(s)
+game --> settler --
+settler -> asteroid ++: RemoveCrewmante(s)
+asteroid --> settler--
+settler-> tester ++: Are there teleporters on me?
+tester --> settler --: yes
+settler -> storage ++: GetTeleporters()
+storage --> settler --: teleporters
+
+alt settler has at least one teleporter
+    participant "teleporters[0]: TeleportGate" as teleporter
+    settler -> teleporter ++: Explode()
+    teleporter--> settler --
+end
+settler --> control --
+
+
+@enduml

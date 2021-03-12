@@ -1,22 +1,33 @@
 @startuml
 
 skinparam SequenceLifeLineBackgroundColor LightYellow
-
+title "Settler tries to/places a teleporter"
 actor Player as player
 participant "s: Settler" as settler
+actor Tester as tester
 participant "a: Asteroid" as asteroid
 participant "t: TeleportGate" as teleport
 participant "ps: PlayerStorage" as storage
 
 player -> settler ++: PlaceTeleporter()
+settler -> tester ++: Is there a teleporter here already?
+tester --> settler --: yes/no
 settler -> asteroid ++: GetTeleporter()
-asteroid --> settler -- : ateroid_t
+asteroid --> settler -- : teleporterOnAsteroid
+settler -> tester ++: Do I have at least one teleporter on me?
+tester --> settler --: no/yes
 settler -> storage ++: GetOneTeleporter()
-storage --> settler -- : storage_t
+storage --> settler -- : TeleportersInInventory
 
-alt atorage_t isnt ISNULL AND asteroid_t ISNULL
-    
+alt no teleporter on asteroid AND teleporter on settler
+    settler -> teleport ++: SetHomeAsteroid(a)
+    teleport --> settler --
+    settler -> asteroid ++: SetTeleporter(t)
+    asteroid --> settler --
+    settler -> storage ++: RemoveTeleportGate(t)
+    storage --> settler --
+
 end
-
+settler --> player --
 
 @enduml
