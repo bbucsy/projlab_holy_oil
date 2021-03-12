@@ -1,0 +1,20 @@
+@startuml
+
+title "settler fills asteroid with uranium"
+
+rectangle "s: Settler" as settler
+rectangle "onAsteroid: Asteroid" as onAsteroid
+rectangle "uranium: Uranium" as uranium
+rectangle "bill: BillOfMaterial" as bill
+rectangle "storage: PlayerStorage" as storage
+
+settler-down->onAsteroid : SetResource(s, uranium)
+onAsteroid ---up-> uranium : ReactToPlace(onAsteroid, s)
+uranium -up-> bill : ctor()
+uranium -> bill : AddMaterials(uranium)
+uranium -> storage : HasEnoughOf(bill)
+storage -up-> uranium : hasEnough
+uranium -> storage : RemoveBill(bill)
+uranium -> onAsteroid : SetResource(uranium)
+
+@enduml
