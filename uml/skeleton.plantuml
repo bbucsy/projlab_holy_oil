@@ -2,6 +2,8 @@
 
 skinparam SequenceLifeLineBackgroundColor LightYellow
 
+title "Settler tries to/builds teleporters"
+
 actor Player as player
 participant "s: Settler" as settler
 participant ": TeleporterRecipe" as TeleporterRecipe
@@ -27,12 +29,8 @@ actor Tester as tester
 TeleporterRecipe -> tester ++: What does this tester have?
 tester --> TeleporterRecipe --: storage
 participant "storage: PlayerStorage" as storage
-TeleporterRecipe -> storage ++ : HasEnoughOf(bill)
-storage --> TeleporterRecipe  --: DoesntHaveEnough
 TeleporterRecipe -> tester ++: Does this settler have teleporters already?
-tester --> TeleporterRecipe --: yes
-TeleporterRecipe -> storage  ++ : GetOneTeleporter()
-storage --> TeleporterRecipe -- : teleportInStorage
+tester --> TeleporterRecipe --: yes/no
 
 alt hasEnough and no teleport in storage
 

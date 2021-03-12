@@ -1,0 +1,32 @@
+@startuml
+
+title "Settler has enough materials to build Robot"
+
+rectangle "s: Settler" as settler
+rectangle "onAsteroid: Asteroid" as asteroid
+rectangle ": RobotRecipe" as recipe
+rectangle "coal: Coal" as coal
+rectangle "iron: Iron" as iron
+rectangle "uranium: Uranium" as uranium
+rectangle "bill: BillOfMaterial" as bill
+rectangle "Tester" as tester
+rectangle "storage: PlayerStorage" as storage
+rectangle ": RobotController" as controller
+rectangle "r: Robot" as robot
+
+settler -> recipe : CraftRobot()
+recipe -down-> coal : ctor()
+recipe -down-> uranium : ctor()
+recipe -down-> iron : ctor()
+recipe -down-> bill : ctor(coal, uranium, iron)
+recipe -up-> tester : Query<<Input>>
+tester -down-> recipe : storage
+recipe -up-> storage : HasEnoughOf(bill)
+storage -> recipe : hasEnough
+recipe -> storage : RemoveBill(bill)
+recipe -down-> robot : ctor()
+recipe -> asteroid : AddCrewmate(robot)
+recipe -> robot : Move(onAsteroid)
+recipe -> controller : AddRobot(robot)
+
+@enduml

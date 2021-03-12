@@ -12,12 +12,10 @@ participant "ps: PlayerStorage" as storage
 player -> settler ++: PlaceTeleporter()
 settler -> tester ++: Is there a teleporter here already?
 tester --> settler --: yes/no
-settler -> asteroid ++: GetTeleporter()
-asteroid --> settler -- : teleporterOnAsteroid
 settler -> tester ++: Do I have at least one teleporter on me?
 tester --> settler --: no/yes
 settler -> storage ++: GetOneTeleporter()
-storage --> settler -- : TeleportersInInventory
+storage --> settler -- : t
 
 alt no teleporter on asteroid AND teleporter on settler
     settler -> teleport ++: SetHomeAsteroid(a)
