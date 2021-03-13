@@ -1,0 +1,50 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Asteroid explodes with a TeleportGate on it (pair in Storage)"
+
+actor Controller as C
+
+participant "a: Asteroid" as a
+participant ": SunController" as sun
+participant ": GameController" as game
+participant "teleporter: TeleportGate" as tport
+participant "pair: TeleportGate" as pair
+participant "homeStorageOfPair: PlayerStorage" as home2
+
+C -> a ++ : Explode()
+
+loop there are no crewmates
+end
+
+a -> sun ++ : RemoveAsteroid(a)
+sun --> a --
+
+a -> game ++ : RemoveAsteroid(a)
+game --> a --
+
+alt teleporter is not null
+
+    a -> tport ++ : Explode()
+
+        tport -> pair ++ : ExplodePair()
+
+            alt pair not on asteroid
+
+                pair -> home2 ++ : RemoveTeleportGate(pair)
+                home2 --> pair --
+
+            end
+        
+        pair --> tport --
+
+        tport -> a ++ : RemoveTeleporter(teleporter)
+        a --> tport --
+
+    tport --> a --
+
+end
+
+a --> C --
+
+@enduml
