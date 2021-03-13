@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+title "Settler builds teleport AND FAILS"
+
+rectangle "s: Settler" as s
+rectangle "ps: PlayerStorage" as store
+rectangle ": Skeleton" as skeleton
+
+skeleton --down-> s : <<create>>
+skeleton --up-> store : <<create>>
+skeleton --left-> s : SetStorage(ps)
+skeleton --right-> store : AddBill(bill)
+
+@enduml
