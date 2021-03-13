@@ -8,12 +8,17 @@ rectangle "s: Settler" as settler
 rectangle "onAsteroid: Asteroid" as onAsteroid
 rectangle "uranium: Uranium" as uranium
 rectangle "Skeleton" as skeleton
+rectangle "ps: PlayerStorage" as storage
 
 skeleton->settler : <<create>>
 skeleton->onAsteroid: <<create>>
-skeleton->uranium: <<create>>
+skeleton-up->uranium: <<create>>
+skeleton->storage: <<create>>
 
-skeleton-down->onAsteroid: SetResource(uranium)
+skeleton-down->onAsteroid: SetResource(u)
+skeleton->onAsteroid: AddCrewmate(s)
+skeleton-down->onAsteroid: SetOnAsteroid(a)
+skeleton-up->settler: SetStorage(ps)
 
 
 @enduml
