@@ -8,11 +8,17 @@ rectangle "Skeleton" as c
 rectangle "a: Asteroid" as a
 rectangle "resource: Uranium" as r
 
+rectangle "SunController" as sun
+rectangle "GameController" as game
 
 
- c --> a : "<<create>>"
- c --> r : <<create>>
- c --> a : SetResource(resource)
 
+c --> a : "<<create>>"
+c --> r : <<create>>
+c --> a : SetResource(resource)
+
+c ---> sun : AddAsteroid(a)
+
+c ---> game: AddAsteroid(a)
 
 @enduml
