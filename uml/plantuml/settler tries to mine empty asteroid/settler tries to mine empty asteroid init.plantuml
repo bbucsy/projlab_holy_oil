@@ -1,0 +1,16 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "settler tries to mine empty asteroid"
+
+rectangle "s: Settler" as settler
+rectangle "onAsteroid: Asteroid" as onAsteroid
+rectangle "Skeleton" as skeleton
+
+skeleton->settler : <<create>>
+skeleton->onAsteroid: <<create>>
+
+skeleton-down->onAsteroid: SetResource(NULL)
+
+@endulm

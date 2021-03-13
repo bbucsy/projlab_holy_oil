@@ -1,0 +1,19 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "settler mines uranium"
+
+rectangle "s: Settler" as settler
+rectangle "onAsteroid: Asteroid" as onAsteroid
+rectangle "uranium: Uranium" as uranium
+rectangle "Skeleton" as skeleton
+
+skeleton->settler : <<create>>
+skeleton->onAsteroid: <<create>>
+skeleton->uranium: <<create>>
+
+skeleton-down->onAsteroid: SetResource(uranium)
+
+
+@enduml
