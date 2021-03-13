@@ -1,0 +1,26 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Settler moves to asteroid"
+
+actor Player as player
+
+participant "s: Settler" as settler
+participant "onAsteroid: Asteroid" as onAsteroid
+participant "target: Asteroid" as target
+
+player -> settler ++ : Move(target)
+
+settler -> onAsteroid ++ : GetNeighbours()
+onAsteroid --> settler -- : neighbours
+
+alt neighbours contains target
+
+    settler -> target ++ : ReactToMove (onAsteroid, s)
+    target --> settler --
+
+end
+
+settler --> player --
+
+@enduml

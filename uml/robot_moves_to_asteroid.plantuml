@@ -1,0 +1,26 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Robot moves to asteroid"
+
+actor Controller as controller
+
+participant "r: Robot" as robot
+participant "onAsteroid: Asteroid" as onAsteroid
+participant "target: Asteroid" as target
+
+controller -> robot ++ : Move(target)
+
+robot -> onAsteroid ++ : GetNeighbours()
+onAsteroid --> robot -- : neighbours
+
+alt neighbours contains target
+
+    robot -> target ++ : ReactToMove (onAsteroid, s)
+    target --> robot --
+
+end
+
+robot --> controller --
+
+@enduml

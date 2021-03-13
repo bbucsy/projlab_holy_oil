@@ -1,0 +1,29 @@
+@startuml Uranium explodes
+
+title Uranium Explodes
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Controller as controller
+participant "a:Asteroid" as a
+participant "resource: Uranium" as res
+
+actor Tester as tester
+
+controller -> a ++ :ReactToSunNearby()
+
+a -> tester ++ : is sun nearby? <<input>>
+tester --> a -- : IsNearSun:bool
+
+a -> tester ++ : number of layers remaining? <<input>>
+tester --> a -- : numOfLayersRemaining
+
+alt sun is nearby && numOfLayersRemaining == 0 && resource is not Null
+    a -> res ++: ReactToSunNearby(a)
+    res -> a ++: Explode()
+    a --> res --
+    res --> a --
+end
+a --> controller
+
+@enduml

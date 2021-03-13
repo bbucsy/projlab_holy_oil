@@ -1,0 +1,39 @@
+@startuml usecase
+left to right direction
+:Player: -left-> (Settler builds Robot)
+:Player: -left-> (Settler tries to build Robot)
+:Player: -left-> (Settler builds TeleportGate)
+:Player: -left-> (Settler tries to build TeleportGate)
+:Player: -right-> (Settler mines Uranium)
+
+:Player: -right-> (Settler tries to mine empty Asteroid)
+:Player: -right-> (Settler tries to mine Asteroid that still has layers)
+:Player: -right-> (Settler drills Asteroid with layers)
+:Player: -right-> (Settler drills Asteroid without layers)
+:Player: -up-> (Settler moves to Asteroid)
+
+:Player: -up-> (Settler moves to neighbouring TeleportGate)
+:Player: -up-> (Settler moves to neighbouring TeleportGate without pair)
+:Player: -down-> (Settler places TeleportGate)
+:Player: -down-> (Settler tries to place TeleportGate)
+:Player: -down-> (Settler fills Asteroid with Uranium)
+
+:Player: -down-> (Settler tries to fill Asteroid with Uranium)
+newpage
+left to right direction
+:Controller: -left-> (Robot moves to Asteroid)
+:Controller: -left-> (Robot drills Asteroid with layers)
+:Controller: -left-> (Robot drills Asteroid without layers)
+:Controller: -right-> (Settler dies)
+
+:Controller: -right-> (Robot dies)
+:Controller: -right-> (Uranium explodes)
+:Controller: -down-> (Asteroid explodes with a robot on it)
+:Controller: -down-> (Asteroid explodes with a settler on it)
+:Controller: -down-> (Asteroid explodes with a TeleportGate on it)
+
+:Controller: -right-> (Water evaporates)
+:Controller: -up-> (Sun announces next Sunstorm)
+:Controller: -up-> (Sun starts Sunstorm)
+:Controller: -up-> (Sun pulls some Asteroids nearby)
+@enduml

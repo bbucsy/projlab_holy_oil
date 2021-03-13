@@ -1,0 +1,45 @@
+@startuml
+
+title "Sun Steps"
+
+actor Controller as CTR
+participant ": SunController" as sunController
+participant "a: Asteroid" as asteroid
+actor Tester as TST
+
+CTR -> sunController ++ : Step()
+
+loop for all a in asteroids
+
+    sunController -> asteroid ++ : ReactToSunNearby()
+    asteroid --> sunController --
+
+end
+
+loop for all a in asteroids
+
+    sunController -> TST ++ : Should this asteroid be near sun? <<Input>>
+    TST --> sunController -- : newSunNearby
+
+    sunController -> asteroid ++ : SetIsNearby(newSunNearby)
+    asteroid --> sunController --
+
+end
+
+sunController -> TST ++ : Should I start a sunstorm? <<Input>>
+TST --> sunController -- : startSunStorm
+
+alt startSunStorm
+
+    loop for all a in asteroids
+
+        sunController -> asteroid ++ : ReactToSunstorm()
+        asteroid --> sunController --
+
+    end
+
+end
+
+sunController --> CTR --
+
+@enduml

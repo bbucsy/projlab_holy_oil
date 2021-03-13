@@ -1,0 +1,56 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Settler build robot"
+
+actor User as US
+participant "s: Settler" as settler
+participant "onAsteroid: Asteroid" as onAsteroid
+participant ": RobotRecipe" as robotRecipe
+
+US -> settler ++ : CraftRobot()
+settler -> robotRecipe ++ : Craft(s, onAsteroid)
+
+participant "coal: Coal" as coal
+robotRecipe -> coal ** : ctor()
+participant "uranium: Uranium" as uranium
+robotRecipe -> uranium ** : ctor()
+participant "iron: Iron" as iron
+robotRecipe -> iron ** : ctor()
+
+participant "bill: BillOfMaterial" as bill
+robotRecipe -> bill ** : ctor(iron, uranium, coal)
+
+actor Tester as TESTER
+robotRecipe -> TESTER ++ : What does this settler have? <<Input>
+TESTER --> robotRecipe -- : storage
+
+participant "storage: PlayerStorage" as storage
+robotRecipe -> storage ++ : HasEnoughOf(bill)
+storage --> robotRecipe -- : hasEnough
+
+alt hasEnough
+
+    robotRecipe -> storage ++ : RemoveBill(bill)
+    storage --> robotRecipe --
+
+    participant "r: Robot" as robot
+    robotRecipe -> robot ** : ctor()
+
+    robotRecipe -> onAsteroid ++ : AddCrewmate(robot)
+    onAsteroid --> robotRecipe --
+
+    robotRecipe -> robot ++ : Move(onAsteroid)
+    robot --> robotRecipe --
+
+    participant ": RobotController" as controller
+    robotRecipe -> controller ++ : AddRobot(robot)
+    controller --> robotRecipe --
+
+end
+
+robotRecipe --> settler --
+
+settler --> US --
+
+@enduml

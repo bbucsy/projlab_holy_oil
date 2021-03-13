@@ -1,0 +1,48 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "settler tries to fill asteroid with uranium"
+
+actor User as US
+
+participant "s: Settler" as settler
+
+US -> settler ++: PlaceResource(uranium)
+
+participant "onAsteroid: Asteroid" as onAsteroid
+
+    settler->onAsteroid ++: SetResource(s, uranium)
+
+actor Tester as TE
+        onAsteroid -> TE ++: number of layers remaining? <<input>>  
+        TE --> onAsteroid --: numOfLayers
+alt resource is NULL && numOfLayersRemaining == 0
+
+participant "uranium: Uranium" as uranium
+
+        onAsteroid -> uranium ++: ReactToPlace(onAsteroid, s)
+
+participant "bill: BillOfMaterial" as bill
+            uranium -> bill **: ctor()
+            uranium -> bill ++: AddMaterials(uranium)
+            bill --> uranium --
+
+participant "storage: PlayerStorage" as storage
+            uranium -> storage ++: HasEnoughOf(bill)
+            storage --> uranium --: hasEnough
+
+            uranium -> storage ++: RemoveBill(bill)
+            storage --> uranium --
+
+            uranium -> onAsteroid ++: SetResource(uranium)
+            onAsteroid --> uranium --
+
+        uranium --> onAsteroid --
+end
+
+    onAsteroid --> settler--
+
+settler --> US--
+
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Asteroid explodes with a robot on it (moves to Asteroid)"
+
+actor Controller as C
+
+participant "a: Asteroid" as a
+participant "neighbour: Asteroid" as neighbour
+participant "r: Robot" as r
+participant ": SunController" as sun
+participant ": GameController" as game
+
+C -> a ++ : Explode()
+
+loop for all c in crewmates
+
+    a -> r ++ : ReactToAsteroidExplosion() 
+        r -> a ++ : GetRandomNeighbour()
+        return neighbour
+        r -> r ++ : Move(neighbour)
+        deactivate r
+    r --> a --
+
+end
+
+a -> sun ++ : RemoveAsteroid(a)
+sun --> a --
+
+a -> game ++ : RemoveAsteroid(a)
+game --> a --
+
+alt teleporter is null
+end
+
+a --> C --
+
+@enduml
