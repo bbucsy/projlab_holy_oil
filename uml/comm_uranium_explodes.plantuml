@@ -1,0 +1,18 @@
+@startuml Uranium explodes
+
+title Uranium Explodes
+
+skinparam Linetype polyline
+
+rectangle "Skeleton" as c
+rectangle "a: Asteroid" as a
+rectangle "resource: Uranium" as r
+
+
+
+ c --> a : "<<create>>"
+ c --> r : <<create>>
+ c --> a : SetResource(resource)
+
+
+@enduml

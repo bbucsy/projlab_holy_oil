@@ -1,0 +1,31 @@
+@startuml Use Teleport Gate fail
+
+title Settler tries to use teleport gate without active pair
+
+skinparam Linetype polyline
+
+rectangle "Skeleton" as c
+rectangle "s: Settler" as s
+rectangle "gate: TeleportGate" as g
+rectangle "pair: TeleportGate" as p
+
+
+rectangle "onAsteroid: Asteroid" as a1
+
+
+
+c ---right-> s : <<create>>
+c --> a1 : <<create>>
+c --up-> g : <<create>>
+c --up-> p : <<create>>
+
+
+c ---right-> s : setOnAsteroid(onAsteroid)
+c ---> a1 : AddCrewmate(s)
+c ---> a1 : setTeleportGate(gate)
+c ---> p : setPair(gate)
+c --up-> g : setHomeAsteroid(onAsteroid)
+c --up-> g : setPair(pair)
+c --up-> p : setHomeAsteroid(null)
+
+@enduml

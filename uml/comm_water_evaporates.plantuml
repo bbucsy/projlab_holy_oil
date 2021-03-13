@@ -1,0 +1,17 @@
+@startuml water evaporates
+
+title Water evaporates 
+skinparam Linetype polyline
+
+rectangle "Skeleton" as c
+rectangle "a: Asteroid" as a
+rectangle "resource: Water" as r
+
+
+
+ c --> a : "<<create>>"
+ c --> r : <<create>>
+ c --> a : SetResource(resource)
+
+
+@enduml

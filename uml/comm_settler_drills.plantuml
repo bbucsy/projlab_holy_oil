@@ -1,0 +1,20 @@
+@startuml Settler drills
+
+title Settler drills
+
+skinparam Linetype polyline
+
+rectangle "Skeleton" as c
+rectangle "s: Settler" as s
+rectangle "onAsteroid: Asteroid" as a
+
+
+
+c --left-> s : <<create>>
+c --left-> s : setOnAsteroid(onAsteroid)
+
+c --right-> a : <<create>>
+c --right-> a : AddCrewmate(s)
+
+
+@enduml

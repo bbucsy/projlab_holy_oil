@@ -1,0 +1,34 @@
+@startuml Use Teleport Gate
+
+title Use Teleport Gate
+
+skinparam Linetype polyline
+
+rectangle "Skeleton" as c
+rectangle "s: Settler" as s
+rectangle "gate: TeleportGate" as g
+rectangle "pair: TeleportGate" as p
+
+
+rectangle "onAsteroid: Asteroid" as a1
+rectangle "targetAsteroid: Asteroid" as a2
+
+
+
+c ---right-> s : <<create>>
+c --> a1 : <<create>>
+c --> a2 : <<create>>
+c --up-> g : <<create>>
+c --up-> p : <<create>>
+
+
+c ---right-> s : setOnAsteroid(onAsteroid)
+c ---> a1 : AddCrewmate(s)
+c ---> a1 : setTeleportGate(gate)
+c ---> p : setPair(gate)
+c --up-> g : setHomeAsteroid(onAsteroid)
+c --up-> g : setPair(pair)
+c --up-> p : setHomeAsteroid(targetAsteroid)
+c ---> a2 : setTeleportGate(pair)
+
+@enduml

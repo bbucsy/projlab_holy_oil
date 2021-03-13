@@ -1,0 +1,20 @@
+@startuml Robot drills
+
+title Robot drills
+
+skinparam Linetype polyline
+
+rectangle "Skeleton" as c
+rectangle "r: Robot" as s
+rectangle "onAsteroid: Asteroid" as a
+
+
+
+c --left-> s : <<create>>
+c --left-> s : setOnAsteroid(onAsteroid)
+
+c --right-> a : <<create>>
+c --right-> a : AddCrewmate(r)
+
+
+@enduml

@@ -10,7 +10,6 @@ participant "s: Settler" as s
 participant "gate: TeleportGate" as gate
 participant "pair: TeleportGate" as pair
 
-participant "targetAsteroid: Asteroid" as a2
 
 participant "onAsteroid: Asteroid" as a1
 
