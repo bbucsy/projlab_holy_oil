@@ -7,10 +7,15 @@ title "settler tries to mine empty asteroid"
 rectangle "s: Settler" as settler
 rectangle "onAsteroid: Asteroid" as onAsteroid
 rectangle "Skeleton" as skeleton
+rectangle "ps: PlayerStorage" as storage
 
 skeleton->settler : <<create>>
 skeleton->onAsteroid: <<create>>
+skeleton->storage: <<create>>
 
 skeleton-down->onAsteroid: SetResource(NULL)
+skeleton->onAsteroid: AddCrewmate(s)
+skeleton-down->onAsteroid: SetOnAsteroid(a)
+skeleton-up->settler: SetStorage(ps)
 
 @endulm

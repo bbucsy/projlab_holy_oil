@@ -3,14 +3,20 @@
 title "settler fills asteroid with uranium"
 
 rectangle "s: Settler" as settler
-rectangle "onAsteroid: Asteroid" as onAsteroid
-rectangle "uranium: Uranium" as uranium
+rectangle "a: Asteroid" as onAsteroid
+rectangle "u: Uranium" as uranium
 rectangle "Skeleton" as skeleton
+rectangle "ps: PlayerStorage" as storage
 
 skeleton->settler : <<create>>
-skeleton->onAsteroid: <<create>>
-skeleton->uranium: <<create>>
+skeleton-->onAsteroid: <<create>>
+skeleton-up->uranium: <<create>>
+skeleton-up->storage: <<create>>
 
 skeleton-down->onAsteroid: SetResource(NULL)
+skeleton->onAsteroid: AddCrewmate(s)
+skeleton->settler: SetStorage(ps)
+skeleton-up->settler: SetOnAsteroid(a)
+skeleton->storage: SetStoredMaterials(u)
 
 @enduml
