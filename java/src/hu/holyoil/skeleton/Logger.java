@@ -21,7 +21,9 @@ public final class Logger {
         objectNames.put(o,name);
     }
 
-    public static String GetName(Object object){ return objectNames.get(object); }
+    public static String GetName(Object object){
+        return objectNames.get(object);
+    }
 
     public static void ClearObjects(){
         objectNames.clear();

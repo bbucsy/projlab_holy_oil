@@ -20,7 +20,7 @@ public class BillOfMaterial {
     }
 
     public List<AbstractBaseResource> GetMaterials() {
-        Logger.Log(this,"Returning material");
+        Logger.Log(this,"Returning materials");
         Logger.Return();
         return resources;
     }

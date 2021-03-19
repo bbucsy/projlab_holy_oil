@@ -2,6 +2,7 @@ package hu.holyoil.resource;
 
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.skeleton.Logger;
 
 public class Water extends AbstractBaseResource {
 
@@ -20,13 +21,15 @@ public class Water extends AbstractBaseResource {
 
     @Override
     public Boolean IsSameType(AbstractBaseResource abstractBaseResource) {
-        System.out.println("I am water " + this.toString() + " and I am being compared to " + abstractBaseResource.toString());
-        return null;
+        Logger.Log(this,"Being compared to " + Logger.GetName(abstractBaseResource));
+        Logger.Return();
+        return true;
     }
 
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
-        System.out.println("I am water " + this.toString() + " and I am exposed to a sun. I will empty the core of " + asteroid.toString());
+        Logger.Log(this,"Reacting to Sun nearby");
         asteroid.SetResource(null);
+        Logger.Return();
     }
 }
