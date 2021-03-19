@@ -20,7 +20,7 @@ public abstract class TestCase {
         load();
 
         // play scenario
-        System.out.println("<" + Name() + ">" + " started\n");
+        System.out.println("<" + Name() + ">" + " started");
         Logger.SetEnabled(true);
         start();
 

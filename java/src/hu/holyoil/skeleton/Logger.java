@@ -12,6 +12,13 @@ public final class Logger {
     private static Scanner in = new Scanner(System.in);
     private static boolean enabled = true;
 
+    private static void print(String msg, int indentation) {
+        StringBuilder spaces = new StringBuilder();
+        for (int i = 0; i < indentation; ++i) {
+            spaces.append("  ");
+        }
+        System.out.print(spaces.toString() + msg);
+    }
 
     public static void SetEnabled(boolean e){
         enabled = e;
@@ -36,11 +43,13 @@ public final class Logger {
             System.out.println("Unregistered object calling");
             return;
         }
-        System.out.print((objectNames.get(caller)+": -> " + msg).indent(indentation++));
+        print(objectNames.get(caller)+": -> " + msg + "\n", indentation++);
     }
 
     public static void Return(){
-        indentation--;
+        if (!enabled) return;
+        if (indentation > 0)
+            --indentation;
     }
 
     public static int GetInteger(Object caller, String msg){
@@ -49,9 +58,8 @@ public final class Logger {
             return 0;
         }
 
-        System.out.print((objectNames.get(caller)+": " + msg).indent(indentation-1).stripTrailing() + " ");
-        int res = in.nextInt();
-        return res;
+        print((objectNames.get(caller)+": " + msg).trim() + " ", indentation - 1);
+        return in.nextInt();
     }
 
     public static Boolean GetBoolean(Object caller, String msg){
@@ -60,9 +68,8 @@ public final class Logger {
             return Boolean.FALSE;
         }
 
-        System.out.print((objectNames.get(caller)+": " + msg).indent(indentation-1).stripTrailing() + " ");
-        Boolean res = in.nextBoolean();
-        return res;
+        print((objectNames.get(caller)+": " + msg).trim() + " [true/false] ", indentation - 1);
+        return in.nextBoolean();
     }
 
 }

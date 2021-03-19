@@ -68,7 +68,27 @@ public class PlayerStorage {
     public void RemoveBill(BillOfMaterial billOfMaterial) {
 
         Logger.Log(this, "Removing bill " + Logger.GetName(billOfMaterial));
+
         storedMaterials.removeAll(billOfMaterial.GetMaterials());
+
+        for (AbstractBaseResource billResource : billOfMaterial.GetMaterials()) {
+
+            for (AbstractBaseResource storedResource : storedMaterials) {
+
+                if (storedResource.IsSameType(billResource)) {
+
+                    storedMaterials.remove(
+                            storedResource
+                    );
+
+                    break;
+
+                }
+
+            }
+
+        }
+
         Logger.Return();
 
     }
@@ -77,7 +97,31 @@ public class PlayerStorage {
 
         Logger.Log(this, "Checking if I have enough of " + Logger.GetName(billOfMaterial));
         Logger.Return();
-        // todo: logic
+
+        boolean[] checked = new boolean[storedMaterials.size()];
+        for (int i = 0; i < storedMaterials.size(); i++)
+            checked[i] = false;
+
+        for (AbstractBaseResource billResource : billOfMaterial.GetMaterials()) {
+
+            boolean found = false;
+
+            for (int i = 0; i < storedMaterials.size(); i++) {
+
+                if (storedMaterials.get(i).IsSameType(billResource) && !checked[i]) {
+                    checked[i] = true;
+                    found = true;
+                    break;
+                }
+
+            }
+
+            if (!found) {
+                return false;
+            }
+
+        }
+
         return true;
 
     }
