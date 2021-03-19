@@ -18,8 +18,6 @@ public class AsteroidExplodesWithSettler extends TestCase {
 
     @Override
     protected void load() {
-        Logger.SetEnabled(true);
-
         asteroid = new Asteroid();
         Logger.RegisterObject(asteroid, "a: Asteroid");
 
