@@ -3,6 +3,7 @@ package hu.holyoil.neighbour;
 import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.resource.AbstractBaseResource;
+import hu.holyoil.skeleton.Logger;
 
 import java.util.List;
 
@@ -26,8 +27,9 @@ public class Asteroid implements INeighbour {
         System.out.println("I am asteroid " + this.toString() + " and my new isnearbysun is " + newIsNearbySun);
     }
 
-    public void DecNumOfLayersRemaining(Boolean newIsNearbySun) {
-        System.out.println("I am asteroid " + this.toString() + " and my new isnearbysun is " + newIsNearbySun);
+    public void DecNumOfLayersRemaining() {
+        Logger.Log(this,"Decreesing layer by 1");
+        Logger.Return();
     }
 
     public void ReactToMineBy(IStorageCapable iStorageCapable) {
@@ -35,7 +37,13 @@ public class Asteroid implements INeighbour {
     }
 
     public void ReactToDrill() {
-        System.out.println("I am asteroid " + this.toString() + " and I am being drilled");
+        Logger.Log(this, "Getting drilled");
+
+        int layers = Logger.getInteger(this,"How many layers do I have?");
+
+        if (layers >= 1) this.DecNumOfLayersRemaining();
+
+        Logger.Return();
     }
 
     public void ReactToSunstorm() {

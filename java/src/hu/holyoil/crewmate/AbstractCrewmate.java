@@ -2,6 +2,7 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
+import hu.holyoil.skeleton.Logger;
 import jdk.jshell.spi.ExecutionControl;
 
 public abstract class AbstractCrewmate {
@@ -13,11 +14,15 @@ public abstract class AbstractCrewmate {
     }
 
     public void SetOnAsteroid(Asteroid asteroid) {
-        System.out.println("Setting my onAsteroid to " + asteroid.toString());
+        onAsteroid = asteroid;
     }
 
     public void Drill()  {
-        System.out.println("Drilling");
+        Logger.Log(this,"Drilling");
+
+        onAsteroid.ReactToDrill();
+
+        Logger.Return();
     }
 
     public abstract void Die();
