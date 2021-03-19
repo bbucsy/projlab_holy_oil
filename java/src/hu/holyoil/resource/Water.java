@@ -26,7 +26,7 @@ public class Water extends AbstractBaseResource {
 
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
-        System.out.println("I am water " + this.toString() + " and I am explosed to a sun. I will empty the core of " + asteroid.toString());
+        System.out.println("I am water " + this.toString() + " and I am exposed to a sun. I will empty the core of " + asteroid.toString());
         asteroid.SetResource(null);
     }
 }
