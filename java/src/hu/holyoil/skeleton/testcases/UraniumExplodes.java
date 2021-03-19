@@ -21,8 +21,6 @@ public class UraniumExplodes extends TestCase {
     @Override
     protected void load() {
 
-        Logger.SetEnabled(false);
-
         // magic
         asteroid = new Asteroid();
         Logger.RegisterObject(asteroid, "a: Asteroid");
@@ -37,7 +35,6 @@ public class UraniumExplodes extends TestCase {
         Logger.RegisterObject(GameController.getInstance(), ": GameController");
 
         asteroid.SetIsNearbySun(Logger.GetBoolean(this, "Is this asteroid nearby sun?"));
-        Logger.SetEnabled(true);
 
     }
 
