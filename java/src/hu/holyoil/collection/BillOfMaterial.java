@@ -1,6 +1,7 @@
 package hu.holyoil.collection;
 
 import hu.holyoil.resource.AbstractBaseResource;
+import hu.holyoil.skeleton.Logger;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
@@ -8,28 +9,20 @@ import java.util.List;
 
 public class BillOfMaterial {
 
-    private static Integer ID = 0;
-    private Integer myID;
+    List<AbstractBaseResource> resources;
 
     public BillOfMaterial() {
-        myID = ID;
-        ID++;
         resources = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-        return "BillOfMaterial " + myID.toString();
-    }
-
-    List<AbstractBaseResource> resources;
-
     public void AddMaterial(AbstractBaseResource abstractBaseResource){
-        System.out.println("I am BillOfMaterial " + this.toString() + "Adding material " + abstractBaseResource.toString());
+        Logger.Log(this,"Adding Material: " + Logger.getName(abstractBaseResource));
+        Logger.Return();
     }
 
     public List<AbstractBaseResource> GetMaterials() {
-        System.out.println("Returning my materials");
+        Logger.Log(this,"Returning material");
+        Logger.Return();
         return resources;
     }
 }
