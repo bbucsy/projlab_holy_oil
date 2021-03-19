@@ -2,6 +2,7 @@ package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.skeleton.Logger;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
@@ -16,14 +17,38 @@ public class GameController implements ISteppable  {
     @Override
     public void Step() { System.out.println("Stepping"); }
 
-    public void CheckWinCondition()  { System.out.println("Checking win condition"); }
-    public void CheckLoseCondition()  { System.out.println("Checking lose condition"); }
-    public void CheckGameCondition()  { System.out.println("Checking game condition"); }
-    public void StartGame()  { System.out.println("Starting game"); }
-    public void AddAsteroid(Asteroid asteroid)  { System.out.println("Adding asteroid " + asteroid.toString()); }
-    public void RemoveAsteroid(Asteroid asteroid)  { System.out.println("Removing asteroid " + asteroid.toString()); }
-    public void AddSettler(Settler settler)  { System.out.println("Adding settler " + settler.toString()); }
-    public void RemoveSettler(Settler settler)  { System.out.println("Removing settler " + settler.toString()); }
+    public void CheckWinCondition()  {
+        Logger.Log(this,"Checking win condition");
+        Logger.Return();
+    }
+    public void CheckLoseCondition()  {
+        Logger.Log(this,"Checking loose condition");
+        Logger.Return();
+    }
+    public void CheckGameCondition()  {
+        Logger.Log(this,"Checking game condition");
+        Logger.Return(); }
+
+    public void StartGame()  {
+        Logger.Log(this,"Starting game");
+        Logger.Return();
+    }
+    public void AddAsteroid(Asteroid asteroid)  {
+        Logger.Log(this,"Adding Asteroid");
+        Logger.Return();
+    }
+    public void RemoveAsteroid(Asteroid asteroid)  {
+        Logger.Log(this,"Removing asteroid");
+        Logger.Return();
+    }
+    public void AddSettler(Settler settler)  {
+        Logger.Log(this,"Adding settler");
+        Logger.Return();
+    }
+    public void RemoveSettler(Settler settler)  {
+        Logger.Log(this,"Removing settler");
+        Logger.Return();
+    }
 
     public static GameController getInstance() {
         if (gameController == null) {
