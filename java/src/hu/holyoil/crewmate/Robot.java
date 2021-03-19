@@ -11,6 +11,7 @@ public class Robot extends AbstractCrewmate {
 
     public Robot(Asteroid startingAsteroid) {
         onAsteroid = startingAsteroid;
+        onAsteroid.AddCrewmate(this);
     }
 
     @Override

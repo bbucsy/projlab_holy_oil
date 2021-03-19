@@ -103,10 +103,6 @@ public class TestFramework {
 
     }
 
-    public Asteroid GetAsteroid() {
-        return new Asteroid();
-    }
-
     public static TestFramework getInstance() {
 
         if (testFramework == null) {
