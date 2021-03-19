@@ -39,11 +39,11 @@ public class Asteroid implements INeighbour {
         Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
         Logger.Return();
 
-        crewmates.add(abstractCrewmate);
-
         Logger.Log(this, "Removing Crewmate");
         from.RemoveCrewmate(abstractCrewmate);
         Logger.Return();
+
+        crewmates.add(abstractCrewmate);
 
         Logger.Log(this, "Setting onAsteroid of Crewmate");
         abstractCrewmate.SetOnAsteroid(this);
@@ -211,7 +211,9 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
         Logger.Log(this, "Signaling to crewmates that I am exploding");
-        crewmates.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
+        while (crewmates.size() > 0) {
+            crewmates.get(0).ReactToAsteroidExplosion();
+        }
         Logger.Return();
 
         Logger.Log(this, "Removing me from GameController");

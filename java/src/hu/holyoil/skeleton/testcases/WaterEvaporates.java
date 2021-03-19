@@ -25,11 +25,9 @@ public class WaterEvaporates extends TestCase {
 
         Boolean isNearSun = Logger.GetBoolean(this, "Is the Asteroid near the Sun?");
         a.SetIsNearbySun(isNearSun);
-        Logger.Return();
 
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
-        Logger.Return();
 
         a.SetResource(resource);
     }

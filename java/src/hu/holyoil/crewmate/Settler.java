@@ -19,6 +19,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     public Settler(Asteroid startingAsteroid) {
         storage = new PlayerStorage();
         onAsteroid = startingAsteroid;
+        Move(onAsteroid);
     }
 
 
