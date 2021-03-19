@@ -73,6 +73,7 @@ public class TestFramework {
 
         while (true) {
 
+            System.out.println("----------");
             System.out.println("Testcases:");
 
             for (int i = 0; i < testcases.size(); i++) {
@@ -81,16 +82,21 @@ public class TestFramework {
 
             }
 
+            System.out.println("-1: Exit Application");
             System.out.print("Choose a testcase number to run: ");
             int numToRun = scanner.nextInt();
 
-            while (numToRun < 0 || numToRun >= testcases.size()) {
+            if (numToRun == -1)
+                return;
+
+            while (numToRun < -1 || numToRun >= testcases.size()) {
 
                 System.out.print("Choose a valid number: ");
                 numToRun = scanner.nextInt();
 
             }
 
+            System.out.println("----------");
             testcases.get(numToRun).runTestcase();
 
         }
