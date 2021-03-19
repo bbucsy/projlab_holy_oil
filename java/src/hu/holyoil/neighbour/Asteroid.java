@@ -124,14 +124,6 @@ public class Asteroid implements INeighbour {
 
         Logger.Log(this, "Reacting to sun nearby");
 
-        Boolean isNearSun = Logger.GetBoolean(this, "Is the Asteroid near the Sun?");
-        SetIsNearbySun(isNearSun);
-        Logger.Return();
-
-        int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
-        SetNumOfLayersRemaining(numOfLayersRemaining);
-        Logger.Return();
-
         if (isNearSun && numOfLayersRemaining == 0 && resource != null) {
 
             Logger.Log(this, "Resource is reacting to sun nearby");

@@ -17,7 +17,7 @@ public final class Logger {
         for (int i = 0; i < indentation; ++i) {
             spaces.append("  ");
         }
-        System.out.println(spaces.toString() + msg);
+        System.out.print(spaces.toString() + msg);
     }
 
     public static void SetEnabled(boolean e){
@@ -43,7 +43,7 @@ public final class Logger {
             System.out.println("Unregistered object calling");
             return;
         }
-        print(objectNames.get(caller)+": -> " + msg, indentation++);
+        print(objectNames.get(caller)+": -> " + msg + "\n", indentation++);
     }
 
     public static void Return(){
@@ -68,7 +68,7 @@ public final class Logger {
             return Boolean.FALSE;
         }
 
-        print((objectNames.get(caller)+": " + msg).trim() + " ", indentation - 1);
+        print((objectNames.get(caller)+": " + msg).trim() + " [true/false] ", indentation - 1);
         return in.nextBoolean();
     }
 

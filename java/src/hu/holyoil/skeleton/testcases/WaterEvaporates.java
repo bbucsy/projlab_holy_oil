@@ -19,8 +19,17 @@ public class WaterEvaporates extends TestCase {
         a = new Asteroid();
         resource = new Water();
 
+        Logger.RegisterObject(this,"TestFixture");
         Logger.RegisterObject(a,"a: Asteroid");
         Logger.RegisterObject(resource,"resource: Water");
+
+        Boolean isNearSun = Logger.GetBoolean(this, "Is the Asteroid near the Sun?");
+        a.SetIsNearbySun(isNearSun);
+        Logger.Return();
+
+        int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
+        a.SetNumOfLayersRemaining(numOfLayersRemaining);
+        Logger.Return();
 
         a.SetResource(resource);
     }
