@@ -30,7 +30,7 @@ public class RobotController implements ISteppable {
     }
 
     private RobotController() {
-
+        //robots = new ArrayList<>();
     }
 
 }

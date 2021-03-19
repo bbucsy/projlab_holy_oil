@@ -4,14 +4,18 @@ import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 
 public class Uranium extends AbstractBaseResource {
-    @Override
-    public void ReactToMine(Asteroid asteroid, IStorageCapable iStorageCapable) {
-        System.out.println("I am uranium " + this.toString() + " and I am being mined by " + iStorageCapable.toString() + " on " + asteroid.toString());
+
+    private static Integer ID = 0;
+    private Integer myID;
+
+    public Uranium() {
+        myID = ID;
+        ID++;
     }
 
     @Override
-    public void ReactToPlace(Asteroid asteroid, IStorageCapable iStorageCapable) {
-        System.out.println("I am uranium " + this.toString() + " and I am being placed by " + iStorageCapable.toString() + " on " + asteroid.toString());
+    public String toString() {
+        return "uranium " + myID.toString();
     }
 
     @Override
@@ -23,5 +27,6 @@ public class Uranium extends AbstractBaseResource {
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
         System.out.println("I am uranium " + this.toString() + " and I am explosed to a sun. I will blow up " + asteroid.toString());
+        asteroid.Explode();
     }
 }

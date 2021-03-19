@@ -4,6 +4,7 @@ import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import jdk.jshell.spi.ExecutionControl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameController implements ISteppable  {
@@ -32,7 +33,8 @@ public class GameController implements ISteppable  {
     }
 
     private GameController() {
-
+        //settlers = new ArrayList<>();
+        //asteroids = new ArrayList<>();
     }
 
 }

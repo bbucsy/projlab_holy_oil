@@ -8,7 +8,7 @@ public interface IStorageCapable {
     void CraftRobot();
     void CraftTeleportGate();
     void Mine();
-    PlayerStorage getStorage();
+    PlayerStorage GetStorage();
     void PlaceTeleporter();
     void PlaceResource(AbstractBaseResource abstractBaseResource);
 

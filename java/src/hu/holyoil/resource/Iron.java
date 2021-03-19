@@ -1,17 +1,18 @@
 package hu.holyoil.resource;
 
-import hu.holyoil.crewmate.IStorageCapable;
-import hu.holyoil.neighbour.Asteroid;
-
 public class Iron extends AbstractBaseResource {
-    @Override
-    public void ReactToMine(Asteroid asteroid, IStorageCapable iStorageCapable) {
-        System.out.println("I am iron " + this.toString() + " and I am being mined by " + iStorageCapable.toString() + " on " + asteroid.toString());
+
+    private static Integer ID = 0;
+    private Integer myID;
+
+    public Iron() {
+        myID = ID;
+        ID++;
     }
 
     @Override
-    public void ReactToPlace(Asteroid asteroid, IStorageCapable iStorageCapable) {
-        System.out.println("I am iron " + this.toString() + " and I am being placed by " + iStorageCapable.toString() + " on " + asteroid.toString());
+    public String toString() {
+        return "iron " + myID.toString();
     }
 
     @Override
