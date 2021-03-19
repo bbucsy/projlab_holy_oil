@@ -16,12 +16,12 @@ public abstract class TestCase {
 
     public void runTestcase(){
         // load scenario
-        Logger.setEnabled(false);
+        Logger.SetEnabled(false);
         load();
 
         // play scenario
         System.out.println("<" + Name() + ">" + " started\n");
-        Logger.setEnabled(true);
+        Logger.SetEnabled(true);
         start();
 
         // delete resource

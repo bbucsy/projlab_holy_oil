@@ -2,7 +2,6 @@ package hu.holyoil.collection;
 
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class BillOfMaterial {
     }
 
     public void AddMaterial(AbstractBaseResource abstractBaseResource){
-        Logger.Log(this,"Adding Material: " + Logger.getName(abstractBaseResource));
+        Logger.Log(this,"Adding Material: " + Logger.GetName(abstractBaseResource));
         Logger.Return();
     }
 

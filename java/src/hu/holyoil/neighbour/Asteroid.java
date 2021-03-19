@@ -36,7 +36,7 @@ public class Asteroid implements INeighbour {
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
 
-        Logger.Log(this, "Reacting to move");
+        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
         Logger.Return();
 
         crewmates.add(abstractCrewmate);
@@ -89,7 +89,7 @@ public class Asteroid implements INeighbour {
 
         Logger.Log(this, "Getting drilled");
 
-        int layers = Logger.getInteger(this,"How many layers do I have?");
+        int layers = Logger.GetInteger(this,"How many layers do I have?");
 
         if (layers >= 1) this.DecNumOfLayersRemaining();
 

@@ -13,7 +13,7 @@ public final class Logger {
     private static boolean enabled = true;
 
 
-    public static void setEnabled(boolean e){
+    public static void SetEnabled(boolean e){
         enabled = e;
     }
 
@@ -21,7 +21,7 @@ public final class Logger {
         objectNames.put(o,name);
     }
 
-    public static String getName(Object object){ return objectNames.get(object); }
+    public static String GetName(Object object){ return objectNames.get(object); }
 
     public static void ClearObjects(){
         objectNames.clear();
@@ -41,7 +41,7 @@ public final class Logger {
         indentation--;
     }
 
-    public static int getInteger(Object caller, String msg){
+    public static int GetInteger(Object caller, String msg){
         if(!objectNames.containsKey(caller)){
             System.out.println("Unregistered object calling");
             return 0;
