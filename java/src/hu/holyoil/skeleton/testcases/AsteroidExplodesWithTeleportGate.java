@@ -20,8 +20,6 @@ public class AsteroidExplodesWithTeleportGate extends TestCase {
     @Override
     protected void load() {
 
-        Logger.SetEnabled(false);
-
         Logger.RegisterObject(this, "TestFixture");
         asteroid = new Asteroid();
         Logger.RegisterObject(asteroid, "a: Asteroid");
@@ -58,8 +56,6 @@ public class AsteroidExplodesWithTeleportGate extends TestCase {
             );
 
         }
-
-        Logger.SetEnabled(true);
 
     }
 
