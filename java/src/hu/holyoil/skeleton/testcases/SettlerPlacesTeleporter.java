@@ -21,11 +21,10 @@ public class SettlerPlacesTeleporter extends TestCase {
     @Override
     protected void load() {
 
-        System.out.print("Is there a teleporter on this asteroid already? (true / false) ");
-        boolean isTeleporterHere = scanner.nextBoolean();
+        Logger.RegisterObject(this, "TestFixture");
+        boolean isTeleporterHere = Logger.GetBoolean(this, "Is there a teleporter here?");
 
-        System.out.print("Does the settler have a teleporter already? (true / false) ");
-        boolean doesSettlerHaveTeleporter = scanner.nextBoolean();
+        boolean doesSettlerHaveTeleporter = Logger.GetBoolean(this, "Does this settler have a teleporter?");
 
         Asteroid asteroid = new Asteroid();
         Logger.RegisterObject(asteroid, "onAsteroid: Asteroid");
