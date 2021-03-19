@@ -52,4 +52,15 @@ public final class Logger {
         return res;
     }
 
+    public static Boolean GetBoolean(Object caller, String msg){
+        if(!objectNames.containsKey(caller)){
+            System.out.println("Unregistered object calling");
+            return Boolean.FALSE;
+        }
+
+        System.out.print((objectNames.get(caller)+": " + msg).indent(indentation-1).stripTrailing() + " ");
+        Boolean res = in.nextBoolean();
+        return res;
+    }
+
 }
