@@ -2,7 +2,6 @@ package hu.holyoil.controller;
 
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.List;
