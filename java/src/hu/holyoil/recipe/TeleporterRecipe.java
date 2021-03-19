@@ -6,6 +6,7 @@ import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.resource.*;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class TeleporterRecipe implements IRecipe {
@@ -14,12 +15,24 @@ public class TeleporterRecipe implements IRecipe {
 
     @Override
     public void Craft(IStorageCapable iStorageCapable, Asteroid asteroid) {
-        System.out.println("A teleportgate is crafted by " + iStorageCapable.toString() + " on " + asteroid.toString());
+
+        Logger.Log(this, "Crafting teleportgate pair");
+        Logger.Return();
+
         BillOfMaterial billOfMaterial = new BillOfMaterial();
-        billOfMaterial.AddMaterial(new Iron());
-        billOfMaterial.AddMaterial(new Iron());
-        billOfMaterial.AddMaterial(new Uranium());
-        billOfMaterial.AddMaterial(new Water());
+        Iron iron1 = new Iron();
+        Iron iron2 = new Iron();
+        Uranium uranium = new Uranium();
+        Water water = new Water();
+
+        Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
+        Logger.RegisterObject(iron1, "iron1: Iron");
+        Logger.RegisterObject(iron2, "iron2: Iron");
+
+        billOfMaterial.AddMaterial(iron1);
+        billOfMaterial.AddMaterial(iron2);
+        billOfMaterial.AddMaterial(uranium);
+        billOfMaterial.AddMaterial(water);
         PlayerStorage storage = iStorageCapable.GetStorage();
         if (storage.HasEnoughOf(billOfMaterial) && storage.GetOneTeleporter() == null) {
             storage.RemoveBill(billOfMaterial);

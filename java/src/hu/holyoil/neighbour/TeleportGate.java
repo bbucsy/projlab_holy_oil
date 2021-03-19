@@ -1,50 +1,81 @@
 package hu.holyoil.neighbour;
 
 import hu.holyoil.crewmate.AbstractCrewmate;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class TeleportGate implements INeighbour {
 
-    private static Integer ID = 0;
-    private Integer myID;
-
     public TeleportGate() {
-        myID = ID;
-        ID++;
         pair = null;
         homeAsteroid = null;
         homeStorage = null;
     }
 
-    @Override
-    public String toString() {
-        return "TeleportGate " + myID.toString();
-    }
-
     private TeleportGate pair;
     private Asteroid homeAsteroid;
+
+    public TeleportGate getPair() {
+        return pair;
+    }
+
+    public void setPair(TeleportGate pair) {
+        this.pair = pair;
+    }
+
+    public Asteroid getHomeAsteroid() {
+        return homeAsteroid;
+    }
+
+    public void setHomeAsteroid(Asteroid homeAsteroid) {
+        this.homeAsteroid = homeAsteroid;
+    }
+
+    public PlayerStorage getHomeStorage() {
+        return homeStorage;
+    }
+
+    public void setHomeStorage(PlayerStorage homeStorage) {
+        this.homeStorage = homeStorage;
+    }
+
     private PlayerStorage homeStorage;
 
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-        System.out.println("I am teleportgate " + this.toString() + " and I am moved on from " + from.toString() + " by " + abstractCrewmate.toString());
+
+        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
+        if (homeAsteroid != null) {
+            homeAsteroid.ReactToMove(from, abstractCrewmate);
+        }
+        Logger.Return();
+
     }
 
     public void SetPair(TeleportGate newPair) {
-        System.out.println("I am teleportgate " + this.toString() + " and my pair is being set to " + newPair.toString());
+
+        Logger.Log(this, "Setting my pair to " + Logger.GetName(newPair));
         pair = newPair;
+        Logger.Return();
+
     }
 
     @Override
     public void Explode() {
-        System.out.println("I am teleportgate " + this.toString() + " and I am exploding");
+
+        Logger.Log(this, "Exploding");
         pair.ExplodePair();
         ActuallyExplode();
+        Logger.Return();
+
     }
 
     private void ExplodePair() {
-        System.out.println("I am teleportgate " + this.toString() + " and I am being exploded by my pair");
+
+        Logger.Log(this, "Being exploded by pair");
         ActuallyExplode();
+        Logger.Return();
+
     }
 
     private void ActuallyExplode() {

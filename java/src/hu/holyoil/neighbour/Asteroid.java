@@ -53,7 +53,7 @@ public class Asteroid implements INeighbour {
 
     public void SetIsNearbySun(Boolean newIsNearbySun) {
 
-        Logger.Log(this, "Setting isNearbySun");
+        Logger.Log(this, "Setting isNearbySun to " + newIsNearbySun.toString());
         isNearSun = newIsNearbySun;
         Logger.Return();
 
@@ -72,7 +72,7 @@ public class Asteroid implements INeighbour {
 
     public void ReactToMineBy(IStorageCapable iStorageCapable) {
 
-        Logger.Log(this, "Reacting to mine");
+        Logger.Log(this, "Reacting to mine by " + Logger.GetName(iStorageCapable));
         Logger.Return();
 
         if (resource != null && numOfLayersRemaining == 0) {
@@ -129,68 +129,107 @@ public class Asteroid implements INeighbour {
 
     public void SetResource(AbstractBaseResource abstractBaseResource) {
 
-        Logger.Log(this, "Setting resource");
-        // System.out.println("I am asteroid " + this.toString() + " and my resource is being set to " + ((abstractBaseResource == null) ? "null" : abstractBaseResource.toString()));
+        Logger.Log(this, "Setting resource to " + Logger.GetName(abstractBaseResource));
         resource = abstractBaseResource;
         Logger.Return();
 
     }
 
     public INeighbour GetRandomNeighbour() {
-        System.out.println("I am asteroid " + this.toString() + " someone is asking for my random neighbour");
+
+        Logger.Log(this, "Returning random neighbour");
         if (Main.isTestMode) {
+            Logger.Return();
             return TestFramework.getInstance().GetAsteroid();
         } else {
+            Logger.Return();
             return null;
         }
+
     }
 
     public void AddNeighbourAsteroid(Asteroid asteroid) {
-        System.out.println("I am asteroid " + this.toString() + " my new neighbour is " + asteroid.toString());
+
+        Logger.Log(this, "Adding asteroid " + asteroid + " to my neighbours");
         neighbouringAsteroids.add(asteroid);
+        Logger.Return();
+
     }
 
     public List<Asteroid> GetNeighbours() {
-        System.out.println("I am asteroid " + this.toString() + " someone is asking for my neighbours");
+
+        Logger.Log(this, "Returning my neighbours");
+        Logger.Return();
         return neighbouringAsteroids;
+
     }
 
     public void AddCrewmate(AbstractCrewmate abstractCrewmate) {
-        System.out.println("I am asteroid " + this.toString() + " my new crewmate is " + abstractCrewmate.toString());
+
+        Logger.Log(this, "Adding new crewmate: " + Logger.GetName(abstractCrewmate));
         crewmates.add(abstractCrewmate);
+        Logger.Return();
+
     }
 
     public void RemoveCrewmate(AbstractCrewmate abstractCrewmate) {
-        System.out.println("I am asteroid " + this.toString() + " I lost crewmate " + abstractCrewmate.toString());
+
+        Logger.Log(this, "Removing crewmate: " + Logger.GetName(abstractCrewmate));
         crewmates.remove(abstractCrewmate);
+        Logger.Return();
+
     }
 
     public void KillAllCrewmates() {
-        System.out.println("I am asteroid " + this.toString() + " and I am killing all crewmates on me");
+
+        Logger.Log(this, "Killing all crewmates");
         crewmates.forEach(AbstractCrewmate::Die);
+        Logger.Return();
+
     }
 
     public void RemoveTeleporter() {
-        System.out.println("I am asteroid " + this.toString() + " and my teleporter is getting removed");
+
+        Logger.Log(this, "Removing teleporter");
         teleporter = null;
+        Logger.Return();
+
     }
 
     @Override
     public void Explode() {
-        System.out.println("I am asteroid " + this.toString() + " and I am exploding");
+
+        Logger.Log(this, "Exploding");
+        Logger.Return();
+
+        Logger.Log(this, "Signaling to crewmates that I am exploding");
         crewmates.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
+        Logger.Return();
+
+        Logger.Log(this, "Removing me from GameController");
         GameController.getInstance().RemoveAsteroid(this);
+        Logger.Return();
+
+        Logger.Log(this, "Removing me from SunController");
         SunController.getInstance().RemoveAsteroid(this);
+        Logger.Return();
+
     }
 
     public TeleportGate GetTeleporter() {
-        System.out.println("I am asteroid " + this.toString() + " someone is asking for my teleporter");
+
+        Logger.Log(this, "Returning Teleporter");
+        Logger.Return();
         return teleporter;
+
     }
 
     public void SetTeleporter(TeleportGate teleportGate) {
-        System.out.println("I am asteroid " + this.toString() + " and my teleporter is being set");
+
+        Logger.Log(this, "Setting teleporter to: " + Logger.GetName(teleportGate));
         teleporter = teleportGate;
+        Logger.Return();
+
     }
 
 }
