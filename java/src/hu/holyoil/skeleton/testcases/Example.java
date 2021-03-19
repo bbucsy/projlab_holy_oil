@@ -16,8 +16,8 @@ public class Example extends TestCase {
 
     @Override
     protected void load() {
-        s = new Settler();
         Asteroid a = new Asteroid();
+        s = new Settler(a);
 
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(a, "onAsteroid: Asteroid");

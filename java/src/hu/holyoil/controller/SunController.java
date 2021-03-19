@@ -13,7 +13,7 @@ public class SunController implements ISteppable {
     private List<Asteroid> asteroids;
 
     @Override
-    public void Step()  {
+    public void Step() {
         System.out.println("Stepping");
     }
 

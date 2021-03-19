@@ -1,8 +1,6 @@
-package hu.holyoil.testframework;
+package hu.holyoil.skeleton;
 
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.testcase.ITestcase;
-import hu.holyoil.testcase.WaterEvaporatesTestcase;
 
 import java.io.File;
 import java.net.URL;
@@ -14,9 +12,9 @@ public class TestFramework {
 
     private static TestFramework testFramework;
 
-    private List<ITestcase> testcases;
+    private List<TestCase> testcases;
 
-    public void AddTestcase(ITestcase testcase) {
+    public void AddTestcase(TestCase testcase) {
         testcases.add(testcase);
     }
 
@@ -29,7 +27,7 @@ public class TestFramework {
         try {
 
             // We load the testcases
-            Enumeration<URL> resources = classLoader.getResources("hu/holyoil/testcase");
+            Enumeration<URL> resources = classLoader.getResources("hu/holyoil/skeleton/testcases");
             URL directoryURL = resources.nextElement();
             File directory = new File(directoryURL.getFile());
 
@@ -46,10 +44,11 @@ public class TestFramework {
 
                     // If it is not the interface, we create an instance of it. The static initializator block should call
                     // the AddTestcase() of this class.
-                    if (file.getName().endsWith(".class") && !file.getName().equalsIgnoreCase("ITestcase.class")) {
+                    if (file.getName().endsWith(".class")) {
 
-                        System.out.println("Found class: " + file.getName());
-                        Class.forName("hu.holyoil.testcase." + file.getName().substring(0, file.getName().length() - 6));
+                        // System.out.println("Found class: " + file.getName());
+                        // **magic**
+                        Class.forName("hu.holyoil.skeleton.testcases." + file.getName().substring(0, file.getName().length() - 6)).getDeclaredConstructor().newInstance();
 
                     }
 
@@ -67,9 +66,8 @@ public class TestFramework {
     }
 
     public void RunTestcases() {
-        // System.out.println("I have " + testcases.size() + " ITestcases");
 
-        testcases.forEach(ITestcase::runTestcase);
+        testcases.forEach(TestCase::runTestcase);
 
     }
 

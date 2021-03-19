@@ -1,6 +1,6 @@
 package hu.holyoil.skeleton;
 
- public abstract class TestCase {
+public abstract class TestCase {
 
 
     public abstract String Name();
@@ -8,8 +8,13 @@ package hu.holyoil.skeleton;
     protected abstract void load();
     protected abstract void start();
 
+    // Do not touch.
+    protected TestCase() {
+        // System.out.println(this.Name());
+        TestFramework.getInstance().AddTestcase(this);
+    }
 
-    public void PlayScenario(){
+    public void runTestcase(){
         // load scenario
         Logger.setEnabled(false);
         load();

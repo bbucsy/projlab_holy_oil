@@ -7,7 +7,7 @@ import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
-import hu.holyoil.testframework.TestFramework;
+import hu.holyoil.skeleton.TestFramework;
 
 import java.util.ArrayList;
 import java.util.List;

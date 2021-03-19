@@ -2,6 +2,7 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
+import hu.holyoil.skeleton.Logger;
 import jdk.jshell.spi.ExecutionControl;
 
 public abstract class AbstractCrewmate {
