@@ -1,7 +1,6 @@
 package hu.holyoil.crewmate;
 
 import hu.holyoil.controller.GameController;
-import hu.holyoil.controller.SunController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
@@ -77,7 +76,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
         if(storageTeleporter != null && asteroidTeleporter == null);
 
-        storageTeleporter.setHomeAsteroid(onAsteroid);
+        storageTeleporter.SetHomeAsteroid(onAsteroid);
         onAsteroid.SetTeleporter(storageTeleporter);
 
         storage.RemoveTeleportGate(storageTeleporter);

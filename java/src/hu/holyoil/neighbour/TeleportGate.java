@@ -15,27 +15,23 @@ public class TeleportGate implements INeighbour {
     private TeleportGate pair;
     private Asteroid homeAsteroid;
 
-    public TeleportGate getPair() {
+    public TeleportGate GetPair() {
         return pair;
     }
 
-    public void setPair(TeleportGate pair) {
-        this.pair = pair;
-    }
-
-    public Asteroid getHomeAsteroid() {
+    public Asteroid GetHomeAsteroid() {
         return homeAsteroid;
     }
 
-    public void setHomeAsteroid(Asteroid homeAsteroid) {
+    public void SetHomeAsteroid(Asteroid homeAsteroid) {
         this.homeAsteroid = homeAsteroid;
     }
 
-    public PlayerStorage getHomeStorage() {
+    public PlayerStorage GetHomeStorage() {
         return homeStorage;
     }
 
-    public void setHomeStorage(PlayerStorage homeStorage) {
+    public void SetHomeStorage(PlayerStorage homeStorage) {
         this.homeStorage = homeStorage;
     }
 
@@ -81,6 +77,8 @@ public class TeleportGate implements INeighbour {
     private void ActuallyExplode() {
         if ((homeAsteroid == null && homeStorage == null) ||(homeAsteroid != null && homeStorage != null)) {
             // Error
+            //Logger.Log(this, "Caused an error");
+            //Logger.Return();
         }
         if ((homeAsteroid == null && homeStorage != null)) {
             // in storage
