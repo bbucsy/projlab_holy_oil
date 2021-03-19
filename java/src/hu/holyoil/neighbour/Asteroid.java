@@ -211,9 +211,8 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
         Logger.Log(this, "Signaling to crewmates that I am exploding");
-        while (crewmates.size() > 0) {
-            crewmates.get(0).ReactToAsteroidExplosion();
-        }
+        List<AbstractCrewmate> crewmatesShallowCopy = new ArrayList<>(crewmates);
+        crewmatesShallowCopy.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
         Logger.Return();
 
         Logger.Log(this, "Removing me from GameController");
