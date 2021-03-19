@@ -1,6 +1,7 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.skeleton.Logger;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
@@ -17,9 +18,18 @@ public class SunController implements ISteppable {
         System.out.println("Stepping");
     }
 
-    public void AddAsteroid(Asteroid asteroid)  { System.out.println("Adding asteroid " + asteroid.toString()); }
-    public void RemoveAsteroid(Asteroid asteroid)  { System.out.println("Removing asteroid " + asteroid.toString()); }
-    public void StartSunstorm()  { System.out.println("Starting sunstorm"); }
+    public void AddAsteroid(Asteroid asteroid)  {
+        Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Return();
+    }
+    public void RemoveAsteroid(Asteroid asteroid)  {
+        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Return();
+    }
+    public void StartSunstorm()  {
+       Logger.Log(this,"Starting sunstorm");
+       Logger.Return();
+    }
 
     public static SunController getInstance() {
 

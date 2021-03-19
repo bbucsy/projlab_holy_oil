@@ -3,83 +3,95 @@ package hu.holyoil.crewmate;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
 import hu.holyoil.recipe.TeleporterRecipe;
 import hu.holyoil.resource.AbstractBaseResource;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class Settler extends AbstractCrewmate implements IStorageCapable {
 
-    private static Integer ID = 0;
-    private Integer myID;
-
     private Settler() {
-        myID = ID;
-        ID++;
         storage = new PlayerStorage();
     }
 
     public Settler(Asteroid startingAsteroid) {
-        myID = ID;
-        ID++;
         storage = new PlayerStorage();
         onAsteroid = startingAsteroid;
     }
 
-    @Override
-    public String toString() {
-        return "Settler " + myID.toString();
-    }
 
     private PlayerStorage storage;
 
     @Override
     public void Die() {
-        System.out.println("I am settler " + this.toString() + " and I just died");
+        Logger.Log(this, "Died");
         GameController.getInstance().RemoveSettler(this);
         // Handle teleportgate logic
         onAsteroid.RemoveCrewmate(this);
+        Logger.Return();
     }
 
     @Override
     public void ReactToAsteroidExplosion() {
-        System.out.println("I am settler " + this.toString() + " and my asteroid just exploded");
+        Logger.Log(this, "Reacting to asteroid explosion");
         Die();
+        Logger.Return();
     }
 
     @Override
     public void CraftRobot() {
-        System.out.println("I am settler " + this.toString() + " and i am crafting a robot");
+        Logger.Log(this, "Crafting robot");
         RobotRecipe.getInstance().Craft(this, onAsteroid);
+        Logger.Return();
     }
 
     @Override
     public void CraftTeleportGate() {
-        System.out.println("I am settler " + this.toString() + " and i am crafting a teleportgate pair");
+        Logger.Log(this, "Crafting teleport gate pair.");
         TeleporterRecipe.getInstance().Craft(this, onAsteroid);
+        Logger.Return();
     }
 
     @Override
     public void Mine() {
-        System.out.println("I am settler " + this.toString() + " and i am mining");
+        Logger.Log(this, "Mining");
         onAsteroid.ReactToMineBy(this);
+        Logger.Return();
     }
 
     @Override
     public PlayerStorage GetStorage() {
-        System.out.println("I am settler " + this.toString() + " and i am returning my storage");
+        Logger.Log(this,"Returning " + Logger.GetName(storage));
+        Logger.Return();
         return storage;
     }
 
     @Override
     public void PlaceTeleporter() {
-        System.out.println("I am settler " + this.toString() + " and i am placing a teleporter");
-        // Handle teleportgate logic
+        Logger.Log(this, "Place teleporter");
+
+        TeleportGate storageTeleporter = storage.GetOneTeleporter();
+        TeleportGate asteroidTeleporter = onAsteroid.GetTeleporter();
+
+        if(storageTeleporter != null && asteroidTeleporter == null);
+
+        storageTeleporter.setHomeAsteroid(onAsteroid);
+        onAsteroid.SetTeleporter(storageTeleporter);
+
+        storage.RemoveTeleportGate(storageTeleporter);
+
+        Logger.Return();
     }
 
     @Override
     public void PlaceResource(AbstractBaseResource abstractBaseResource) {
-        System.out.println("I am settler " + this.toString() + " and i am placing resource " + abstractBaseResource.toString());
+
+        Logger.Log(this, "Placing resource " + Logger.GetName(abstractBaseResource));
+
         onAsteroid.SetResource(abstractBaseResource);
+
+        Logger.Return();
     }
 }
