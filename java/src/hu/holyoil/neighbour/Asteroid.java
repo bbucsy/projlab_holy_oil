@@ -14,12 +14,7 @@ import java.util.List;
 
 public class Asteroid implements INeighbour {
 
-    private static Integer ID = 0;
-    private Integer myID;
-
     public Asteroid() {
-        myID = ID;
-        ID++;
         neighbouringAsteroids = new ArrayList<>();
         crewmates = new ArrayList<>();
         resource = null;
@@ -27,11 +22,6 @@ public class Asteroid implements INeighbour {
         isNearSun = Boolean.FALSE;
         isDiscovered = Boolean.FALSE;
         numOfLayersRemaining = 0;
-    }
-
-    @Override
-    public String toString() {
-        return "Asteroid " + myID.toString();
     }
 
     private Boolean isNearSun;
@@ -45,30 +35,58 @@ public class Asteroid implements INeighbour {
 
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-        System.out.println("I am asteroid " + this.toString() + " and I am moved on from " + from.toString() + " by " + abstractCrewmate.toString());
+
+        Logger.Log(this, "Reacting to move");
+        Logger.Return();
+
         crewmates.add(abstractCrewmate);
+
+        Logger.Log(this, "Removing Crewmate");
         from.RemoveCrewmate(abstractCrewmate);
+        Logger.Return();
+
+        Logger.Log(this, "Setting onAsteroid of Crewmate");
         abstractCrewmate.SetOnAsteroid(this);
+        Logger.Return();
+
     }
 
     public void SetIsNearbySun(Boolean newIsNearbySun) {
-        System.out.println("I am asteroid " + this.toString() + " and my new isnearbysun is " + newIsNearbySun);
+
+        Logger.Log(this, "Setting isNearbySun");
         isNearSun = newIsNearbySun;
+        Logger.Return();
+
     }
 
     public void DecNumOfLayersRemaining() {
-        Logger.Log(this,"Decreesing layer by 1");
+
+        Logger.Log(this,"Decreasing layer by 1");
+
+        if (numOfLayersRemaining > 0)
+            numOfLayersRemaining--;
+
         Logger.Return();
+
     }
 
     public void ReactToMineBy(IStorageCapable iStorageCapable) {
-        System.out.println("I am asteroid " + this.toString() + " and I am being mined by " + iStorageCapable.toString());
+
+        Logger.Log(this, "Reacting to mine");
+        Logger.Return();
+
         if (resource != null && numOfLayersRemaining == 0) {
+
+            Logger.Log(this, "Resource reacting to mine");
             resource.ReactToMine(this, iStorageCapable);
+            Logger.Return();
+
         }
+
     }
 
     public void ReactToDrill() {
+
         Logger.Log(this, "Getting drilled");
 
         int layers = Logger.getInteger(this,"How many layers do I have?");
@@ -76,25 +94,46 @@ public class Asteroid implements INeighbour {
         if (layers >= 1) this.DecNumOfLayersRemaining();
 
         Logger.Return();
+
     }
 
     public void ReactToSunstorm() {
-        System.out.println("I am asteroid " + this.toString() + " and I am being sunstormed");
+
+        Logger.Log(this, "Reacting to sunstorm");
+        Logger.Return();
+
         if (numOfLayersRemaining > 0 || resource != null) {
+
+            Logger.Log(this, "Killing all crewmates");
             KillAllCrewmates();
+            Logger.Return();
+
         }
+
     }
 
     public void ReactToSunNearby() {
-        System.out.println("I am asteroid " + this.toString() + " and I am reacting to being near a sun");
+
+        Logger.Log(this, "Reacting to sun nearby");
+        Logger.Return();
+
         if (isNearSun && resource != null) {
+
+            Logger.Log(this, "Resource is reacting to sun nearby");
             resource.ReactToSunNearby(this);
+            Logger.Return();
+
         }
+
     }
 
     public void SetResource(AbstractBaseResource abstractBaseResource) {
-        System.out.println("I am asteroid " + this.toString() + " and my resource is being set to " + ((abstractBaseResource == null) ? "null" : abstractBaseResource.toString()));
+
+        Logger.Log(this, "Setting resource");
+        // System.out.println("I am asteroid " + this.toString() + " and my resource is being set to " + ((abstractBaseResource == null) ? "null" : abstractBaseResource.toString()));
         resource = abstractBaseResource;
+        Logger.Return();
+
     }
 
     public INeighbour GetRandomNeighbour() {
