@@ -14,12 +14,15 @@ public abstract class AbstractCrewmate {
     }
 
     public void SetOnAsteroid(Asteroid asteroid) {
-        System.out.println("I am crewmate " + this.toString() + " Setting my onAsteroid to " + asteroid.toString());
+        onAsteroid = asteroid;
     }
 
     public void Drill()  {
-        System.out.println("I am crewmate " + this.toString() + " and I am Drilling");
+        Logger.Log(this,"Drilling");
+
         onAsteroid.ReactToDrill();
+
+        Logger.Return();
     }
 
     public abstract void Die();
