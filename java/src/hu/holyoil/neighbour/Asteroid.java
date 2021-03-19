@@ -59,6 +59,14 @@ public class Asteroid implements INeighbour {
 
     }
 
+    public void SetNumOfLayersRemaining(int newNumOfLayersRemaining) {
+
+        Logger.Log(this, "Setting numOfLayersRemaining to " + newNumOfLayersRemaining);
+        numOfLayersRemaining = newNumOfLayersRemaining;
+        Logger.Return();
+
+    }
+
     public void DecNumOfLayersRemaining() {
 
         Logger.Log(this,"Decreasing layer by 1");
@@ -115,15 +123,23 @@ public class Asteroid implements INeighbour {
     public void ReactToSunNearby() {
 
         Logger.Log(this, "Reacting to sun nearby");
+
+        Boolean isNearSun = Logger.GetBoolean(this, "Is the Asteroid near the Sun?");
+        SetIsNearbySun(isNearSun);
         Logger.Return();
 
-        if (isNearSun && resource != null) {
+        int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
+        SetNumOfLayersRemaining(numOfLayersRemaining);
+        Logger.Return();
+
+        if (isNearSun && numOfLayersRemaining == 0 && resource != null) {
 
             Logger.Log(this, "Resource is reacting to sun nearby");
             resource.ReactToSunNearby(this);
             Logger.Return();
 
         }
+        Logger.Return();
 
     }
 
