@@ -7,10 +7,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Scanner;
 
 public class TestFramework {
 
     private static TestFramework testFramework;
+    private Scanner scanner;
 
     private List<TestCase> testcases;
 
@@ -67,7 +69,31 @@ public class TestFramework {
 
     public void RunTestcases() {
 
-        testcases.forEach(TestCase::runTestcase);
+        scanner = new Scanner(System.in);
+
+        while (true) {
+
+            System.out.println("Testcases:");
+
+            for (int i = 0; i < testcases.size(); i++) {
+
+                System.out.println(i + ": " + testcases.get(i).Name());
+
+            }
+
+            System.out.print("Choose a testcase number to run: ");
+            int numToRun = scanner.nextInt();
+
+            while (numToRun < 0 || numToRun >= testcases.size()) {
+
+                System.out.print("Choose a valid number: ");
+                numToRun = scanner.nextInt();
+
+            }
+
+            testcases.get(numToRun).runTestcase();
+
+        }
 
     }
 
