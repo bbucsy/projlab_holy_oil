@@ -49,6 +49,6 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
 
     @Override
     protected void start() {
-        a.PutResource(s, u);
+        s.PlaceResource(u);
     }
 }

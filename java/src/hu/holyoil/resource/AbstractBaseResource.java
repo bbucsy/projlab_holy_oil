@@ -26,9 +26,12 @@ public abstract class AbstractBaseResource {
     }
     public void ReactToPlace(Asteroid asteroid, IStorageCapable iStorageCapable) {
         Logger.Log(this ,"Reacting to Place by " + Logger.GetName(iStorageCapable));
+
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Logger.RegisterObject(billOfMaterial, "billOfMaterial: BillOfMaterial");
+
         billOfMaterial.AddMaterial(this);
+
         if (iStorageCapable.GetStorage().HasEnoughOf(billOfMaterial)) {
             iStorageCapable.GetStorage().RemoveBill(billOfMaterial);
             asteroid.SetResource(this);

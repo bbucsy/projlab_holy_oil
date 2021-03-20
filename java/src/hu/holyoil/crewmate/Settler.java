@@ -97,7 +97,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
         Logger.Log(this, "Placing resource " + Logger.GetName(abstractBaseResource));
         if(onAsteroid.GetResource()==null)
-             onAsteroid.SetResource(abstractBaseResource);
+             onAsteroid.PutResource(this, abstractBaseResource);
 
         Logger.Return();
     }
