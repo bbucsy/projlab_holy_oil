@@ -37,13 +37,13 @@ public class SettlerDies extends TestCase {
             Logger.RegisterObject(tp, "t: TeleportGate");
             Logger.RegisterObject(pair, "pair: TeleportGate");
         }
-        GameController.getInstance().AddAsteroid(a);
-        GameController.getInstance().AddSettler(s);
+        GameController.GetInstance().AddAsteroid(a);
+        GameController.GetInstance().AddSettler(s);
 
         Logger.RegisterObject(a, "onAsteroid: Asteroid");
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(ps, "storage: PlayerStorage");
-        Logger.RegisterObject(GameController.getInstance(), "GameController");
+        Logger.RegisterObject(GameController.GetInstance(), "GameController");
     }
 
     @Override

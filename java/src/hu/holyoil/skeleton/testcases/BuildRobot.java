@@ -28,11 +28,11 @@ public class BuildRobot extends TestCase {
         Asteroid asteroid = new Asteroid();
         Logger.RegisterObject(this, "TestFixture");
         Logger.RegisterObject(asteroid, "a: Asteroid");
-        Logger.RegisterObject(RobotController.getInstance(), ": RobotController");
+        Logger.RegisterObject(RobotController.GetInstance(), ": RobotController");
         settler = new Settler(asteroid);
         Logger.RegisterObject(settler, "s: Settler");
         Logger.RegisterObject(settler.GetStorage(), "storage: Storage");
-        Logger.RegisterObject(RobotRecipe.getInstance(), ": RobotRecipe");;
+        Logger.RegisterObject(RobotRecipe.GetInstance(), ": RobotRecipe");;
 
         boolean canBuildRobot = Logger.GetBoolean(this, "Does the Settler have enough materials to build a robot?");
 

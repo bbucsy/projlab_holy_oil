@@ -21,7 +21,7 @@ public class BuildTeleportGatePair extends TestCase {
     @Override
     protected void load() {
 
-        Logger.RegisterObject(TeleporterRecipe.getInstance(), ": TeleporterRecipe");
+        Logger.RegisterObject(TeleporterRecipe.GetInstance(), ": TeleporterRecipe");
 
         Asteroid asteroid = new Asteroid();
         settler = new Settler(asteroid);
