@@ -152,14 +152,16 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     /**
      * A telepes megpróbál lerakni egy nyersanyagot egy üres aszteroidára
      * @param abstractBaseResource a storage-ből kiválasztott nyersanyagot teszi le
+     * ellenőrzi üres-e az aszteroida magja
+     *                             csak akkor
      */
     @Override
     public void PlaceResource(AbstractBaseResource abstractBaseResource) {
 
         Logger.Log(this, "Placing resource " + Logger.GetName(abstractBaseResource));
-        if(onAsteroid.GetResource()==null)
-             onAsteroid.SetResource(abstractBaseResource);
-
+        if(onAsteroid.GetResource()==null) {
+            onAsteroid.SetResource(abstractBaseResource);
+        }
         Logger.Return();
     }
 }
