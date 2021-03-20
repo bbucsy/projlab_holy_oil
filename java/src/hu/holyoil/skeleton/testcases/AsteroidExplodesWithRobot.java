@@ -47,11 +47,11 @@ public class AsteroidExplodesWithRobot extends TestCase {
             Logger.RegisterObject(newHome, "neigh: Asteroid");
 
             pair1.SetPair(pair2);
-            pair1.setHomeAsteroid(asteroid);
+            pair1.SetHomeAsteroid(asteroid);
             asteroid.SetTeleporter(pair1);
 
             pair2.SetPair(pair1);
-            pair2.setHomeAsteroid(newHome);
+            pair2.SetHomeAsteroid(newHome);
 
             neighbour = pair1;
         }
