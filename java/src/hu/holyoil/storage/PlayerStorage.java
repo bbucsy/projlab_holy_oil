@@ -38,7 +38,7 @@ public class PlayerStorage {
 
     public TeleportGate GetOneTeleporter() {
 
-        Logger.Log(this, "Returning one teleporter");
+        Logger.Log(this, "Returning one or no teleporter");
         if (teleporters.size() == 0) {
             Logger.Return();
             return null;

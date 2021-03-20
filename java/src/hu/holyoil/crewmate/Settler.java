@@ -28,7 +28,9 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     public void Die() {
         Logger.Log(this, "Died");
         GameController.getInstance().RemoveSettler(this);
-        // Handle teleportgate logic
+        if (storage.GetOneTeleporter() != null) {
+            storage.GetOneTeleporter().Explode();
+        }
         onAsteroid.RemoveCrewmate(this);
         Logger.Return();
     }

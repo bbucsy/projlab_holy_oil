@@ -9,8 +9,6 @@ import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
 public class SettlerDies extends TestCase {
-
-    private Asteroid a;
     private Settler s;
 
     @Override
@@ -20,29 +18,32 @@ public class SettlerDies extends TestCase {
 
     @Override
     protected void load() {
-        a=new Asteroid();
+        Asteroid a=new Asteroid();
         s=new Settler(a);
+        PlayerStorage ps= s.GetStorage();
 
         Logger.RegisterObject(this, "TestFixture");
-        boolean hasTeleporter = Logger.GetBoolean(this, "Does the Settler have one or more teleporters?");
-        Logger.RegisterObject(a, "onAsteroid: Asteroid");
-        Logger.RegisterObject(s, "s: Settler");
-        Logger.RegisterObject(GameController.getInstance(), "GameController");
-
-        GameController.getInstance().AddAsteroid(a);
-        GameController.getInstance().AddSettler(s);
+        boolean hasTeleporter = Logger.GetBoolean(this, "Does the Settler have one teleporter?");
 
         if(hasTeleporter){
             TeleportGate tp=new TeleportGate();
-            PlayerStorage ps=new PlayerStorage();
+            TeleportGate pair=new TeleportGate();
+            pair.SetPair(tp);
+            tp.SetPair(pair);
 
             tp.SetHomeStorage(ps);
             ps.AddTeleportGatePair(tp, null);
 
             Logger.RegisterObject(tp, "t: TeleportGate");
-            Logger.RegisterObject(ps, "storage: PlayerStorage");
+            Logger.RegisterObject(pair, "pair: TeleportGate");
         }
+        GameController.getInstance().AddAsteroid(a);
+        GameController.getInstance().AddSettler(s);
 
+        Logger.RegisterObject(a, "onAsteroid: Asteroid");
+        Logger.RegisterObject(s, "s: Settler");
+        Logger.RegisterObject(ps, "storage: PlayerStorage");
+        Logger.RegisterObject(GameController.getInstance(), "GameController");
     }
 
     @Override
