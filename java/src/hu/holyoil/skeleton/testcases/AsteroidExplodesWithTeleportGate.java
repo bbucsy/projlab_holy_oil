@@ -23,8 +23,8 @@ public class AsteroidExplodesWithTeleportGate extends TestCase {
         Logger.RegisterObject(this, "TestFixture");
         asteroid = new Asteroid();
         Logger.RegisterObject(asteroid, "a: Asteroid");
-        Logger.RegisterObject(GameController.getInstance(), ": GameController");
-        Logger.RegisterObject(SunController.getInstance(), ": SunController");
+        Logger.RegisterObject(GameController.GetInstance(), ": GameController");
+        Logger.RegisterObject(SunController.GetInstance(), ": SunController");
 
         boolean isTeleportgateInStorage = Logger.GetBoolean(this, "Is the teleportgate in storage?");
 
