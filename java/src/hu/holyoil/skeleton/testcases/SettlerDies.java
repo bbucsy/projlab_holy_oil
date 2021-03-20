@@ -31,8 +31,7 @@ public class SettlerDies extends TestCase {
             pair.SetPair(tp);
             tp.SetPair(pair);
 
-            tp.SetHomeStorage(ps);
-            ps.AddTeleportGatePair(tp, null);
+            ps.AddTeleportGatePair(tp, pair);
 
             Logger.RegisterObject(tp, "t: TeleportGate");
             Logger.RegisterObject(pair, "pair: TeleportGate");
