@@ -12,14 +12,10 @@ participant ": GameController" as game
 
 C -> a ++ : Explode()
 
-loop for all c in crewmates
-
-    a -> s ++ : ReactToAsteroidExplosion() 
-        s -> s ++ : Die()
-        deactivate s
-    s --> a --
-
-end
+a -> s ++ : ReactToAsteroidExplosion() 
+    s -> s ++ : Die()
+    deactivate s
+s --> a --
 
 a -> sun ++ : RemoveAsteroid(a)
 sun --> a --
