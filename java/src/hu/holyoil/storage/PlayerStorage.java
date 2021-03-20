@@ -1,6 +1,5 @@
 package hu.holyoil.storage;
 
-import hu.holyoil.Main;
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.resource.AbstractBaseResource;
@@ -22,7 +21,9 @@ public class PlayerStorage {
     public void AddTeleportGatePair(TeleportGate teleportGate1, TeleportGate teleportGate2) {
 
         Logger.Log(this, "Adding teleportgate pair of " + Logger.GetName(teleportGate1) + " and " + Logger.GetName(teleportGate2));
+        teleportGate1.SetHomeStorage(this);
         teleporters.add(teleportGate1);
+        teleportGate2.SetHomeStorage(this);
         teleporters.add(teleportGate2);
         Logger.Return();
 
@@ -32,6 +33,7 @@ public class PlayerStorage {
 
         Logger.Log(this, "Removing teleportgate " + Logger.GetName(teleportGate));
         teleporters.remove(teleportGate);
+        teleportGate.SetHomeStorage(null);
         Logger.Return();
 
     }

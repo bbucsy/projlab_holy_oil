@@ -235,6 +235,14 @@ public class Asteroid implements INeighbour {
         crewmatesShallowCopy.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
         Logger.Return();
 
+        if (teleporter != null) {
+
+            Logger.Log(this, "Exploding my teleporter");
+            teleporter.Explode();
+            Logger.Return();
+
+        }
+
         Logger.Log(this, "Removing me from GameController");
         GameController.GetInstance().RemoveAsteroid(this);
         Logger.Return();
