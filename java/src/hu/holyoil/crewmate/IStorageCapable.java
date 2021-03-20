@@ -4,10 +4,10 @@ import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.storage.PlayerStorage;
 
 /**
- * Interface amely lehetővé teszi a telepeseknek hogy tudjanak
- *                  tárolni
- *                  gyártani
- *                  nyersanyagot lerakni
+ * Interface amely lehetővé teszi a telepeseknek hogy tudjanak:
+ *                 <p> tárolni,
+ *                  gyártani,
+ *                  nyersanyagot lerakni.</p>
  */
 public interface IStorageCapable {
     /**

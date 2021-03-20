@@ -14,7 +14,7 @@ public interface INeighbour {
     void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate);
 
     /**
-     * 
+     * Felrobban
      */
     void Explode();
 }

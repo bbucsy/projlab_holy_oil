@@ -5,24 +5,24 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
 /**
- * Robotot leíró osztály
- * leszármazottja az AbstractCrewmate-nek (telepessel való közös tulajdonságai miatt)
+ * Robotot leíró osztály.
+ * Leszármazottja az AbstractCrewmate-nek (telepessel való közös tulajdonságai miatt)
  */
 public class Robot extends AbstractCrewmate {
     /**
-     * PRIVÁT paraméter nélküli konstruktor
-     * nem hívható kívülről
+     * Privát paraméter nélküli konstruktor.
+     * Nem hívható kívülről
      */
     private Robot() {
     }
 
     /**
-     * A Robot konstruktora
+     * A Robot konstruktora.
+     * <p>beállítja a kezdő aszteroidát
+     *       hozzáadja az aszteroidához a robotot
+     *       A RobotController-hez a gyártás során adódik hozzá
+     *                                A robot mindig gyártás során példányosítódik</p>
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
-     * beállítja a kezdő aszteroidát
-     * hozzáadja az aszteroidához a robotot
-     * A RobotController-hez a gyártás során adódik hozzá
-     *                          A robot mindig gyártás során példányosítódik
      */
     public Robot(Asteroid startingAsteroid) {
         onAsteroid = startingAsteroid;
@@ -31,8 +31,8 @@ public class Robot extends AbstractCrewmate {
 
     /**
      * Robot "meghal"
-     * eltávolítja a robotot a RobotController singleton tárolójából
-     * eltávolítja a robotot az aszteroidáról
+     * <p>eltávolítja a robotot a RobotController singleton tárolójából és
+     * eltávolítja a robotot az aszteroidáról</p>
      */
     @Override
     public void Die() {
@@ -44,7 +44,7 @@ public class Robot extends AbstractCrewmate {
     }
 
     /**
-     * A robot alatt felrobban az aszteroida ami átlöki egy szomszédra
+     * A robot alatt felrobban az aszteroida ami átlöki egy szomszédra.
      * Ez a szomszéd lehet egy aktív teleporter is, amin átküldi a robotot
      */
     @Override

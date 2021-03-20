@@ -9,10 +9,38 @@ import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * A teleporterek gyártásáért felelős singleton osztály,
+ * nem lehet példányosítani
+ */
 public class TeleporterRecipe implements IRecipe {
-
+    /**
+     * a singleton volta miatt kell
+     */
     private static TeleporterRecipe teleporterRecipe;
 
+    /**
+     * megvalósítja a teleportkapuk gyártását
+     * <p>
+     *     a teleportkapukat csak párosával lehet olyan telepesnek létrehoznia akinél nincs egy teleporter se
+     * </p>
+     * <p>létrehozza a szükséges nyersanyagokat, majd ezeket beleteszi a billbe.
+     *         Elkéri a játékos tárolóját, és ellenőrzi megvan-e minden a billről
+     * </p>
+     * <p>
+     *     Ellenőrzi a telepes tárolóját
+     * </p>
+     * <p>
+     *     Ha nincs nála egy teleporter se ÉS van nála elég anyag akkor:
+     *
+     * eltávolítja a felhasználandó nyersanyagokat,
+     * létrehoz két teleporter kaput,
+     * ezeket beállítja egymás párjainak (mind a kettőn elvégzendő),
+     * hozzáadja a két teleportert a telepes tárolójába.</p>
+     * @param iStorageCapable a gyártást végrehajtó telepes
+     *                        (a tárolója tartalma miatt át kell adni, majd később ide kerülnek a teleporterek)
+     * @param asteroid az aszteroida amin a gyártás megtörténik
+     */
     @Override
     public void Craft(IStorageCapable iStorageCapable, Asteroid asteroid) {
 
@@ -76,6 +104,10 @@ public class TeleporterRecipe implements IRecipe {
         }
     }
 
+    /**
+     * Singleton osztályra való hivatkozás
+     * @return visszaad egy instance-ot
+     */
     public static TeleporterRecipe GetInstance() {
 
         if (teleporterRecipe == null) {
@@ -86,6 +118,9 @@ public class TeleporterRecipe implements IRecipe {
 
     }
 
+    /**
+     * Privát konstruktor: nem lehet meghívni, mivel nem lehet példányosítani
+     */
     private TeleporterRecipe() {}
 
 }

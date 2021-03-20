@@ -9,10 +9,31 @@ import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * A robot gyártásáért felelős singleton osztály,
+ * nem lehet példányosítani
+ */
 public class RobotRecipe implements IRecipe {
-
+    /**
+     * ez azért kell mert singleton
+     */
     private static RobotRecipe robotRecipe;
 
+    /**
+     * megvalósítja a robot gyártását
+     * <p> létrehoz egy új resource listát ami kelleni fog a gyártáshoz
+     *                       (BillOfMaterial)</p>
+     * <p>létrehozza a szükséges nyersanyagokat, majd ezeket beleteszi a billbe.
+     *       Elkéri a játékos tárolóját, és ellenőrzi megvan-e minden a billről</p>
+     * <p>Ha van:</p>
+     *                       kiveszi a tárolóból a gyártáshoz felhasznált anyagokat,
+     *                       létrehoz egy robotot a jelen aszteroidán,
+     *                       az aszteroidához hozzáadja a robotot,
+     *                       a robotot hozzáadja a RobotControllerhez.
+     * @param iStorageCapable a gyártást végrehajtó telepes
+     *                        (a tárolója tartalma miatt át kell adni)
+     * @param asteroid az aszteroida amin a gyártás megtörténik
+     */
     @Override
     public void Craft(IStorageCapable iStorageCapable, Asteroid asteroid) {
 
@@ -68,6 +89,10 @@ public class RobotRecipe implements IRecipe {
 
     }
 
+    /**
+     * Singleton osztályként így lehet rá referálni
+     * @return visszaad egy instance-ot
+     */
     public static RobotRecipe GetInstance() {
 
         if (robotRecipe == null) {
@@ -78,6 +103,11 @@ public class RobotRecipe implements IRecipe {
 
     }
 
+    /**
+     * Privát konstruktor,
+     * nem lehet meghívni,
+     * nem lehet példányosítani
+     */
     private RobotRecipe() {}
 
 }

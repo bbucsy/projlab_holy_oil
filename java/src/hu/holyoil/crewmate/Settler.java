@@ -10,15 +10,15 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 /**
- * A Telepeseket leíró osztály
- * leszármazottja az AbstractCrewmate-nek (robottal közös tulajdonságai miatt)
- * implementálja az IStorageCapable-t mert képes tárolásra és gyártásra
+ * A Telepeseket leíró osztály.
+ * Leszármazottja az AbstractCrewmate-nek (robottal közös tulajdonságai miatt).
+ * Implementálja az IStorageCapable-t mert képes tárolásra és gyártásra.
  */
 public class Settler extends AbstractCrewmate implements IStorageCapable {
     /**
      * Létrehoz egy telepest
-     * Kívülről nem elérhető: nem lehet kezdő Aszteroida nélkül példányosítani
-     * Nem használjuk jelenleg sehol: biztonságból van: ne lehessen storage nélkül létrehozni settlert sehol
+     * <p>Kívülről nem elérhető: nem lehet kezdő Aszteroida nélkül példányosítani.
+     * Nem használjuk jelenleg sehol: biztonságból van: ne lehessen storage nélkül létrehozni settlert sehol</p>
      */
     private Settler() {
         storage = new PlayerStorage();
@@ -26,9 +26,10 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * Settler konstruktora
+     * <p>inicializálja a storage-ot,
+     * hozzáadja az aszteroidához a telepest</p>
      * @param startingAsteroid Aszteroida amelyen létrehozza a settlert
-     * inicializálja a storage-ot
-     * hozzáadja az aszteroidához a telepest
+     *
      */
     public Settler(Asteroid startingAsteroid) {
         storage = new PlayerStorage();
@@ -44,10 +45,10 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * A telepes meghal
-     * felülírja az AbstractCrewmate Die() metódusát
-     * Eltávolítja a telepest a GameControllerből
-     * Ha a telepesnél van legalább egy teleporter azt felrobbantja (ami felrobbantja a párját)
-     * Az aszteroidáról is kitörli a telepest
+     * <p>felülírja az AbstractCrewmate Die() metódusát.
+     * Eltávolítja a telepest a GameControllerből.
+     * Ha a telepesnél van legalább egy teleporter azt felrobbantja (ami felrobbantja a párját).
+     * Az aszteroidáról is kitörli a telepest</p>
      */
     @Override
     public void Die() {
@@ -64,8 +65,8 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     }
 
     /**
-     * Az aszteroida által meghívandó függvény, ha az aszteroida felrobban
-     * meghívja a Die() függvényt
+     * Az aszteroida által meghívandó függvény, ha az aszteroida felrobban.
+     * Meghívja a Die() függvényt.
      */
     @Override
     public void ReactToAsteroidExplosion() {
@@ -76,8 +77,8 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * Robot készítése
-     * a tényleges robot gyártás és feltétel ellenőrzést a RobotRecipe végzi
-     * meghívja a RobotRecipe() singleton osztály Craft() metódusát
+     * <p>a tényleges robot gyártás és feltétel ellenőrzést a RobotRecipe végzi.
+     * Meghívja a RobotRecipe() singleton osztály Craft() metódusát</p>
      */
     @Override
     public void CraftRobot() {
@@ -88,8 +89,8 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      *Teleportkapu pár gyártása (mindig egyszerre kettőt)
-     * A tényleges teleport gyártás és feltétel ellenőrzést a TeleporterRecipe végzi
-     * meghívja a TeleporterRecipe() singleton osztály Craft() metódusát
+     * <p>A tényleges teleport gyártás és feltétel ellenőrzést a TeleporterRecipe végzi.
+     * Meghívja a TeleporterRecipe() singleton osztály Craft() metódusát</p>
      */
     @Override
     public void CraftTeleportGate() {
@@ -100,8 +101,8 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * A telepes megpróbálja kibányászni a jelen aszteroida nyersanyagát
-     * Az aszteroida ReactToMineBy metódusa meghívja az AbstractBaseResource ReactToMine metódusát
-     * Az AbstractBaseResource kezeli le az aszteroida ürítését és az inventory feltöltését
+     * <p>Az aszteroida ReactToMineBy metódusa meghívja az AbstractBaseResource ReactToMine metódusát.
+     * Az AbstractBaseResource kezeli le az aszteroida ürítését és az inventory feltöltését</p>
      */
     @Override
     public void Mine() {
@@ -122,13 +123,13 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * A telepes megpróbál lerakni egy teleportert
-     * Ellenőrzi van-e nála legalább egy teleporter: ha nincs a storage.GetOneTeleporter null-al tér vissza
-     * Ellenőrzi az aszteroidán van e már teleporter: ha nincs, az onAsteroid.GetTeleporter null-al tér vissza
-     * csak akkor tehet le teleportert ha nála van legalább egy, és az aszteroidán még egy sincs
-     * ha ez teljesül:
-     *      a teleporter homeAsteroid tagváltozóját ráállítja az aszteroidára amin a telepes áll
-     *      a  jelen aszteroida Teleporter tagváltozóját beállítja a teleporterre
-     *      eltávolítja a teleportert a játékos inventoryjából
+     * <p>Ellenőrzi van-e nála legalább egy teleporter: ha nincs a storage.GetOneTeleporter null-al tér vissza. </p>
+     * <p>Ellenőrzi az aszteroidán van e már teleporter: ha nincs, az onAsteroid.GetTeleporter null-al tér vissza.</p>
+     * <p>csak akkor tehet le teleportert ha nála van legalább egy, és az aszteroidán még egy sincs</p>
+     * <p>ha ez teljesül:
+     *      a teleporter homeAsteroid tagváltozóját ráállítja az aszteroidára amin a telepes áll,
+     *      a  jelen aszteroida Teleporter tagváltozóját beállítja a teleporterre,
+     *      eltávolítja a teleportert a játékos inventoryjából</p>
      */
     @Override
     public void PlaceTeleporter() {
@@ -151,9 +152,9 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * A telepes megpróbál lerakni egy nyersanyagot egy üres aszteroidára
-     * @param abstractBaseResource a storage-ből kiválasztott nyersanyagot teszi le
-     * ellenőrzi üres-e az aszteroida magja
-     *                             csak akkor sikerül ha az aszteroida üres
+     * <p>ellenőrzi üres-e az aszteroida magja.
+     *    Csak akkor sikerül ha az aszteroida üres</p>
+     * @param abstractBaseResource a storage-ből kiválasztott nyersanyag
      */
     @Override
     public void PlaceResource(AbstractBaseResource abstractBaseResource) {

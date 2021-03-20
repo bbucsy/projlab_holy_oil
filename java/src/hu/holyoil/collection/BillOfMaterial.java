@@ -6,8 +6,13 @@ import hu.holyoil.skeleton.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * nyersanyagokat listázó osztály. Nem összekeverendő a PlayerStorage-al.
+ */
 public class BillOfMaterial {
-
+    /**
+     * 
+     */
     List<AbstractBaseResource> resources;
 
     public BillOfMaterial() {
