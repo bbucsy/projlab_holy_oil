@@ -5,6 +5,7 @@ import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.IStorageCapable;
+import hu.holyoil.crewmate.Settler;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
@@ -48,6 +49,17 @@ public class Asteroid implements INeighbour {
         abstractCrewmate.SetOnAsteroid(this);
         Logger.Return();
 
+    }
+
+    /** eredeti változat a szekvenciadiagramokon: SetResource(s: Settler, resource: AbstractBaseResource)
+     *
+     */
+    public void PutResource(Settler s, AbstractBaseResource res) {
+        if (numOfLayersRemaining == 0 && resource == null) {
+            Logger.Log(this, "Putting down resource from settler to asteroid core.");
+            res.ReactToPlace(this, s);
+            return;
+        }
     }
 
     public void SetIsNearbySun(Boolean newIsNearbySun) {
