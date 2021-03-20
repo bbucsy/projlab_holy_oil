@@ -134,6 +134,11 @@ public class Asteroid implements INeighbour {
 
     }
 
+    public AbstractBaseResource GetResource(){
+        Logger.Log(this, "Returning resource");
+        Logger.Return();
+        return resource;
+    }
     public void SetResource(AbstractBaseResource abstractBaseResource) {
 
         Logger.Log(this, "Setting resource to " + Logger.GetName(abstractBaseResource));
@@ -229,6 +234,14 @@ public class Asteroid implements INeighbour {
         List<AbstractCrewmate> crewmatesShallowCopy = new ArrayList<>(crewmates);
         crewmatesShallowCopy.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
         Logger.Return();
+
+        if (teleporter != null) {
+
+            Logger.Log(this, "Exploding my teleporter");
+            teleporter.Explode();
+            Logger.Return();
+
+        }
 
         Logger.Log(this, "Removing me from GameController");
         GameController.GetInstance().RemoveAsteroid(this);
