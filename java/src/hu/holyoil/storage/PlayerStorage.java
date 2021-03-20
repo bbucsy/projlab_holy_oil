@@ -40,7 +40,7 @@ public class PlayerStorage {
 
     public TeleportGate GetOneTeleporter() {
 
-        Logger.Log(this, "Returning one teleporter");
+        Logger.Log(this, "Returning one or no teleporter");
         if (teleporters.size() == 0) {
             Logger.Return();
             return null;
@@ -98,7 +98,6 @@ public class PlayerStorage {
     public Boolean HasEnoughOf(BillOfMaterial billOfMaterial) {
 
         Logger.Log(this, "Checking if I have enough of " + Logger.GetName(billOfMaterial));
-        Logger.Return();
 
         boolean[] checked = new boolean[storedMaterials.size()];
         for (int i = 0; i < storedMaterials.size(); i++)
@@ -119,11 +118,17 @@ public class PlayerStorage {
             }
 
             if (!found) {
+                Logger.Log(this, "I do not have enough to complete this bill");
+                Logger.Return();
+                Logger.Return();
                 return false;
             }
 
         }
 
+        Logger.Log(this, "I have enough to complete this bill");
+        Logger.Return();
+        Logger.Return();
         return true;
 
     }

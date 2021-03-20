@@ -18,6 +18,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     public Settler(Asteroid startingAsteroid) {
         storage = new PlayerStorage();
         onAsteroid = startingAsteroid;
+        onAsteroid.AddCrewmate(this);
     }
 
 
@@ -27,7 +28,9 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     public void Die() {
         Logger.Log(this, "Died");
         GameController.getInstance().RemoveSettler(this);
-        // Handle teleportgate logic
+        if (storage.GetOneTeleporter() != null) {
+            storage.GetOneTeleporter().Explode();
+        }
         onAsteroid.RemoveCrewmate(this);
         Logger.Return();
     }
@@ -74,12 +77,14 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
         TeleportGate storageTeleporter = storage.GetOneTeleporter();
         TeleportGate asteroidTeleporter = onAsteroid.GetTeleporter();
 
-        if(storageTeleporter != null && asteroidTeleporter == null);
+        if (storageTeleporter != null && asteroidTeleporter == null) {
 
-        storageTeleporter.SetHomeAsteroid(onAsteroid);
-        onAsteroid.SetTeleporter(storageTeleporter);
+            storageTeleporter.SetHomeAsteroid(onAsteroid);
+            onAsteroid.SetTeleporter(storageTeleporter);
 
-        storage.RemoveTeleportGate(storageTeleporter);
+            storage.RemoveTeleportGate(storageTeleporter);
+
+        }
 
         Logger.Return();
     }

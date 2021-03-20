@@ -10,6 +10,8 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class Asteroid implements INeighbour {
@@ -39,11 +41,11 @@ public class Asteroid implements INeighbour {
         Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
         Logger.Return();
 
-        crewmates.add(abstractCrewmate);
-
         Logger.Log(this, "Removing Crewmate");
         from.RemoveCrewmate(abstractCrewmate);
         Logger.Return();
+
+        crewmates.add(abstractCrewmate);
 
         Logger.Log(this, "Setting onAsteroid of Crewmate");
         abstractCrewmate.SetOnAsteroid(this);
@@ -146,11 +148,14 @@ public class Asteroid implements INeighbour {
     public INeighbour GetRandomNeighbour() {
 
         Logger.Log(this, "Returning random neighbour");
+        Logger.Return();
         if (Main.isTestMode) {
-            Logger.Return();
-            return TestFramework.getInstance().GetAsteroid();
+            if (neighbouringAsteroids.isEmpty())
+                return teleporter;
+            else
+                return neighbouringAsteroids.get(0);
         } else {
-            Logger.Return();
+            // todo
             return null;
         }
 
@@ -211,7 +216,8 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
         Logger.Log(this, "Signaling to crewmates that I am exploding");
-        crewmates.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
+        List<AbstractCrewmate> crewmatesShallowCopy = new ArrayList<>(crewmates);
+        crewmatesShallowCopy.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
         Logger.Return();
 
         if (teleporter != null) {

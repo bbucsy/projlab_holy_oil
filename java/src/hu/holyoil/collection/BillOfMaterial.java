@@ -16,6 +16,7 @@ public class BillOfMaterial {
 
     public void AddMaterial(AbstractBaseResource abstractBaseResource){
         Logger.Log(this,"Adding Material: " + Logger.GetName(abstractBaseResource));
+        resources.add(abstractBaseResource);
         Logger.Return();
     }
 
