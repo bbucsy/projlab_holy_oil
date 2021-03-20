@@ -1,5 +1,6 @@
 package hu.holyoil.skeleton.testcases;
 
+import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.resource.Uranium;
@@ -35,11 +36,15 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
         a.AddCrewmate(s);
         a.SetResource(u);
 
-        for(int i=0; i<10; i++){
+        BillOfMaterial bill = new BillOfMaterial();
+
+        for (int i = 0; i < 10; i++) {
             Uranium addUranium = new Uranium();
-            ps.SetStoredMaterial(addUranium);
+            bill.AddMaterial(addUranium);
             Logger.RegisterObject(addUranium,"u"+i+": Uranium");
         }
+
+        ps.AddBill(bill);
 
         Logger.RegisterObject(this, "TestFixture");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
