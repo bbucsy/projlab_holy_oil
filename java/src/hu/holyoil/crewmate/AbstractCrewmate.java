@@ -37,14 +37,27 @@ public abstract class AbstractCrewmate {
         Logger.Return();
     }
 
+    /**
+     * A Crewmate egy egységet fúr az aszteroida köpenyén
+     * meghívja az aszteroida ReactToDrill metódusát
+     *                      Az aszteroida lekezeli a kéregvastagság csökkenést
+     */
     public void Drill() {
         Logger.Log(this, "Drilling");
         onAsteroid.ReactToDrill();
         Logger.Return();
     }
 
+    /**
+     * Máshogy történik a leszármazottak halála
+     *          leszármazottak maguk realizálják
+     */
     public abstract void Die();
 
+    /**
+     * Máshogy reagálnak a leszármazottak a robbanásra
+     *          leszármazottak maguk realizálják
+     */
     public abstract void ReactToAsteroidExplosion();
 
 }

@@ -140,11 +140,9 @@ public class Asteroid implements INeighbour {
         return resource;
     }
     public void SetResource(AbstractBaseResource abstractBaseResource) {
-
         Logger.Log(this, "Setting resource to " + Logger.GetName(abstractBaseResource));
         resource = abstractBaseResource;
         Logger.Return();
-
     }
 
     public INeighbour GetRandomNeighbour() {
