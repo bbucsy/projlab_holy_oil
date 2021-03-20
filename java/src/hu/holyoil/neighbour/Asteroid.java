@@ -38,10 +38,10 @@ public class Asteroid implements INeighbour {
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
 
-        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
+        Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractCrewmate));
         Logger.Return();
 
-        Logger.Log(this, "Removing Crewmate");
+        Logger.Log(this, "Removing Crewmate from " + Logger.GetName(from));
         from.RemoveCrewmate(abstractCrewmate);
         Logger.Return();
 
