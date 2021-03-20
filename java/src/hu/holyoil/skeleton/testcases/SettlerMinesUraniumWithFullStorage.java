@@ -7,41 +7,48 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
-public class SettlerFillsAsteroidWithUranium extends TestCase {
+import java.util.ArrayList;
+import java.util.List;
 
-    private PlayerStorage ps;
-    private Uranium u;
+public class SettlerMinesUraniumWithFullStorage extends TestCase {
+
     private Asteroid a;
     private Settler s;
 
     @Override
     public String Name() {
-        return "Settler fills asteroid with uranium";
+        return "Settler tries to mine uranium with full storage";
     }
 
     @Override
     protected void load() {
-        u = new Uranium();
+        Uranium u = new Uranium();
         a = new Asteroid();
         s = new Settler(a);
-        ps = s.GetStorage();
+        PlayerStorage ps = s.GetStorage();
 
         Logger.RegisterObject(ps,"ps: PlayerStorage");
-        Logger.RegisterObject(u,"u: Urnaium");
+        Logger.RegisterObject(u,"u: Uranium");
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(a, "a: Asteroid");
 
         a.AddCrewmate(s);
-        ps.SetStoredMaterial(u);
+        a.SetResource(u);
+
+        for(int i=0; i<10; i++){
+            Uranium addUranium = new Uranium();
+            ps.SetStoredMaterial(addUranium);
+            Logger.RegisterObject(addUranium,"u"+i+": Uranium");
+        }
 
         Logger.RegisterObject(this, "TestFixture");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
-        Logger.Return();
     }
 
     @Override
     protected void start() {
-        a.PutResource(s, u);
+        a.ReactToMineBy(s);
     }
+
 }

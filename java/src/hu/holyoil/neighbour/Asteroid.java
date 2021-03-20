@@ -55,8 +55,8 @@ public class Asteroid implements INeighbour {
      *
      */
     public void PutResource(Settler s, AbstractBaseResource res) {
+        Logger.Log(this, "Putting down resource from settler to asteroid core.");
         if (numOfLayersRemaining == 0 && resource == null) {
-            Logger.Log(this, "Putting down resource from settler to asteroid core.");
             res.ReactToPlace(this, s);
             return;
         }
