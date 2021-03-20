@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * nyersanyagokat listázó osztály. Nem összekeverendő a PlayerStorage-al. Elsősorban a receptek kezelésére használjuk.
+ * nyersanyagokat listázó osztály. Nem összekeverendő a PlayerStorage entitással. Elsősorban a receptek kezelésére használjuk.
  */
 public class BillOfMaterial {
     /**

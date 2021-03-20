@@ -30,7 +30,7 @@ public class Uranium extends AbstractBaseResource {
     }
 
     /**
-     * 
+     * Uránium reagál a napközeliségre és felrobbantja az aszteroidáját.
      * @param asteroid az aszteroida amiben a nyersanyag megtalálható
      */
     @Override

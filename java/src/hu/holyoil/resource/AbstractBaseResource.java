@@ -15,7 +15,7 @@ public abstract class AbstractBaseResource {
      * Az aszteroidából való bányászást kezeli.
      * <p>
      *     Létrehoz egy új billt, ehhez hozzáadja magát. Elkéri a bányász inventoryját. Ha még nincs tele az inventory hozzáadja a billt.
-     *     Az aszteroida magja üressé válik
+     *     Az aszteroida magja üressé válik.
      * </p>
      * @param asteroid a nyersanyagot tartalmazó aszteroida
      * @param iStorageCapable a bányászást megkísérlő telepes

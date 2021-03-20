@@ -8,16 +8,36 @@ import hu.holyoil.skeleton.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A játékosok inventoryját leíró osztály.
+ */
 public class PlayerStorage {
-
+    /**
+     * Paraméter nélküli konstruktor.
+     * Inicializálja a tagváltozó listákat.
+     */
     public PlayerStorage() {
         storedMaterials = new ArrayList<>();
         teleporters = new ArrayList<>();
     }
 
+    /**
+     * A teleportereket tartalmazó lista. Egy játékosnál maximum kettő teleporter lehet.
+     */
     private List<TeleportGate> teleporters;
+    /**
+     * A tárolt nyersanyagok listája. Egy játékosnál egyszerre 10 nyersanyag lehet.
+     */
     protected List<AbstractBaseResource> storedMaterials;
 
+    /**
+     * Hozzáad a tárolóhoz két teleportert amik egymásnak párjai.
+     * <p>
+     *     Mivel egyszerre hozzuk létre a párokat, egyszerre tesszük be.
+     * </p>
+     * @param teleportGate1 a pár egyik fele
+     * @param teleportGate2 a pár másik fele
+     */
     public void AddTeleportGatePair(TeleportGate teleportGate1, TeleportGate teleportGate2) {
 
         Logger.Log(this, "Adding teleportgate pair of " + Logger.GetName(teleportGate1) + " and " + Logger.GetName(teleportGate2));
@@ -29,6 +49,10 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Eltávolít egy teleportert a tárolóból.
+     * @param teleportGate az eltávolítandó teleporter
+     */
     public void RemoveTeleportGate(TeleportGate teleportGate) {
 
         Logger.Log(this, "Removing teleportgate " + Logger.GetName(teleportGate));
@@ -38,6 +62,13 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Visszaad egy teleportert a tárolóból.
+     * <p>
+     *     Ez lehet null, ha nincs a telepesnél egy darab se.
+     * </p>
+     * @return
+     */
     public TeleportGate GetOneTeleporter() {
 
         if (teleporters.size() == 0) {
@@ -52,6 +83,10 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Visszaadja hány nyersanyagot tárol jelenleg.
+     * @return a nyersanyag lista mérete
+     */
     public Integer GetSumResources() {
 
         Logger.Log(this, "Returning sum resources");
@@ -60,6 +95,10 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Hozzáad egy billnyi nyersanyagot a tárolóhoz.
+     * @param billOfMaterial
+     */
     public void AddBill(BillOfMaterial billOfMaterial) {
 
         Logger.Log(this, "Adding bill " + Logger.GetName(billOfMaterial));
@@ -68,6 +107,10 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Eltávolít egy billnyi nyersanyagot a tárolóból.
+     * @param billOfMaterial az eltávolítandó nyersanyagok billje
+     */
     public void RemoveBill(BillOfMaterial billOfMaterial) {
 
         Logger.Log(this, "Removing bill " + Logger.GetName(billOfMaterial));
@@ -96,6 +139,14 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Eldönti van-e elég nyersanyag egy bizonyos összeállításból.
+     * <p>
+     *     Például recepteknél használatos.
+     * </p>
+     * @param billOfMaterial
+     * @return
+     */
     public Boolean HasEnoughOf(BillOfMaterial billOfMaterial) {
 
         Logger.Log(this, "Checking if I have enough of " + Logger.GetName(billOfMaterial));

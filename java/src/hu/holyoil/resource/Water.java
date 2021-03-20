@@ -26,6 +26,10 @@ public class Water extends AbstractBaseResource {
         return abstractBaseResource instanceof Water;
     }
 
+    /**
+     * Reagál a napközeliségre és elszublimál
+     * @param asteroid az aszteroida amiben a nyersanyag megtalálható
+     */
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
         Logger.Log(this,"Reacting to Sun nearby");
