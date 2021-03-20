@@ -76,7 +76,7 @@ public class TeleporterRecipe implements IRecipe {
         }
     }
 
-    public static TeleporterRecipe getInstance() {
+    public static TeleporterRecipe GetInstance() {
 
         if (teleporterRecipe == null) {
             teleporterRecipe = new TeleporterRecipe();

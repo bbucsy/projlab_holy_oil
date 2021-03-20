@@ -9,10 +9,7 @@ import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Asteroid implements INeighbour {
 
@@ -155,8 +152,21 @@ public class Asteroid implements INeighbour {
             else
                 return neighbouringAsteroids.get(0);
         } else {
-            // todo
-            return null;
+
+            Random random = new Random();
+            boolean canChooseTeleporter = false;
+            if (teleporter != null) {
+                if (teleporter.GetPair().GetHomeAsteroid() != null) {
+                    canChooseTeleporter = true;
+                }
+            }
+
+            int chosenIndex = random.nextInt() %
+                    (neighbouringAsteroids.size() + (canChooseTeleporter ? 0 : 1));
+
+            return chosenIndex == neighbouringAsteroids.size() ?
+                    teleporter :
+                    neighbouringAsteroids.get(chosenIndex);
         }
 
     }
@@ -221,11 +231,11 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
         Logger.Log(this, "Removing me from GameController");
-        GameController.getInstance().RemoveAsteroid(this);
+        GameController.GetInstance().RemoveAsteroid(this);
         Logger.Return();
 
         Logger.Log(this, "Removing me from SunController");
-        SunController.getInstance().RemoveAsteroid(this);
+        SunController.GetInstance().RemoveAsteroid(this);
         Logger.Return();
 
     }

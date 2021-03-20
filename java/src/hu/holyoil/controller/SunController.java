@@ -19,18 +19,21 @@ public class SunController implements ISteppable {
 
     public void AddAsteroid(Asteroid asteroid)  {
         Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ " >");
+        asteroids.add(asteroid);
         Logger.Return();
     }
     public void RemoveAsteroid(Asteroid asteroid)  {
         Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ " >");
+        asteroids.remove(asteroid);
         Logger.Return();
     }
     public void StartSunstorm()  {
        Logger.Log(this,"Starting sunstorm");
+       asteroids.forEach(Asteroid::ReactToSunstorm);
        Logger.Return();
     }
 
-    public static SunController getInstance() {
+    public static SunController GetInstance() {
 
         if (sunController == null) {
             sunController = new SunController();
@@ -41,8 +44,8 @@ public class SunController implements ISteppable {
     }
 
     private SunController() {
-        //turnsUntilNextSunstorm = 100;
-        //asteroids = new ArrayList<>();
+        turnsUntilNextSunstorm = 100;
+        asteroids = new ArrayList<>();
     }
 
 }

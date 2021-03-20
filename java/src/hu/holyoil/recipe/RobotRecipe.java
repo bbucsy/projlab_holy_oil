@@ -61,14 +61,14 @@ public class RobotRecipe implements IRecipe {
             Logger.Return();
 
             Logger.Log(this, "Registering " + Logger.GetName(robot) + " at the robotcontroller");
-            RobotController.getInstance().AddRobot(robot);
+            RobotController.GetInstance().AddRobot(robot);
             Logger.Return();
 
         }
 
     }
 
-    public static RobotRecipe getInstance() {
+    public static RobotRecipe GetInstance() {
 
         if (robotRecipe == null) {
             robotRecipe = new RobotRecipe();

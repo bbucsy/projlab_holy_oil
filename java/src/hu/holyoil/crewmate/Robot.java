@@ -17,7 +17,7 @@ public class Robot extends AbstractCrewmate {
     @Override
     public void Die() {
         Logger.Log(this, "Died");
-        RobotController.getInstance().RemoveRobot(this);
+        RobotController.GetInstance().RemoveRobot(this);
         onAsteroid.RemoveCrewmate(this);
         Logger.Return();
 
@@ -28,6 +28,5 @@ public class Robot extends AbstractCrewmate {
         Logger.Log(this, "ReactingToAsteroidExplosion");
         onAsteroid.GetRandomNeighbour().ReactToMove(onAsteroid, this);
         Logger.Return();
-
     }
 }

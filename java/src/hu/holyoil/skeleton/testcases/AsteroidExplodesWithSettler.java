@@ -25,12 +25,13 @@ public class AsteroidExplodesWithSettler extends TestCase {
         Logger.RegisterObject(settler, "s: Settler");
 
         Logger.RegisterObject(this, "TestFixture");
-        Logger.RegisterObject(SunController.getInstance(), ": SunController");
-        Logger.RegisterObject(GameController.getInstance(), ": GameController");
+        Logger.RegisterObject(SunController.GetInstance(), ": SunController");
+        Logger.RegisterObject(GameController.GetInstance(), ": GameController");
+        Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
 
-        SunController.getInstance().AddAsteroid(asteroid);
-        GameController.getInstance().AddAsteroid(asteroid);
-        GameController.getInstance().AddSettler(settler);
+        SunController.GetInstance().AddAsteroid(asteroid);
+        GameController.GetInstance().AddAsteroid(asteroid);
+        GameController.GetInstance().AddSettler(settler);
     }
 
     @Override

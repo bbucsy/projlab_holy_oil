@@ -15,7 +15,7 @@ public class Example extends TestCase {
     private BillOfMaterial b = new BillOfMaterial();
     @Override
     public String Name() {
-        return "Settler Drills";
+        return "Example";
     }
 
     @Override
