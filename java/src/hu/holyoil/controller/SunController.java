@@ -80,6 +80,8 @@ public class SunController implements ISteppable {
     /**
      * Privát konstruktor
      * Nem lehet kívülről meghívni, nem lehet példányosítani.
+     * <p>A 100 forduló a következő napviharig egy ad hoc szám, bármi lehet.
+     * Inicializálja az aszteroidáka tároló listát.</p>
      */
     private SunController() {
         turnsUntilNextSunstorm = 100;

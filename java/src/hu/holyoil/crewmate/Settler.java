@@ -66,7 +66,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
 
     /**
      * Az aszteroida által meghívandó függvény, ha az aszteroida felrobban.
-     * Meghívja a Die() függvényt.
+     * <p>Meghívja a Die() függvényt.</p>
      */
     @Override
     public void ReactToAsteroidExplosion() {

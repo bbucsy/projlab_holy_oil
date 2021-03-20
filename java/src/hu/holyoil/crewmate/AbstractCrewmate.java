@@ -11,15 +11,14 @@ import hu.holyoil.skeleton.Logger;
  */
 public abstract class AbstractCrewmate {
     /**
-     * azon aszteroida amin a Crewmate jelenleg tartózkodik
+     * Azon aszteroida amin a Crewmate jelenleg tartózkodik
      */
     protected Asteroid onAsteroid;
 
     /**
      * A Crewmate átmegy a jelen aszteroida egy szomszédjára
+     * <p>meghívja a szomszéd ReactToMove metódusát. Az aszteroida váltást a szomszéd aszteroida kezeli</p>
      * @param neighbour az aszteroida egy elérhető szomszédja
-     * meghívja a szomszéd ReactToMove metódusát
-     *                  Az aszteroida váltást a szomszéd aszteroida kezeli
      */
     public void Move(INeighbour neighbour) {
         Logger.Log(this, "Moving to " + Logger.GetName(neighbour));

@@ -7,7 +7,7 @@ import hu.holyoil.storage.PlayerStorage;
  * Interface amely lehetővé teszi a telepeseknek hogy tudjanak:
  *                 <p> tárolni,
  *                  gyártani,
- *                  nyersanyagot lerakni.</p>
+ *                  nyersanyagot felvenni és lerakni.</p>
  */
 public interface IStorageCapable {
     /**

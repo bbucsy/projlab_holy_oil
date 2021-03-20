@@ -18,10 +18,9 @@ public class Robot extends AbstractCrewmate {
 
     /**
      * A Robot konstruktora.
-     * <p>beállítja a kezdő aszteroidát
-     *       hozzáadja az aszteroidához a robotot
-     *       A RobotController-hez a gyártás során adódik hozzá
-     *                                A robot mindig gyártás során példányosítódik</p>
+     * <p>beállítja a kezdő aszteroidát,
+     *       hozzáadja az aszteroidához a robotot.
+     *       A RobotController-hez a gyártás során adódik hozzá. A robot mindig gyártás során példányosítódik</p>
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
@@ -45,7 +44,7 @@ public class Robot extends AbstractCrewmate {
 
     /**
      * A robot alatt felrobban az aszteroida ami átlöki egy szomszédra.
-     * Ez a szomszéd lehet egy aktív teleporter is, amin átküldi a robotot
+     * <p>Ez a szomszéd lehet egy aktív teleporter is, amin átküldi a robotot</p>
      */
     @Override
     public void ReactToAsteroidExplosion() {
