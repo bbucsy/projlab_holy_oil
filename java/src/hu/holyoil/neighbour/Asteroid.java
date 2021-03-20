@@ -228,12 +228,7 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
     }
-
-    public AbstractBaseResource GetResource(){
-        Logger.Log(this, "Returning resource");
-        Logger.Return();
-        return resource;
-    }
+    
     /**
      * Visszaadja a magban található nyersanyagot.
      * @return visszaadja a resource tagváltozót
