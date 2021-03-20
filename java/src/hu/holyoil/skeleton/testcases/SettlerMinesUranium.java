@@ -26,7 +26,7 @@ public class SettlerMinesUranium extends TestCase {
         ps = s.GetStorage();
 
         Logger.RegisterObject(ps,"ps: PlayerStorage");
-        Logger.RegisterObject(u,"u: Urnaium");
+        Logger.RegisterObject(u,"u: Uranium");
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(a, "a: Asteroid");
 
@@ -36,7 +36,6 @@ public class SettlerMinesUranium extends TestCase {
         Logger.RegisterObject(this, "TestFixture");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
-        Logger.Return();
     }
 
     @Override

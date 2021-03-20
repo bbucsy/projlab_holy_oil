@@ -8,9 +8,7 @@ import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
 public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
-    private PlayerStorage ps;
     private Uranium u;
-    private Uranium u1;
     private Asteroid a;
     private Settler s;
 
@@ -22,25 +20,32 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
     @Override
     protected void load() {
         u = new Uranium();
-        u1 = new Uranium();
+
         a = new Asteroid();
         s = new Settler(a);
-        ps = s.GetStorage();
+        PlayerStorage ps = s.GetStorage();
 
         Logger.RegisterObject(ps, "ps: PlayerStorage");
-        Logger.RegisterObject(u, "u: Urnaium");
-        Logger.RegisterObject(u1, "u1: Uranium");
+        Logger.RegisterObject(u, "u: Uranium");
+
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(a, "a: Asteroid");
 
         a.AddCrewmate(s);
         ps.SetStoredMaterial(u);
-        a.SetResource(u1);
 
-        Logger.RegisterObject(this, "TestFixture");
+
+        Logger.RegisterObject(this, "TestFixtureLayer");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
-        Logger.Return();
+
+        Logger.RegisterObject(this, "TestFixtureLayer");
+        if (Logger.GetBoolean(this, "Is it filled?")) {
+            Uranium u1 = new Uranium();
+            a.SetResource(u1);
+            Logger.RegisterObject(u1, "u1: Uranium");
+        }
+
     }
 
     @Override
