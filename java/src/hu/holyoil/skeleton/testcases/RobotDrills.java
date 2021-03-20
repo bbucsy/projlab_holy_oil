@@ -16,8 +16,13 @@ public class RobotDrills extends TestCase {
 
     @Override
     protected void load() {
+        Logger.RegisterObject(this, "TestFixture");
+
+        int layers = Logger.GetInteger(this,"How many layers does the asteroid have?");
         Asteroid a = new Asteroid();
+        a.SetNumOfLayersRemaining(layers);
         r = new Robot(a);
+
 
         Logger.RegisterObject(a,"onAsteroid: Asteroid");
         Logger.RegisterObject(r,"r: Robot");

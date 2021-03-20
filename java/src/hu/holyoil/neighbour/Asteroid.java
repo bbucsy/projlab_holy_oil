@@ -99,9 +99,7 @@ public class Asteroid implements INeighbour {
 
         Logger.Log(this, "Getting drilled");
 
-        int layers = Logger.GetInteger(this,"How many layers do I have?");
-
-        if (layers >= 1) this.DecNumOfLayersRemaining();
+        if (numOfLayersRemaining>= 1) this.DecNumOfLayersRemaining();
 
         Logger.Return();
 
