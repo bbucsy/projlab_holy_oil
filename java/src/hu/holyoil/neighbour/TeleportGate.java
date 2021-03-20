@@ -20,6 +20,8 @@ public class TeleportGate implements INeighbour {
     }
 
     public Asteroid GetHomeAsteroid() {
+        Logger.Log(this, "Returning home asteroid: "+ Logger.GetName(homeAsteroid));
+        Logger.Return();
         return homeAsteroid;
     }
 
