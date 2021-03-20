@@ -7,6 +7,7 @@ java/.idea/**/tasks.xml
 java/.idea/**/usage.statistics.xml
 java/.idea/**/dictionaries
 java/.idea/**/shelf
+java/.sources
 
 # Generated files
 java/.idea/**/contentModel.xml
