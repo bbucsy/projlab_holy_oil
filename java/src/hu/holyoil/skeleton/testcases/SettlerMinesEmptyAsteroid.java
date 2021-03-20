@@ -31,7 +31,6 @@ public class SettlerMinesEmptyAsteroid extends TestCase {
         Logger.RegisterObject(this, "TestFixture");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
-        Logger.Return();
     }
 
     @Override

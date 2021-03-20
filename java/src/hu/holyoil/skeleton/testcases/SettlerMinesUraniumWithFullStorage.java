@@ -17,7 +17,7 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler mines uranium with full storage";
+        return "Settler tries to mine uranium with full storage";
     }
 
     @Override
@@ -26,7 +26,6 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
         a = new Asteroid();
         s = new Settler(a);
         PlayerStorage ps = s.GetStorage();
-        List<Uranium> adder = new ArrayList<>();
 
         Logger.RegisterObject(ps,"ps: PlayerStorage");
         Logger.RegisterObject(u,"u: Uranium");
@@ -39,7 +38,7 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
         for(int i=0; i<10; i++){
             Uranium addUranium = new Uranium();
             ps.SetStoredMaterial(addUranium);
-            Logger.RegisterObject(addUranium,"addUranium: Uranium");
+            Logger.RegisterObject(addUranium,"u"+i+": Uranium");
         }
 
         Logger.RegisterObject(this, "TestFixture");

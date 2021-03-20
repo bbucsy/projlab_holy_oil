@@ -15,7 +15,7 @@ public class SettlerMinesUranium extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler mines uranium";
+        return "Settler mines uranium successfully";
     }
 
     @Override

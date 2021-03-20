@@ -14,7 +14,7 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler tries to fill asteroid with uranium";
+        return "Settler fills asteroid with uranium";
     }
 
     @Override
@@ -35,12 +35,11 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
         ps.SetStoredMaterial(u);
 
 
-        Logger.RegisterObject(this, "TestFixtureLayer");
+        Logger.RegisterObject(this, "TestFixture");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
 
-        Logger.RegisterObject(this, "TestFixtureLayer");
-        if (Logger.GetBoolean(this, "Is it filled?")) {
+        if (Logger.GetBoolean(this, "Is it filled already?")) {
             Uranium u1 = new Uranium();
             a.SetResource(u1);
             Logger.RegisterObject(u1, "u1: Uranium");
