@@ -59,6 +59,7 @@ public class Asteroid implements INeighbour {
         if (numOfLayersRemaining == 0 && resource == null) {
             res.ReactToPlace(this, s);
         }
+        Logger.Return();
     }
 
     public void SetIsNearbySun(Boolean newIsNearbySun) {
