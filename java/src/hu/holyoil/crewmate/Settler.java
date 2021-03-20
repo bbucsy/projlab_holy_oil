@@ -35,7 +35,6 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
         }
 
         onAsteroid.RemoveCrewmate(this);
-
         Logger.Return();
     }
 
