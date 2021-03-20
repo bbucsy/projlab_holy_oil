@@ -40,11 +40,12 @@ public class PlayerStorage {
 
     public TeleportGate GetOneTeleporter() {
 
-        Logger.Log(this, "Returning one or no teleporter");
         if (teleporters.size() == 0) {
+            Logger.Log(this, "Returning no teleporter");
             Logger.Return();
             return null;
         } else {
+            Logger.Log(this, "Returning one teleporter");
             Logger.Return();
             return teleporters.get(0);
         }

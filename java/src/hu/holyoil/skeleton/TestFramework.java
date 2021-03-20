@@ -99,6 +99,13 @@ public class TestFramework {
             System.out.println("----------");
             testcases.get(numToRun).runTestcase();
 
+            try {
+                System.out.println("Press enter to choose another testcase!");
+                System.in.read();
+            } catch (Exception ignore) {
+
+            }
+
         }
 
     }

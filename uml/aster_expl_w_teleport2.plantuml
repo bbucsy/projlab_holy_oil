@@ -14,9 +14,6 @@ participant "homeStorageOfPair: PlayerStorage" as home2
 
 C -> a ++ : Explode()
 
-loop there are no crewmates
-end
-
 a -> sun ++ : RemoveAsteroid(a)
 sun --> a --
 

@@ -21,9 +21,20 @@ public abstract class AbstractCrewmate {
      * @param neighbour az aszteroida egy elérhető szomszédja
      */
     public void Move(INeighbour neighbour) {
-        Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
-        neighbour.ReactToMove(onAsteroid, this);
-        Logger.Return();
+
+        if (onAsteroid.GetNeighbours().contains(neighbour)) {
+
+            Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
+            neighbour.ReactToMove(onAsteroid, this);
+            Logger.Return();
+
+        } else {
+
+            Logger.Log(this, "Cannot move to " + Logger.GetName(neighbour) + ", it is not a neighbour of my asteroid");
+            Logger.Return();
+
+        }
+
     }
 
     /**

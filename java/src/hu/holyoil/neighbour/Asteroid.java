@@ -5,6 +5,7 @@ import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.IStorageCapable;
+import hu.holyoil.crewmate.Settler;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
@@ -77,10 +78,10 @@ public class Asteroid implements INeighbour {
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
 
-        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
+        Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractCrewmate));
         Logger.Return();
 
-        Logger.Log(this, "Removing Crewmate");
+        Logger.Log(this, "Removing Crewmate from " + Logger.GetName(from));
         from.RemoveCrewmate(abstractCrewmate);
         Logger.Return();
 
@@ -90,6 +91,17 @@ public class Asteroid implements INeighbour {
         abstractCrewmate.SetOnAsteroid(this);
         Logger.Return();
 
+    }
+
+    /** eredeti változat a szekvenciadiagramokon: SetResource(s: Settler, resource: AbstractBaseResource)
+     *
+     */
+    public void PutResource(Settler s, AbstractBaseResource res) {
+        Logger.Log(this, "Putting down resource from settler to asteroid core.");
+        if (numOfLayersRemaining == 0 && resource == null) {
+            res.ReactToPlace(this, s);
+        }
+        Logger.Return();
     }
 
     /**
@@ -167,9 +179,7 @@ public class Asteroid implements INeighbour {
 
         Logger.Log(this, "Getting drilled");
 
-        int layers = Logger.GetInteger(this,"How many layers do I have?");
-
-        if (layers >= 1) this.DecNumOfLayersRemaining();
+        if (numOfLayersRemaining>= 1) this.DecNumOfLayersRemaining();
 
         Logger.Return();
 
@@ -219,6 +229,11 @@ public class Asteroid implements INeighbour {
 
     }
 
+    public AbstractBaseResource GetResource(){
+        Logger.Log(this, "Returning resource");
+        Logger.Return();
+        return resource;
+    }
     /**
      * Visszaadja a magban található nyersanyagot.
      * @return visszaadja a resource tagváltozót

@@ -13,16 +13,12 @@ participant ": GameController" as game
 
 C -> a ++ : Explode()
 
-loop for all c in crewmates
-
-    a -> r ++ : ReactToAsteroidExplosion() 
-        r -> a ++ : GetRandomNeighbour()
-        return neighbour
-        r -> r ++ : Move(neighbour)
-        deactivate r
-    r --> a --
-
-end
+a -> r ++ : ReactToAsteroidExplosion() 
+    r -> a ++ : GetRandomNeighbour()
+    return neighbour
+    r -> r ++ : Move(neighbour)
+    deactivate r
+r --> a --
 
 a -> sun ++ : RemoveAsteroid(a)
 sun --> a --
