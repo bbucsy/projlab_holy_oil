@@ -18,6 +18,11 @@ public class PlayerStorage {
     private List<TeleportGate> teleporters;
     protected List<AbstractBaseResource> storedMaterials;
 
+    public void SetStoredMaterial(AbstractBaseResource res){
+        Logger.Log(this, "Pre-setting the storage with material: " + Logger.GetName(res));
+        storedMaterials.add(res);
+    }
+
     public void AddTeleportGatePair(TeleportGate teleportGate1, TeleportGate teleportGate2) {
 
         Logger.Log(this, "Adding teleportgate pair of " + Logger.GetName(teleportGate1) + " and " + Logger.GetName(teleportGate2));
