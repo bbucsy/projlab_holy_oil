@@ -20,12 +20,12 @@ public abstract class TestCase {
         load();
 
         // play scenario
-        System.out.println("<" + Name() + ">" + " started");
+        System.out.println("====== " + Name() + " started ======");
         Logger.SetEnabled(true);
         start();
 
         // delete resource
-        System.out.println("<" + Name() + ">" + " Ended\n");
+        System.out.println("====== " + Name() + " ended ======");
         Logger.ClearObjects();
     }
 

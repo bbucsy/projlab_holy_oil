@@ -51,7 +51,9 @@ public class TeleportGate implements INeighbour {
      * @param homeAsteroid Az aszteroida amihez a teleporter mostantól tartozni fog.
      */
     public void SetHomeAsteroid(Asteroid homeAsteroid) {
+        Logger.Log(this, "Setting home asteroid: "+ Logger.GetName(homeAsteroid));
         this.homeAsteroid = homeAsteroid;
+        Logger.Return();
     }
 
     /**
@@ -87,13 +89,13 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-
         Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
+
         if (pair.GetHomeAsteroid() != null) {
             pair.GetHomeAsteroid().ReactToMove(from, abstractCrewmate);
         }
-        Logger.Return();
 
+        Logger.Return();
     }
 
     /**

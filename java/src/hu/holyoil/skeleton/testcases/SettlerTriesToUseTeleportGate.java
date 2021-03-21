@@ -12,7 +12,7 @@ public class SettlerTriesToUseTeleportGate extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler tries to use teleport without pair";
+        return "Settler tries to use teleport gate without active pair";
     }
 
     @Override

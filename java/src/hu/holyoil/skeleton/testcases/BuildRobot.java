@@ -19,7 +19,7 @@ public class BuildRobot extends TestCase {
 
     @Override
     public String Name() {
-        return "Build Robot";
+        return "Settler builds / tries to build Robot";
     }
 
     @Override

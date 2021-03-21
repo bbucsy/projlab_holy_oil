@@ -12,7 +12,7 @@ public class SettlerMovesToAsteroid extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler moves to asteroid";
+        return "Settler moves to Asteroid";
     }
 
     @Override

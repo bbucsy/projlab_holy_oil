@@ -15,7 +15,7 @@ public class SettlerPlacesTeleporter extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler places Teleporter";
+        return "Settler places / tries to place TeleportGate";
     }
 
     @Override

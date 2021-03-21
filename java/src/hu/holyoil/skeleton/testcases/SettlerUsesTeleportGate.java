@@ -14,7 +14,7 @@ public class SettlerUsesTeleportGate extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler uses teleport";
+        return "Settler moves through teleport";
     }
 
     @Override

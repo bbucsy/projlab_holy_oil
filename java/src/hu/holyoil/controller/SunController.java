@@ -38,7 +38,7 @@ public class SunController implements ISteppable {
      * @param asteroid hozzáadja az asteroids tagváltozóhoz
      */
     public void AddAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ ">");
         asteroids.add(asteroid);
         Logger.Return();
     }
@@ -48,7 +48,7 @@ public class SunController implements ISteppable {
      * @param asteroid törli az asteroids tagváltozóról
      */
     public void RemoveAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ ">");
         asteroids.remove(asteroid);
         Logger.Return();
     }

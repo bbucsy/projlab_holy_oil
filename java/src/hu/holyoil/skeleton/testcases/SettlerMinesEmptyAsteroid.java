@@ -13,7 +13,7 @@ public class SettlerMinesEmptyAsteroid extends TestCase {
 
     @Override
     public String Name() {
-        return "Settler tries to mine empty asteroid";
+        return "Settler tries to mine empty Asteroid";
     }
 
     @Override

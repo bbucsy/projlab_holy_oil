@@ -11,7 +11,7 @@ public class WaterEvaporates extends TestCase {
 
     @Override
     public String Name() {
-        return "Water Evaporates";
+        return "Water evaporates";
     }
 
     @Override
