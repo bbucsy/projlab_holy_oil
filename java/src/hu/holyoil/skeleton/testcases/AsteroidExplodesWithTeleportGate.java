@@ -19,20 +19,25 @@ public class AsteroidExplodesWithTeleportGate extends TestCase {
 
     @Override
     protected void load() {
-
         Logger.RegisterObject(this, "TestFixture");
+
         asteroid = new Asteroid();
         Logger.RegisterObject(asteroid, "a: Asteroid");
+
         Logger.RegisterObject(GameController.GetInstance(), ": GameController");
         Logger.RegisterObject(SunController.GetInstance(), ": SunController");
 
-        boolean isTeleportgateInStorage = Logger.GetBoolean(this, "Is the teleportgate in storage?");
+        boolean isTeleportGateInStorage = Logger.GetBoolean(this, "Is the TeleportGate's pair in a settler's storage?");
 
         TeleportGate t1 = new TeleportGate(), t2 = new TeleportGate();
         Logger.RegisterObject(t1, "t1: TeleportGate");
         Logger.RegisterObject(t2, "t2: TeleportGate");
         t1.SetPair(t2);
         t2.SetPair(t1);
+
+        Asteroid asteroid2 = new Asteroid();
+        asteroid.AddNeighbourAsteroid(asteroid2);
+        Logger.RegisterObject(asteroid2, "a2: Asteroid");
 
         Settler settler = new Settler(asteroid);
         Logger.RegisterObject(settler, "s: Settler");
@@ -43,26 +48,15 @@ public class AsteroidExplodesWithTeleportGate extends TestCase {
         );
 
         settler.PlaceTeleporter();
+        settler.Move(asteroid2);
 
-        if (!isTeleportgateInStorage) {
-
-            Asteroid otherAsteroid = new Asteroid();
-            Logger.RegisterObject(otherAsteroid, "otherAsteroid: Asteroid");
-            t2.SetHomeAsteroid(otherAsteroid);
-
-            otherAsteroid.SetTeleporter(settler.GetStorage().GetOneTeleporter());
-            settler.GetStorage().RemoveTeleportGate(
-                    settler.GetStorage().GetOneTeleporter()
-            );
-
+        if (!isTeleportGateInStorage) {
+            settler.PlaceTeleporter();
         }
-
     }
 
     @Override
     protected void start() {
-
         asteroid.Explode();
-
     }
 }

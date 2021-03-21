@@ -230,9 +230,7 @@ public class Asteroid implements INeighbour {
 
     @Override
     public void Explode() {
-
         Logger.Log(this, "Exploding");
-        Logger.Return();
 
         Logger.Log(this, "Signaling to crewmates that I am exploding");
         List<AbstractCrewmate> crewmatesShallowCopy = new ArrayList<>(crewmates);
@@ -255,6 +253,7 @@ public class Asteroid implements INeighbour {
         SunController.GetInstance().RemoveAsteroid(this);
         Logger.Return();
 
+        Logger.Return();
     }
 
     public TeleportGate GetTeleporter() {
