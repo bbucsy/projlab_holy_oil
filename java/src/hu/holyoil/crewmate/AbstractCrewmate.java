@@ -11,7 +11,7 @@ public abstract class AbstractCrewmate {
     public void Move(INeighbour neighbour) {
         Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
 
-        if (onAsteroid.GetNeighbours().contains(neighbour)) {
+        if (onAsteroid.GetNeighbours().contains(neighbour) || onAsteroid.GetTeleporter() == neighbour) {
             neighbour.ReactToMove(onAsteroid, this);
         } else {
             Logger.Log(this, "Cannot move to " + Logger.GetName(neighbour) + ", it is not a neighbour of my asteroid");
