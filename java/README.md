@@ -4,9 +4,18 @@
 
 ### Eclipse IDE
 
-TODO
+1. File -> Import... -> Existing projects into workspace
+2. Keresse ki a projekt könyvtárát
+3. Pipálja be a java nevezetű projektet
+4. Finish
+5. Run Configuration beállításánál keressük ki a Main osztályt mint a main method helyét.
 
-## Fordítási és futattási utasítások
+### IntelliJ IDEA
+
+1. Nyissa meg a projektmappát (ahol az .imp fájl található) az IDEA segítségével
+2. Az Add Configuration... menügomb megnyomása után állítsa be a projekt Main osztályát az applikáció futására, válassza ki a Java 1.8 verziót a JDK-ra, és válassza ki a java modult.
+
+## Fordítási és futattási utasítások kézzel
 
 ### Fordítás
 
