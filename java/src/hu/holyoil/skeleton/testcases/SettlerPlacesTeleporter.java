@@ -8,6 +8,13 @@ import hu.holyoil.skeleton.TestCase;
 
 import java.util.Scanner;
 
+/**
+ * Teszteli amikor egy telepes megpróbál lerakni egy teleportert egy aszteroidán.
+ * Dokumentumban: 10. oldalon látható a SZEKVENCIA diagram,
+ *                           19. és 20. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: Van az aszteroidán már teleporter? (Egy aszteroidán egyszerre egy teleporter lehet.)
+ *           Van a telepesnél teleporter amit le tud rakni?
+ */
 public class SettlerPlacesTeleporter extends TestCase {
 
     Settler settler;

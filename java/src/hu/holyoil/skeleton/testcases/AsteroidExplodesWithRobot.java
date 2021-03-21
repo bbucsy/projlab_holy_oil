@@ -9,6 +9,14 @@ import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli amikor egy aszteroida felrobban és van rajta robot.
+ * EZ A SZEKVENCIA DAIGRAM HELYESEN CSAK A 6. BEADANDÓ DOKUMENTUMBAN SZEREPEL.
+ * Dokumentumban: 15. és 16. oldalon látható a SZEKVENCIA diagram,
+ *                  27. oldalon a KOMMUNIKÁCIÓS diagram
+ * A változás a dokumentumhoz képest: A testernek feltett kérdések a teszeset lefutása elején kerülnek feltételre.
+ * Elágazás: A robot vagy átmegy egy teleporteren, vagy egy szomszédos aszteroidára, tester input alapján
+ */
 public class AsteroidExplodesWithRobot extends TestCase {
     INeighbour neighbour;
     Robot robot;

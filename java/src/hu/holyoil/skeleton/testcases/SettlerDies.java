@@ -8,6 +8,12 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Teszteli amikor egy telepes meghal
+ * Dokumentumban: 11. oldalon látható a SZEKVENCIA diagram,
+ *                         20. és 21. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: Van a telepes tárolójában legalább egy teleporter? (Ha van, fel kell robbantani a párjával együtt.)
+ */
 public class SettlerDies extends TestCase {
     private Settler s;
 

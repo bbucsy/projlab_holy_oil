@@ -5,6 +5,12 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli a robot mozgását egyik aszteroidásól a másikra.
+ * Dokumentumban: 13. oldalon látható a SZEKVENCIA diagram,
+ *                         22. oldalon a KOMMUNIKÁCIÓS diagram
+ * Megjegyzés: Mivel a sikertelen mozgás gyakorlatban nem történhet meg, nincs rá teszteset programozva
+ */
 public class RobotMovesToAsteroid extends TestCase {
 
     private Robot r;

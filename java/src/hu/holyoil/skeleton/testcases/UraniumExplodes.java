@@ -9,6 +9,13 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.skeleton.TestFramework;
 
+/**
+ * Teszteli amikor egy uránt tartalmazó aszteroida napközelbe kerül.
+ * Dokumentumban: 15. oldalon látható a SZEKVENCIA diagram,
+ *                          25. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: 0 vagy több réteg van még hátra a magig? (Az aszteroida csak akkor robban fel ha ki van fúrva teljesen.)
+ *           Napközelben van az aszteroida?
+ */
 public class UraniumExplodes extends TestCase {
 
     Asteroid asteroid;

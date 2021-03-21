@@ -8,6 +8,16 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Teszteli amikor egy telepes megpróbál feltölteni egy aszteroidát egy nyersanyaggal a tárolójából.
+ * <p>
+ *     Mivel az AbstractResource nem példányosítható a tesztben Uránt használunk példaként.
+ * </p>
+ * Dokumentumban: 14. oldalon látható a SZEKVENCIA diagram,
+ *                          23. és 24. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: 0 vagy több réteg van még hátra az aszteroida magjáig? (Csak kifúrt aszteroidát lehet feltölteni.)
+ *           Üres az aszteroida? (Csak üres aszteroidát lehet feltölteni.)
+ */
 public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
     private Uranium u;
     private Asteroid a;

@@ -6,6 +6,11 @@ import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli amikor a telepes sikeresen használ egy teleport kaput.
+ * Dokumentumban: 13. oldalon látható a SZEKVENCIA diagram,
+ *                          29. oldalon a KOMMUNIKÁCIÓS diagram
+ */
 public class SettlerUsesTeleportGate extends TestCase {
 
     private TeleportGate gate;

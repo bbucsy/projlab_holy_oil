@@ -5,6 +5,11 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli a telepes mozgását egyik aszteroidáról a másikra.
+ * Dokumentumban: 12. oldalon látható a SZEKVENCIA diagram,
+ *                           22. és 23. oldalon a KOMMUNIKÁCIÓS diagram
+ */
 public class SettlerMovesToAsteroid extends TestCase {
 
     private Settler s;

@@ -11,6 +11,15 @@ import hu.holyoil.storage.PlayerStorage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Teszteli amikor egy telepes megpróbál bányászni egy aszteroidán de nincs hely a tárolójában.
+ * <p>
+ *     Mivel az AbstractResource nem példányosítható a tesztben Uránt használunk példaként.
+ * </p>
+ * Dokumentumban: 10. oldalon látható a SZEKVENCIA diagram,
+ *                           24. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: 0 vagy több réteg van még hátra az aszteroida magjáig? (Belső műkösés miatt kell tudni, egyébként nincs befolyása, nincs loggolva.)
+ */
 public class SettlerMinesUraniumWithFullStorage extends TestCase {
 
     private Asteroid a;

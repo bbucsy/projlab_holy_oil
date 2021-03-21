@@ -7,6 +7,16 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Teszteli amikor egy telepes megpróbál kibányászni egy nyersanyagot.
+ * <p>
+ *     Mivel az AbstractResource nem példányosítható a tesztben Uránt használunk példaként.
+ * </p>
+ * Dokumentumban: 10. oldalon látható a SZEKVENCIA diagram,
+ *                           23. oldalon a KOMMUNIKÁCIÓS diagram (ha az aszteroidának még van rétege)
+ *                           és a 24. oldalon
+ * Elágazás: 0 vagy több réteg van még hátra az aszteroida magjáig?
+ */
 public class SettlerMinesUranium extends TestCase {
     private Uranium u;
     private Asteroid a;

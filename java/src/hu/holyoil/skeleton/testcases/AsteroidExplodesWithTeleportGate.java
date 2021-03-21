@@ -8,6 +8,13 @@ import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli amikor egy aszteroida felrobban és van rajta egy teleporter.
+ * EZ A SZEKVENCIA DAIGRAM HELYESEN CSAK A 6. BEADANDÓ DOKUMENTUMBAN SZEREPEL.
+ * Dokumentumban: 17. oldalon látható a SZEKVENCIA diagram,
+ *                     26. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: A felrobbanó aszteroidán található teleporter párja le van rakva egy aszteroidára, vagy még egy játékos tárolójában van? (Honnan kell eltávolítani a párt.)
+ */
 public class AsteroidExplodesWithTeleportGate extends TestCase {
 
     Asteroid asteroid;

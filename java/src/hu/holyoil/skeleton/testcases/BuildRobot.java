@@ -13,6 +13,12 @@ import hu.holyoil.resource.Water;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli amikor egy telepes megpróbál felépíteni egy robotot.
+ * Dokumentumban: 9. oldalon látható a SZEKVENCIA diagram,
+ *                      21. és 22. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: Van-e elég nyersanyag egy robot építéséhez?
+ */
 public class BuildRobot extends TestCase {
 
     Settler settler;

@@ -6,6 +6,11 @@ import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli amikor egy telepes megpróbál használni egy teleport kaput aminek a párja nincs lerakva aszteroidára.
+ * Dokumentumban: 14. oldalon látható a SZEKVENCIA diagram,
+ *                          29. oldalon a KOMMUNIKÁCIÓS diagram
+ */
 public class SettlerTriesToUseTeleportGate extends TestCase {
     private TeleportGate gate;
     private Settler s;

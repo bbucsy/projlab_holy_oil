@@ -6,6 +6,12 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Teszteli amikor egy robot ásni próbál egy aszteroidán.
+ * Dokumentumban: 12. oldalon látható a SZEKVENCIA diagram,
+ *                        28. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: 0 vagy több réteg van még hátra az aszteroida magjáig?
+ */
 public class RobotDrills extends TestCase {
     private Robot r;
 

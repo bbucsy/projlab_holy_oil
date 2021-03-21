@@ -6,6 +6,12 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Teszteli amikor egy telepes megpróbál egy üres aszteroidából bányászni.
+ * Dokumentumban: 10. oldalon látható a SZEKVENCIA diagram,
+ *                           25. oldalon a KOMMUNIKÁCIÓS diagram
+ * Elágazás: 0 vagy több réteg van még hátra az aszteroida magjáig? (Belső működés miatt muszáj tudni van-e még rétege az aszteroidának, ez nincs loggolva.)
+ */
 public class SettlerMinesEmptyAsteroid extends TestCase {
     private Asteroid a;
     private Settler s;
