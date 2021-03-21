@@ -26,7 +26,9 @@ public class TeleportGate implements INeighbour {
     }
 
     public void SetHomeAsteroid(Asteroid homeAsteroid) {
+        Logger.Log(this, "Setting home asteroid: "+ Logger.GetName(homeAsteroid));
         this.homeAsteroid = homeAsteroid;
+        Logger.Return();
     }
 
     public PlayerStorage GetHomeStorage() {
