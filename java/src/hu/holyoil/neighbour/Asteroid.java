@@ -35,20 +35,13 @@ public class Asteroid implements INeighbour {
 
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-
         Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractCrewmate));
-        Logger.Return();
 
-        Logger.Log(this, "Removing Crewmate from " + Logger.GetName(from));
         from.RemoveCrewmate(abstractCrewmate);
-        Logger.Return();
-
-        crewmates.add(abstractCrewmate);
-
-        Logger.Log(this, "Setting onAsteroid of Crewmate");
+        AddCrewmate(abstractCrewmate);
         abstractCrewmate.SetOnAsteroid(this);
-        Logger.Return();
 
+        Logger.Return();
     }
 
     /** eredeti változat a szekvenciadiagramokon: SetResource(s: Settler, resource: AbstractBaseResource)
@@ -149,6 +142,7 @@ public class Asteroid implements INeighbour {
         Logger.Return();
         return resource;
     }
+
     public void SetResource(AbstractBaseResource abstractBaseResource) {
 
         Logger.Log(this, "Setting resource to " + Logger.GetName(abstractBaseResource));

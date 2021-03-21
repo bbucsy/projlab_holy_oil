@@ -43,13 +43,13 @@ public class TeleportGate implements INeighbour {
 
     @Override
     public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-
         Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
+
         if (pair.GetHomeAsteroid() != null) {
             pair.GetHomeAsteroid().ReactToMove(from, abstractCrewmate);
         }
-        Logger.Return();
 
+        Logger.Return();
     }
 
     public void SetPair(TeleportGate newPair) {

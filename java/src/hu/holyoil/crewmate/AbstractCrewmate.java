@@ -9,20 +9,16 @@ public abstract class AbstractCrewmate {
     protected Asteroid onAsteroid;
 
     public void Move(INeighbour neighbour) {
+        Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
 
         if (onAsteroid.GetNeighbours().contains(neighbour)) {
-
-            Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
             neighbour.ReactToMove(onAsteroid, this);
-            Logger.Return();
-
         } else {
-
             Logger.Log(this, "Cannot move to " + Logger.GetName(neighbour) + ", it is not a neighbour of my asteroid");
             Logger.Return();
-
         }
 
+        Logger.Return();
     }
 
     public void SetOnAsteroid(Asteroid asteroid) {
