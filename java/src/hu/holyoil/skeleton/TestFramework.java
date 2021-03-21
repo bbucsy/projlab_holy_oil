@@ -9,19 +9,38 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Tesztelést elősegítő keretrendszer, amely kezeli a tesztek indulását, betöltését, kérések kiszolgálását.
+ */
 public class TestFramework {
 
+    /**
+     * Singleton osztály, így saját magát statikusan példányosítja.
+     */
     private static TestFramework testFramework;
+
+    /**
+     * Helyi szkenner tagváltozó, amely a bemenetet kezeli.
+     */
     private Scanner scanner;
 
+    /**
+     * A keretrendszerbe betöltött tesztesetek listája.
+     */
     private List<TestCase> testcases;
 
+    /**
+     * Tesztek hozzáadására szolgáló metódus
+     * @param testcase A hozzáadni kívánt teszteset
+     */
     public void AddTestcase(TestCase testcase) {
         testcases.add(testcase);
     }
 
-    // Loads all testcases
-    // See: https://dzone.com/articles/get-all-classes-within-package
+    /**
+     * Automatikusan a projektben írt teszteset osztályokból példányosító metódus, amely be is tölti azokat a keretrendszerbe.
+     * Forrás: https://dzone.com/articles/get-all-classes-within-package
+     */
     public void AddTestcases() {
 
         // We get a classloader
@@ -67,6 +86,9 @@ public class TestFramework {
 
     }
 
+    /**
+     * A betöltött tesztesetek elindítását szolgáló metódus, amely kommunikál a felhasználóval.
+     */
     public void RunTestcases() {
 
         scanner = new Scanner(System.in);
@@ -110,6 +132,10 @@ public class TestFramework {
 
     }
 
+    /**
+     * Bevett szokás, singleton osztály "példányosító" függvénye.
+     * @return a statikusan példányosított keretrendszer objektum
+     */
     public static TestFramework getInstance() {
 
         if (testFramework == null) {
@@ -120,6 +146,9 @@ public class TestFramework {
 
     }
 
+    /**
+     * Kívülről nem elérhető konstruktor, a singleton tulajdonság védelmére.
+     */
     private TestFramework() {
         testcases = new ArrayList<>();
     }

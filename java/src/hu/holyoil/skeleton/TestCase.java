@@ -1,19 +1,40 @@
 package hu.holyoil.skeleton;
 
+/**
+ * Absztrakt osztály a tesztesetek közös kezelésére
+ */
 public abstract class TestCase {
 
-
+    /**
+     * Absztrakt metódus, amelynek feladata visszaadni a teszteset nevét
+     * @return teszteset neve
+     */
     public abstract String Name();
 
+    /**
+     * Absztrakt metódus, amelynek feladata előre feltölteni a teszteset környezeti változóit (test fixture).
+     * A kommunikációs diagram egészének és a szekvencia diagramok elejének legprogramozott megfelelője
+     */
     protected abstract void load();
+
+    /**
+     * Absztrakt metódus a teszteset által vizsgált szekvencia elindítására
+     */
     protected abstract void start();
 
-    // Do not touch.
+    /**
+     * Kifelé nem elérhető, csak a leszármazottak által elérhető konstruktor. Célja hozzáadni a jelenlegi tesztelési
+     * keretrendszerhez saját példányát.
+     * Maradj távol ennek módosításától!
+     */
     protected TestCase() {
-        // System.out.println(this.Name());
         TestFramework.getInstance().AddTestcase(this);
     }
 
+    /**
+     * A teszteset egészének futását kezdeményező függvény. Magában foglalja a test fixture beállítását, és a tesztelt
+     * szekvencia elindítását.
+     */
     public void runTestcase(){
         // load scenario
         Logger.SetEnabled(false);
@@ -28,7 +49,4 @@ public abstract class TestCase {
         System.out.println("====== " + Name() + " ended ======");
         Logger.ClearObjects();
     }
-
-
-
 }
