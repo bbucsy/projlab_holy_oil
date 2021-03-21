@@ -1,6 +1,7 @@
 package hu.holyoil.skeleton;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public final class Logger {
@@ -58,8 +59,16 @@ public final class Logger {
             return 0;
         }
 
-        print(("> " + objectNames.get(caller)+": " + msg).trim() + " ", indentation - 1);
-        return in.nextInt();
+        print(("> " + objectNames.get(caller)+": " + msg).trim() + " ", indentation);
+        int result = 0;
+        try {
+            result = in.nextInt();
+        }
+        catch (InputMismatchException e) {
+            print("[InputMismatchException] Input interpreted as 0...\n", indentation);
+            in.next();
+        }
+        return result;
     }
 
     public static Boolean GetBoolean(Object caller, String msg){
@@ -68,8 +77,16 @@ public final class Logger {
             return Boolean.FALSE;
         }
 
-        print(("> " + objectNames.get(caller)+": " + msg).trim() + " [true/false] ", indentation - 1);
-        return in.nextBoolean();
+        print(("> " + objectNames.get(caller)+": " + msg).trim() + " [true/false] ", indentation);
+        boolean result = false;
+        try {
+            result = in.nextBoolean();
+        }
+        catch (InputMismatchException e) {
+            print("[InputMismatchException] Input interpreted as false...\n", indentation);
+            in.next();
+        }
+        return result;
     }
 
 }
