@@ -5,7 +5,6 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
-import sun.rmi.runtime.Log;
 
 public class SettlerUsesTeleportGate extends TestCase {
 
