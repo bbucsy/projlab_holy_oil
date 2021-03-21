@@ -93,8 +93,13 @@ public class Asteroid implements INeighbour {
 
     }
 
-    /** eredeti változat a szekvenciadiagramokon: SetResource(s: Settler, resource: AbstractBaseResource)
-     *
+    /**
+     * A telepes megpróbál lerakni egy nyersanyagot az aszteroida magjába
+     * <p>
+     *     Ez csak akkor végrehajtható ha a kéreg teljesen ki lett fúrva ÉS az aszteroida üres.
+     * </p>
+     * @param s a telepes, akinél a lerakni kívánt nyersanyag van
+     * @param res a lerakni kívánt nyersanyag
      */
     public void PutResource(Settler s, AbstractBaseResource res) {
         Logger.Log(this, "Putting down resource from settler to asteroid core.");
