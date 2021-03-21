@@ -17,17 +17,17 @@ public class RobotController implements ISteppable {
     }
 
     public void AddRobot(Robot robot)  {
-        Logger.Log(this,"Adding robot <" +  Logger.GetName(robot)+ " >");
+        Logger.Log(this,"Adding robot <" +  Logger.GetName(robot)+ ">");
         robots.add(robot);
         Logger.Return();
     }
     public void RemoveRobot(Robot robot)  {
-        Logger.Log(this,"Removing robot <" +  Logger.GetName(robot)+ " >");
+        Logger.Log(this,"Removing robot <" +  Logger.GetName(robot)+ ">");
         robots.remove(robot);
         Logger.Return();
     }
     public void HandleRobot(Robot robot)  {
-        Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ " >");
+        Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ ">");
         // todo
         Logger.Return();
     }

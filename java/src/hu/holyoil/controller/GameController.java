@@ -37,22 +37,22 @@ public class GameController implements ISteppable  {
         Logger.Return();
     }
     public void AddAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Adding Asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Log(this,"Adding Asteroid <" +  Logger.GetName(asteroid)+ ">");
         asteroids.add(asteroid);
         Logger.Return();
     }
     public void RemoveAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ ">");
         asteroids.remove(asteroid);
         Logger.Return();
     }
     public void AddSettler(Settler settler)  {
-        Logger.Log(this,"Adding settler <" +  Logger.GetName(settler)+ " >");
+        Logger.Log(this,"Adding settler <" +  Logger.GetName(settler)+ ">");
         settlers.add(settler);
         Logger.Return();
     }
     public void RemoveSettler(Settler settler)  {
-        Logger.Log(this,"Removing settler <" +  Logger.GetName(settler)+ " >");
+        Logger.Log(this,"Removing settler <" +  Logger.GetName(settler)+ ">");
         settlers.remove(settler);
         Logger.Return();
     }

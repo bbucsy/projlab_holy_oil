@@ -18,12 +18,12 @@ public class SunController implements ISteppable {
     }
 
     public void AddAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ ">");
         asteroids.add(asteroid);
         Logger.Return();
     }
     public void RemoveAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ " >");
+        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ ">");
         asteroids.remove(asteroid);
         Logger.Return();
     }
