@@ -14,7 +14,7 @@ public class AsteroidExplodesWithTeleportGate extends TestCase {
 
     @Override
     public String Name() {
-        return "Asteroid explodes with teleportgate on it";
+        return "Asteroid explodes with a TeleportGate on it";
     }
 
     @Override

@@ -73,17 +73,17 @@ public class TestFramework {
 
         while (true) {
 
-            System.out.println("----------");
+            System.out.println("--------------------------------");
             System.out.println("Testcases:");
 
             for (int i = 0; i < testcases.size(); i++) {
 
-                System.out.println(i + ": " + testcases.get(i).Name());
+                System.out.println(i + ".\t" + testcases.get(i).Name());
 
             }
 
-            System.out.println("-1: Exit Application");
-            System.out.print("Choose a testcase number to run: ");
+            System.out.println("-1.\tExit Application");
+            System.out.print("> Choose a testcase number to run: ");
             int numToRun = scanner.nextInt();
 
             if (numToRun == -1)
@@ -91,16 +91,16 @@ public class TestFramework {
 
             while (numToRun < -1 || numToRun >= testcases.size()) {
 
-                System.out.print("Choose a valid number: ");
+                System.out.print("> Choose a valid number: ");
                 numToRun = scanner.nextInt();
 
             }
 
-            System.out.println("----------");
+            System.out.println("--------------------------------");
             testcases.get(numToRun).runTestcase();
 
             try {
-                System.out.println("Press enter to choose another testcase!");
+                System.out.println("Press ENTER to choose another testcase...");
                 System.in.read();
             } catch (Exception ignore) {
 

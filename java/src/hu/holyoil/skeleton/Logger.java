@@ -15,7 +15,7 @@ public final class Logger {
     private static void print(String msg, int indentation) {
         StringBuilder spaces = new StringBuilder();
         for (int i = 0; i < indentation; ++i) {
-            spaces.append("  ");
+            spaces.append("\t");
         }
         System.out.print(spaces.toString() + msg);
     }
@@ -58,7 +58,7 @@ public final class Logger {
             return 0;
         }
 
-        print((objectNames.get(caller)+": " + msg).trim() + " ", indentation - 1);
+        print(("> " + objectNames.get(caller)+": " + msg).trim() + " ", indentation - 1);
         return in.nextInt();
     }
 
@@ -68,7 +68,7 @@ public final class Logger {
             return Boolean.FALSE;
         }
 
-        print((objectNames.get(caller)+": " + msg).trim() + " [true/false] ", indentation - 1);
+        print(("> " + objectNames.get(caller)+": " + msg).trim() + " [true/false] ", indentation - 1);
         return in.nextBoolean();
     }
 
