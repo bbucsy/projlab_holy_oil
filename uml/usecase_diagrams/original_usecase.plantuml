@@ -1,0 +1,24 @@
+@startuml original_usecase
+
+:Player: -left-> (Fill)
+:Player: -right-> (Build)
+
+(Build Robot) --|> (Build)
+(Build Gate) --|> (Build)
+
+:Player: -left-> (Mine)
+:Player: --> (Drill)
+:Player: --> (Move)
+
+(Move to neighbour) --|> (Move)
+(Move through Gate) --|> (Move)
+
+:Player: --> (Place Gate)
+:Player: --> (View environment)
+
+
+:Controller: -up-> (Drill)
+:Controller: -up-> (Move)
+:Controller: -right-> (Manage Sun)
+
+@enduml
