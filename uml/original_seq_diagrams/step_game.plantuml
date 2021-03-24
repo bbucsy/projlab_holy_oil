@@ -1,0 +1,22 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Game takes a turn"
+
+actor Controller as CTR
+participant ": GameController" as game
+
+CTR -> game ++ : Step()
+
+game -> game ++ : CheckWinCondition()
+deactivate game
+
+game -> game ++ : CheckGameWinnable()
+deactivate game
+
+game -> game ++ : CheckLoseCondition()
+deactivate game
+
+game --> CTR --
+
+@enduml

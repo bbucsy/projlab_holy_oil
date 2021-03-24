@@ -1,0 +1,47 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title TeleportGate explodes
+
+actor "a: Asteroid" as a
+participant "t: TeleportGate" as t1
+participant "pair: TeleportGate" as t2
+participant "homeAsteroidPair: Asteroid" as ha1
+participant "homeStoragePair: PlayerStorage" as hs1
+participant "homeAsteroid: Asteroid" as ha2
+participant "homeStorage: PlayerStorage" as hs2
+
+
+a -> t1 ++ : Explode()
+
+    t1 -> t2 ++ : ExplodePair()
+
+        alt pair's homeAsteroid isn't null
+
+            t2 -> ha1 ++ : RemoveTeleporter(pair)
+            ha1 --> t2 --
+
+        else
+
+            t2 -> hs1 ++ : RemoveTeleportGate(pair)
+            hs1 --> t2 --
+
+        end
+    
+    t2 --> t1 --
+
+    alt homeAsteroid isn't null
+
+        t1 -> ha2 ++ : RemoveTeleporter(t)
+        ha2 --> t1 --
+
+    else
+
+        t1 -> hs2 ++ : RemoveTeleportGate(t)
+        hs2 --> t1 --
+
+    end    
+
+t1 --> a --
+
+@enduml

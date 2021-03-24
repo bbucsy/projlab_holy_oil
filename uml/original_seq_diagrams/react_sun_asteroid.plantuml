@@ -1,0 +1,22 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Asteroid reacts to sun nearby"
+
+actor Controller as C
+
+participant "a: Asteroid" as a
+participant "res: AbstractResource" as r
+
+C -> a ++ : ReactToSunNearby()
+
+    alt is near sun AND layers == 0 AND res isn't null
+
+        a -> r ++ : ReactToSunNearby(a)
+        r --> a --
+
+    end
+
+a --> C --
+
+@enduml

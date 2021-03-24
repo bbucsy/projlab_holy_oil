@@ -1,0 +1,50 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title Uranium gets mined
+
+actor Player as PLAYER
+
+participant "s: Settler" as s
+participant "onAsteroid: Asteroid" as a
+participant "uranium: Uranium" as u
+participant "storage: PlayerStorage" as st
+participant "bill: BillOfMaterial" as bill
+
+
+PLAYER -> s ++: Mine()
+
+    s-->a ++: ReactToMineBy(s)
+
+        alt resource is NOT NULL && numOfLayersRemaining == 0
+
+            a -> u ++: ReactToMine(onAsteroid, s)
+
+                u -> st ++: GetSumResource()
+                st --> u --: sumResources
+
+                alt sumResources < 10
+
+                    u -> bill **: ctor()
+
+                    u->bill++: AddMaterial(uranium)
+                    bill --> u --
+
+                    u->st ++: AddBill(bill)
+                    st --> u --
+                    
+                    u -> a ++: SetResource(null)
+                    a --> u -- 
+
+                end
+
+            u --> a--
+
+        end
+
+    a --> s --
+
+s --> PLAYER --
+
+@enduml

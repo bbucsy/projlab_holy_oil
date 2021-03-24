@@ -1,0 +1,17 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+title "Robot dies"
+actor Controller as control
+participant "r: Robot" as robot
+participant ": RobotController" as robotcontroller
+participant "a: Asteroid" as asteroid
+
+control -> robot ++: Die()
+robot -> robotcontroller ++: RemoveRobot(r)
+robotcontroller --> robot --
+robot -> asteroid ++: RemoveCrewmate(r)
+asteroid --> robot --
+robot --> control --
+
+@enduml

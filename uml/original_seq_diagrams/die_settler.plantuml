@@ -1,0 +1,34 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Settler dies"
+
+actor Controller as control
+participant "s: Settler" as settler
+participant "GameController" as game
+participant "a: Asteroid" as asteroid
+participant "ps: PlayerStorage" as storage
+participant "teleporter: TeleportGate" as teleporter
+
+control -> settler ++ : Die()
+
+    settler -> game ++ : RemoveSettler(s)
+    game --> settler --
+
+    settler -> asteroid ++ : RemoveCrewmante(s)
+    asteroid --> settler--
+
+    settler -> storage ++ : GetOneTeleporter()
+    storage --> settler -- : teleporter
+
+    alt teleporter isn't null
+
+        settler -> teleporter ++ : Explode()
+        teleporter --> settler --
+
+    end
+
+settler --> control --
+
+
+@enduml

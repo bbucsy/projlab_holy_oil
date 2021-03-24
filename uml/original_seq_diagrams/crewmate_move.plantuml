@@ -1,0 +1,26 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "AbstractCrewmate moves to neighbour"
+
+actor Player as player
+
+participant "c: AbstractCrewmate" as crewmate
+participant "onAsteroid: Asteroid" as onAsteroid
+participant "neighbour: INeighbour" as neighbour
+
+player -> crewmate ++ : Move(neighbour)
+
+crewmate -> onAsteroid ++ : GetNeighbours()
+onAsteroid --> crewmate -- : neighbours
+
+alt neighbours contains neighbour
+
+    crewmate -> neighbour ++ : ReactToMove (onAsteroid, c)
+    neighbour --> crewmate --
+
+end
+
+crewmate --> player --
+
+@enduml

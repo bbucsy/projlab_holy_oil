@@ -1,0 +1,26 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Moving through TeleportGate"
+
+actor "c: AbstractCrewmate" as crewmate
+participant "neighbour: TeleportGate" as neighbour
+participant "pair: TeleportGate" as pair
+participant "from: Asteroid" as from
+participant "homeAsteroid: Asteroid" as home
+
+crewmate -> neighbour ++ : ReactToMove (from, c)
+
+    neighbour -> pair ++ : GetHomeAsteroid()
+    pair --> neighbour -- : homeAsteroid
+
+    alt homeAsteroid isn't null
+
+        neighbour -> home ++ : ReactToMove (from, c)
+        home --> neighbour --
+
+    end
+
+neighbour --> crewmate --
+
+@enduml

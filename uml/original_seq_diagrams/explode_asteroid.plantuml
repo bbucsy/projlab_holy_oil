@@ -1,0 +1,37 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Asteroid explodes"
+
+actor Controller as C
+
+participant "a: Asteroid" as a
+participant "c: AbstractCrewmate" as r
+participant ": SunController" as sun
+participant ": GameController" as game
+participant "teleporter: TeleportGate" as tport
+
+C -> a ++ : Explode()
+
+loop for all AbstractCrewmate c in crewmates
+    a -> r ++ : ReactToAsteroidExplosion()
+    r --> a --
+end
+
+a -> sun ++ : RemoveAsteroid(a)
+sun --> a --
+
+a -> game ++ : RemoveAsteroid(a)
+game --> a --
+
+alt teleporter is not null
+
+    a -> tport ++ : Explode()
+
+    tport --> a --
+
+end
+
+a --> C --
+
+@enduml

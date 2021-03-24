@@ -1,0 +1,41 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Sun takes a turn"
+
+actor Controller as CTR
+participant ": SunController" as sunController
+participant "a: Asteroid" as asteroid
+
+CTR -> sunController ++ : Step()
+
+loop for all Asteroid a in asteroids
+
+    sunController -> asteroid ++ : ReactToSunNearby()
+    asteroid --> sunController --
+
+end
+
+loop for all Asteroid a in asteroids
+
+    sunController -> asteroid ++ : SetIsNearby(random)
+    asteroid --> sunController --
+
+end
+
+sunController -> sunController ++ : DecTurnsUntilNextSunstorm()
+deactivate sunController
+
+alt turnsUntilNextSunstorm == 0
+
+    sunController -> sunController ++ : StartSunstorm()
+    deactivate sunController
+
+    sunController -> sunController ++ : SetTurnsUntilNextSunstorm(random)
+    deactivate sunController
+
+end
+
+sunController --> CTR --
+
+@enduml

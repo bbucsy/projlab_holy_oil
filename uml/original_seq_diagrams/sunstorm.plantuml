@@ -1,0 +1,39 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Sun kills crewmates who cannot hide"
+
+actor Controller as C
+
+participant ": SunController" as sun
+participant "a: Asteroid" as a
+participant "c: AbstractCrewmate" as c
+
+C -> sun ++ : StartSunstorm()
+
+    loop for all Asteroid a in asteroids
+
+        sun -> a ++ : ReactToSunstorm()
+
+            alt numOfLayersRemaining > 0 OR resource isn't null
+
+                a -> a ++ : KillAllCrewmates()
+
+                    loop for all Crewmate c in crewmates
+
+                        a -> c ++ : Die()
+                        c --> a --
+
+                    end
+
+                deactivate a
+
+            end
+
+        a --> sun --
+
+    end
+
+sun --> C --
+
+@enduml

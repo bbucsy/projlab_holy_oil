@@ -1,0 +1,16 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Settler reacts to explosion"
+
+actor Controller as C
+
+participant "s: Settler" as s
+
+C -> s ++ : ReactToAsteroidExplosion() 
+    s -> s ++ : Die()
+    deactivate s
+s --> C --
+
+@enduml

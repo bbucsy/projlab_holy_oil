@@ -1,0 +1,23 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Moving to asteroid"
+
+actor "c: AbstractCrewmate" as crewmate
+participant "neighbour: Asteroid" as neighbour
+participant "from: Asteroid" as from
+
+crewmate -> neighbour ++ : ReactToMove (from, c)
+
+    neighbour -> neighbour ++ : AddCrewmate(c)
+    deactivate neighbour
+
+    neighbour -> from ++ : RemoveCrewmate(c)
+    from --> neighbour --
+
+    neighbour -> crewmate ++ : SetOnAsteroid(neighbour)
+    crewmate --> neighbour --
+
+neighbour --> crewmate --
+
+@enduml

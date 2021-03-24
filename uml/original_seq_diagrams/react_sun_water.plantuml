@@ -1,0 +1,14 @@
+@startuml Water evaporates
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+title Water reacts to sun nearby
+
+actor "a: Asteroid" as a
+participant "resource: Water" as res
+
+a -> res ++: ReactToSunNearby(a)
+    res -> a ++: SetResource(null)
+    a --> res --
+res --> a --
+
+@enduml

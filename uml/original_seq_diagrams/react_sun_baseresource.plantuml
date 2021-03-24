@@ -1,0 +1,12 @@
+@startuml Uranium explodes
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title AbstractBaseResource reacts to sun nearby
+
+actor "a: Asteroid" as a
+participant "res: AbstractBaseResource" as res
+
+a -> res ++: ReactToSunNearby(a)
+res --> a --
+
+@enduml

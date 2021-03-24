@@ -1,0 +1,23 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Robot reacts to explosion"
+
+actor Controller as C
+
+participant "r: Robot" as s
+participant "onAsteroid: Asteroid" as a
+participant "next: INeighbour" as n
+
+C -> s ++ : ReactToAsteroidExplosion()
+
+    s -> a ++ : GetRandomNeighbour()
+    a --> s -- : next
+
+    s -> s ++ : Move(next)
+    deactivate s
+
+s --> C --
+
+@enduml

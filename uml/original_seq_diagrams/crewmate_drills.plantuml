@@ -1,0 +1,28 @@
+@startuml Settler Drills
+
+title Crewmate drills
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Player as player
+
+participant "c: AbstractCrewmate" as s
+participant "onAsteroid: Asteroid" as a
+
+
+player -> s ++ : Drill()
+
+    s -> a ++ : ReactToDrill()
+
+        alt numOfLayersRemaining >= 1 
+
+            a -> a ++ : DecNumOfLAyersRemaining()
+            deactivate a
+
+        end 
+
+    a --> s
+
+s --> player --
+
+@enduml

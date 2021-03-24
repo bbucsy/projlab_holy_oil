@@ -1,0 +1,53 @@
+@startuml
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Initialize Game"
+
+actor Controller as CTR
+participant ": GameController" as game
+participant "a: Asteroid" as a1
+participant "a: Asteroid" as a2
+participant "randomRes: AbstractBaseResource" as res
+participant "s: Settler" as s
+
+CTR -> game ++ : StartGame()
+
+    loop at least 100 times
+
+        game -> a1 ** : ctor(randomBetween1and5)
+
+        game -> game ++ : AddAsteroid(a)
+        deactivate game
+
+    end
+
+    loop for all Asteroid a in asteroids
+        
+        loop at least 7 times
+
+            game -> a2 ++ : AddNeighbourAsteroid(randomAsteroid)
+            a2 --> game --
+
+        end
+
+        opt with a 0.8 probabilty
+
+            game -> res ** : ctor()
+
+            game -> a2 ++ : SetResource(randomRes)
+            a2 --> game --
+
+        end
+
+    end
+
+
+    loop for a given number of players
+
+        game -> s ** : ctor(randomAsteroid)
+
+    end
+
+game --> CTR --
+
+@enduml

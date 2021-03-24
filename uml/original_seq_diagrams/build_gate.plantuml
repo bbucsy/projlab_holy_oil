@@ -1,0 +1,60 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Build gate pair"
+
+actor Player as player
+participant "s: Settler" as settler
+participant ": TeleporterRecipe" as TeleporterRecipe
+participant "water: Water" as water
+participant "uranium: Uranium" as uranium
+participant "iron1: Iron" as iron1
+participant "iron2: Iron" as iron2
+participant "bill: BillOfMaterial" as bill
+participant "storage: PlayerStorage" as storage
+participant "t1: TeleportGate" as teleport1
+participant "t2: TeleportGate" as teleport2
+
+player -> settler ++ : CraftTeleportGate()
+settler -> TeleporterRecipe ++: GetCraftedBy
+
+TeleporterRecipe -> water ** : ctor()
+TeleporterRecipe -> uranium ** : ctor()
+TeleporterRecipe -> iron1 ** : ctor()
+TeleporterRecipe -> iron2 ** : ctor()
+
+TeleporterRecipe -> bill ** : ctor()
+TeleporterRecipe -> bill ++ : AddMaterial(water)
+return
+TeleporterRecipe -> bill ++ : AddMaterial(uranium)
+return
+TeleporterRecipe -> bill ++ : AddMaterial(iron1)
+return
+TeleporterRecipe -> bill ++ : AddMaterial(iron2)
+return
+
+alt hasEnough and no teleport in storage
+
+    TeleporterRecipe -> storage ++ : RemoveBill(bill)
+    storage --> TeleporterRecipe --
+
+    TeleporterRecipe -> teleport1 ** : ctor()
+    TeleporterRecipe -> teleport2 ** : ctor()
+
+    TeleporterRecipe -> teleport1 ++ : SetPair(t2)
+    teleport1 --> TeleporterRecipe --
+
+    TeleporterRecipe -> teleport2 ++ : SetPair(t1)
+    teleport2 --> TeleporterRecipe --
+
+    TeleporterRecipe -> storage ++: AddTeleportGatePair(t1, t2)
+    storage --> TeleporterRecipe --
+
+end
+
+TeleporterRecipe --> settler --
+
+settler --> player --
+
+@enduml
