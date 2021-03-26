@@ -11,11 +11,26 @@ import hu.holyoil.skeleton.Logger;
 public class Uranium extends AbstractBaseResource {
 
     /**
+    * Az uránium akkor robban fel, ha az élete 0-ra csökken
+     */
+    private int health;
+
+
+    /**
      * Paraméter nélküli konstruktor.
      */
     public Uranium() {
+        health = 3;
     }
 
+    /**
+    * Beállítja az uránium életét
+    */
+    public void SetHealth(int hp) {
+        Logger.Log(this,"Setting health to " + hp);
+        health = hp;
+        Logger.Return();
+    }
 
     /**
      * Megvalósítja az összehasonlító metódust.
@@ -36,7 +51,12 @@ public class Uranium extends AbstractBaseResource {
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
         Logger.Log(this,"Reacting to Sun nearby");
-        asteroid.Explode();
+        
+        SetHealth(health-1);
+
+        if(health <= 0)
+            asteroid.Explode();
+        
         Logger.Return();
     }
 }
