@@ -113,9 +113,6 @@ public class AIController implements ISteppable {
     }
     /**
      * Kezeli egy teleporter működését
-     * <p>
-     *     Megjegyzés: ellenőrizni kell majd hogy csak a kerge (isCrazy == true) teleportereken legyen meghívva a move
-     * </p>
      * @param teleportGate az adott teleporter
      */
     public void HandleTeleportGate(TeleportGate teleportGate)  {
@@ -142,6 +139,7 @@ public class AIController implements ISteppable {
     private AIController() {
         robots = new ArrayList<>();
         ufos = new ArrayList<>();
+        teleporters = new ArrayList<>();
     }
 
 }

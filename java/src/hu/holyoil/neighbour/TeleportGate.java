@@ -172,32 +172,14 @@ public class TeleportGate implements INeighbour {
         Logger.Return();
     }
     /**
-     * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere.
-     * A szomszédok listáján elindul egy random indexen, és sorban vizsgálja van-e teleportere.
-     * Ha körbeért és mindegyiknek van teleportere, nem tud mozogni.
+     * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere, ha meg van kergülve.
      */
     public void Move(){
         Logger.Log(this, "Teleporter Moving");
-        int chosenIndex= new Random().nextInt(homeAsteroid.GetNeighbours().size());
-        int start = chosenIndex;
-        boolean canMove = true;
-        while(canMove && homeAsteroid.GetNeighbours().get(chosenIndex).GetTeleporter()!=null){
-            if(chosenIndex==homeAsteroid.GetNeighbours().size()-1){
-                chosenIndex=-1;
-            }
-            chosenIndex++;
-            if(chosenIndex==start){
-                canMove = false;
-            }
-        }
-        if(canMove){
-            homeAsteroid.GetNeighbours().get(chosenIndex).SetTeleporter(this);
-            homeAsteroid = homeAsteroid.GetNeighbours().get(chosenIndex);
-        }
-        else {
-            Logger.Log(this, "All neighbours already have a teleporter, cannot move");
-            Logger.Return();
-        }
+
+        if(isCrazy)
+            homeAsteroid.ReactToTeleporterMoving(this);
+
         Logger.Return();
     }
 

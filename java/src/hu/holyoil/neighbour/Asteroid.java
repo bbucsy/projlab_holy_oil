@@ -87,6 +87,38 @@ public class Asteroid implements INeighbour {
     }
 
     /**
+     * Mozgatja a kapott teleportert egy szomszédos aszteroidára.
+     * A szomszédok listáján elindul egy random indexen, és sorban vizsgálja van-e teleportere. Ekkor a saját teleporterét null-ra állítja.
+     * Ha körbeért és mindegyiknek van teleportere, nem tud mozogni.
+     * @param teleportGate a mozgatni való teleporter (ami jelenleg az aszteroida sajátja)
+     */
+    public void ReactToTeleporterMoving(TeleportGate teleportGate){
+        Logger.Log(this, "Reacting to moving teleporter: " + Logger.GetName(teleportGate));
+
+        int chosenIndex= new Random().nextInt(neighbouringAsteroids.size());
+        int start = chosenIndex;
+        boolean canMove = true;
+        while(canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter()!=null){
+            if(chosenIndex==neighbouringAsteroids.size()-1){
+                chosenIndex=-1;
+            }
+            chosenIndex++;
+            if(chosenIndex==start){
+                canMove = false;
+            }
+        }
+        if(canMove){
+            neighbouringAsteroids.get(chosenIndex).SetTeleporter(teleportGate);
+            teleportGate.SetHomeAsteroid(neighbouringAsteroids.get(chosenIndex));
+            teleporter=null;
+        }
+        else {
+            Logger.Log(this, "All neighbours already have a teleporter, cannot move");
+            Logger.Return();
+        }
+    }
+
+    /**
      * A telepes megpróbál lerakni egy nyersanyagot az aszteroida magjába
      * <p>
      *     Ez csak akkor végrehajtható ha a kéreg teljesen ki lett fúrva ÉS az aszteroida üres.
