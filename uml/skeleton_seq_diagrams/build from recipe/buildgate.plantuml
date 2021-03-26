@@ -29,10 +29,10 @@ actor Tester as tester
 TeleporterRecipe -> tester ++: What does this tester have?
 tester --> TeleporterRecipe --: storage
 participant "storage: PlayerStorage" as storage
-TeleporterRecipe -> tester ++: Does this settler have teleporters already?
-tester --> TeleporterRecipe --: yes/no
+TeleporterRecipe -> tester ++: How many teleporters does this settler already have?
+tester --> TeleporterRecipe --: teleporterCount
 
-alt hasEnough and no teleport in storage
+alt hasEnough and teleporterCount <= 1
 
     TeleporterRecipe -> storage ++ : RemoveBill(bill)
     storage --> TeleporterRecipe --

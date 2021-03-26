@@ -6,6 +6,7 @@ class PlayerStorage {
   + AddTeleportGatePair(t1: TeleportGate, t2: TeleportGate)
   + GetOneTeleporter()
   + GetSumResources(): int
+  + GetTeleporterCount(): int
   + HasEnoughOf(b: BillOfMaterial): bool
   + PlayerStorage()
   + RemoveBill(b: BillOfMaterial)

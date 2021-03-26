@@ -34,7 +34,10 @@ return
 TeleporterRecipe -> bill ++ : AddMaterial(iron2)
 return
 
-alt hasEnough and no teleport in storage
+TeleporterRecipe -> storage ++ : GetTeleporterCount()
+storage -> TeleporterRecipe -- : teleporterCount
+
+alt hasEnough and teleporterCount <= 1
 
     TeleporterRecipe -> storage ++ : RemoveBill(bill)
     storage --> TeleporterRecipe --
