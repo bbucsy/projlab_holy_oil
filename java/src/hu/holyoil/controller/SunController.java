@@ -4,6 +4,7 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A nap viselkedését irányító singleton kontroller osztály. Körönként lép, ezért implementálja az ISteppable interfacet
@@ -64,16 +65,18 @@ public class SunController implements ISteppable {
         Queue<Asteroid> traversingQueue = new LinkedList<>();
 
         Random rand = new Random();
-        traversingQueue.add(
-                asteroids.get(
-                        rand.nextInt(asteroids.size())
-                )
-        );
+        Asteroid startingAsteroid = asteroids.get(rand.nextInt(asteroids.size()));
+        traversingQueue.add(startingAsteroid);
+        chosenAsteroids.add(startingAsteroid);
 
         while (chosenAsteroids.size() < asteroids.size() / 3 && !traversingQueue.isEmpty()) {
            Asteroid currentAsteroid = traversingQueue.remove();
-           chosenAsteroids.addAll(currentAsteroid.GetNeighbours());
-           traversingQueue.addAll(currentAsteroid.GetNeighbours());
+           List<Asteroid> untraversedNeighbours = currentAsteroid.GetNeighbours()
+                   .stream()
+                   .filter(chosenAsteroids::contains)
+                   .collect(Collectors.toList());
+           chosenAsteroids.addAll(untraversedNeighbours);
+           traversingQueue.addAll(untraversedNeighbours);
         }
 
         /* Calling reaction on collected asteroids */
