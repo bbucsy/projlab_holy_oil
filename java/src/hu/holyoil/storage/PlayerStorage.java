@@ -50,6 +50,18 @@ public class PlayerStorage {
     }
 
     /**
+     * Visszaadja, hogy jelenleg hány teleportert tárol ez a tároló.
+     * @return Tárolt teleporterek száma.
+     * */
+    public int GetTeleporterCount() {
+
+        Logger.Log(this, "Returning teleporter count");
+        Logger.Return();
+        return teleporters.size();
+
+    }
+
+    /**
      * Eltávolít egy teleportert a tárolóból.
      * @param teleportGate az eltávolítandó teleporter
      */
