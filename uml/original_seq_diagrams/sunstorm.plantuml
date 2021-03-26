@@ -11,7 +11,7 @@ participant "c: AbstractCrewmate" as c
 
 C -> sun ++ : StartSunstorm()
 
-    loop for all Asteroid a in asteroids
+    loop traverse 1/3 of asteroids with BFS (randomly)
 
         sun -> a ++ : ReactToSunstorm()
 

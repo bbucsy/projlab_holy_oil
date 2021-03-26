@@ -102,7 +102,7 @@ class Asteroid {
   + AddNeighbourAsteroid(a: Asteroid)
   + DecNumOfLayersRemaining()
   + Explode()
-  + GetNeighbours(): INeighbour[]
+  + GetNeighbours(): Asteroid[]
   + GetRandomNeighbour(): INeighbour
   + GetResource(): AbstractBaseResource
   + GetTeleporter(): TeleportGate
