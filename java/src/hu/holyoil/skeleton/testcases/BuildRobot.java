@@ -1,15 +1,13 @@
 package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.controller.RobotController;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.recipe.RobotRecipe;
-import hu.holyoil.recipe.TeleporterRecipe;
 import hu.holyoil.resource.Coal;
 import hu.holyoil.resource.Iron;
 import hu.holyoil.resource.Uranium;
-import hu.holyoil.resource.Water;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
@@ -34,7 +32,7 @@ public class BuildRobot extends TestCase {
         Asteroid asteroid = new Asteroid();
         Logger.RegisterObject(this, "TestFixture");
         Logger.RegisterObject(asteroid, "a: Asteroid");
-        Logger.RegisterObject(RobotController.GetInstance(), ": RobotController");
+        Logger.RegisterObject(AIController.GetInstance(), ": AIController");
         settler = new Settler(asteroid);
         Logger.RegisterObject(settler, "s: Settler");
         Logger.RegisterObject(settler.GetStorage(), "storage: Storage");

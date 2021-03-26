@@ -39,7 +39,7 @@ public class SettlerPlacesTeleporter extends TestCase {
         Logger.RegisterObject(settler, "s: Settler");
         Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
         settler.SetOnAsteroid(asteroid);
-        asteroid.AddCrewmate(settler);
+        asteroid.AddSpaceship(settler);
 
         if (isTeleporterHere) {
             TeleportGate teleportGate = new TeleportGate();

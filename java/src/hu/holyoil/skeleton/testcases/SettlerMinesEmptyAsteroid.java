@@ -32,7 +32,7 @@ public class SettlerMinesEmptyAsteroid extends TestCase {
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(a, "a: Asteroid");
 
-        a.AddCrewmate(s);
+        a.AddSpaceship(s);
 
         Logger.RegisterObject(this, "TestFixture");
         int numOfLayersRemaining = Logger.GetInteger(this, "How many layers does this Asteroid have left?");

@@ -20,10 +20,6 @@ public interface IStorageCapable {
      */
     void CraftTeleportGate();
 
-    /**
-     * Bányászat
-     */
-    void Mine();
 
     /**
      * Visszaadja a telepes inventory-ját a jelenlegi állapotban

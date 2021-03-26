@@ -14,7 +14,7 @@ import hu.holyoil.storage.PlayerStorage;
  * Leszármazottja az AbstractCrewmate-nek (robottal közös tulajdonságai miatt).
  * Implementálja az IStorageCapable-t mert képes tárolásra és gyártásra.
  */
-public class Settler extends AbstractCrewmate implements IStorageCapable {
+public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner {
     /**
      * Létrehoz egy telepest
      * <p>Kívülről nem elérhető: nem lehet kezdő Aszteroida nélkül példányosítani.
@@ -34,7 +34,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
     public Settler(Asteroid startingAsteroid) {
         storage = new PlayerStorage();
         onAsteroid = startingAsteroid;
-        onAsteroid.AddCrewmate(this);
+        onAsteroid.AddSpaceship(this);
     }
 
 
@@ -60,7 +60,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable {
             storage.GetOneTeleporter().Explode();
         }
 
-        onAsteroid.RemoveCrewmate(this);
+        onAsteroid.RemoveSpaceship(this);
         Logger.Return();
     }
 

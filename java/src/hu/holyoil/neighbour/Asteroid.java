@@ -3,7 +3,7 @@ package hu.holyoil.neighbour;
 import hu.holyoil.Main;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
-import hu.holyoil.crewmate.AbstractCrewmate;
+import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.resource.AbstractBaseResource;
@@ -25,7 +25,7 @@ public class Asteroid implements INeighbour {
      */
     public Asteroid() {
         neighbouringAsteroids = new ArrayList<>();
-        crewmates = new ArrayList<>();
+        spaceships = new ArrayList<>();
         resource = null;
         teleporter = null;
         isNearSun = Boolean.FALSE;
@@ -58,7 +58,7 @@ public class Asteroid implements INeighbour {
     /**
      * Az aszteroidán tartózkodó telepesek és robotok listája
      */
-    private List<AbstractCrewmate> crewmates;
+    private List<AbstractSpaceship> spaceships;
     /**
      * Az aszteroida magja.
      * <p>Lehet null, akkor az aszteroida üres.</p>
@@ -68,20 +68,20 @@ public class Asteroid implements INeighbour {
     /**
      * A legénység mozgását kezelő függvény.
      * <p>
-     *     A crewmatet leveszi a kapott forrás aszteroidáról.
-     *     A crewmatet hozzáadja a saját tárolójához.
-     *     A crewmate aszteroidáját átállítja magára.
+     *     A Spaceshipt leveszi a kapott forrás aszteroidáról.
+     *     A Spaceshipt hozzáadja a saját tárolójához.
+     *     A Spaceship aszteroidáját átállítja magára.
      * </p>
-     * @param from az az aszteroida amin a Crewmate eredetileg tartózkodik
-     * @param abstractCrewmate a mozgást elvégezni készülő Crewmate
+     * @param from az az aszteroida amin a Spaceship eredetileg tartózkodik
+     * @param abstractSpaceship a mozgást elvégezni készülő Spaceship
      */
     @Override
-    public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-        Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractCrewmate));
+    public void ReactToMove(Asteroid from, AbstractSpaceship abstractSpaceship) {
+        Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractSpaceship));
 
-        from.RemoveCrewmate(abstractCrewmate);
-        AddCrewmate(abstractCrewmate);
-        abstractCrewmate.SetOnAsteroid(this);
+        from.RemoveSpaceship(abstractSpaceship);
+        AddSpaceship(abstractSpaceship);
+        abstractSpaceship.SetOnAsteroid(this);
 
         Logger.Return();
     }
@@ -131,7 +131,7 @@ public class Asteroid implements INeighbour {
 
     /**
      * Eggyel csökkenti a magig fúrandó réteg vastagságát.
-     * <p>Erre egy Crewmate képes egy fúrás lépéssel.</p>
+     * <p>Erre egy Spaceship képes egy fúrás lépéssel.</p>
      */
     public void DecNumOfLayersRemaining() {
 
@@ -168,7 +168,7 @@ public class Asteroid implements INeighbour {
     }
 
     /**
-     * Az aszteroida reagál ha egy Crewmate megpróbál rajta fúrni.
+     * Az aszteroida reagál ha egy Spaceship megpróbál rajta fúrni.
      * <p>
      *     Ha még van hátra fúrnivaló kéreg eggyel csökkenti a kéreg vastagságát, egyébként nem történik semmi.
      * </p>
@@ -187,7 +187,7 @@ public class Asteroid implements INeighbour {
      * Az szteroida reagál a napviharra.
      * <p>
      *     Ha az aszteroida magja NEM üres VAGY az aszteroida kérge még nincs teljesen kifúrva:
-     *     az összes Crewmate meghal a crewmates listán.
+     *     az összes Spaceship meghal a spaceships listán.
      * </p>
      */
     public void ReactToSunstorm() {
@@ -197,8 +197,8 @@ public class Asteroid implements INeighbour {
 
         if (numOfLayersRemaining > 0 || resource != null) {
 
-            Logger.Log(this, "Killing all crewmates");
-            KillAllCrewmates();
+            Logger.Log(this, "Killing all spaceships");
+            KillAllSpaceships();
             Logger.Return();
 
         }
@@ -321,36 +321,36 @@ public class Asteroid implements INeighbour {
     }
 
     /**
-     * Felvesz egy új crewmatet az aszteroidára
-     * @param abstractCrewmate az aszteroidára lépő telepes vagy robot
+     * Felvesz egy új Spaceshipt az aszteroidára
+     * @param abstractSpaceship az aszteroidára lépő telepes vagy robot
      */
-    public void AddCrewmate(AbstractCrewmate abstractCrewmate) {
+    public void AddSpaceship(AbstractSpaceship abstractSpaceship) {
 
-        Logger.Log(this, "Adding new crewmate: " + Logger.GetName(abstractCrewmate));
-        crewmates.add(abstractCrewmate);
+        Logger.Log(this, "Adding new Spaceship: " + Logger.GetName(abstractSpaceship));
+        spaceships.add(abstractSpaceship);
         Logger.Return();
 
     }
 
     /**
-     * Elvesz egy crewmatet az aszteroidáról
-     * @param abstractCrewmate a törlendő telepes vagy robot
+     * Elvesz egy Spaceshipt az aszteroidáról
+     * @param abstractSpaceship a törlendő telepes vagy robot
      */
-    public void RemoveCrewmate(AbstractCrewmate abstractCrewmate) {
+    public void RemoveSpaceship(AbstractSpaceship abstractSpaceship) {
 
-        Logger.Log(this, "Removing crewmate: " + Logger.GetName(abstractCrewmate));
-        crewmates.remove(abstractCrewmate);
+        Logger.Log(this, "Removing Spaceship: " + Logger.GetName(abstractSpaceship));
+        spaceships.remove(abstractSpaceship);
         Logger.Return();
 
     }
 
     /**
-     * Megöli az aszteroidán tartózkodó egész legénységet.
+     * Megöli az aszteroidán tartózkodó összes egységet.
      */
-    public void KillAllCrewmates() {
+    public void KillAllSpaceships() {
 
-        Logger.Log(this, "Killing all crewmates");
-        crewmates.forEach(AbstractCrewmate::Die);
+        Logger.Log(this, "Killing all spaceships");
+        spaceships.forEach(AbstractSpaceship::Die);
         Logger.Return();
     }
 
@@ -368,7 +368,7 @@ public class Asteroid implements INeighbour {
     /**
      * Az aszteroida felrobban.
      * <p>
-     *     Meghívja minden Crewmate robbanásra reagáló metódusát. Ha az aszteroidán volt teleporter azt felrobbantja.
+     *     Meghívja minden Spaceship robbanásra reagáló metódusát. Ha az aszteroidán volt teleporter azt felrobbantja.
      *     Eltávolítja magát a GameControllerből, majd a SunControllerből.
      * </p>
      */
@@ -376,9 +376,9 @@ public class Asteroid implements INeighbour {
     public void Explode() {
         Logger.Log(this, "Exploding");
 
-        Logger.Log(this, "Signaling to crewmates that I am exploding");
-        List<AbstractCrewmate> crewmatesShallowCopy = new ArrayList<>(crewmates);
-        crewmatesShallowCopy.forEach(AbstractCrewmate::ReactToAsteroidExplosion);
+        Logger.Log(this, "Signaling to spaceships that I am exploding");
+        List<AbstractSpaceship> spaceshipsShallowCopy = new ArrayList<>(spaceships);
+        spaceshipsShallowCopy.forEach(AbstractSpaceship::ReactToAsteroidExplosion);
         Logger.Return();
 
         if (teleporter != null) {
@@ -415,6 +415,15 @@ public class Asteroid implements INeighbour {
 
     }
 
+    /**
+     * Felfedezetté teszi az aszteroidát.
+     * Átállítja az isDiscovered tagváltozót igazra.
+     */
+    public void Discover(){
+        Logger.Log(this, "Discovering Asteroid");
+        isDiscovered=true;
+        Logger.Return();
+    }
     /**
      * Beállítja a teleportert.
      * @param teleportGate az aszteroida új teleportere

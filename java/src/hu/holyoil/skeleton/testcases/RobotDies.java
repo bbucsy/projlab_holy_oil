@@ -1,6 +1,6 @@
 package hu.holyoil.skeleton.testcases;
 
-import hu.holyoil.controller.RobotController;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -28,9 +28,9 @@ public class RobotDies extends TestCase {
 
         Logger.RegisterObject(asteroid, "onAsteroid: Asteroid");
         Logger.RegisterObject(robot, "r: Robot");
-        Logger.RegisterObject(RobotController.GetInstance(), "controller: RobotController");
+        Logger.RegisterObject(AIController.GetInstance(), "controller: AIController");
 
-        RobotController.GetInstance().AddRobot(robot);
+        AIController.GetInstance().AddRobot(robot);
     }
 
     @Override

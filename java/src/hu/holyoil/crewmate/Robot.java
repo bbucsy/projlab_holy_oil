@@ -1,6 +1,6 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.controller.RobotController;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -20,25 +20,25 @@ public class Robot extends AbstractCrewmate {
      * A Robot konstruktora.
      * <p>beállítja a kezdő aszteroidát,
      *       hozzáadja az aszteroidához a robotot.
-     *       A RobotController-hez a gyártás során adódik hozzá. A robot mindig gyártás során példányosítódik</p>
+     *       A AIController-hez a gyártás során adódik hozzá. A robot mindig gyártás során példányosítódik</p>
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
         onAsteroid = startingAsteroid;
         Logger.RegisterObject(this, "r: Robot");
-        onAsteroid.AddCrewmate(this);
+        onAsteroid.AddSpaceship(this);
     }
 
     /**
      * Robot "meghal"
-     * <p>eltávolítja a robotot a RobotController singleton tárolójából és
+     * <p>eltávolítja a robotot a AIController singleton tárolójából és
      * eltávolítja a robotot az aszteroidáról</p>
      */
     @Override
     public void Die() {
         Logger.Log(this, "Died");
-        RobotController.GetInstance().RemoveRobot(this);
-        onAsteroid.RemoveCrewmate(this);
+        AIController.GetInstance().RemoveRobot(this);
+        onAsteroid.RemoveSpaceship(this);
         Logger.Return();
 
     }

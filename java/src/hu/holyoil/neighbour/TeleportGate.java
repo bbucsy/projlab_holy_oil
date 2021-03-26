@@ -1,6 +1,6 @@
 package hu.holyoil.neighbour;
 
-import hu.holyoil.crewmate.AbstractCrewmate;
+import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
@@ -81,18 +81,18 @@ public class TeleportGate implements INeighbour {
     /**
      * A rajta keresztül való mozgást kezeli.
      * <p>
-     *     Ha egy crewmate át akar rajta lépni ellenőrzi, hogy a párja le van-e rakva. Ha nem, nem történik semmi.
-     *     Ha igen, meghívja a párja aszteroidájának mozgásra való reakció metódusát, és a crewmate átlép arra az aszteroidára.
+     *     Ha egy Spaceship át akar rajta lépni ellenőrzi, hogy a párja le van-e rakva. Ha nem, nem történik semmi.
+     *     Ha igen, meghívja a párja aszteroidájának mozgásra való reakció metódusát, és a Spaceship átlép arra az aszteroidára.
      * </p>
-     * @param from az az aszteroida amin a Crewmate eredetileg tartózkodik, ebben az esetben a teleport saját aszteroidája
-     * @param abstractCrewmate a mozgást elvégezni készülő Crewmate
+     * @param from az az aszteroida amin a Spaceship eredetileg tartózkodik, ebben az esetben a teleport saját aszteroidája
+     * @param abstractSpaceship a mozgást elvégezni készülő Spaceship
      */
     @Override
-    public void ReactToMove(Asteroid from, AbstractCrewmate abstractCrewmate) {
-        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractCrewmate));
+    public void ReactToMove(Asteroid from, AbstractSpaceship abstractSpaceship) {
+        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractSpaceship));
 
         if (pair.GetHomeAsteroid() != null) {
-            pair.GetHomeAsteroid().ReactToMove(from, abstractCrewmate);
+            pair.GetHomeAsteroid().ReactToMove(from, abstractSpaceship);
         }
 
         Logger.Return();

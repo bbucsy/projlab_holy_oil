@@ -1,24 +1,29 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Robot;
+import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A robotokat irányító kontroller. Implementálja az ISteppable interfacet, így a robotok minden körben végrehajtanak egy lépést. Singleton osztály.
+ * Az AI-t irányító kontroller. Implementálja az ISteppable interfacet, így az irányított egységek minden körben végrehajtanak egy lépést. Singleton osztály.
  * <p>A PROJEKT EZEN FÁZISÁBAN MÉG NINCS KÉSZ, A TESZTELÉSHEZ NEM SZÜKSÉGES. Ennek megfelelően a dokumentáció is csak felszínes megértést nyújt, amennyi a tesztekhez kellhet.</p>
  */
-public class RobotController implements ISteppable {
+public class AIController implements ISteppable {
     /**
      * Singleton osztály statikus tagváltozója amin keresztül el lehet érni.
      */
-    private static RobotController robotController;
+    private static AIController AIController;
     /**
      * A pályán található összes "élő" robot listája
      */
     private List<Robot> robots;
+    /**
+     * A pályán található összes "élő" UFO
+     */
+    private List<Ufo> ufos;
 
     /**
      * Minden robot végrehajt egy lépést
@@ -39,6 +44,15 @@ public class RobotController implements ISteppable {
         robots.add(robot);
         Logger.Return();
     }
+    /**
+     * Hozzáad egy ufót a játékhoz.
+     * @param ufo Hozzáadja az ufos tagváltozóhoz
+     */
+    public void AddUfo(Ufo ufo)  {
+        Logger.Log(this,"Adding ufo <" +  Logger.GetName(ufo)+ ">");
+        ufos.add(ufo);
+        Logger.Return();
+    }
 
     /**
      * Töröl egy robotot a játékból
@@ -49,7 +63,15 @@ public class RobotController implements ISteppable {
         robots.remove(robot);
         Logger.Return();
     }
-
+    /**
+     * Töröl egy ufút a játékból
+     * @param ufo törli az ufót az ufos tagváltozóból
+     */
+    public void RemoveUfo(Ufo ufo)  {
+        Logger.Log(this,"Removing ufo <" +  Logger.GetName(ufo)+ ">");
+        ufos.remove(ufo);
+        Logger.Return();
+    }
     /**
      * Kezeli egy robot működését
      * @param robot az adott robot
@@ -59,27 +81,34 @@ public class RobotController implements ISteppable {
         // todo
         Logger.Return();
     }
-
+    /**
+     * Kezeli egy ufo működését
+     * @param ufo az adott ufó
+     */
+    public void HandleUfo(Ufo ufo)  {
+        Logger.Log(this,"Handle ufo <" +  Logger.GetName(ufo)+ ">");
+        // todo
+        Logger.Return();
+    }
     /**
      * Singleton osztályra lehet vele hivatkozni
      * @return visszaad egy instance-et
      */
-    public static RobotController GetInstance() {
+    public static AIController GetInstance() {
 
-        if (robotController == null) {
-            robotController = new RobotController();
+        if (AIController == null) {
+            AIController = new AIController();
         }
-
-        return robotController;
-
+        return AIController;
     }
 
     /**
      * Privát konstruktor.
      * Nem lehet kívülről meghívni, nem lehet példányosítani.
      */
-    private RobotController() {
+    private AIController() {
         robots = new ArrayList<>();
+        ufos = new ArrayList<>();
     }
 
 }

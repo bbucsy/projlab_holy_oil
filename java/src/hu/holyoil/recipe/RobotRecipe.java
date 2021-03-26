@@ -1,7 +1,7 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.controller.RobotController;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
@@ -78,11 +78,11 @@ public class RobotRecipe implements IRecipe {
             Logger.RegisterObject(robot, "r: Robot");
 
             Logger.Log(this, "Adding " + Logger.GetName(robot) + " to asteroid " + Logger.GetName(asteroid));
-            asteroid.AddCrewmate(robot);
+            asteroid.AddSpaceship(robot);
             Logger.Return();
 
             Logger.Log(this, "Registering " + Logger.GetName(robot) + " at the robotcontroller");
-            RobotController.GetInstance().AddRobot(robot);
+            AIController.GetInstance().AddRobot(robot);
             Logger.Return();
 
         }

@@ -41,7 +41,7 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(a, "a: Asteroid");
 
-        a.AddCrewmate(s);
+        a.AddSpaceship(s);
 
         BillOfMaterial bill = new BillOfMaterial();
         bill.AddMaterial(u);
