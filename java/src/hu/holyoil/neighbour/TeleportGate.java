@@ -178,7 +178,7 @@ public class TeleportGate implements INeighbour {
         Logger.Log(this, "Teleporter Moving");
 
         if(isCrazy)
-            homeAsteroid.ReactToTeleporterMoving(this);
+            homeAsteroid.ReactToTeleporterMoving();
 
         Logger.Return();
     }

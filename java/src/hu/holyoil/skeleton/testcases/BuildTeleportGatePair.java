@@ -1,6 +1,7 @@
 package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
@@ -35,6 +36,7 @@ public class BuildTeleportGatePair extends TestCase {
         Logger.RegisterObject(settler, "s: Settler");
         Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
         Logger.RegisterObject(this, "TestFixture");
+        Logger.RegisterObject(AIController.GetInstance(), ":AIController");
         boolean settlerHasTeleporterAlready = Logger.GetBoolean(this, "Does this Settler already have a teleporter?");
         boolean settlerHasEnoughResources = Logger.GetBoolean(this, "Does this Settler have enough Resources to create a teleportgate pair?");
 
