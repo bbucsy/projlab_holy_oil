@@ -9,7 +9,7 @@ participant "resource: Uranium" as res
 a -> res ++: ReactToSunNearby(a)
 res -> res ++: health--
 deactivate res
-alt health == 0
+alt health <= 0
     res -> a ++: Explode()
     a --> res --
 end
