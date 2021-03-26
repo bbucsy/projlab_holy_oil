@@ -81,7 +81,7 @@ public class RobotRecipe implements IRecipe {
             asteroid.AddSpaceship(robot);
             Logger.Return();
 
-            Logger.Log(this, "Registering " + Logger.GetName(robot) + " at the robotcontroller");
+            Logger.Log(this, "Registering " + Logger.GetName(robot) + " at the AIcontroller");
             AIController.GetInstance().AddRobot(robot);
             Logger.Return();
 

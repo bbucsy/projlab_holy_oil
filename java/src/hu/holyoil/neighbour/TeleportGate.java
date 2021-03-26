@@ -1,8 +1,12 @@
 package hu.holyoil.neighbour;
 
+import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
+import sun.rmi.runtime.Log;
+
+import java.util.Random;
 
 /**
  * Teleportereket leíró osztály.
@@ -17,6 +21,7 @@ public class TeleportGate implements INeighbour {
         pair = null;
         homeAsteroid = null;
         homeStorage = null;
+        isCrazy = false;
     }
 
     /**
@@ -27,7 +32,10 @@ public class TeleportGate implements INeighbour {
      * Az aszteroida amin a teleporter tartózkodik.
      */
     private Asteroid homeAsteroid;
-
+    /**
+     * Mutatja érte-e már napvihar a teleportert.
+     */
+    private boolean isCrazy;
     /**
      * Visszaadja a teleporter párját.
      * @return a teleporter párja
@@ -103,11 +111,9 @@ public class TeleportGate implements INeighbour {
      * @param newPair a teleporter párja
      */
     public void SetPair(TeleportGate newPair) {
-
         Logger.Log(this, "Setting my pair to " + Logger.GetName(newPair));
         pair = newPair;
         Logger.Return();
-
     }
 
     /**
@@ -119,12 +125,10 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void Explode() {
-
         Logger.Log(this, "Exploding");
         pair.ExplodePair();
         ActuallyExplode();
         Logger.Return();
-
     }
 
     /**
@@ -155,6 +159,46 @@ public class TeleportGate implements INeighbour {
                 homeAsteroid.RemoveTeleporter();
             }
         }
+        AIController.GetInstance().RemoveTeleportGate(this);
+    }
+
+    /**
+     * Napvihar hatására a teleporter megkergül, és innentől a játék végéig kerge marad.
+     */
+    @Override
+    public void ReactToSunstorm() {
+        Logger.Log(this, "Reacting to Sunstorm");
+        isCrazy = true;
+        Logger.Return();
+    }
+    /**
+     * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere.
+     * A szomszédok listáján elindul egy random indexen, és sorban vizsgálja van-e teleportere.
+     * Ha körbeért és mindegyiknek van teleportere, nem tud mozogni.
+     */
+    public void Move(){
+        Logger.Log(this, "Teleporter Moving");
+        int chosenIndex= new Random().nextInt(homeAsteroid.GetNeighbours().size());
+        int start = chosenIndex;
+        boolean canMove = true;
+        while(canMove && homeAsteroid.GetNeighbours().get(chosenIndex).GetTeleporter()!=null){
+            if(chosenIndex==homeAsteroid.GetNeighbours().size()-1){
+                chosenIndex=-1;
+            }
+            chosenIndex++;
+            if(chosenIndex==start){
+                canMove = false;
+            }
+        }
+        if(canMove){
+            homeAsteroid.GetNeighbours().get(chosenIndex).SetTeleporter(this);
+            homeAsteroid = homeAsteroid.GetNeighbours().get(chosenIndex);
+        }
+        else {
+            Logger.Log(this, "All neighbours already have a teleporter, cannot move");
+            Logger.Return();
+        }
+        Logger.Return();
     }
 
 }

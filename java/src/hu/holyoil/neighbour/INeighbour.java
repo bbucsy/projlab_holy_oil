@@ -8,7 +8,7 @@ import hu.holyoil.crewmate.AbstractSpaceship;
  */
 public interface INeighbour {
     /**
-     * A Crewmatek mozgására reagáló metódus
+     * Az űrhajók mozgására reagáló metódus
      * @param from az az aszteroida amin a Crewmate eredetileg tartózkodik
      * @param abstractSpaceship a mozgást elvégezni készülő Crewmate
      */
@@ -18,4 +18,9 @@ public interface INeighbour {
      * Felrobban
      */
     void Explode();
+
+    /**
+     * Reagál napviharra
+     */
+    void ReactToSunstorm();
 }

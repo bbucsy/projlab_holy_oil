@@ -2,6 +2,7 @@ package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
+import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
@@ -24,7 +25,10 @@ public class AIController implements ISteppable {
      * A pályán található összes "élő" UFO
      */
     private List<Ufo> ufos;
-
+    /**
+     * Az pályán található összes teleporter.
+     */
+    private List<TeleportGate> teleporters;
     /**
      * Minden robot végrehajt egy lépést
      * <p>Jelenleg nincs realizálva, teszteléshez nem szükséges.</p>
@@ -53,7 +57,15 @@ public class AIController implements ISteppable {
         ufos.add(ufo);
         Logger.Return();
     }
-
+    /**
+     * Hozzáad egy teleportert a játékhoz.
+     * @param teleportGate Hozzáadja a teleporters tagváltozóhoz
+     */
+    public void AddTeleportGate(TeleportGate teleportGate)  {
+        Logger.Log(this,"Adding teleporter <" +  Logger.GetName(teleportGate)+ ">");
+        teleporters.add(teleportGate);
+        Logger.Return();
+    }
     /**
      * Töröl egy robotot a játékból
      * @param robot törli a robotot a robots tagváltozóból
@@ -73,6 +85,15 @@ public class AIController implements ISteppable {
         Logger.Return();
     }
     /**
+     * Töröl egy teleportert a játékból
+     * @param teleportGate törli a teleportert a teleporters tagváltozóból
+     */
+    public void RemoveTeleportGate(TeleportGate teleportGate)  {
+        Logger.Log(this,"Removing teleporter <" +  Logger.GetName(teleportGate)+ ">");
+        teleporters.remove(teleportGate);
+        Logger.Return();
+    }
+    /**
      * Kezeli egy robot működését
      * @param robot az adott robot
      */
@@ -87,6 +108,18 @@ public class AIController implements ISteppable {
      */
     public void HandleUfo(Ufo ufo)  {
         Logger.Log(this,"Handle ufo <" +  Logger.GetName(ufo)+ ">");
+        // todo
+        Logger.Return();
+    }
+    /**
+     * Kezeli egy teleporter működését
+     * <p>
+     *     Megjegyzés: ellenőrizni kell majd hogy csak a kerge (isCrazy == true) teleportereken legyen meghívva a move
+     * </p>
+     * @param teleportGate az adott teleporter
+     */
+    public void HandleTeleportGate(TeleportGate teleportGate)  {
+        Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
         // todo
         Logger.Return();
     }

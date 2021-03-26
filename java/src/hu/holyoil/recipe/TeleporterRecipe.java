@@ -1,6 +1,7 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
@@ -100,6 +101,13 @@ public class TeleporterRecipe implements IRecipe {
             storage.AddTeleportGatePair(t1, t2);
             Logger.Return();
 
+            Logger.Log(this, "Registering " + Logger.GetName(t1) + " at the AIcontroller");
+            AIController.GetInstance().AddTeleportGate(t1);
+            Logger.Return();
+
+            Logger.Log(this, "Registering " + Logger.GetName(t2) + " at the AIcontroller");
+            AIController.GetInstance().AddTeleportGate(t2);
+            Logger.Return();
         }
     }
 
