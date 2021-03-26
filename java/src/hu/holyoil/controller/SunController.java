@@ -70,13 +70,21 @@ public class SunController implements ISteppable {
         chosenAsteroids.add(startingAsteroid);
 
         while (chosenAsteroids.size() < asteroids.size() / 3 && !traversingQueue.isEmpty()) {
-           Asteroid currentAsteroid = traversingQueue.remove();
-           List<Asteroid> untraversedNeighbours = currentAsteroid.GetNeighbours()
+            Asteroid currentAsteroid = traversingQueue.remove();
+
+            List<Asteroid> untraversedNeighbours = currentAsteroid.GetNeighbours()
                    .stream()
-                   .filter(chosenAsteroids::contains)
+                   .filter(item -> !chosenAsteroids.contains(item))
                    .collect(Collectors.toList());
-           chosenAsteroids.addAll(untraversedNeighbours);
-           traversingQueue.addAll(untraversedNeighbours);
+
+            traversingQueue.addAll(untraversedNeighbours);
+
+            for (Asteroid item : untraversedNeighbours) {
+                if (chosenAsteroids.size() < asteroids.size() / 3)
+                    chosenAsteroids.add(item);
+                else
+                    break;
+            }
         }
 
         /* Calling reaction on collected asteroids */
