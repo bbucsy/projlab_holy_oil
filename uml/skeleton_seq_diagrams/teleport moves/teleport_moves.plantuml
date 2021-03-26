@@ -12,7 +12,7 @@ participant "neighbour: Asteroid" as neigh
 contr -> tp ++: Move()
 
 alt is crazy
-    tp -> home ++: ReactToTeleporterMoving(tp)
+    tp -> home ++: ReactToTeleporterMoving()
 
     loop has no teleporter
         home -> neigh ++: GetTeleporter()

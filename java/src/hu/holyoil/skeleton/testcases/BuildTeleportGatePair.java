@@ -11,7 +11,7 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
 /**
- * Teszteli amikor egy teleper megpróbál egy teleportpárt építeni
+ * Teszteli amikor egy telepes megpróbál egy teleportpárt építeni
  * Dokumentumban: 9. oldalon látható a SZEKVENCIA diagram,
  *                      19. oldalon a KOMMUNIKÁCIÓS diagram
  * Elágazások: Van-e elég nyersanyag a telepesnél?
