@@ -20,4 +20,6 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
         onAsteroid.ReactToDrill();
         Logger.Return();
     }
+
+    
 }

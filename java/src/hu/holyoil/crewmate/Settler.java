@@ -17,7 +17,7 @@ import hu.holyoil.storage.PlayerStorage;
 public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner {
     /**
      * Létrehoz egy telepest
-     * <p>Kívülről nem elérhető: nem lehet kezdő Aszteroida nélkül példányosítani.
+     * <p>Kívülről nem elérhető: nem lehet kezdő storage nélkül példányosítani.
      * Nem használjuk jelenleg sehol: biztonságból van: ne lehessen storage nélkül létrehozni settlert sehol</p>
      */
     private Settler() {
