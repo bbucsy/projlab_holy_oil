@@ -5,6 +5,7 @@ skinparam CircledCharacterRadius 0
 skinparam CircledCharacterFontSize 0
 skinparam ClassFontStyle bold
 
+
 ' Storage
 class PlayerStorage {
   - id: int
@@ -27,85 +28,111 @@ class BillOfMaterial {
 }
 
 ' Controller
-interface ISteppable {
+interface ISteppable << interface >> {
   {abstract} + Step()
 }
 
-class GameController << singleton >> {
-  + AddAsteroid(a: Asteroid)
-  + AddSettler(s: Settler)
-  + CheckGameCondition()
-  + CheckLoseCondition()
-  + CheckWinCondition()
-  + RemoveAsteroid(a: Asteroid)
-  + RemoveSettler(s: Settler)
-  + StartGame()
-  + Step()
-}
+together {
+  class GameController << singleton >> {
+    + AddAsteroid(a: Asteroid)
+    + AddSettler(s: Settler)
+    + CheckGameCondition()
+    + CheckLoseCondition()
+    + CheckWinCondition()
+    + RemoveAsteroid(a: Asteroid)
+    + RemoveSettler(s: Settler)
+    + StartGame()
+    + Step()
+  }
 
-class RobotController << singleton >> {
-  + AddRobot(r: Robot)
-  + HandleRobot(r: Robot)
-  + RemoveRobot(r: Robot)
-  + Step()
-}
+  class AIController << singleton >> {
+    + AddRobot(r: Robot)
+    + AddTeleportGate(t: TeleportGate)
+    + AddUfo(u: Ufo)
+    + HandleRobot(r: Robot)
+    + HandleTeleportGate(t: TeleportGate)
+    + HandleUfo(u: Ufo)
+    + RemoveRobot(r: Robot)
+    + RemoveTeleportGate(t: TeleportGate)
+    + RemoveUfo(u: Ufo)
+    + Step()
+  }
 
-class SunController << singleton >> {
-  - turnsUntilNextSunstorm : int
-  - id: int
-  + GetId(): int
-  + AddAsteroid(a: Asteroid)
-  + RemoveAsteroid(a: Asteroid)
-  + StartSunstorm()
-  + Step()
+  class SunController << singleton >> {
+    - turnsUntilNextSunstorm : int
+    - id: int
+    + GetId(): int
+    + AddAsteroid(a: Asteroid)
+    + RemoveAsteroid(a: Asteroid)
+    + StartSunstorm()
+    + Step()
+  }
 }
 
 ' Crewmate
-abstract class AbstractCrewmate {
+abstract class AbstractSpaceship {
   {abstract} + Die()
-  + Drill()
   + Move(n: INeighbour)
   {abstract} + ReactToAsteroidExplosion()
   + SetOnAsteroid(a: Asteroid)
 }
 
-interface IStorageCapable {
+abstract class AbstractCrewmate {
+  + Drill()
+  + SetOnAsteroid(a: Asteroid)
+}
+
+interface IMiner << interface >> {
+  {abstract} + Mine()
+}
+
+interface IStorageCapable << interface >> {
   {abstract} + CraftRobot()
   {abstract} + CraftTeleportGate()
   {abstract} + GetStorage(): PlayerStorage
-  {abstract} + Mine()
   {abstract} + PlaceResource(r: AbstractBaseResource)
   {abstract} + PlaceTeleporter()
 }
 
-class Robot {
-  - id: int
-  + GetId(): int
-  + Die()
-  + ReactToAsteroidExplosion()
-  + Robot(start: Asteroid)
-  - Robot()
-}
+together {
+  class Robot {
+    - id: int
+    + GetId(): int
+    + Die()
+    + ReactToAsteroidExplosion()
+    + Robot(start: Asteroid)
+    - Robot()
+  }
 
-class Settler {
-  - id: int
-  + GetId(): int
-  + CraftRobot()
-  + CraftTeleportGate()
-  + Die()
-  + GetStorage(): PlayerStorage
-  + Mine()
-  + PlaceResource(r: AbstractBaseResource)
-  + PlaceTeleporter()
-  + ReactToAsteroidExplosion()
-  + Settler(start: Asteroid)
-  - Settler()
+  class Settler {
+    - id: int
+    + GetId(): int
+    + CraftRobot()
+    + CraftTeleportGate()
+    + Die()
+    + GetStorage(): PlayerStorage
+    + Mine()
+    + PlaceResource(r: AbstractBaseResource)
+    + PlaceTeleporter()
+    + ReactToAsteroidExplosion()
+    + Settler(start: Asteroid)
+    - Settler()
+  }
+
+  class Ufo {
+    + Die()
+    + Mine()
+    + ReactToAsteroidExplosion()
+    + Ufo(start: Asteroid)
+    - Ufo()
+  }
 }
 
 ' Neighbour
-interface INeighbour {
+interface INeighbour << interface >> {
   {abstract} + Explode()
   {abstract} + ReactToMove(from: Asteroid, c: AbstractCrewmate)
+  {abstract} + ReactToSunstorm()
 }
 
 class Asteroid {
@@ -114,22 +141,25 @@ class Asteroid {
   - numOfLayersRemaining : int
   - id: int
   + GetId(): int
-  + AddCrewmate(c: AbstractCrewmate)
+  + AddSpaceship(s: AbstractSpaceship)
   + AddNeighbourAsteroid(a: Asteroid)
   + DecNumOfLayersRemaining()
+  + Discover()
   + Explode()
   + GetNeighbours(): Asteroid[]
   + GetRandomNeighbour(): INeighbour
   + GetResource(): AbstractBaseResource
   + GetTeleporter(): TeleportGate
-  + KillAllCrewmates()
+  + KillAllSpaceships()
   + PutResource(s: Settler, r: AbstractBaseResource)
   + ReactToDrill()
-  + ReactToMineBy(s: IStorageCapable)
-  + ReactToMove(from: Asteroid, c: AbstractCrewmate)
+  + ReactToMineBy(m: IMiner)
+  + ReactToMineBy(m: IMiner, s: PlayerStorage)
+  + ReactToMove(t: TeleportGate)
+  + ReactToMove(from: Asteroid, s: AbstractSpaceship)
   + ReactToSunNearby()
   + ReactToSunstorm()
-  + RemoveCrewmate(c: AbstractCrewmate)
+  + RemoveSpaceship(s: AbstractSpaceship)
   + RemoveTeleporter()
   + SetIsNearbySun(s: bool)
   + SetNumOfLayersRemaining(l: int)
@@ -138,13 +168,16 @@ class Asteroid {
 }
 
 class TeleportGate {
+  - isCrazy: bool
   - id: int
   + GetId(): int
   + Explode()
   + GetHomeAsteroid(): Asteroid
   + GetHomeStorage(): PlayerStorage
   + GetPair(): TeleportGate
+  + Move(a: Asteroid)
   + ReactToMove(from: Asteroid, c: AbstractCrewmate)
+  + ReactToSunstorm()
   + SetHomeAsteroid(a: Asteroid)
   + SetHomeStorage(s: PlayerStorage)
   + SetPair(t: TeleportGate)
@@ -157,32 +190,35 @@ abstract class AbstractBaseResource {
   - id: int
   + GetId(): int
   {abstract} + IsSameType(r: AbstractBaseResource): bool
-  + ReactToMine(a: Asteroid, c: IStorageCapable)
+  + ReactToMine(a: Asteroid, c: IMiner)
+  + ReactToMine(a: Asteroid, c: IMiner, , s: PlayerStorage)
   + ReactToPlace(a: Asteroid, c: IStorageCapable)
   + ReactToSunNearby(a: Asteroid)
 }
 
-class Coal {
-  + IsSameType(r: AbstractBaseResource): bool
-}
+together {
+  class Coal {
+    + IsSameType(r: AbstractBaseResource): bool
+  }
 
-class Iron {
-  + IsSameType(r: AbstractBaseResource): bool
-}
+  class Iron {
+    + IsSameType(r: AbstractBaseResource): bool
+  }
 
-class Uranium {
-  - health : int
-  + IsSameType(r: AbstractBaseResource): bool
-  + ReactToSunNearby(a: Asteroid)
-}
+  class Uranium {
+    - health : int
+    + IsSameType(r: AbstractBaseResource): bool
+    + ReactToSunNearby(a: Asteroid)
+  }
 
-class Water {
-  + IsSameType(r: AbstractBaseResource): bool
-  + ReactToSunNearby(a: Asteroid)
+  class Water {
+    + IsSameType(r: AbstractBaseResource): bool
+    + ReactToSunNearby(a: Asteroid)
+  }
 }
 
 ' Recipe
-interface IRecipe {
+interface IRecipe << interface >> {
   {abstract} + Craft(c: IStorageCapable, a: Asteroid)
 }
 
@@ -190,35 +226,41 @@ interface IIdentifiable <<interface>> {
   + GetId(): int
 }
 
-class RobotRecipe << singleton >> {
-  + Craft(c: IStorageCapable, a: Asteroid)
-}
+together {
+  class RobotRecipe << singleton >> {
+    + Craft(c: IStorageCapable, a: Asteroid)
+  }
 
-class TeleporterRecipe << singleton >> {
-  + Craft(c: IStorageCapable, a: Asteroid)
+  class TeleporterRecipe << singleton >> {
+    + Craft(c: IStorageCapable, a: Asteroid)
+  }
 }
 
 ' Interface realizations
 GameController .up.|> ISteppable
-RobotController .up.|> ISteppable
+AIController .up.|> ISteppable
 SunController .up.|> ISteppable
 Asteroid .up.|> INeighbour
 TeleportGate .up.|> INeighbour
-RobotRecipe ..up.|> IRecipe
-TeleporterRecipe ..up.|> IRecipe
+RobotRecipe .up.|> IRecipe
+TeleporterRecipe .up.|> IRecipe
 Settler .up.|> IStorageCapable
 AbstractCrewmate ...|> IIdentifiable
 INeighbour --|> IIdentifiable
 AbstractBaseResource ..|> IIdentifiable
 PlayerStorage ..|> IIdentifiable
+Settler .up.|> IMiner
+Ufo .up.|> IMiner
 
 ' Inheritance
 Coal -up-|> AbstractBaseResource
 Iron -up-|> AbstractBaseResource
 Uranium -up-|> AbstractBaseResource
 Water -up-|> AbstractBaseResource
-Robot --|> AbstractCrewmate
-Settler --|> AbstractCrewmate
+Robot -up-|> AbstractCrewmate
+Settler -up-|> AbstractCrewmate
+Ufo -up-|> AbstractSpaceship
+AbstractCrewmate -up-|> AbstractSpaceship
 
 ' Association connections
 Asteroid "- homeAsteroid 0..1" -- "- teleporter 0..1" TeleportGate
@@ -227,19 +269,21 @@ TeleportGate "- teleporters 0..2" -- "- homeStorage 1" PlayerStorage
 TeleportGate o-- "- pair 1" TeleportGate
 Settler *-- "- storage 1" PlayerStorage
 
-AbstractCrewmate "- crewmates 0..*" -- "~# onAsteroid 1" Asteroid
+AbstractSpaceship "- spaceships 0..*" -- "~# onAsteroid 1" Asteroid
 Asteroid -- "- neighbouringAsteroids 1..*" Asteroid
 
-SunController o-right- "- asteroids 1..*" Asteroid
-GameController o-left- "- asteroids 1..*" Asteroid
-RobotController o-right- "- robots 1..*" Robot
-GameController o-right- "- settlers 1..*" Settler
+SunController o-- "- asteroids 1..*" Asteroid
+GameController o-- "- asteroids 1..*" Asteroid
+AIController o-- "- robots 0..*" Robot
+AIController o-- "- ufos 0..*" Ufo
+AIController o-- "- teleporters 0..*" TeleportGate
+GameController o-- "- settlers 1..*" Settler
 
 Asteroid o-- "- resource 0..1" AbstractBaseResource
-BillOfMaterial o-left- "- resources 0..*" AbstractBaseResource
+BillOfMaterial o-- "- resources 0..*" AbstractBaseResource
 PlayerStorage o-- "~# storedMaterials 0..*" AbstractBaseResource
 
-TeleporterRecipe ..down.> BillOfMaterial
-RobotRecipe ..down.> BillOfMaterial
+TeleporterRecipe ..> BillOfMaterial
+RobotRecipe ..> BillOfMaterial
 
 @enduml

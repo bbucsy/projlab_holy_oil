@@ -6,14 +6,14 @@ title "Asteroid explodes"
 actor Controller as C
 
 participant "a: Asteroid" as a
-participant "c: AbstractCrewmate" as r
+participant "c: AbstractSpaceship" as r
 participant ": SunController" as sun
 participant ": GameController" as game
 participant "teleporter: TeleportGate" as tport
 
 C -> a ++ : Explode()
 
-loop for all AbstractCrewmate c in crewmates
+loop for all AbstractSpaceship c in spaceships
     a -> r ++ : ReactToAsteroidExplosion()
     r --> a --
 end

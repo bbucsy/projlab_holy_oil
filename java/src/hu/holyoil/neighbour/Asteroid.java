@@ -5,11 +5,13 @@ import hu.holyoil.Main;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.AbstractSpaceship;
+import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
+import hu.holyoil.storage.PlayerStorage;
 
 import java.util.*;
 
@@ -132,6 +134,26 @@ public class Asteroid implements INeighbour {
     }
 
     /**
+     * Mozgatja a kapott teleportert erre az aszteroidára.
+     * @param comingTeleporter ide a mozgást elvégezni készülő Spaceship
+     */
+    public void ReactToMove(TeleportGate comingTeleporter){
+        Logger.Log(this, "Reacting to coming teleporter: " + Logger.GetName(comingTeleporter));
+
+        if (teleporter == null) {
+            comingTeleporter.GetHomeAsteroid().RemoveTeleporter();
+            SetTeleporter(comingTeleporter);
+            comingTeleporter.SetHomeAsteroid(this);
+        }
+        else {
+            Logger.Log(this, "I cannot accept teleport, I already have one.");
+            Logger.Return();
+        }
+
+        Logger.Return();
+    }
+
+    /**
      * A telepes megpróbál lerakni egy nyersanyagot az aszteroida magjába
      * <p>
      *     Ez csak akkor végrehajtható ha a kéreg teljesen ki lett fúrva ÉS az aszteroida üres.
@@ -190,22 +212,46 @@ public class Asteroid implements INeighbour {
     }
 
     /**
-     * Lekezeli amikor egy telepes megpróbálja kibányászni a magját.
+     * Lekezeli amikor egy ufo megpróbálja kibányászni a magját.
      * <p>
      *     Ha az aszteroida magja nem üres ÉS már teljesen ki van fúrva a kérge (tehát a vastagsága 0), meghívja a nyersanyag reagáló függvényét.
-     *     A telepes tárolóját és az aszteroida magját innentől a Resource kezeli.
+     *     Az aszteroida magját innentől a Resource kezeli.
      * </p>
-     * @param iStorageCapable a bányászni készülő telepes
+     * @param iMiner a bányászni készülő ufo
      */
-    public void ReactToMineBy(IStorageCapable iStorageCapable) {
+    public void ReactToMineBy(IMiner iMiner) {
 
-        Logger.Log(this, "Reacting to mine by " + Logger.GetName(iStorageCapable));
+        Logger.Log(this, "Reacting to mine by " + Logger.GetName(iMiner));
         Logger.Return();
 
         if (resource != null && numOfLayersRemaining == 0) {
 
             Logger.Log(this, "Resource reacting to mine");
-            resource.ReactToMine(this, iStorageCapable);
+            resource.ReactToMine(this, iMiner);
+            Logger.Return();
+
+        }
+
+    }
+
+    /**
+     * Lekezeli amikor egy telepes megpróbálja kibányászni a magját.
+     * <p>
+     *     Ha az aszteroida magja nem üres ÉS már teljesen ki van fúrva a kérge (tehát a vastagsága 0), meghívja a nyersanyag reagáló függvényét.
+     *     A telepes tárolóját és az aszteroida magját innentől a Resource kezeli.
+     * </p>
+     * @param iMiner a bányászni készülő telepes
+     * @param storage a telepes tárolója
+     */
+    public void ReactToMineBy(IMiner iMiner, PlayerStorage storage) {
+
+        Logger.Log(this, "Reacting to mine by " + Logger.GetName(iMiner));
+        Logger.Return();
+
+        if (resource != null && numOfLayersRemaining == 0) {
+
+            Logger.Log(this, "Resource reacting to mine");
+            resource.ReactToMine(this, iMiner, storage);
             Logger.Return();
 
         }
@@ -246,6 +292,10 @@ public class Asteroid implements INeighbour {
             KillAllSpaceships();
             Logger.Return();
 
+        }
+
+        if (teleporter != null) {
+            teleporter.ReactToSunstorm();
         }
 
     }
@@ -311,7 +361,7 @@ public class Asteroid implements INeighbour {
      * <p>
      *     Ez többek között azért kell, hogy amikor a robot alatt felrobban az aszteroida és átmenne egy teleporteren, csak akkor tehesse azt meg, ha annak a teleporternek van aktív párja.
      * </p>
-     * @return
+     * @return véletlen szomszéd
      */
     public INeighbour GetRandomNeighbour() {
         Logger.Log(this, "Returning random neighbour");

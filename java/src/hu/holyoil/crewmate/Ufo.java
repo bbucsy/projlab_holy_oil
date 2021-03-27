@@ -59,7 +59,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
     @Override
     public void Mine() {
         Logger.Log(this, "Mining");
-        onAsteroid.SetResource(null);
+        onAsteroid.ReactToMineBy(this);
         Logger.Return();
     }
 }

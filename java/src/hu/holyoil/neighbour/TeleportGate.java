@@ -1,9 +1,14 @@
 package hu.holyoil.neighbour;
 
+import hu.holyoil.Main;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
+import sun.rmi.runtime.Log;
+
+import java.util.Random;
 
 /**
  * Teleportereket leíró osztály.
@@ -18,6 +23,8 @@ public class TeleportGate implements INeighbour {
         pair = null;
         homeAsteroid = null;
         homeStorage = null;
+        isCrazy = false;
+        id = Main.GetId();
     }
 
     /**
@@ -52,7 +59,10 @@ public class TeleportGate implements INeighbour {
      * Az aszteroida amin a teleporter tartózkodik.
      */
     private Asteroid homeAsteroid;
-
+    /**
+     * Mutatja érte-e már napvihar a teleportert.
+     */
+    private boolean isCrazy;
     /**
      * Visszaadja a teleporter párját.
      * @return a teleporter párja
@@ -128,11 +138,9 @@ public class TeleportGate implements INeighbour {
      * @param newPair a teleporter párja
      */
     public void SetPair(TeleportGate newPair) {
-
         Logger.Log(this, "Setting my pair to " + Logger.GetName(newPair));
         pair = newPair;
         Logger.Return();
-
     }
 
     /**
@@ -144,12 +152,10 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void Explode() {
-
         Logger.Log(this, "Exploding");
         pair.ExplodePair();
         ActuallyExplode();
         Logger.Return();
-
     }
 
     /**
@@ -178,8 +184,35 @@ public class TeleportGate implements INeighbour {
             // this line is needed for idea to stfu
             if (homeAsteroid != null) {
                 homeAsteroid.RemoveTeleporter();
+                AIController.GetInstance().RemoveTeleportGate(this);
             }
         }
+    }
+
+    /**
+     * Napvihar hatására a teleporter megkergül, és innentől a játék végéig kerge marad.
+     */
+    @Override
+    public void ReactToSunstorm() {
+        Logger.Log(this, "Reacting to Sunstorm");
+        isCrazy = true;
+        Logger.Return();
+    }
+    /**
+     * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere, ha meg van kergülve.
+     */
+    public void Move(Asteroid asteroid){
+        Logger.Log(this, "Teleporter Moving to" + Logger.GetName(asteroid));
+
+        if (isCrazy && homeAsteroid.GetNeighbours().contains(asteroid)) {
+            asteroid.ReactToMove(this);
+        }
+        else {
+            Logger.Log(this, "Cannot move to " + Logger.GetName(asteroid) + ", it is not a neighbour of my asteroid or i am not even crazy");
+            Logger.Return();
+        }
+
+        Logger.Return();
     }
 
 }

@@ -2,7 +2,7 @@
 
 skinparam SequenceLifeLineBackgroundColor LightYellow
 
-title Uranium gets mined
+title Uranium gets mined by Settler
 
 actor Player as PLAYER
 
@@ -15,11 +15,11 @@ participant "bill: BillOfMaterial" as bill
 
 PLAYER -> s ++: Mine()
 
-    s-->a ++: ReactToMineBy(s)
+    s-->a ++: ReactToMineBy(s, s.storage)
 
         alt resource is NOT NULL && numOfLayersRemaining == 0
 
-            a -> u ++: ReactToMine(onAsteroid, s)
+            a -> u ++: ReactToMine(onAsteroid, s, s.storage)
 
                 u -> st ++: GetSumResource()
                 st --> u --: sumResources

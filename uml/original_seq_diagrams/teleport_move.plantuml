@@ -1,0 +1,40 @@
+@startuml tpmoves
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title TeleportGate moves to Asteroid
+
+actor Controller as CTR
+
+participant "t: TeleportGate" as tp
+participant "homeAsteroid: Asteroid" as home
+participant "a: Asteroid" as a
+
+CTR -> tp ++ : Move(a)
+
+tp -> home ++ : GetNeighbours()
+home --> tp -- : neighbours
+
+alt isCrazy AND neighbours contains a
+
+    tp -> a ++ : ReactToMove(t)
+
+        alt a doesn't have teleporter
+
+            a -> home ++ : RemoveTeleporter(t)
+            home --> a --
+
+            a -> a ++ : SetTeleporter(t)
+            deactivate a
+
+            a -> tp ++ : SetHomeAsteroid(a)
+            tp --> a --
+
+        end
+
+    a --> tp --
+
+end
+
+tp --> CTR --
+
+@enduml

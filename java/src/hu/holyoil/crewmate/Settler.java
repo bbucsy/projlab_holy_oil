@@ -1,6 +1,7 @@
 package hu.holyoil.crewmate;
 
 import hu.holyoil.Main;
+import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
@@ -118,7 +119,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void Mine() {
         Logger.Log(this, "Mining");
-        onAsteroid.ReactToMineBy(this);
+        onAsteroid.ReactToMineBy(this, storage);
         Logger.Return();
     }
 
@@ -155,6 +156,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
             onAsteroid.SetTeleporter(storageTeleporter);
 
             storage.RemoveTeleportGate(storageTeleporter);
+            AIController.GetInstance().AddTeleportGate(storageTeleporter);
 
         }
 

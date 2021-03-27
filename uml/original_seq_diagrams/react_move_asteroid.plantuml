@@ -3,16 +3,16 @@ skinparam SequenceLifeLineBackgroundColor LightYellow
 
 title "Moving to asteroid"
 
-actor "c: AbstractCrewmate" as crewmate
+actor "c: AbstractSpaceship" as crewmate
 participant "neighbour: Asteroid" as neighbour
 participant "from: Asteroid" as from
 
 crewmate -> neighbour ++ : ReactToMove (from, c)
 
-    neighbour -> neighbour ++ : AddCrewmate(c)
+    neighbour -> neighbour ++ : AddSpaceship(c)
     deactivate neighbour
 
-    neighbour -> from ++ : RemoveCrewmate(c)
+    neighbour -> from ++ : RemoveSpaceship(c)
     from --> neighbour --
 
     neighbour -> crewmate ++ : SetOnAsteroid(neighbour)

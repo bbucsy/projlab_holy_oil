@@ -5,6 +5,9 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Az UFO mozog egy aszteroidáról a másikra.
+ */
 public class UfoMoves extends TestCase {
     Ufo ufo;
     Asteroid target;
@@ -22,7 +25,6 @@ public class UfoMoves extends TestCase {
         Logger.RegisterObject(home, "home: Asteroid");
         Logger.RegisterObject(target, "target: Asteroid");
 
-        home.AddSpaceship(ufo);
         home.AddNeighbourAsteroid(target);
         target.AddNeighbourAsteroid(home);
 

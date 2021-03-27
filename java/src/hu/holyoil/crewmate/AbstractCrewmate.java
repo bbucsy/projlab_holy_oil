@@ -31,5 +31,4 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
         onAsteroid.Discover();
         Logger.Return();
     }
-    
 }

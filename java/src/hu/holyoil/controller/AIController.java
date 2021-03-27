@@ -2,6 +2,7 @@ package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
+import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
@@ -24,7 +25,10 @@ public class AIController implements ISteppable {
      * A pályán található összes "élő" UFO
      */
     private List<Ufo> ufos;
-
+    /**
+     * Az pályán található összes teleporter.
+     */
+    private List<TeleportGate> teleporters;
     /**
      * Minden robot végrehajt egy lépést
      * <p>Jelenleg nincs realizálva, teszteléshez nem szükséges.</p>
@@ -53,7 +57,15 @@ public class AIController implements ISteppable {
         ufos.add(ufo);
         Logger.Return();
     }
-
+    /**
+     * Hozzáad egy teleportert a játékhoz.
+     * @param teleportGate Hozzáadja a teleporters tagváltozóhoz
+     */
+    public void AddTeleportGate(TeleportGate teleportGate)  {
+        Logger.Log(this,"Adding teleporter <" +  Logger.GetName(teleportGate)+ ">");
+        teleporters.add(teleportGate);
+        Logger.Return();
+    }
     /**
      * Töröl egy robotot a játékból
      * @param robot törli a robotot a robots tagváltozóból
@@ -70,6 +82,15 @@ public class AIController implements ISteppable {
     public void RemoveUfo(Ufo ufo)  {
         Logger.Log(this,"Removing ufo <" +  Logger.GetName(ufo)+ ">");
         ufos.remove(ufo);
+        Logger.Return();
+    }
+    /**
+     * Töröl egy teleportert a játékból
+     * @param teleportGate törli a teleportert a teleporters tagváltozóból
+     */
+    public void RemoveTeleportGate(TeleportGate teleportGate)  {
+        Logger.Log(this,"Removing teleporter <" +  Logger.GetName(teleportGate)+ ">");
+        teleporters.remove(teleportGate);
         Logger.Return();
     }
     /**
@@ -90,11 +111,40 @@ public class AIController implements ISteppable {
         // todo
         Logger.Return();
     }
-    public void CreateUfos(){
-        Logger.Log(this, "Creating UFOs at the beginning of the game");
+    /**
+     * Kezeli egy teleporter működését
+     * @param teleportGate az adott teleporter
+     */
+    public void HandleTeleportGate(TeleportGate teleportGate)  {
+        Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
         // todo
+
+        // nice idea for this logic
+        /*int chosenIndex= new Random().nextInt(neighbouringAsteroids.size());
+        int start = chosenIndex;
+        boolean canMove = true;
+        while(canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter()!=null){
+            if(chosenIndex==neighbouringAsteroids.size()-1){
+                chosenIndex=-1;
+            }
+            chosenIndex++;
+            if(chosenIndex==start){
+                canMove = false;
+            }
+        }
+        if(canMove){
+            neighbouringAsteroids.get(chosenIndex).SetTeleporter(teleportGate);
+            teleportGate.SetHomeAsteroid(neighbouringAsteroids.get(chosenIndex));
+            teleporter=null;
+        }
+        else {
+            Logger.Log(this, "All neighbours already have a teleporter, cannot move");
+            Logger.Return();
+        }*/
+
         Logger.Return();
     }
+
     /**
      * Singleton osztályra lehet vele hivatkozni
      * @return visszaad egy instance-et
@@ -114,6 +164,7 @@ public class AIController implements ISteppable {
     private AIController() {
         robots = new ArrayList<>();
         ufos = new ArrayList<>();
+        teleporters = new ArrayList<>();
     }
 
 }

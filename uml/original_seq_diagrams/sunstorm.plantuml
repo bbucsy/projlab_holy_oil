@@ -1,13 +1,14 @@
 @startuml
 skinparam SequenceLifeLineBackgroundColor LightYellow
 
-title "Sun kills crewmates who cannot hide"
+title "Sunstorm starts"
 
 actor Controller as C
 
 participant ": SunController" as sun
 participant "a: Asteroid" as a
-participant "c: AbstractCrewmate" as c
+participant "s: AbstractSpaceship" as c
+participant "teleporter: TeleportGate" as t
 
 C -> sun ++ : StartSunstorm()
 
@@ -17,9 +18,9 @@ C -> sun ++ : StartSunstorm()
 
             alt numOfLayersRemaining > 0 OR resource isn't null
 
-                a -> a ++ : KillAllCrewmates()
+                a -> a ++ : KillAllSpaceships()
 
-                    loop for all Crewmate c in crewmates
+                    loop for all AbstractSpaceship s in spaceships
 
                         a -> c ++ : Die()
                         c --> a --
@@ -27,6 +28,17 @@ C -> sun ++ : StartSunstorm()
                     end
 
                 deactivate a
+
+            end
+
+            alt teleporter isn't null
+
+                a -> t ++ : ReactToSunstorm()
+
+                    t -> t ++ : isCrazy = true
+                    deactivate t
+
+                t --> a --
 
             end
 

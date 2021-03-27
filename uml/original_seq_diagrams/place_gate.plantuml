@@ -8,6 +8,7 @@ participant "s: Settler" as settler
 participant "ps: PlayerStorage" as storage
 participant "a: Asteroid" as asteroid
 participant "t1: TeleportGate" as t1
+participant ": AIController" as ai
 
 player -> settler ++: PlaceTeleporter()
 
@@ -27,6 +28,9 @@ player -> settler ++: PlaceTeleporter()
 
         settler -> storage ++: RemoveTeleportGate(t1)
         storage --> settler --
+
+        settler -> ai ++: AddTeleportGate(t1)
+        ai --> settler --
 
     end
 

@@ -13,7 +13,7 @@ participant "bill: BillOfMaterial" as bill
 participant "storage: PlayerStorage" as storage
 participant "onAsteroid: Asteroid" as onAsteroid
 participant "r: Robot" as robot
-participant ": RobotController" as controller
+participant ": AIController" as controller
 
 US -> settler ++ : CraftRobot()
 settler -> robotRecipe ++ : Craft(s, onAsteroid)
@@ -43,7 +43,7 @@ alt hasEnough
 
     robotRecipe -> robot ** : ctor()
 
-    robotRecipe -> onAsteroid ++ : AddCrewmate(robot)
+    robotRecipe -> onAsteroid ++ : AddSpaceship(robot)
     onAsteroid --> robotRecipe --
 
     robotRecipe -> robot ++ : Move(onAsteroid)

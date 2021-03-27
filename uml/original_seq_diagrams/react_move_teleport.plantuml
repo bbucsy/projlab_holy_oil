@@ -3,7 +3,7 @@ skinparam SequenceLifeLineBackgroundColor LightYellow
 
 title "Moving through TeleportGate"
 
-actor "c: AbstractCrewmate" as crewmate
+actor "c: AbstractSpaceship" as crewmate
 participant "neighbour: TeleportGate" as neighbour
 participant "pair: TeleportGate" as pair
 participant "from: Asteroid" as from

@@ -2,6 +2,7 @@ package hu.holyoil.resource;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -26,21 +27,37 @@ public abstract class AbstractBaseResource implements IIdentifiable {
     }
 
     /**
-     * Az aszteroidából való bányászást kezeli.
+     * Az aszteroidából való bányászást kezeli tároló nélküli bányász esetén.
+     * <p>
+     *     Az aszteroida magja üressé válik.
+     * </p>
+     * @param asteroid a nyersanyagot tartalmazó aszteroida
+     * @param iMiner a bányászást megkísérlő ufó
+     */
+    public void ReactToMine(Asteroid asteroid, IMiner iMiner) {
+        Logger.Log(this,"ReactingToMine by " + Logger.GetName(iMiner));
+
+        asteroid.SetResource(null);
+
+        Logger.Return();
+    }
+
+    /**
+     * Az aszteroidából való bányászást kezeli tárolóval rendelkező bányász esetén.
      * <p>
      *     Létrehoz egy új billt, ehhez hozzáadja magát. Elkéri a bányász inventoryját. Ha még nincs tele az inventory hozzáadja a billt.
      *     Az aszteroida magja üressé válik.
      * </p>
      * @param asteroid a nyersanyagot tartalmazó aszteroida
-     * @param iStorageCapable a bányászást megkísérlő telepes
+     * @param iMiner a bányászást megkísérlő telepes
+     * @param storage a telepes tárolója
      */
-    public void ReactToMine(Asteroid asteroid, IStorageCapable iStorageCapable) {
-        Logger.Log(this,"ReactingToMine by " + Logger.GetName(iStorageCapable));
+    public void ReactToMine(Asteroid asteroid, IMiner iMiner, PlayerStorage storage) {
+        Logger.Log(this,"ReactingToMine by " + Logger.GetName(iMiner));
 
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Logger.RegisterObject(billOfMaterial, "billOfMaterial: BillOfMaterial");
         billOfMaterial.AddMaterial(this);
-        PlayerStorage storage = iStorageCapable.GetStorage();
         if (storage.GetSumResources() < 10) {
             storage.AddBill(
                     billOfMaterial

@@ -15,7 +15,7 @@ participant "storage: PlayerStorage" as storage
 
 US -> settler ++: PlaceResource(uranium)
 
-settler->onAsteroid ++: SetResource(s, uranium)
+settler->onAsteroid ++: PutResource(s, uranium)
 
 alt resource is NULL && numOfLayersRemaining == 0
 

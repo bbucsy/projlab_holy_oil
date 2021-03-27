@@ -1,0 +1,36 @@
+@startuml
+
+title Teleporter Moves
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+actor Controller as contr
+participant "teleporter: TeleportGate" as tp
+participant "homeAsteroid: Asteroid" as home
+participant "neighbour: Asteroid" as neigh
+
+contr -> tp ++: Move()
+
+alt is crazy
+    tp -> home ++: ReactToTeleporterMoving()
+
+    loop has no teleporter
+        home -> neigh ++: GetTeleporter()
+        neigh --> home --
+    end
+
+    alt found neighbour with no teleporter
+        home -> neigh ++: SetTeleporter(teleporter)
+        neigh --> home --
+        home -> tp ++: SetHomeAsteroid(neigh)
+        tp --> home --
+        home -> home ++: SetTeleporter(null)
+        home --
+
+    end
+
+    home --> tp --
+end
+
+tp --> contr --
+@enduml
