@@ -8,6 +8,8 @@ java/.idea/**/usage.statistics.xml
 java/.idea/**/dictionaries
 java/.idea/**/shelf
 java/.sources
+out/
+uml/out
 
 # Generated files
 java/.idea/**/contentModel.xml
