@@ -43,7 +43,7 @@ alt hasEnough
 
     robotRecipe -> robot ** : ctor()
 
-    robotRecipe -> onAsteroid ++ : AddCrewmate(robot)
+    robotRecipe -> onAsteroid ++ : AddSpaceship(robot)
     onAsteroid --> robotRecipe --
 
     robotRecipe -> robot ++ : Move(onAsteroid)
