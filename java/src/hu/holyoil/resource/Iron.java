@@ -20,7 +20,7 @@ public class Iron extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "IRON: " + id;
+        return "IRON " + id;
     }
 
     /**

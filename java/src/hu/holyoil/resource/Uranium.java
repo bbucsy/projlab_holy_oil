@@ -29,7 +29,7 @@ public class Uranium extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "URANIUM: " + id + " " + health;
+        return "URANIUM " + id + " " + health;
     }
 
     /**
