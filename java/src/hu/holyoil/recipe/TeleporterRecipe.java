@@ -100,14 +100,6 @@ public class TeleporterRecipe implements IRecipe {
             Logger.Log(this, "Adding teleportgates to storage");
             storage.AddTeleportGatePair(t1, t2);
             Logger.Return();
-
-            Logger.Log(this, "Registering " + Logger.GetName(t1) + " at the AIcontroller");
-            AIController.GetInstance().AddTeleportGate(t1);
-            Logger.Return();
-
-            Logger.Log(this, "Registering " + Logger.GetName(t2) + " at the AIcontroller");
-            AIController.GetInstance().AddTeleportGate(t2);
-            Logger.Return();
         }
     }
 

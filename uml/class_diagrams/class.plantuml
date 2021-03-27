@@ -145,6 +145,7 @@ class Asteroid {
   + ReactToDrill()
   + ReactToMineBy(m: IMiner)
   + ReactToMineBy(m: IMiner, s: PlayerStorage)
+  + ReactToMove(t: TeleportGate)
   + ReactToMove(from: Asteroid, s: AbstractSpaceship)
   + ReactToSunNearby()
   + ReactToSunstorm()
@@ -162,7 +163,9 @@ class TeleportGate {
   + GetHomeAsteroid(): Asteroid
   + GetHomeStorage(): PlayerStorage
   + GetPair(): TeleportGate
+  + Move(a: Asteroid)
   + ReactToMove(from: Asteroid, c: AbstractCrewmate)
+  + ReactToSunstorm()
   + SetHomeAsteroid(a: Asteroid)
   + SetHomeStorage(s: PlayerStorage)
   + SetPair(t: TeleportGate)

@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
@@ -144,6 +145,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
             onAsteroid.SetTeleporter(storageTeleporter);
 
             storage.RemoveTeleportGate(storageTeleporter);
+            AIController.GetInstance().AddTeleportGate(storageTeleporter);
 
         }
 

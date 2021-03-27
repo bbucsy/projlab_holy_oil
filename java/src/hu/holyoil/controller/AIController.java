@@ -118,6 +118,30 @@ public class AIController implements ISteppable {
     public void HandleTeleportGate(TeleportGate teleportGate)  {
         Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
         // todo
+
+        // nice idea for this logic
+        /*int chosenIndex= new Random().nextInt(neighbouringAsteroids.size());
+        int start = chosenIndex;
+        boolean canMove = true;
+        while(canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter()!=null){
+            if(chosenIndex==neighbouringAsteroids.size()-1){
+                chosenIndex=-1;
+            }
+            chosenIndex++;
+            if(chosenIndex==start){
+                canMove = false;
+            }
+        }
+        if(canMove){
+            neighbouringAsteroids.get(chosenIndex).SetTeleporter(teleportGate);
+            teleportGate.SetHomeAsteroid(neighbouringAsteroids.get(chosenIndex));
+            teleporter=null;
+        }
+        else {
+            Logger.Log(this, "All neighbours already have a teleporter, cannot move");
+            Logger.Return();
+        }*/
+
         Logger.Return();
     }
 

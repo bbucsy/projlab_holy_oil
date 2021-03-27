@@ -157,9 +157,9 @@ public class TeleportGate implements INeighbour {
             // this line is needed for idea to stfu
             if (homeAsteroid != null) {
                 homeAsteroid.RemoveTeleporter();
+                AIController.GetInstance().RemoveTeleportGate(this);
             }
         }
-        AIController.GetInstance().RemoveTeleportGate(this);
     }
 
     /**
@@ -174,11 +174,16 @@ public class TeleportGate implements INeighbour {
     /**
      * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere, ha meg van kergülve.
      */
-    public void Move(){
-        Logger.Log(this, "Teleporter Moving");
+    public void Move(Asteroid asteroid){
+        Logger.Log(this, "Teleporter Moving to" + Logger.GetName(asteroid));
 
-        if(isCrazy)
-            homeAsteroid.ReactToTeleporterMoving();
+        if (isCrazy && homeAsteroid.GetNeighbours().contains(asteroid)) {
+            asteroid.ReactToMove(this);
+        }
+        else {
+            Logger.Log(this, "Cannot move to " + Logger.GetName(asteroid) + ", it is not a neighbour of my asteroid or i am not even crazy");
+            Logger.Return();
+        }
 
         Logger.Return();
     }
