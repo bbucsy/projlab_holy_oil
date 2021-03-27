@@ -328,7 +328,7 @@ public class Asteroid implements INeighbour {
      * <p>
      *     Ez többek között azért kell, hogy amikor a robot alatt felrobban az aszteroida és átmenne egy teleporteren, csak akkor tehesse azt meg, ha annak a teleporternek van aktív párja.
      * </p>
-     * @return
+     * @return véletlen szomszéd
      */
     public INeighbour GetRandomNeighbour() {
         Logger.Log(this, "Returning random neighbour");
@@ -372,7 +372,6 @@ public class Asteroid implements INeighbour {
 
     /**
      * Visszaadja a szomszédok listáját.
-     * @return a neighbouringAsteroids lista
      * @return a neighbouringAsteroids lista
      */
     public List<Asteroid> GetNeighbours() {
