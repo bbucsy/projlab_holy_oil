@@ -20,4 +20,15 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
         onAsteroid.ReactToDrill();
         Logger.Return();
     }
+    /**
+     * Beállítja az aszteroidát amin éppen van az űrhajó, és felfedezi azt.
+     * @param asteroid A beállítandó aszteroida
+     */
+    @Override
+    public void SetOnAsteroid(Asteroid asteroid) {
+        Logger.Log(this, "Setting onAsteroid to " + Logger.GetName(asteroid));
+        onAsteroid = asteroid;
+        onAsteroid.Discover();
+        Logger.Return();
+    }
 }

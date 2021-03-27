@@ -22,7 +22,7 @@ public class TeleporterRecipe implements IRecipe {
     /**
      * megvalósítja a teleportkapuk gyártását
      * <p>
-     *     a teleportkapukat csak párosával lehet olyan telepesnek létrehoznia akinél nincs egy teleporter se
+     *     a teleportkapukat csak párosával lehet olyan telepesnek létrehoznia akinél maximum egy teleporter van
      * </p>
      * <p>létrehozza a szükséges nyersanyagokat, majd ezeket beleteszi a billbe.
      *         Elkéri a játékos tárolóját, és ellenőrzi megvan-e minden a billről
@@ -31,7 +31,7 @@ public class TeleporterRecipe implements IRecipe {
      *     Ellenőrzi a telepes tárolóját
      * </p>
      * <p>
-     *     Ha nincs nála egy teleporter se ÉS van nála elég anyag akkor:
+     *     Ha van hely még kettő teleporternek ÉS van nála elég anyag akkor:
      *
      * eltávolítja a felhasználandó nyersanyagokat,
      * létrehoz két teleporter kaput,
@@ -79,7 +79,7 @@ public class TeleporterRecipe implements IRecipe {
         PlayerStorage storage = iStorageCapable.GetStorage();
         Logger.Return();
 
-        if (storage.HasEnoughOf(billOfMaterial) && storage.GetOneTeleporter() == null) {
+        if (storage.HasEnoughOf(billOfMaterial) && storage.GetTeleporterCount() <= 1) {
 
             Logger.Log(this, "Removing bill");
             storage.RemoveBill(billOfMaterial);

@@ -3,8 +3,8 @@ package hu.holyoil.controller;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A nap viselkedését irányító singleton kontroller osztály. Körönként lép, ezért implementálja az ISteppable interfacet
@@ -54,13 +54,43 @@ public class SunController implements ISteppable {
     }
 
     /**
-     * Amikor a turnsUntilNextSunstorm számláló eléri a 0-t elindít egy napvihart.
-     * <p>A pályán található összes aszteroida reagál rá.</p>
+     * Amikor a turnsUntilNextSunstorm számláló eléri a 0-t, ez a metódus hívodik meg.
+     * <p>Hatást gyakorol az öv aszteroidáinak nagyjából egyharmadára.</p>
      */
     public void StartSunstorm()  {
-       Logger.Log(this,"Starting sunstorm");
-       asteroids.forEach(Asteroid::ReactToSunstorm);
-       Logger.Return();
+        Logger.Log(this,"Starting sunstorm");
+
+        /* Collecting the asteroids to affect */
+        Set<Asteroid> chosenAsteroids = new HashSet<>();
+        Queue<Asteroid> traversingQueue = new LinkedList<>();
+
+        Random rand = new Random();
+        Asteroid startingAsteroid = asteroids.get(rand.nextInt(asteroids.size()));
+        traversingQueue.add(startingAsteroid);
+        chosenAsteroids.add(startingAsteroid);
+
+        while (chosenAsteroids.size() < asteroids.size() / 3 && !traversingQueue.isEmpty()) {
+            Asteroid currentAsteroid = traversingQueue.remove();
+
+            List<Asteroid> untraversedNeighbours = currentAsteroid.GetNeighbours()
+                   .stream()
+                   .filter(item -> !chosenAsteroids.contains(item))
+                   .collect(Collectors.toList());
+
+            traversingQueue.addAll(untraversedNeighbours);
+
+            for (Asteroid item : untraversedNeighbours) {
+                if (chosenAsteroids.size() < asteroids.size() / 3)
+                    chosenAsteroids.add(item);
+                else
+                    break;
+            }
+        }
+
+        /* Calling reaction on collected asteroids */
+        chosenAsteroids.forEach(Asteroid::ReactToSunstorm);
+
+        Logger.Return();
     }
 
     /**

@@ -1,11 +1,18 @@
 @startuml classdiagram
 
+skinparam ClassAttributeIconSize 0
+skinparam CircledCharacterRadius 0
+skinparam CircledCharacterFontSize 0
+skinparam ClassFontStyle bold
+
+
 ' Storage
 class PlayerStorage {
   + AddBill(b: BillOfMaterial)
   + AddTeleportGatePair(t1: TeleportGate, t2: TeleportGate)
   + GetOneTeleporter()
   + GetSumResources(): int
+  + GetTeleporterCount(): int
   + HasEnoughOf(b: BillOfMaterial): bool
   + PlayerStorage()
   + RemoveBill(b: BillOfMaterial)
@@ -102,7 +109,7 @@ class Asteroid {
   + AddNeighbourAsteroid(a: Asteroid)
   + DecNumOfLayersRemaining()
   + Explode()
-  + GetNeighbours(): INeighbour[]
+  + GetNeighbours(): Asteroid[]
   + GetRandomNeighbour(): INeighbour
   + GetResource(): AbstractBaseResource
   + GetTeleporter(): TeleportGate
@@ -151,6 +158,7 @@ class Iron {
 }
 
 class Uranium {
+  - health : int
   + IsSameType(r: AbstractBaseResource): bool
   + ReactToSunNearby(a: Asteroid)
 }

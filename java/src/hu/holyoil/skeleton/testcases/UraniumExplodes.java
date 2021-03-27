@@ -15,6 +15,7 @@ import hu.holyoil.skeleton.TestFramework;
  *                          25. oldalon a KOMMUNIKÁCIÓS diagram
  * Elágazás: 0 vagy több réteg van még hátra a magig? (Az aszteroida csak akkor robban fel ha ki van fúrva teljesen.)
  *           Napközelben van az aszteroida?
+             Hány élete van az uránnak?
  */
 public class UraniumExplodes extends TestCase {
 
@@ -44,7 +45,7 @@ public class UraniumExplodes extends TestCase {
         GameController.GetInstance().AddAsteroid(asteroid);
 
         asteroid.SetIsNearbySun(Logger.GetBoolean(this, "Is this asteroid nearby sun?"));
-
+        uranium.SetHealth(Logger.GetInteger(this,"How many health does the uranium have?"));
     }
 
     @Override
