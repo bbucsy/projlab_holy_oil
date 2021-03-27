@@ -1,6 +1,7 @@
 package hu.holyoil.resource;
 
 
+import hu.holyoil.Main;
 import hu.holyoil.skeleton.Logger;
 
 /**
@@ -13,6 +14,15 @@ public class Coal extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Coal() {
+        id = Main.GetId();
+    }
+
+    /**
+     * Kiírja a szenet emberileg olvasható formátumban.
+     * */
+    @Override
+    public String toString() {
+        return "COAL: " + id;
     }
 
     /**

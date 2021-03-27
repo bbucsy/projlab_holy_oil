@@ -1,5 +1,6 @@
 package hu.holyoil.resource;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -15,12 +16,20 @@ public class Uranium extends AbstractBaseResource {
      */
     private int health;
 
-
     /**
      * Paraméter nélküli konstruktor.
      */
     public Uranium() {
         health = 3;
+        id = Main.GetId();
+    }
+
+    /**
+     * Kiírja az uránt emberileg olvasható formátumban.
+     * */
+    @Override
+    public String toString() {
+        return "URANIUM: " + id + " " + health;
     }
 
     /**

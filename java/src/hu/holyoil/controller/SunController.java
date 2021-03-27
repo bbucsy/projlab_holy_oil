@@ -1,5 +1,7 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.IIdentifiable;
+import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -10,11 +12,29 @@ import java.util.stream.Collectors;
  * A nap viselkedését irányító singleton kontroller osztály. Körönként lép, ezért implementálja az ISteppable interfacet
  * <p>A PROJEKT EZEN FÁZISÁBAN MÉG NINCS KÉSZ, A TESZTELÉSHEZ NEM SZÜKSÉGES. Ennek megfelelően a dokumentáció is csak felszínes megértést nyújt, amennyi a tesztekhez kellhet.</p>
  */
-public class SunController implements ISteppable {
+public class SunController implements ISteppable, IIdentifiable {
     /**
      * A singleton osztályra ezzel lehet hivatkozni
      */
     private static SunController sunController;
+
+    /**
+     * A kontroller egyedi azonosítója
+     * */
+    private int id;
+
+    /**
+     * Visszaadja a kontorller egyedi azonosítóját
+     * */
+    public int GetId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "SUNCONTROLLER " + id + " " + turnsUntilNextSunstorm;
+    }
+
     /**
      * Pseudo random szám, ami a következő napviharig hátralévő köröket számolja
      * <p>körönként csökken,napvihar után újra sorsolódik</p>
@@ -116,6 +136,7 @@ public class SunController implements ISteppable {
     private SunController() {
         turnsUntilNextSunstorm = 100;
         asteroids = new ArrayList<>();
+        id = Main.GetId();
     }
 
 }

@@ -5,9 +5,10 @@ skinparam CircledCharacterRadius 0
 skinparam CircledCharacterFontSize 0
 skinparam ClassFontStyle bold
 
-
 ' Storage
 class PlayerStorage {
+  - id: int
+  + GetId(): int
   + AddBill(b: BillOfMaterial)
   + AddTeleportGatePair(t1: TeleportGate, t2: TeleportGate)
   + GetOneTeleporter()
@@ -51,6 +52,8 @@ class RobotController << singleton >> {
 
 class SunController << singleton >> {
   - turnsUntilNextSunstorm : int
+  - id: int
+  + GetId(): int
   + AddAsteroid(a: Asteroid)
   + RemoveAsteroid(a: Asteroid)
   + StartSunstorm()
@@ -76,6 +79,8 @@ interface IStorageCapable {
 }
 
 class Robot {
+  - id: int
+  + GetId(): int
   + Die()
   + ReactToAsteroidExplosion()
   + Robot(start: Asteroid)
@@ -83,6 +88,8 @@ class Robot {
 }
 
 class Settler {
+  - id: int
+  + GetId(): int
   + CraftRobot()
   + CraftTeleportGate()
   + Die()
@@ -105,6 +112,8 @@ class Asteroid {
   - isDiscovered : bool
   - isNearSun : bool
   - numOfLayersRemaining : int
+  - id: int
+  + GetId(): int
   + AddCrewmate(c: AbstractCrewmate)
   + AddNeighbourAsteroid(a: Asteroid)
   + DecNumOfLayersRemaining()
@@ -129,6 +138,8 @@ class Asteroid {
 }
 
 class TeleportGate {
+  - id: int
+  + GetId(): int
   + Explode()
   + GetHomeAsteroid(): Asteroid
   + GetHomeStorage(): PlayerStorage
@@ -143,6 +154,8 @@ class TeleportGate {
 
 ' Resource
 abstract class AbstractBaseResource {
+  - id: int
+  + GetId(): int
   {abstract} + IsSameType(r: AbstractBaseResource): bool
   + ReactToMine(a: Asteroid, c: IStorageCapable)
   + ReactToPlace(a: Asteroid, c: IStorageCapable)
@@ -173,6 +186,10 @@ interface IRecipe {
   {abstract} + Craft(c: IStorageCapable, a: Asteroid)
 }
 
+interface IIdentifiable <<interface>> {
+  + GetId(): int
+}
+
 class RobotRecipe << singleton >> {
   + Craft(c: IStorageCapable, a: Asteroid)
 }
@@ -190,6 +207,10 @@ TeleportGate .up.|> INeighbour
 RobotRecipe ..up.|> IRecipe
 TeleporterRecipe ..up.|> IRecipe
 Settler .up.|> IStorageCapable
+AbstractCrewmate ...|> IIdentifiable
+INeighbour --|> IIdentifiable
+AbstractBaseResource ..|> IIdentifiable
+PlayerStorage ..|> IIdentifiable
 
 ' Inheritance
 Coal -up-|> AbstractBaseResource

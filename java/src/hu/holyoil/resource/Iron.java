@@ -1,5 +1,6 @@
 package hu.holyoil.resource;
 
+import hu.holyoil.Main;
 import hu.holyoil.skeleton.Logger;
 /**
  * Vas.
@@ -11,7 +12,15 @@ public class Iron extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Iron() {
+        id = Main.GetId();
+    }
 
+    /**
+     * Kiírja a vasat emberileg olvasható formátumban.
+     * */
+    @Override
+    public String toString() {
+        return "IRON: " + id;
     }
 
     /**

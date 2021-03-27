@@ -1,5 +1,6 @@
 package hu.holyoil.neighbour;
 
+import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
@@ -31,6 +32,50 @@ public class Asteroid implements INeighbour {
         isNearSun = Boolean.FALSE;
         isDiscovered = Boolean.FALSE;
         numOfLayersRemaining = 0;
+        id = Main.GetId();
+    }
+
+    /**
+     * Az aszteroida egyedi azonosítója
+     * */
+    private int id;
+
+    /**
+     * Visszaadja az aszteroida egyedi azonosítóját.
+     * */
+    public int GetId() {
+        return id;
+    }
+
+    /**
+     * Kiírja az aszteroidát emberileg olvasható módon. Az asszociációk helyén azonosítók vannak.
+     * */
+    @Override
+    public String toString() {
+        StringBuilder toReturn = new StringBuilder("ASTEROID " + id
+                + " " + isNearSun
+                + " " + numOfLayersRemaining
+                + " " + isDiscovered
+                + " " + (resource == null ? "null" : resource.GetId())
+                + " " + (teleporter == null ? "null" : teleporter.GetId()));
+
+        toReturn.append("[");
+        for (int i = 0; i < spaceships.size(); i++) {
+            toReturn.append(spaceships.get(i).GetId());
+            if (i != spaceships.size() - 1) {
+                toReturn.append(" ");
+            }
+        }
+        toReturn.append("] [");
+        for (int i = 0; i < neighbouringAsteroids.size(); i++) {
+            toReturn.append(neighbouringAsteroids.get(i).GetId());
+            if (i != neighbouringAsteroids.size() - 1) {
+                toReturn.append(" ");
+            }
+        }
+        toReturn.append("]");
+
+        return toReturn.toString();
     }
 
     /**
