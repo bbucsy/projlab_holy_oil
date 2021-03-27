@@ -343,6 +343,7 @@ public class Asteroid implements INeighbour {
     /**
      * Visszaadja a szomszédok listáját.
      * @return a neighbouringAsteroids lista
+     * @return a neighbouringAsteroids lista
      */
     public List<Asteroid> GetNeighbours() {
 

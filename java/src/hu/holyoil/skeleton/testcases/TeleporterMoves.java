@@ -5,6 +5,11 @@ import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 
+/**
+ * Megkergült teleporter mozog egy szomszédos aszteroidára.
+ * Az aszteroidának 6 szomszédja van, minden másodiknak van teleportere, ezekre nem tud mozogni.
+ * Elvárjuk, hogy egy random, teleporter nélküli szomszédra mozogjon.
+ */
 public class TeleporterMoves extends TestCase {
     TeleportGate tp;
     @Override
