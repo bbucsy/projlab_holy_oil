@@ -250,6 +250,7 @@ AbstractSpaceship ...|> IIdentifiable
 INeighbour --|> IIdentifiable
 AbstractBaseResource ..|> IIdentifiable
 PlayerStorage ..|> IIdentifiable
+SunController ..|> IIdentifiable
 Settler .up.|> IMiner
 Ufo .up.|> IMiner
 
