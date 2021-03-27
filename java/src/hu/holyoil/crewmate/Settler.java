@@ -107,7 +107,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void Mine() {
         Logger.Log(this, "Mining");
-        onAsteroid.ReactToMineBy(this);
+        onAsteroid.ReactToMineBy(this, storage);
         Logger.Return();
     }
 

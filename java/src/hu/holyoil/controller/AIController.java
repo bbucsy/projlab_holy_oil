@@ -120,12 +120,7 @@ public class AIController implements ISteppable {
         // todo
         Logger.Return();
     }
-  
-    public void CreateUfos(){
-        Logger.Log(this, "Creating UFOs at the beginning of the game");
-        // todo
-        Logger.Return();
-    }
+
     /**
      * Singleton osztályra lehet vele hivatkozni
      * @return visszaad egy instance-et

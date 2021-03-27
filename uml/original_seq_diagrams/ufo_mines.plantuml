@@ -1,0 +1,33 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title Uranium gets mined by Ufo
+
+actor Controller as PLAYER
+
+participant "ufo: Ufo" as s
+participant "onAsteroid: Asteroid" as a
+participant "uranium: Uranium" as u
+
+
+PLAYER -> s ++: Mine()
+
+    s-->a ++: ReactToMineBy(s)
+
+        alt resource is NOT NULL && numOfLayersRemaining == 0
+
+            a -> u ++: ReactToMine(onAsteroid, s)
+
+                u -> a ++: SetResource(null)
+                a --> u --
+
+            u --> a--
+
+        end
+
+    a --> s --
+
+s --> PLAYER --
+
+@enduml

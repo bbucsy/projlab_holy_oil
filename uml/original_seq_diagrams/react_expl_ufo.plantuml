@@ -1,0 +1,16 @@
+@startuml
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Ufo reacts to explosion"
+
+actor Controller as C
+
+participant "ufo: Ufo" as s
+
+C -> s ++ : ReactToAsteroidExplosion() 
+    s -> s ++ : Die()
+    deactivate s
+s --> C --
+
+@enduml

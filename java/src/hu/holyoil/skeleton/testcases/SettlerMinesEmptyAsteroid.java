@@ -41,7 +41,7 @@ public class SettlerMinesEmptyAsteroid extends TestCase {
 
     @Override
     protected void start() {
-        a.ReactToMineBy(s);
+        s.Mine();
     }
 
 }

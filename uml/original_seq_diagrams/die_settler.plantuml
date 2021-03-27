@@ -15,7 +15,7 @@ control -> settler ++ : Die()
     settler -> game ++ : RemoveSettler(s)
     game --> settler --
 
-    settler -> asteroid ++ : RemoveCrewmante(s)
+    settler -> asteroid ++ : RemoveSpaceship(s)
     asteroid --> settler--
 
     settler -> storage ++ : GetOneTeleporter()

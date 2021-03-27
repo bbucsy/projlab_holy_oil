@@ -62,7 +62,7 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
 
     @Override
     protected void start() {
-        a.ReactToMineBy(s);
+        s.Mine();
     }
 
 }

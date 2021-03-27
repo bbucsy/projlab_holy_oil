@@ -1,14 +1,14 @@
 @startuml
 
 skinparam SequenceLifeLineBackgroundColor LightYellow
-title "Robot dies"
+title "Ufo dies"
 actor Controller as control
-participant "r: Robot" as robot
+participant "ufo: Ufo" as robot
 participant ": AIController" as robotcontroller
 participant "a: Asteroid" as asteroid
 
 control -> robot ++: Die()
-robot -> robotcontroller ++: RemoveRobot(r)
+robot -> robotcontroller ++: RemoveUfo(r)
 robotcontroller --> robot --
 robot -> asteroid ++: RemoveSpaceship(r)
 asteroid --> robot --

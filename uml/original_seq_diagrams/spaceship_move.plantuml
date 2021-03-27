@@ -1,11 +1,11 @@
 @startuml
 skinparam SequenceLifeLineBackgroundColor LightYellow
 
-title "AbstractCrewmate moves to neighbour"
+title "AbstractSpaceship moves to neighbour"
 
 actor Player as player
 
-participant "c: AbstractCrewmate" as crewmate
+participant "c: AbstractSpaceship" as crewmate
 participant "onAsteroid: Asteroid" as onAsteroid
 participant "neighbour: INeighbour" as neighbour
 

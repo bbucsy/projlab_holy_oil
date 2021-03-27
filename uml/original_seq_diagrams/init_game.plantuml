@@ -9,6 +9,7 @@ participant "a: Asteroid" as a1
 participant "a: Asteroid" as a2
 participant "randomRes: AbstractBaseResource" as res
 participant "s: Settler" as s
+participant "u: Ufo" as u
 
 CTR -> game ++ : StartGame()
 
@@ -45,6 +46,12 @@ CTR -> game ++ : StartGame()
     loop for a given number of players
 
         game -> s ** : ctor(randomAsteroid)
+
+    end
+
+    loop for a given number of ufos
+
+        game -> u ** : ctor(randomAsteroid)
 
     end
 
