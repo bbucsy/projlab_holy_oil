@@ -71,6 +71,8 @@ together {
 
 ' Crewmate
 abstract class AbstractSpaceship {
+  # id: int
+  + GetId(): int
   {abstract} + Die()
   + Move(n: INeighbour)
   {abstract} + ReactToAsteroidExplosion()
@@ -96,7 +98,6 @@ interface IStorageCapable << interface >> {
 
 together {
   class Robot {
-    - id: int
     + GetId(): int
     + Die()
     + ReactToAsteroidExplosion()
@@ -105,7 +106,6 @@ together {
   }
 
   class Settler {
-    - id: int
     + GetId(): int
     + CraftRobot()
     + CraftTeleportGate()
@@ -120,6 +120,7 @@ together {
   }
 
   class Ufo {
+    + GetId(): int
     + Die()
     + Mine()
     + ReactToAsteroidExplosion()
@@ -245,7 +246,7 @@ TeleportGate .up.|> INeighbour
 RobotRecipe .up.|> IRecipe
 TeleporterRecipe .up.|> IRecipe
 Settler .up.|> IStorageCapable
-AbstractCrewmate ...|> IIdentifiable
+AbstractSpaceship ...|> IIdentifiable
 INeighbour --|> IIdentifiable
 AbstractBaseResource ..|> IIdentifiable
 PlayerStorage ..|> IIdentifiable
