@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.TurnController;
@@ -24,6 +25,15 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     private Settler() {
         storage = new PlayerStorage();
+        id = Main.GetId();
+    }
+
+    /**
+     * Kiírja a settler-t emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
+     * */
+    @Override
+    public String toString() {
+        return "SETTLER " + id + " " + onAsteroid.GetId() + " " + storage.GetId();
     }
 
     /**
@@ -34,6 +44,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      *
      */
     public Settler(Asteroid startingAsteroid) {
+        id = Main.GetId();
         storage = new PlayerStorage();
         onAsteroid = startingAsteroid;
         onAsteroid.AddSpaceship(this);

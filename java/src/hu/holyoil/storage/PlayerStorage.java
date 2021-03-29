@@ -1,5 +1,7 @@
 package hu.holyoil.storage;
 
+import hu.holyoil.IIdentifiable;
+import hu.holyoil.Main;
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.resource.AbstractBaseResource;
@@ -11,7 +13,7 @@ import java.util.List;
 /**
  * A játékosok inventoryját leíró osztály.
  */
-public class PlayerStorage {
+public class PlayerStorage implements IIdentifiable {
     /**
      * Paraméter nélküli konstruktor.
      * Inicializálja a tagváltozó listákat.
@@ -19,6 +21,47 @@ public class PlayerStorage {
     public PlayerStorage() {
         storedMaterials = new ArrayList<>();
         teleporters = new ArrayList<>();
+        id = Main.GetId();
+    }
+
+    /**
+     * A tároló egyedi azonosítója
+     * */
+    private int id;
+
+    /**
+     * Visszaadja a storage egyedi azonosítóját
+     * */
+    public int GetId() {
+        return id;
+    }
+
+    /**
+     * Kiírja a storage-ot emberileg olvasható formátumban. Az asszociációk helyére ID-k kerülnek.
+     * */
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(
+                "PLAYERSTORAGE " + id
+        );
+
+        stringBuilder.append(" [");
+        for (int i = 0; i < storedMaterials.size(); i++) {
+            stringBuilder.append(storedMaterials.get(i).GetId());
+            if (i != storedMaterials.size() - 1) {
+                stringBuilder.append(" ");
+            }
+        }
+        stringBuilder.append("] [");
+        for (int i = 0; i < teleporters.size(); i++) {
+            stringBuilder.append(teleporters.get(i).GetId());
+            if (i != teleporters.size() - 1) {
+                stringBuilder.append(" ");
+            }
+        }
+        stringBuilder.append("]");
+
+        return stringBuilder.toString();
     }
 
     /**

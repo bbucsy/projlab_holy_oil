@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.TurnController;
@@ -10,16 +11,27 @@ public class Ufo extends AbstractSpaceship implements IMiner{
     /**
      * Paraméter nélküli konstruktor, nem lehet kívülről meghívni.
      */
-    private Ufo(){}
+    private Ufo(){
+        id = Main.GetId();
+    }
 
     /**
      * UFO konstruktora. A játék elején jön létre adott számú UFO.
      * @param startingAsteroid az UFO kezdő aszteroidája
      */
     public Ufo(Asteroid startingAsteroid){
+        id = Main.GetId();
         onAsteroid = startingAsteroid;
         onAsteroid.AddSpaceship(this);
         TurnController.GetInstance().RegisterEntityWithAction(this);
+    }
+
+    /**
+     * Kiírja z ufo-t emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
+     * */
+    @Override
+    public String toString() {
+        return "UFO " + id + " " + onAsteroid.GetId();
     }
 
     /**

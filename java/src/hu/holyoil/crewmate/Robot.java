@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
@@ -15,6 +16,15 @@ public class Robot extends AbstractCrewmate {
      * Nem hívható kívülről
      */
     private Robot() {
+        id = Main.GetId();
+    }
+
+    /**
+     * Kiírja a robotot emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
+     * */
+    @Override
+    public String toString() {
+        return "ROBOT " + id + " " + onAsteroid.GetId();
     }
 
     /**
@@ -25,6 +35,7 @@ public class Robot extends AbstractCrewmate {
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
+        id = Main.GetId();
         onAsteroid = startingAsteroid;
         Logger.RegisterObject(this, "r: Robot");
         TurnController.GetInstance().RegisterEntityWithAction(this);

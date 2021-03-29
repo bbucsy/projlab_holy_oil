@@ -22,17 +22,17 @@ public class TeleporterMoves extends TestCase {
         tp = new TeleportGate();
         tp.ReactToSunstorm();
         Logger.RegisterObject(tp, "t: TeleportGate");
+        Logger.RegisterObject(this, "TextFixture");
 
         Asteroid home = new Asteroid();
         Logger.RegisterObject(home, "home: Asteroid");
 
-        for(int i=0; i<6; i++){
-            Asteroid neigh = new Asteroid();
-            if(i%2==0)
-                neigh.SetTeleporter(new TeleportGate());
-            home.AddNeighbourAsteroid(neigh);
-            Logger.RegisterObject(neigh, "neigh" + i + ": Asteroid");
+        Asteroid neigh = new Asteroid();
+        if (Logger.GetBoolean(this, "Should new target have a teleporter?")) {
+            neigh.SetTeleporter(new TeleportGate());
         }
+        home.AddNeighbourAsteroid(neigh);
+        Logger.RegisterObject(neigh, "neigh: Asteroid");
 
         tp.SetHomeAsteroid(home);
         home.SetTeleporter(tp);
@@ -41,6 +41,8 @@ public class TeleporterMoves extends TestCase {
 
     @Override
     protected void start() {
-        tp.Move();
+        tp.Move(
+                tp.GetHomeAsteroid().GetNeighbours().get(0)
+        );
     }
 }

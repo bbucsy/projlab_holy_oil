@@ -1,5 +1,6 @@
 package hu.holyoil.resource;
 
+import hu.holyoil.IIdentifiable;
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
@@ -11,7 +12,20 @@ import hu.holyoil.storage.PlayerStorage;
  * A nyersanyagokat általánosító absztrakt osztály.
  * Nem példányosítható.
  */
-public abstract class AbstractBaseResource {
+public abstract class AbstractBaseResource implements IIdentifiable {
+
+    /**
+     * A nyersanyag egyedi azonosítója
+     * */
+    protected int id;
+
+    /**
+     * Visszaadja a nyersanyag egyedi azonosítóját
+     * */
+    public int GetId() {
+        return id;
+    }
+
     /**
      * Az aszteroidából való bányászást kezeli tároló nélküli bányász esetén.
      * <p>

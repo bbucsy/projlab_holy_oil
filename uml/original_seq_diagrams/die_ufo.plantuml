@@ -5,12 +5,12 @@ title "Ufo dies"
 actor Controller as control
 participant "ufo: Ufo" as robot
 participant ": AIController" as robotcontroller
-participant "a: Asteroid" as asteroid
+participant "onAsteroid: Asteroid" as asteroid
 
 control -> robot ++: Die()
-robot -> robotcontroller ++: RemoveUfo(r)
+robot -> robotcontroller ++: RemoveUfo(ufo)
 robotcontroller --> robot --
-robot -> asteroid ++: RemoveSpaceship(r)
+robot -> asteroid ++: RemoveSpaceship(ufo)
 asteroid --> robot --
 robot --> control --
 

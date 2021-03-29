@@ -1,6 +1,8 @@
 package hu.holyoil.neighbour;
 
+import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
+import hu.holyoil.IIdentifiable;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
@@ -22,6 +24,31 @@ public class TeleportGate implements INeighbour {
         homeAsteroid = null;
         homeStorage = null;
         isCrazy = false;
+        id = Main.GetId();
+    }
+
+    /**
+     * A teleportkaput azonosító egyedi azonosító.
+     * */
+    private int id;
+
+    /**
+     * Visszaadja a teleportkapu egyedi azonosítóját.
+     * */
+    public int GetId() {
+        return id;
+    }
+
+    /**
+     * Kiírja a teleportkaput emberileg olvasható módon. Az asszociációk helyén id-k szerepelnek.
+     * */
+    @Override
+    public String toString() {
+        return "TELEPORTGATE " + id
+                + " " + isCrazy
+                + " " + pair.GetId()
+                + " " + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
+                + " " + (homeStorage == null ? "null" : homeStorage.GetId());
     }
 
     /**

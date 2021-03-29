@@ -13,11 +13,11 @@ participant "uranium: Uranium" as u
 
 PLAYER -> s ++: Mine()
 
-    s-->a ++: ReactToMineBy(s)
+    s-->a ++: ReactToMineBy(ufo)
 
         alt resource is NOT NULL && numOfLayersRemaining == 0
 
-            a -> u ++: ReactToMine(onAsteroid, s)
+            a -> u ++: ReactToMine(onAsteroid, ufo)
 
                 u -> a ++: SetResource(null)
                 a --> u --

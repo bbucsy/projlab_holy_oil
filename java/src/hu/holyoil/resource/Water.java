@@ -1,5 +1,6 @@
 package hu.holyoil.resource;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -13,7 +14,17 @@ public class Water extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Water() {
+        id = Main.GetId();
     }
+
+    /**
+     * Kiírja a vizet emberileg olvasható formátumban.
+     * */
+    @Override
+    public String toString() {
+        return "WATER " + id;
+    }
+
     /**
      * Megvalósítja az összehasonlító metódust.
      * @param abstractBaseResource az összehasonlítandó nyersanyag

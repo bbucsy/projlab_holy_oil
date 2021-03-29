@@ -8,6 +8,8 @@ skinparam ClassFontStyle bold
 
 ' Storage
 class PlayerStorage {
+  - id: int
+  + GetId(): int
   + AddBill(b: BillOfMaterial)
   + AddTeleportGatePair(t1: TeleportGate, t2: TeleportGate)
   + GetOneTeleporter()
@@ -58,6 +60,8 @@ together {
 
   class SunController << singleton >> {
     - turnsUntilNextSunstorm : int
+    - id: int
+    + GetId(): int
     + AddAsteroid(a: Asteroid)
     + RemoveAsteroid(a: Asteroid)
     + StartSunstorm()
@@ -67,6 +71,8 @@ together {
 
 ' Crewmate
 abstract class AbstractSpaceship {
+  # id: int
+  + GetId(): int
   {abstract} + Die()
   + Move(n: INeighbour)
   {abstract} + ReactToAsteroidExplosion()
@@ -92,6 +98,7 @@ interface IStorageCapable << interface >> {
 
 together {
   class Robot {
+    + GetId(): int
     + Die()
     + ReactToAsteroidExplosion()
     + Robot(start: Asteroid)
@@ -99,6 +106,7 @@ together {
   }
 
   class Settler {
+    + GetId(): int
     + CraftRobot()
     + CraftTeleportGate()
     + Die()
@@ -112,6 +120,7 @@ together {
   }
 
   class Ufo {
+    + GetId(): int
     + Die()
     + Mine()
     + ReactToAsteroidExplosion()
@@ -131,6 +140,8 @@ class Asteroid {
   - isDiscovered : bool
   - isNearSun : bool
   - numOfLayersRemaining : int
+  - id: int
+  + GetId(): int
   + AddSpaceship(s: AbstractSpaceship)
   + AddNeighbourAsteroid(a: Asteroid)
   + DecNumOfLayersRemaining()
@@ -159,6 +170,8 @@ class Asteroid {
 
 class TeleportGate {
   - isCrazy: bool
+  - id: int
+  + GetId(): int
   + Explode()
   + GetHomeAsteroid(): Asteroid
   + GetHomeStorage(): PlayerStorage
@@ -175,6 +188,8 @@ class TeleportGate {
 
 ' Resource
 abstract class AbstractBaseResource {
+  - id: int
+  + GetId(): int
   {abstract} + IsSameType(r: AbstractBaseResource): bool
   + ReactToMine(a: Asteroid, c: IMiner)
   + ReactToMine(a: Asteroid, c: IMiner, , s: PlayerStorage)
@@ -208,6 +223,10 @@ interface IRecipe << interface >> {
   {abstract} + Craft(c: IStorageCapable, a: Asteroid)
 }
 
+interface IIdentifiable <<interface>> {
+  + GetId(): int
+}
+
 together {
   class RobotRecipe << singleton >> {
     + Craft(c: IStorageCapable, a: Asteroid)
@@ -227,6 +246,11 @@ TeleportGate .up.|> INeighbour
 RobotRecipe .up.|> IRecipe
 TeleporterRecipe .up.|> IRecipe
 Settler .up.|> IStorageCapable
+AbstractSpaceship ...|> IIdentifiable
+INeighbour --|> IIdentifiable
+AbstractBaseResource ..|> IIdentifiable
+PlayerStorage ..|> IIdentifiable
+SunController ..|> IIdentifiable
 Settler .up.|> IMiner
 Ufo .up.|> IMiner
 
