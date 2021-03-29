@@ -100,6 +100,9 @@ public class TeleporterRecipe implements IRecipe {
             Logger.Log(this, "Adding teleportgates to storage");
             storage.AddTeleportGatePair(t1, t2);
             Logger.Return();
+
+            iStorageCapable.ReactToMoveMade();
+
         }
     }
 

@@ -85,6 +85,8 @@ public class RobotRecipe implements IRecipe {
             AIController.GetInstance().AddRobot(robot);
             Logger.Return();
 
+            iStorageCapable.ReactToMoveMade();
+
         }
 
     }

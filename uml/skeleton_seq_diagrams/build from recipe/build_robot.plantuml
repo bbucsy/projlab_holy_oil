@@ -43,7 +43,7 @@ alt hasEnough
     robotRecipe -> robot ++ : Move(onAsteroid)
     robot --> robotRecipe --
 
-    participant ": RobotController" as controller
+    participant ": AIController" as controller
     robotRecipe -> controller ++ : AddRobot(robot)
     controller --> robotRecipe --
 

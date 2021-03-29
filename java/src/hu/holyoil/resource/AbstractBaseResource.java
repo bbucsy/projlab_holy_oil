@@ -24,6 +24,7 @@ public abstract class AbstractBaseResource {
         Logger.Log(this,"ReactingToMine by " + Logger.GetName(iMiner));
 
         asteroid.SetResource(null);
+        iMiner.ReactToMoveMade();
 
         Logger.Return();
     }
@@ -49,6 +50,7 @@ public abstract class AbstractBaseResource {
                     billOfMaterial
             );
             asteroid.SetResource(null);
+            iMiner.ReactToMoveMade();
         }
 
         Logger.Return();
@@ -74,6 +76,7 @@ public abstract class AbstractBaseResource {
         if (iStorageCapable.GetStorage().HasEnoughOf(billOfMaterial)) {
             iStorageCapable.GetStorage().RemoveBill(billOfMaterial);
             asteroid.SetResource(this);
+            iStorageCapable.ReactToMoveMade();
         }
 
         Logger.Return();

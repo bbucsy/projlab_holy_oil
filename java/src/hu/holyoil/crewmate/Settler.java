@@ -2,6 +2,7 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
@@ -36,6 +37,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
         storage = new PlayerStorage();
         onAsteroid = startingAsteroid;
         onAsteroid.AddSpaceship(this);
+        TurnController.GetInstance().RegisterEntityWithAction(this);
     }
 
 
@@ -62,6 +64,9 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
         }
 
         onAsteroid.RemoveSpaceship(this);
+
+        TurnController.GetInstance().RemoveEntityWithAction(this);
+
         Logger.Return();
     }
 
@@ -83,6 +88,15 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void CraftRobot() {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot build robot, no more moves left");
+            Logger.Return();
+            return;
+
+        }
+
         Logger.Log(this, "Crafting robot");
         RobotRecipe.GetInstance().Craft(this, onAsteroid);
         Logger.Return();
@@ -95,6 +109,15 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void CraftTeleportGate() {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot build teleportgate, no more moves left");
+            Logger.Return();
+            return;
+
+        }
+
         Logger.Log(this, "Crafting teleport gate pair.");
         TeleporterRecipe.GetInstance().Craft(this, onAsteroid);
         Logger.Return();
@@ -107,6 +130,15 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void Mine() {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot mine, no more moves left");
+            Logger.Return();
+            return;
+
+        }
+
         Logger.Log(this, "Mining");
         onAsteroid.ReactToMineBy(this, storage);
         Logger.Return();
@@ -134,6 +166,15 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void PlaceTeleporter() {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot place teleporter, no more moves left");
+            Logger.Return();
+            return;
+
+        }
+
         Logger.Log(this, "Place teleporter");
 
         TeleportGate storageTeleporter = storage.GetOneTeleporter();
@@ -160,6 +201,14 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void PlaceResource(AbstractBaseResource abstractBaseResource) {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot place resource, no more moves left");
+            Logger.Return();
+            return;
+
+        }
 
         Logger.Log(this, "Placing resource " + Logger.GetName(abstractBaseResource));
         if(onAsteroid.GetResource()==null)

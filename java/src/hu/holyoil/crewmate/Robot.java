@@ -1,6 +1,7 @@
 package hu.holyoil.crewmate;
 
 import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -26,6 +27,7 @@ public class Robot extends AbstractCrewmate {
     public Robot(Asteroid startingAsteroid) {
         onAsteroid = startingAsteroid;
         Logger.RegisterObject(this, "r: Robot");
+        TurnController.GetInstance().RegisterEntityWithAction(this);
         onAsteroid.AddSpaceship(this);
     }
 
@@ -39,6 +41,7 @@ public class Robot extends AbstractCrewmate {
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveRobot(this);
         onAsteroid.RemoveSpaceship(this);
+        TurnController.GetInstance().RemoveEntityWithAction(this);
         Logger.Return();
 
     }

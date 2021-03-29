@@ -27,7 +27,6 @@ a -> game ++ : RemoveAsteroid(a)
 game --> a --
 
 alt teleporter is null
-
 end
 
 a --> C --

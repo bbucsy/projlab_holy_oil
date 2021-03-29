@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.skeleton.Logger;
@@ -8,7 +9,7 @@ import hu.holyoil.skeleton.Logger;
  * A telepes, robot és UFO közös őse
  * Nem lehet példányosítani, nem tud fúrni
  */
-public abstract class AbstractSpaceship{
+public abstract class AbstractSpaceship implements IStepping{
     /**
      * Azon aszteroida amin a Crewmate jelenleg tartózkodik
      */
@@ -20,6 +21,13 @@ public abstract class AbstractSpaceship{
      * @param neighbour az aszteroida egy elérhető szomszédja
      */
     public void Move(INeighbour neighbour) {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+            Logger.Log(this, "Cannot move, no more moves left this turn");
+            Logger.Return();
+            return;
+        }
+
         Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
 
         if (onAsteroid.GetNeighbours().contains(neighbour) || onAsteroid.GetTeleporter() == neighbour) {
@@ -41,6 +49,14 @@ public abstract class AbstractSpaceship{
         onAsteroid = asteroid;
         Logger.Return();
     }
+
+    /**
+     * Végrehajtott egy műveletet.
+     * */
+    public void ReactToMoveMade() {
+        TurnController.GetInstance().ReactToActionMade(this);
+    }
+
     /**
      * Máshogy történik a leszármazottak halála
      *          (leszármazottak maguknak realizálják)

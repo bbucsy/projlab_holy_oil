@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.skeleton.Logger;
@@ -16,8 +17,17 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
      *                      Az aszteroida lekezeli a kéregvastagság csökkenést</p>
      */
     public void Drill() {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot drill, no more moves left");
+            Logger.Return();
+            return;
+
+        }
+
         Logger.Log(this, "Drilling");
-        onAsteroid.ReactToDrill();
+        onAsteroid.ReactToDrill(this);
         Logger.Return();
     }
     /**

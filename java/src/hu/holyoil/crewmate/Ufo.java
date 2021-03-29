@@ -2,6 +2,7 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -18,6 +19,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
     public Ufo(Asteroid startingAsteroid){
         onAsteroid = startingAsteroid;
         onAsteroid.AddSpaceship(this);
+        TurnController.GetInstance().RegisterEntityWithAction(this);
     }
 
     /**
@@ -28,6 +30,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveUfo(this);
         onAsteroid.RemoveSpaceship(this);
+        TurnController.GetInstance().RegisterEntityWithAction(this);
         Logger.Return();
     }
 
@@ -46,6 +49,15 @@ public class Ufo extends AbstractSpaceship implements IMiner{
      */
     @Override
     public void Mine() {
+
+        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+
+            Logger.Log(this, "Cannot mine, no more moves left");
+            Logger.Return();
+            return;
+
+        }
+
         Logger.Log(this, "Mining");
         onAsteroid.ReactToMineBy(this);
         Logger.Return();

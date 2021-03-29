@@ -3,10 +3,8 @@ package hu.holyoil.neighbour;
 import hu.holyoil.Main;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
-import hu.holyoil.crewmate.AbstractSpaceship;
-import hu.holyoil.crewmate.IMiner;
-import hu.holyoil.crewmate.IStorageCapable;
-import hu.holyoil.crewmate.Settler;
+import hu.holyoil.controller.TurnController;
+import hu.holyoil.crewmate.*;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
@@ -84,6 +82,8 @@ public class Asteroid implements INeighbour {
         from.RemoveSpaceship(abstractSpaceship);
         AddSpaceship(abstractSpaceship);
         abstractSpaceship.SetOnAsteroid(this);
+
+        abstractSpaceship.ReactToMoveMade();
 
         Logger.Return();
     }
@@ -219,11 +219,14 @@ public class Asteroid implements INeighbour {
      *     Ha még van hátra fúrnivaló kéreg eggyel csökkenti a kéreg vastagságát, egyébként nem történik semmi.
      * </p>
      */
-    public void ReactToDrill() {
+    public void ReactToDrill(AbstractCrewmate abstractCrewmate) {
 
         Logger.Log(this, "Getting drilled");
 
-        if (numOfLayersRemaining>= 1) this.DecNumOfLayersRemaining();
+        if (numOfLayersRemaining>= 1) {
+            this.DecNumOfLayersRemaining();
+            abstractCrewmate.ReactToMoveMade();
+        }
 
         Logger.Return();
 

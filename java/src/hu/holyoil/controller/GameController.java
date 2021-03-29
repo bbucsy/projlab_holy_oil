@@ -5,6 +5,7 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  * <p>A PROJEKT EZEN FÁZISÁBAN MÉG NINCS KÉSZ, A TESZTELÉSHEZ NEM SZÜKSÉGES. Ennek megfelelően a dokumentáció is csak felszínes megértést nyújt, amennyi a tesztekhez kellhet.</p>
  */
 public class GameController implements ISteppable  {
+
     /**
      * singleton volta miatt szükséges statikus tagváltozó
      */
@@ -30,7 +32,10 @@ public class GameController implements ISteppable  {
      * Lépteti a köröket
      */
     @Override
-    public void Step() { System.out.println("Stepping"); }
+    public void Step() {
+        System.out.println("Stepping");
+        TurnController.GetInstance().ResetMoves();
+    }
 
     /**
      * Minden kör végén ellenőrzi megnyerték-e a játékot a telepesek

@@ -9,7 +9,7 @@ import hu.holyoil.storage.PlayerStorage;
  *                  gyártani,
  *                  nyersanyagot felvenni és lerakni.</p>
  */
-public interface IStorageCapable {
+public interface IStorageCapable extends IStepping {
     /**
      * Robot gyártása
      */

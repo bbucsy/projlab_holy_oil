@@ -1,6 +1,6 @@
 package hu.holyoil.crewmate;
 
-public interface IMiner {
+public interface IMiner extends IStepping {
     /**
      * Bányászat
      */
