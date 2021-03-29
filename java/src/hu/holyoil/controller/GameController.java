@@ -123,6 +123,11 @@ public class GameController implements ISteppable  {
         if (gameController == null) {
             gameController = new GameController();
         }
+
+        if (Logger.GetName(gameController) == null) {
+            Logger.RegisterObject(gameController, ": GameController");
+        }
+
         return gameController;
     }
 

@@ -28,7 +28,6 @@ public class RobotDies extends TestCase {
 
         Logger.RegisterObject(asteroid, "onAsteroid: Asteroid");
         Logger.RegisterObject(robot, "r: Robot");
-        Logger.RegisterObject(AIController.GetInstance(), "controller: AIController");
 
         AIController.GetInstance().AddRobot(robot);
     }

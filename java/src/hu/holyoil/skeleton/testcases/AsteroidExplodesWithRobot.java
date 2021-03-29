@@ -1,5 +1,6 @@
 package hu.holyoil.skeleton.testcases;
 
+import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.Robot;
@@ -37,9 +38,6 @@ public class AsteroidExplodesWithRobot extends TestCase {
 
         robot = new Robot(asteroid);
         Logger.RegisterObject(robot, "r: Robot");
-
-        Logger.RegisterObject(SunController.GetInstance(), ": SunController");
-        Logger.RegisterObject(GameController.GetInstance(), ": GameController");
 
         SunController.GetInstance().AddAsteroid(asteroid);
         GameController.GetInstance().AddAsteroid(asteroid);

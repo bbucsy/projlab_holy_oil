@@ -2,7 +2,6 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
-import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -62,7 +61,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
     @Override
     public void Mine() {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot mine, no more moves left");
             Logger.Return();

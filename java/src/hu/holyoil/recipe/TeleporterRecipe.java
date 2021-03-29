@@ -116,6 +116,10 @@ public class TeleporterRecipe implements IRecipe {
             teleporterRecipe = new TeleporterRecipe();
         }
 
+        if (Logger.GetName(teleporterRecipe) == null) {
+            Logger.RegisterObject(teleporterRecipe, ": TeleporterRecipe");
+        }
+
         return teleporterRecipe;
 
     }

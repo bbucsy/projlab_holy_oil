@@ -2,7 +2,6 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.skeleton.Logger;
 
 /**
@@ -18,7 +17,7 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
      */
     public void Drill() {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot drill, no more moves left");
             Logger.Return();

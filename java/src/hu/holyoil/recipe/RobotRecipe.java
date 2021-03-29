@@ -101,6 +101,10 @@ public class RobotRecipe implements IRecipe {
             robotRecipe = new RobotRecipe();
         }
 
+        if (Logger.GetName(robotRecipe) == null) {
+            Logger.RegisterObject(robotRecipe, ": RobotRecipe");
+        }
+
         return robotRecipe;
 
     }

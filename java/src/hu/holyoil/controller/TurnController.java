@@ -1,5 +1,7 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.skeleton.Logger;
+
 import java.util.HashMap;
 
 public class TurnController {
@@ -9,7 +11,7 @@ public class TurnController {
     /**
      * Hány lépést tehet meg egy telepes / robot / ufo egy körben.
      * */
-    private final int NUM_OF_ACTIONS_PER_TURN = 1;
+    public final int NUM_OF_ACTIONS_PER_TURN = 1;
 
     /**
      * Eltárolja minden objektumról, hogy hány lépést tett már meg.
@@ -21,8 +23,8 @@ public class TurnController {
      * @param object A vizsgálandó objektum
      * @return Léphet-e az adott objektum.
      * */
-    public boolean HasActionsLeft(Object object) {
-        return movesMade.get(object) < NUM_OF_ACTIONS_PER_TURN;
+    public boolean HasNoActionsLeft(Object object) {
+        return movesMade.get(object) >= NUM_OF_ACTIONS_PER_TURN;
     }
 
     /**
@@ -47,7 +49,7 @@ public class TurnController {
      * @param object A beregisztrálandó objektum
      * */
     public void RegisterEntityWithAction(Object object) {
-        movesMade.put(object, NUM_OF_ACTIONS_PER_TURN);
+        movesMade.put(object, 0);
     }
 
     /**
@@ -62,6 +64,10 @@ public class TurnController {
 
         if (turnController == null) {
             turnController = new TurnController();
+        }
+
+        if (Logger.GetName(turnController) == null) {
+            Logger.RegisterObject(turnController, ": TurnController");
         }
 
         return turnController;

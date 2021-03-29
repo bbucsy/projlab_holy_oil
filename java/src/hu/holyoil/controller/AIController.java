@@ -154,6 +154,11 @@ public class AIController implements ISteppable {
         if (AIController == null) {
             AIController = new AIController();
         }
+
+        if (Logger.GetName(AIController) == null) {
+            Logger.RegisterObject(AIController, ": AIController");
+        }
+
         return AIController;
     }
 

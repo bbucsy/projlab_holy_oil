@@ -24,7 +24,6 @@ public class UfoDies extends TestCase {
 
         Logger.RegisterObject(a, "onAsteroid: Asteroid");
         Logger.RegisterObject(ufo, "ufo: Ufo");
-        Logger.RegisterObject(AIController.GetInstance(), ": AIController");
     }
 
     @Override

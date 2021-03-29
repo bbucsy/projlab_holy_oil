@@ -100,7 +100,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void CraftRobot() {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot build robot, no more moves left");
             Logger.Return();
@@ -121,7 +121,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void CraftTeleportGate() {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot build teleportgate, no more moves left");
             Logger.Return();
@@ -142,7 +142,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void Mine() {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot mine, no more moves left");
             Logger.Return();
@@ -178,7 +178,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void PlaceTeleporter() {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot place teleporter, no more moves left");
             Logger.Return();
@@ -213,7 +213,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     @Override
     public void PlaceResource(AbstractBaseResource abstractBaseResource) {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
             Logger.Log(this, "Cannot place resource, no more moves left");
             Logger.Return();

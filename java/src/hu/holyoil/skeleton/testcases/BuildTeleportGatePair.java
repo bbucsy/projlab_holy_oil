@@ -29,14 +29,11 @@ public class BuildTeleportGatePair extends TestCase {
     @Override
     protected void load() {
 
-        Logger.RegisterObject(TeleporterRecipe.GetInstance(), ": TeleporterRecipe");
-
         Asteroid asteroid = new Asteroid();
         settler = new Settler(asteroid);
         Logger.RegisterObject(settler, "s: Settler");
         Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
         Logger.RegisterObject(this, "TestFixture");
-        Logger.RegisterObject(AIController.GetInstance(), ":AIController");
         boolean settlerHasTeleporterAlready = Logger.GetBoolean(this, "Does this Settler already have a teleporter?");
         boolean settlerHasEnoughResources = Logger.GetBoolean(this, "Does this Settler have enough Resources to create a teleportgate pair?");
 

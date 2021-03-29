@@ -35,7 +35,7 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
      */
     public void Move(INeighbour neighbour) {
 
-        if (!TurnController.GetInstance().HasActionsLeft(this)) {
+        if (TurnController.GetInstance().HasNoActionsLeft(this)) {
             Logger.Log(this, "Cannot move, no more moves left this turn");
             Logger.Return();
             return;
@@ -43,6 +43,7 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
 
         Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
 
+        //noinspection SuspiciousMethodCalls
         if (onAsteroid.GetNeighbours().contains(neighbour) || onAsteroid.GetTeleporter() == neighbour) {
             neighbour.ReactToMove(onAsteroid, this);
         } else {

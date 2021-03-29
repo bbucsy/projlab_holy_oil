@@ -48,7 +48,6 @@ public class SettlerDies extends TestCase {
         Logger.RegisterObject(a, "onAsteroid: Asteroid");
         Logger.RegisterObject(s, "s: Settler");
         Logger.RegisterObject(ps, "storage: PlayerStorage");
-        Logger.RegisterObject(GameController.GetInstance(), "GameController");
     }
 
     @Override

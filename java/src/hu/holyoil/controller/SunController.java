@@ -123,6 +123,10 @@ public class SunController implements ISteppable, IIdentifiable {
             sunController = new SunController();
         }
 
+        if (Logger.GetName(sunController) == null) {
+            Logger.RegisterObject(sunController, ": SunController");
+        }
+
         return sunController;
 
     }
