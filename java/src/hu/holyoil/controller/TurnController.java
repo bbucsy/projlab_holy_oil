@@ -19,9 +19,9 @@ public class TurnController {
     private HashMap<Object, Integer> movesMade;
 
     /**
-     * Visszaadja, hogy egy adott elem léphet-e még.
+     * Visszaadja, hogy egy adott elem lelépte-e már a lépéseit.
      * @param object A vizsgálandó objektum
-     * @return Léphet-e az adott objektum.
+     * @return Lelépte-e az összes lépését ez az egység.
      * */
     public boolean HasNoActionsLeft(Object object) {
         return movesMade.get(object) >= NUM_OF_ACTIONS_PER_TURN;

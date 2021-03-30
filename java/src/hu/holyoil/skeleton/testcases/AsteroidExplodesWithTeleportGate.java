@@ -1,7 +1,5 @@
 package hu.holyoil.skeleton.testcases;
 
-import hu.holyoil.controller.GameController;
-import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;

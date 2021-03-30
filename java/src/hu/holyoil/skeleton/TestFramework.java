@@ -1,13 +1,8 @@
 package hu.holyoil.skeleton;
 
-import hu.holyoil.neighbour.Asteroid;
-
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Tesztelést elősegítő keretrendszer, amely kezeli a tesztek indulását, betöltését, kérések kiszolgálását.
@@ -56,7 +51,7 @@ public class TestFramework {
             if (directory.exists()) {
 
                 // We iterate through the files
-                for (File file : directory.listFiles()) {
+                for (File file : Objects.requireNonNull(directory.listFiles())) {
 
                     // It may be null
                     if (file == null) {
@@ -123,6 +118,7 @@ public class TestFramework {
 
             try {
                 System.out.println("Press ENTER to choose another testcase...");
+                //noinspection ResultOfMethodCallIgnored
                 System.in.read();
             } catch (Exception ignore) {
 

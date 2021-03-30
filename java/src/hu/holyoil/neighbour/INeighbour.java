@@ -1,7 +1,6 @@
 package hu.holyoil.neighbour;
 
 import hu.holyoil.IIdentifiable;
-import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.AbstractSpaceship;
 
 /**

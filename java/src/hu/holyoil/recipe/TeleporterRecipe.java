@@ -1,7 +1,6 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;

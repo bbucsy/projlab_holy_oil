@@ -1,14 +1,11 @@
 package hu.holyoil.neighbour;
 
-import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
-import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.*;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
-import hu.holyoil.skeleton.TestFramework;
 import hu.holyoil.storage.PlayerStorage;
 
 import java.util.*;

@@ -1,10 +1,8 @@
 package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.recipe.RobotRecipe;
 import hu.holyoil.resource.Coal;
 import hu.holyoil.resource.Iron;
 import hu.holyoil.resource.Uranium;

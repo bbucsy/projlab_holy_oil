@@ -41,7 +41,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveUfo(this);
         onAsteroid.RemoveSpaceship(this);
-        TurnController.GetInstance().RegisterEntityWithAction(this);
+        TurnController.GetInstance().RemoveEntityWithAction(this);
         Logger.Return();
     }
 

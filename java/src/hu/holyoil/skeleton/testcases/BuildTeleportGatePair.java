@@ -1,11 +1,9 @@
 package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.controller.AIController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
-import hu.holyoil.recipe.TeleporterRecipe;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;

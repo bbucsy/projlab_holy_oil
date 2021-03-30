@@ -2,12 +2,10 @@ package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
-import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.resource.Uranium;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
-import hu.holyoil.skeleton.TestFramework;
 
 /**
  * Teszteli amikor egy uránt tartalmazó aszteroida napközelbe kerül.

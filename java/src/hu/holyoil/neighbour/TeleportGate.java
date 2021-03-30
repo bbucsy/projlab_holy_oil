@@ -2,13 +2,9 @@ package hu.holyoil.neighbour;
 
 import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
-import hu.holyoil.IIdentifiable;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
-import sun.rmi.runtime.Log;
-
-import java.util.Random;
 
 /**
  * Teleportereket leíró osztály.

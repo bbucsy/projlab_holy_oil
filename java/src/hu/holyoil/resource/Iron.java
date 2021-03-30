@@ -1,7 +1,6 @@
 package hu.holyoil.resource;
 
 import hu.holyoil.Main;
-import hu.holyoil.skeleton.Logger;
 /**
  * Vas.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.

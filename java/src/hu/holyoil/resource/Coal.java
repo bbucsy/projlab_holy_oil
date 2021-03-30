@@ -2,7 +2,6 @@ package hu.holyoil.resource;
 
 
 import hu.holyoil.Main;
-import hu.holyoil.skeleton.Logger;
 
 /**
  * Szén.

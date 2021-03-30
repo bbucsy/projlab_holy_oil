@@ -1,7 +1,6 @@
 package hu.holyoil.resource;
 
 import hu.holyoil.Main;
-import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 /**

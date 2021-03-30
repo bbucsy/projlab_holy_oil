@@ -8,9 +8,6 @@ import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestCase;
 import hu.holyoil.storage.PlayerStorage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Teszteli amikor egy telepes megpróbál bányászni egy aszteroidán de nincs hely a tárolójában.
  * <p>

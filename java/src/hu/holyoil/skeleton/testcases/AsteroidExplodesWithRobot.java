@@ -1,6 +1,5 @@
 package hu.holyoil.skeleton.testcases;
 
-import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.Robot;
