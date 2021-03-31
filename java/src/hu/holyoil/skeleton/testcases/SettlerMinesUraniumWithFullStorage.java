@@ -32,15 +32,10 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
 
     @Override
     protected void load() {
-        Uranium u = new Uranium();
-        a = new Asteroid();
-        s = new Settler(a);
+        Uranium u = new Uranium("u");
+        a = new Asteroid("a");
+        s = new Settler(a, "s", "ps");
         PlayerStorage ps = s.GetStorage();
-
-        Logger.RegisterObject(ps,"ps: PlayerStorage");
-        Logger.RegisterObject(u,"u: Uranium");
-        Logger.RegisterObject(s, "s: Settler");
-        Logger.RegisterObject(a, "a: Asteroid");
 
         a.AddSpaceship(s);
         a.SetResource(u);
@@ -48,9 +43,8 @@ public class SettlerMinesUraniumWithFullStorage extends TestCase {
         BillOfMaterial bill = new BillOfMaterial();
 
         for (int i = 0; i < 10; i++) {
-            Uranium addUranium = new Uranium();
+            Uranium addUranium = new Uranium("u" + i);
             bill.AddMaterial(addUranium);
-            Logger.RegisterObject(addUranium,"u"+i+": Uranium");
         }
 
         ps.AddBill(bill);

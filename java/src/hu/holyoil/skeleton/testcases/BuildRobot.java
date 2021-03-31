@@ -29,26 +29,18 @@ public class BuildRobot extends TestCase {
     @Override
     protected void load() {
 
-        Asteroid asteroid = new Asteroid();
+        Asteroid asteroid = new Asteroid("a");
         Logger.RegisterObject(this, "TestFixture");
-        Logger.RegisterObject(asteroid, "a: Asteroid");
-        Logger.RegisterObject(AIController.GetInstance(), ": AIController");
-        settler = new Settler(asteroid);
-        Logger.RegisterObject(settler, "s: Settler");
-        Logger.RegisterObject(settler.GetStorage(), "storage: Storage");
-        Logger.RegisterObject(RobotRecipe.GetInstance(), ": RobotRecipe");;
+        settler = new Settler(asteroid, "s", "storage");
 
         boolean canBuildRobot = Logger.GetBoolean(this, "Does the Settler have enough materials to build a robot?");
 
         if (canBuildRobot) {
 
             BillOfMaterial billOfMaterial = new BillOfMaterial();
-            Iron iron = new Iron();
-            Logger.RegisterObject(iron, "storageIron: Iron");
-            Coal coal = new Coal();
-            Logger.RegisterObject(coal, "storageCoal: Iron");
-            Uranium uranium = new Uranium();
-            Logger.RegisterObject(uranium, "storageUranium: Uranium");
+            Iron iron = new Iron("storageIron");
+            Coal coal = new Coal("storageCoal");
+            Uranium uranium = new Uranium("storageUranium");
             billOfMaterial.AddMaterial(iron);
             billOfMaterial.AddMaterial(coal);
             billOfMaterial.AddMaterial(uranium);

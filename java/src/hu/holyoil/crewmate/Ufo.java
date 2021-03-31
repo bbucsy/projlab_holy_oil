@@ -1,27 +1,28 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
-import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
 public class Ufo extends AbstractSpaceship implements IMiner{
-    /**
-     * Paraméter nélküli konstruktor, nem lehet kívülről meghívni.
-     */
-    private Ufo(){
-        id = Main.GetId();
-    }
 
     /**
      * UFO konstruktora. A játék elején jön létre adott számú UFO.
      * @param startingAsteroid az UFO kezdő aszteroidája
      */
     public Ufo(Asteroid startingAsteroid){
-        id = Main.GetId();
-        onAsteroid = startingAsteroid;
+        this(startingAsteroid, InputOutputController.GetInstance().GetRandomUnusedName("Ufo "));
+    }
+
+    public Ufo(Asteroid asteroid, String name) {
+
+        id = name;
+        onAsteroid = asteroid;
         onAsteroid.AddSpaceship(this);
+        InputOutputController.GetInstance().RegisterObject(this, id);
+        Logger.RegisterObject(this, id + ": Ufo");
+
     }
 
     /**
@@ -29,7 +30,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
      * */
     @Override
     public String toString() {
-        return "UFO " + id + " " + onAsteroid.GetId();
+        return "UFO (name:)" + id + " (asteroid name:)" + onAsteroid.GetId();
     }
 
     /**
@@ -40,6 +41,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveUfo(this);
         onAsteroid.RemoveSpaceship(this);
+        InputOutputController.GetInstance().RemoveObject(id);
         Logger.Return();
     }
 

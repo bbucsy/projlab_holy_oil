@@ -1,14 +1,10 @@
 package hu.holyoil.neighbour;
 
-import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
-import hu.holyoil.IIdentifiable;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
-import sun.rmi.runtime.Log;
-
-import java.util.Random;
 
 /**
  * Teleportereket leíró osztály.
@@ -20,22 +16,30 @@ public class TeleportGate implements INeighbour {
      * A létrejövő teleporternek nincs párja, nincs benne semmilyen tárolóban, és nincs rajta egy aszteroidán sem.
      */
     public TeleportGate() {
+        this(InputOutputController.GetInstance().GetRandomUnusedName("TeleportGate "));
+    }
+
+    public TeleportGate(String name) {
+
         pair = null;
         homeAsteroid = null;
         homeStorage = null;
         isCrazy = false;
-        id = Main.GetId();
+        id = name;
+        InputOutputController.GetInstance().RegisterObject(this, id);
+        Logger.RegisterObject(this, id + ": TeleportGate");
+
     }
 
     /**
      * A teleportkaput azonosító egyedi azonosító.
      * */
-    private int id;
+    private String id;
 
     /**
      * Visszaadja a teleportkapu egyedi azonosítóját.
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 
@@ -44,11 +48,11 @@ public class TeleportGate implements INeighbour {
      * */
     @Override
     public String toString() {
-        return "TELEPORTGATE " + id
-                + " " + isCrazy
-                + " " + pair.GetId()
-                + " " + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
-                + " " + (homeStorage == null ? "null" : homeStorage.GetId());
+        return "TELEPORTGATE (name:)" + id
+                + " (is crazy:)" + isCrazy
+                + " (pair name:)" + pair.GetId()
+                + " (asteroid name:)" + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
+                + " (storage name:)" + (homeStorage == null ? "null" : homeStorage.GetId());
     }
 
     /**
@@ -187,6 +191,9 @@ public class TeleportGate implements INeighbour {
                 AIController.GetInstance().RemoveTeleportGate(this);
             }
         }
+        Logger.Log(this, "Removing me from InputOutputController");
+        InputOutputController.GetInstance().RemoveObject(id);
+        Logger.Return();
     }
 
     /**

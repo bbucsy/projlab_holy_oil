@@ -17,12 +17,12 @@ public abstract class AbstractBaseResource implements IIdentifiable {
     /**
      * A nyersanyag egyedi azonosítója
      * */
-    protected int id;
+    protected String id;
 
     /**
      * Visszaadja a nyersanyag egyedi azonosítóját
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 

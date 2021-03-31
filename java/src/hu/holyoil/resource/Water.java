@@ -1,6 +1,7 @@
 package hu.holyoil.resource;
 
 import hu.holyoil.Main;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -14,7 +15,13 @@ public class Water extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Water() {
-        id = Main.GetId();
+        this(InputOutputController.GetInstance().GetRandomUnusedName("Water "));
+    }
+
+    public Water(String name) {
+        id = name;
+        InputOutputController.GetInstance().RegisterObject(this, id);
+        Logger.RegisterObject(this, id + ": Water");
     }
 
     /**
@@ -22,7 +29,7 @@ public class Water extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "WATER " + id;
+        return "WATER (name:)" + id;
     }
 
     /**

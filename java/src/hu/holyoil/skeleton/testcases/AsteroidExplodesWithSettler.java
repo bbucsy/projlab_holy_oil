@@ -1,6 +1,7 @@
 package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
@@ -24,16 +25,11 @@ public class AsteroidExplodesWithSettler extends TestCase {
 
     @Override
     protected void load() {
-        asteroid = new Asteroid();
-        Logger.RegisterObject(asteroid, "a: Asteroid");
+        asteroid = new Asteroid("a");
 
-        settler = new Settler(asteroid);
-        Logger.RegisterObject(settler, "s: Settler");
+        settler = new Settler(asteroid, "s", "storage");
 
         Logger.RegisterObject(this, "TestFixture");
-        Logger.RegisterObject(SunController.GetInstance(), ": SunController");
-        Logger.RegisterObject(GameController.GetInstance(), ": GameController");
-        Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
 
         SunController.GetInstance().AddAsteroid(asteroid);
         GameController.GetInstance().AddAsteroid(asteroid);

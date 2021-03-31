@@ -1,7 +1,6 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.IIdentifiable;
-import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -21,18 +20,18 @@ public class SunController implements ISteppable, IIdentifiable {
     /**
      * A kontroller egyedi azonosítója
      * */
-    private int id;
+    private String id;
 
     /**
      * Visszaadja a kontorller egyedi azonosítóját
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 
     @Override
     public String toString() {
-        return "SUNCONTROLLER " + id + " " + turnsUntilNextSunstorm;
+        return "SUNCONTROLLER (name:)" + id + " (turns until next sunstorm:)" + turnsUntilNextSunstorm;
     }
 
     /**
@@ -123,6 +122,14 @@ public class SunController implements ISteppable, IIdentifiable {
             sunController = new SunController();
         }
 
+        if (Logger.GetName(sunController) == null) {
+            Logger.RegisterObject(sunController, ": SunController");
+        }
+
+        if (InputOutputController.GetInstance().GetObject("SunController") == null) {
+            InputOutputController.GetInstance().RegisterObject(sunController, "SunController");
+        }
+
         return sunController;
 
     }
@@ -136,7 +143,7 @@ public class SunController implements ISteppable, IIdentifiable {
     private SunController() {
         turnsUntilNextSunstorm = 100;
         asteroids = new ArrayList<>();
-        id = Main.GetId();
+        id = "SunController";
     }
 
 }

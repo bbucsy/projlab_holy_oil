@@ -23,12 +23,10 @@ public class WaterEvaporates extends TestCase {
 
     @Override
     protected void load() {
-        a = new Asteroid();
-        resource = new Water();
+        a = new Asteroid("a");
+        resource = new Water("resource");
 
         Logger.RegisterObject(this,"TestFixture");
-        Logger.RegisterObject(a,"a: Asteroid");
-        Logger.RegisterObject(resource,"resource: Water");
 
         Boolean isNearSun = Logger.GetBoolean(this, "Is the Asteroid near the Sun?");
         a.SetIsNearbySun(isNearSun);

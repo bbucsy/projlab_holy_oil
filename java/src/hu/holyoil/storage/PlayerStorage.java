@@ -3,6 +3,7 @@ package hu.holyoil.storage;
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
@@ -19,20 +20,28 @@ public class PlayerStorage implements IIdentifiable {
      * Inicializálja a tagváltozó listákat.
      */
     public PlayerStorage() {
+        this(InputOutputController.GetInstance().GetRandomUnusedName("PlayerStorage "));
+    }
+
+    public PlayerStorage(String name) {
+
         storedMaterials = new ArrayList<>();
         teleporters = new ArrayList<>();
-        id = Main.GetId();
+        id = name;
+        InputOutputController.GetInstance().RegisterObject(this, id);
+        Logger.RegisterObject(this, id + ": PlayerStorage");
+
     }
 
     /**
      * A tároló egyedi azonosítója
      * */
-    private int id;
+    private String id;
 
     /**
      * Visszaadja a storage egyedi azonosítóját
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 
@@ -42,17 +51,17 @@ public class PlayerStorage implements IIdentifiable {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(
-                "PLAYERSTORAGE " + id
+                "PLAYERSTORAGE (name:)" + id
         );
 
-        stringBuilder.append(" [");
+        stringBuilder.append(" (material names:)[");
         for (int i = 0; i < storedMaterials.size(); i++) {
             stringBuilder.append(storedMaterials.get(i).GetId());
             if (i != storedMaterials.size() - 1) {
                 stringBuilder.append(" ");
             }
         }
-        stringBuilder.append("] [");
+        stringBuilder.append("] (teleporter names:)[");
         for (int i = 0; i < teleporters.size(); i++) {
             stringBuilder.append(teleporters.get(i).GetId());
             if (i != teleporters.size() - 1) {
@@ -105,6 +114,21 @@ public class PlayerStorage implements IIdentifiable {
     }
 
     /**
+     * Elvátolítja a benne lévő objektumokat a játéktérből.
+     * */
+    public void ReactToSettlerDie() {
+
+        storedMaterials.forEach(
+                material -> InputOutputController.GetInstance().RemoveObject(material.GetId())
+        );
+        teleporters.forEach(
+                teleportGate -> InputOutputController.GetInstance().RemoveObject(teleportGate.GetId())
+        );
+        InputOutputController.GetInstance().RemoveObject(id);
+
+    }
+
+    /**
      * Eltávolít egy teleportert a tárolóból.
      * @param teleportGate az eltávolítandó teleporter
      */
@@ -122,7 +146,7 @@ public class PlayerStorage implements IIdentifiable {
      * <p>
      *     Ez lehet null, ha nincs a telepesnél egy darab se.
      * </p>
-     * @return
+     * @return Az első teleporter a listából
      */
     public TeleportGate GetOneTeleporter() {
 
@@ -152,7 +176,7 @@ public class PlayerStorage implements IIdentifiable {
 
     /**
      * Hozzáad egy billnyi nyersanyagot a tárolóhoz.
-     * @param billOfMaterial
+     * @param billOfMaterial Az ebben lévő resource-okat adja hozzá a storage-hoz.
      */
     public void AddBill(BillOfMaterial billOfMaterial) {
 
@@ -199,8 +223,8 @@ public class PlayerStorage implements IIdentifiable {
      * <p>
      *     Például recepteknél használatos.
      * </p>
-     * @param billOfMaterial
-     * @return
+     * @param billOfMaterial Az ebben lévő dolgokat ellenőrzi le
+     * @return Van-e elég a billOfMaterial-ban lévő anyagokból
      */
     public Boolean HasEnoughOf(BillOfMaterial billOfMaterial) {
 

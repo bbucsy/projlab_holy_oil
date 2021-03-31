@@ -29,20 +29,17 @@ public class BuildTeleportGatePair extends TestCase {
     @Override
     protected void load() {
 
-        Logger.RegisterObject(TeleporterRecipe.GetInstance(), ": TeleporterRecipe");
-
-        Asteroid asteroid = new Asteroid();
-        settler = new Settler(asteroid);
-        Logger.RegisterObject(settler, "s: Settler");
-        Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
+        Asteroid asteroid = new Asteroid("onAsteroid");
+        settler = new Settler(asteroid, "s", "storage");
         Logger.RegisterObject(this, "TestFixture");
-        Logger.RegisterObject(AIController.GetInstance(), ":AIController");
         boolean settlerHasTeleporterAlready = Logger.GetBoolean(this, "Does this Settler already have a teleporter?");
         boolean settlerHasEnoughResources = Logger.GetBoolean(this, "Does this Settler have enough Resources to create a teleportgate pair?");
 
         if (settlerHasTeleporterAlready) {
 
-            TeleportGate t1 = new TeleportGate(), t2 = new TeleportGate();
+            TeleportGate t1 = new TeleportGate("t1"), t2 = new TeleportGate("t2");
+            t1.SetPair(t2);
+            t2.SetPair(t1);
             settler.GetStorage().AddTeleportGatePair(t1, t2);
 
         }
@@ -50,14 +47,10 @@ public class BuildTeleportGatePair extends TestCase {
         if (settlerHasEnoughResources) {
 
             BillOfMaterial billOfMaterial = new BillOfMaterial();
-            Iron iron1 = new Iron();
-            Logger.RegisterObject(iron1, "storageIron1: Iron");
-            Iron iron2 = new Iron();
-            Logger.RegisterObject(iron2, "storageIron2: Iron");
-            Water water = new Water();
-            Logger.RegisterObject(water, "storageWater: Water");
-            Uranium uranium = new Uranium();
-            Logger.RegisterObject(uranium, "storageUranium: Uranium");
+            Iron iron1 = new Iron("storageIron1");
+            Iron iron2 = new Iron("storageIron2");
+            Water water = new Water("storageWater");
+            Uranium uranium = new Uranium("storageUranium");
             billOfMaterial.AddMaterial(iron1);
             billOfMaterial.AddMaterial(iron2);
             billOfMaterial.AddMaterial(water);

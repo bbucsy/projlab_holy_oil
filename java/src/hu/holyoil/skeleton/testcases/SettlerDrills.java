@@ -25,12 +25,9 @@ public class SettlerDrills extends TestCase {
         Logger.RegisterObject(this, "TestFixture");
 
         int layers = Logger.GetInteger(this,"How many layers does the asteroid have?");
-        Asteroid a = new Asteroid();
+        Asteroid a = new Asteroid("onAsteroid");
         a.SetNumOfLayersRemaining(layers);
-        s = new Settler(a);
-
-        Logger.RegisterObject(a,"onAsteroid: Asteroid");
-        Logger.RegisterObject(s,"s: Settler");
+        s = new Settler(a, "s");
     }
 
     @Override

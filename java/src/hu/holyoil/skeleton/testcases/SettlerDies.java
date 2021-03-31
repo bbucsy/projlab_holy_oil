@@ -24,31 +24,23 @@ public class SettlerDies extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid a=new Asteroid();
-        s=new Settler(a);
+        Asteroid a=new Asteroid("onAsteroid");
+        s=new Settler(a, "s", "storage");
         PlayerStorage ps= s.GetStorage();
 
         Logger.RegisterObject(this, "TestFixture");
         boolean hasTeleporter = Logger.GetBoolean(this, "Does the Settler have one teleporter?");
 
         if(hasTeleporter){
-            TeleportGate tp=new TeleportGate();
-            TeleportGate pair=new TeleportGate();
+            TeleportGate tp=new TeleportGate("t");
+            TeleportGate pair=new TeleportGate("pair");
             pair.SetPair(tp);
             tp.SetPair(pair);
 
             ps.AddTeleportGatePair(tp, pair);
-
-            Logger.RegisterObject(tp, "t: TeleportGate");
-            Logger.RegisterObject(pair, "pair: TeleportGate");
         }
         GameController.GetInstance().AddAsteroid(a);
         GameController.GetInstance().AddSettler(s);
-
-        Logger.RegisterObject(a, "onAsteroid: Asteroid");
-        Logger.RegisterObject(s, "s: Settler");
-        Logger.RegisterObject(ps, "storage: PlayerStorage");
-        Logger.RegisterObject(GameController.GetInstance(), "GameController");
     }
 
     @Override

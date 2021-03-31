@@ -2,6 +2,7 @@ package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
@@ -43,14 +44,17 @@ public class RobotRecipe implements IRecipe {
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
 
-        Iron iron = new Iron();
-        Logger.RegisterObject(iron, "iron: Iron");
+        Iron iron = new Iron(
+                InputOutputController.GetInstance().GetRandomUnusedName("iron")
+        );
 
-        Uranium uranium = new Uranium();
-        Logger.RegisterObject(uranium, "uranium: Uranium");
+        Uranium uranium = new Uranium(
+                InputOutputController.GetInstance().GetRandomUnusedName("uranium")
+        );
 
-        Coal coal = new Coal();
-        Logger.RegisterObject(coal, "coal: Coal");
+        Coal coal = new Coal(
+                InputOutputController.GetInstance().GetRandomUnusedName("coal")
+        );
 
         Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(iron);
@@ -87,6 +91,10 @@ public class RobotRecipe implements IRecipe {
 
         }
 
+        InputOutputController.GetInstance().RemoveObject(iron.GetId());
+        InputOutputController.GetInstance().RemoveObject(uranium.GetId());
+        InputOutputController.GetInstance().RemoveObject(coal.GetId());
+
     }
 
     /**
@@ -97,6 +105,10 @@ public class RobotRecipe implements IRecipe {
 
         if (robotRecipe == null) {
             robotRecipe = new RobotRecipe();
+        }
+
+        if (Logger.GetName(robotRecipe) == null) {
+            Logger.RegisterObject(robotRecipe, ": RobotRecipe");
         }
 
         return robotRecipe;

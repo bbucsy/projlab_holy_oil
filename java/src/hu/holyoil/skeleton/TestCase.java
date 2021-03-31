@@ -1,5 +1,7 @@
 package hu.holyoil.skeleton;
 
+import hu.holyoil.controller.InputOutputController;
+
 /**
  * Absztrakt osztály a tesztesetek közös kezelésére
  */
@@ -47,6 +49,8 @@ public abstract class TestCase {
 
         // delete resource
         System.out.println("====== " + Name() + " ended ======");
+        InputOutputController.GetInstance().WriteState();
+        InputOutputController.GetInstance().ResetObjects();
         Logger.ClearObjects();
     }
 }

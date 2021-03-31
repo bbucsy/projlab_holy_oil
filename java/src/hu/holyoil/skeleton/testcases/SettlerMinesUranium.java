@@ -30,15 +30,10 @@ public class SettlerMinesUranium extends TestCase {
 
     @Override
     protected void load() {
-        u = new Uranium();
-        a = new Asteroid();
-        s = new Settler(a);
+        u = new Uranium("u");
+        a = new Asteroid("a");
+        s = new Settler(a, "s", "ps");
         ps = s.GetStorage();
-
-        Logger.RegisterObject(ps,"ps: PlayerStorage");
-        Logger.RegisterObject(u,"u: Uranium");
-        Logger.RegisterObject(s, "s: Settler");
-        Logger.RegisterObject(a, "a: Asteroid");
 
         a.AddSpaceship(s);
         a.SetResource(u);

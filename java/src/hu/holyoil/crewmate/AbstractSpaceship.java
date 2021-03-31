@@ -18,12 +18,12 @@ public abstract class AbstractSpaceship implements IIdentifiable {
     /**
      * Spaceship egyedi azonosítója
      * */
-    protected int id;
+    protected String id;
 
     /**
      * Visszaadja a hajó egyedi azonosítóját
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 
@@ -35,6 +35,7 @@ public abstract class AbstractSpaceship implements IIdentifiable {
     public void Move(INeighbour neighbour) {
         Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
 
+        //noinspection SuspiciousMethodCalls
         if (onAsteroid.GetNeighbours().contains(neighbour) || onAsteroid.GetTeleporter() == neighbour) {
             neighbour.ReactToMove(onAsteroid, this);
         } else {

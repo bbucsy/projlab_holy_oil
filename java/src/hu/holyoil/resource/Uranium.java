@@ -1,6 +1,7 @@
 package hu.holyoil.resource;
 
 import hu.holyoil.Main;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -20,8 +21,18 @@ public class Uranium extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Uranium() {
-        health = 3;
-        id = Main.GetId();
+        this(InputOutputController.GetInstance().GetRandomUnusedName("Uranium "), 3);
+    }
+
+    public Uranium(String name) {
+        this(name, 3);
+    }
+
+    public Uranium(String name, int health) {
+        this.health = health;
+        id = name;
+        InputOutputController.GetInstance().RegisterObject(this, id);
+        Logger.RegisterObject(this, id + ": Uranium");
     }
 
     /**
@@ -29,7 +40,7 @@ public class Uranium extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "URANIUM " + id + " " + health;
+        return "URANIUM (name:)" + id + " (health:)" + health;
     }
 
     /**
@@ -63,8 +74,10 @@ public class Uranium extends AbstractBaseResource {
         
         SetHealth(health-1);
 
-        if(health <= 0)
+        if(health <= 0) {
             asteroid.Explode();
+            InputOutputController.GetInstance().RemoveObject(id);
+        }
         
         Logger.Return();
     }

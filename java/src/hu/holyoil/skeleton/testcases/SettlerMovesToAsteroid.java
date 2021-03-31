@@ -22,16 +22,12 @@ public class SettlerMovesToAsteroid extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid current = new Asteroid();
-        target = new Asteroid();
-        s = new Settler(current);
+        Asteroid current = new Asteroid("current");
+        target = new Asteroid("target");
+        s = new Settler(current, "s");
 
         target.AddNeighbourAsteroid(current);
         current.AddNeighbourAsteroid(target);
-
-        Logger.RegisterObject(current,"current: Asteroid");
-        Logger.RegisterObject(target, "target: Asteroid");
-        Logger.RegisterObject(s,"s: Settler");
 
     }
 

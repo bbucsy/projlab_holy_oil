@@ -1,7 +1,7 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -10,20 +10,13 @@ import hu.holyoil.skeleton.Logger;
  * Leszármazottja az AbstractCrewmate-nek (telepessel való közös tulajdonságai miatt)
  */
 public class Robot extends AbstractCrewmate {
-    /**
-     * Privát paraméter nélküli konstruktor.
-     * Nem hívható kívülről
-     */
-    private Robot() {
-        id = Main.GetId();
-    }
 
     /**
      * Kiírja a robotot emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
      * */
     @Override
     public String toString() {
-        return "ROBOT " + id + " " + onAsteroid.GetId();
+        return "ROBOT (name:)" + id + " (asteroid name:)" + onAsteroid.GetId();
     }
 
     /**
@@ -34,9 +27,14 @@ public class Robot extends AbstractCrewmate {
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
-        id = Main.GetId();
-        onAsteroid = startingAsteroid;
-        Logger.RegisterObject(this, "r: Robot");
+        this(startingAsteroid, InputOutputController.GetInstance().GetRandomUnusedName("Robot "));
+    }
+
+    public Robot(Asteroid asteroid, String name) {
+        id = name;
+        onAsteroid = asteroid;
+        Logger.RegisterObject(this, id + ": Robot");
+        InputOutputController.GetInstance().RegisterObject(this, id);
         onAsteroid.AddSpaceship(this);
     }
 
@@ -50,6 +48,7 @@ public class Robot extends AbstractCrewmate {
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveRobot(this);
         onAsteroid.RemoveSpaceship(this);
+        InputOutputController.GetInstance().RemoveObject(id);
         Logger.Return();
 
     }

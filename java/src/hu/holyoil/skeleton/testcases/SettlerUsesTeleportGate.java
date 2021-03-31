@@ -23,11 +23,11 @@ public class SettlerUsesTeleportGate extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid onAsteroid = new Asteroid();
-        Asteroid targetAsteroid = new Asteroid();
-        TeleportGate pair = new TeleportGate();
-        s = new Settler(onAsteroid);
-        gate = new TeleportGate();
+        Asteroid onAsteroid = new Asteroid("onAsteroid");
+        Asteroid targetAsteroid = new Asteroid("targetAsteroid");
+        TeleportGate pair = new TeleportGate("pair");
+        s = new Settler(onAsteroid, "s");
+        gate = new TeleportGate("gate");
 
         gate.SetHomeAsteroid(onAsteroid);
         gate.SetPair(pair);
@@ -35,12 +35,6 @@ public class SettlerUsesTeleportGate extends TestCase {
         pair.SetPair(gate);
         targetAsteroid.SetTeleporter(pair);
         onAsteroid.SetTeleporter(gate);
-
-        Logger.RegisterObject(onAsteroid,"onAsteroid: Asteroid");
-        Logger.RegisterObject(targetAsteroid,"targetAsteroid: Asteroid");
-        Logger.RegisterObject(pair,"pair: TeleportGate");
-        Logger.RegisterObject(gate,"gate: TeleportGate");
-        Logger.RegisterObject(s,"s: Settler");
 
 
     }
