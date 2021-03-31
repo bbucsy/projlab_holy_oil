@@ -3,6 +3,7 @@ package hu.holyoil.neighbour;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.AbstractSpaceship;
+import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
@@ -16,7 +17,7 @@ public class TeleportGate implements INeighbour {
      * A létrejövő teleporternek nincs párja, nincs benne semmilyen tárolóban, és nincs rajta egy aszteroidán sem.
      */
     public TeleportGate() {
-        this(InputOutputController.GetInstance().GetRandomUnusedName("TeleportGate "));
+        this(NeighbourBaseRepository.GetIdWithPrefix("TeleportGate "));
     }
 
     public TeleportGate(String name) {
@@ -26,8 +27,7 @@ public class TeleportGate implements INeighbour {
         homeStorage = null;
         isCrazy = false;
         id = name;
-        InputOutputController.GetInstance().RegisterObject(this, id);
-        Logger.RegisterObject(this, id + ": TeleportGate");
+        NeighbourBaseRepository.GetInstance().Add(name, this);
 
     }
 
@@ -191,9 +191,7 @@ public class TeleportGate implements INeighbour {
                 AIController.GetInstance().RemoveTeleportGate(this);
             }
         }
-        Logger.Log(this, "Removing me from InputOutputController");
-        InputOutputController.GetInstance().RemoveObject(id);
-        Logger.Return();
+        NeighbourBaseRepository.GetInstance().Remove(id);
     }
 
     /**

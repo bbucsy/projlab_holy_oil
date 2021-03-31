@@ -7,6 +7,8 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
 import hu.holyoil.recipe.TeleporterRecipe;
+import hu.holyoil.repository.SettlerRepository;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
@@ -34,7 +36,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      *
      */
     public Settler(Asteroid startingAsteroid) {
-        this(startingAsteroid, InputOutputController.GetInstance().GetRandomUnusedName("Settler "), null);
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Settler "), null);
     }
 
     public Settler(Asteroid asteroid, String name) {
@@ -51,8 +53,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
         }
         onAsteroid = asteroid;
         onAsteroid.AddSpaceship(this);
-        Logger.RegisterObject(this, id + ": Settler");
-        InputOutputController.GetInstance().RegisterObject(this, id);
+        SpaceshipBaseRepository.GetInstance().Add(name, this);
 
     }
 
@@ -77,7 +78,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
         if (storage.GetOneTeleporter() != null) {
             storage.GetOneTeleporter().Explode();
         }
-        InputOutputController.GetInstance().RemoveObject(id);
+        SpaceshipBaseRepository.GetInstance().Remove(id);
 
         storage.ReactToSettlerDie();
 

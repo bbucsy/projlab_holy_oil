@@ -1,15 +1,18 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
-import hu.holyoil.crewmate.Settler;
+import hu.holyoil.commandhandler.docommand.DoCommandHandler;
+import hu.holyoil.repository.NeighbourBaseRepository;
+import hu.holyoil.repository.PlayerStorageBaseRepository;
+import hu.holyoil.repository.ResourceBaseRepository;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputOutputController {
-
-    private HashMap<String, Object> writableObjects;
 
     private static InputOutputController inputOutputController;
 
@@ -25,51 +28,25 @@ public class InputOutputController {
 
     InputOutputController() {
 
-        writableObjects = new HashMap<>();
-
-    }
-
-    public void RegisterObject(Object object, String name) {
-
-        writableObjects.put(name, object);
-
-    }
-
-    public void RemoveObject(String name) {
-
-        writableObjects.remove(name);
-
-    }
-
-    public String GetRandomUnusedName(String prefix) {
-
-        int i = 1;
-        while (writableObjects.get(prefix + i) != null) {
-            i++;
-        }
-        return prefix + i;
-
-    }
-
-    public Object GetObject(String name) {
-
-        return writableObjects.get(name);
-
     }
 
     public void WriteState() {
 
         System.out.println("---STATE---");
-        for (Object object : writableObjects.values()) {
-            System.out.println("\t" + object.toString());
+
+        ArrayList<IIdentifiable> toWrite = new ArrayList<>();
+
+        toWrite.addAll(NeighbourBaseRepository.GetInstance().GetAll());
+        toWrite.addAll(PlayerStorageBaseRepository.GetInstance().GetAll());
+        toWrite.addAll(ResourceBaseRepository.GetInstance().GetAll());
+        toWrite.addAll(SpaceshipBaseRepository.GetInstance().GetAll());
+        toWrite.add(SunController.GetInstance());
+
+        for (IIdentifiable iIdentifiable: toWrite) {
+            System.out.println(iIdentifiable.toString());
         }
+
         System.out.println("---END OF STATE---");
-
-    }
-
-    public void ResetObjects() {
-
-        writableObjects.clear();
 
     }
 
@@ -86,66 +63,7 @@ public class InputOutputController {
         String[] command = line.split(" ");
         switch (command[0]) {
             case "do": {
-                if (command.length < 3) {
-                    System.out.println("Not enough arguments");
-                }
-                if (!(GetObject(command[1]) instanceof Settler)) {
-                    System.out.println("No Settler with name \"" + command[1] + "\" found");
-                    return;
-                }
-                switch (command[2].toUpperCase()) {
-                    case "LOOKAROUND": {
-                        // todo: Check exactly what info he has access to
-                        WriteState();
-                        break;
-                    }
-                    case "MOVE": {
-                        break;
-                    }
-                    case "DRILL": {
-                        ((Settler)GetObject(command[1])).Drill();
-                        break;
-                    }
-                    case "MINE": {
-                        ((Settler)GetObject(command[1])).Mine();
-                        break;
-                    }
-                    case "PLACERESOURCE": {
-                        if (command.length < 4) {
-                            System.out.println("Not enough arguments");
-                            return;
-                        }
-                        // todo: this function
-                        break;
-                    }
-                    case "CRAFT": {
-                        if (command.length < 4) {
-                            System.out.println("Not enough arguments");
-                            return;
-                        }
-                        if (command[3].toUpperCase().equals("ROBOT")) {
-
-                            ((Settler)GetObject(command[1])).CraftRobot();
-
-                        } else {
-
-                            if (command[3].toUpperCase().equals("TELEPORT")) {
-
-                                ((Settler)GetObject(command[1])).CraftTeleportGate();
-
-                            } else {
-
-                                System.out.println("Cannot craft " + command[3]);
-
-                            }
-
-                        }
-                    }
-                    default: {
-                        System.out.println("Unrecognized command " + command[2]);
-                        break;
-                    }
-                }
+                new DoCommandHandler().Handle(line);
                 break;
             }
             case "create": {

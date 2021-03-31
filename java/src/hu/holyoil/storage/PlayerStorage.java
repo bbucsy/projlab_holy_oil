@@ -5,6 +5,7 @@ import hu.holyoil.Main;
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.TeleportGate;
+import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 
@@ -20,7 +21,7 @@ public class PlayerStorage implements IIdentifiable {
      * Inicializálja a tagváltozó listákat.
      */
     public PlayerStorage() {
-        this(InputOutputController.GetInstance().GetRandomUnusedName("PlayerStorage "));
+        this(PlayerStorageBaseRepository.GetIdWithPrefix("PlayerStorage "));
     }
 
     public PlayerStorage(String name) {
@@ -28,8 +29,7 @@ public class PlayerStorage implements IIdentifiable {
         storedMaterials = new ArrayList<>();
         teleporters = new ArrayList<>();
         id = name;
-        InputOutputController.GetInstance().RegisterObject(this, id);
-        Logger.RegisterObject(this, id + ": PlayerStorage");
+        PlayerStorageBaseRepository.GetInstance().Add(name, this);
 
     }
 
@@ -118,13 +118,10 @@ public class PlayerStorage implements IIdentifiable {
      * */
     public void ReactToSettlerDie() {
 
-        storedMaterials.forEach(
-                material -> InputOutputController.GetInstance().RemoveObject(material.GetId())
-        );
-        teleporters.forEach(
-                teleportGate -> InputOutputController.GetInstance().RemoveObject(teleportGate.GetId())
-        );
-        InputOutputController.GetInstance().RemoveObject(id);
+        storedMaterials.forEach(AbstractBaseResource::ReactToHomeDestroyed);
+        List<TeleportGate> teleportGatesShallowCopy = new ArrayList<>(teleporters);
+        teleportGatesShallowCopy.forEach(TeleportGate::Explode);
+        PlayerStorageBaseRepository.GetInstance().Remove(id);
 
     }
 

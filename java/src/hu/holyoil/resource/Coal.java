@@ -3,6 +3,7 @@ package hu.holyoil.resource;
 
 import hu.holyoil.Main;
 import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.skeleton.Logger;
 
 /**
@@ -15,13 +16,12 @@ public class Coal extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Coal() {
-        this(InputOutputController.GetInstance().GetRandomUnusedName("Coal "));
+        this(ResourceBaseRepository.GetIdWithPrefix("Coal "));
     }
 
     public Coal(String name) {
         id = name;
-        InputOutputController.GetInstance().RegisterObject(this, id);
-        Logger.RegisterObject(this, id + ": Coal");
+        ResourceBaseRepository.GetInstance().Add(name, this);
     }
 
     /**

@@ -6,6 +6,8 @@ import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
+import hu.holyoil.repository.NeighbourBaseRepository;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
@@ -50,16 +52,16 @@ public class TeleporterRecipe implements IRecipe {
 
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Iron iron1 = new Iron(
-                InputOutputController.GetInstance().GetRandomUnusedName("iron")
+                ResourceBaseRepository.GetIdWithPrefix("iron")
         );
         Iron iron2 = new Iron(
-                InputOutputController.GetInstance().GetRandomUnusedName("iron")
+                ResourceBaseRepository.GetIdWithPrefix("iron")
         );
         Uranium uranium = new Uranium(
-                InputOutputController.GetInstance().GetRandomUnusedName("uranium")
+                ResourceBaseRepository.GetIdWithPrefix("uranium")
         );
         Water water = new Water(
-                InputOutputController.GetInstance().GetRandomUnusedName("water")
+                ResourceBaseRepository.GetIdWithPrefix("water")
         );
 
         Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
@@ -91,9 +93,9 @@ public class TeleporterRecipe implements IRecipe {
             Logger.Return();
 
             TeleportGate t1 = new TeleportGate(
-                    InputOutputController.GetInstance().GetRandomUnusedName("t")
+                    NeighbourBaseRepository.GetIdWithPrefix("t")
             ), t2 = new TeleportGate(
-                    InputOutputController.GetInstance().GetRandomUnusedName("t")
+                    NeighbourBaseRepository.GetIdWithPrefix("t")
             );
 
             Logger.Log(this, "Setting pair of " + Logger.GetName(t1));
@@ -109,10 +111,10 @@ public class TeleporterRecipe implements IRecipe {
             Logger.Return();
         }
 
-        InputOutputController.GetInstance().RemoveObject(iron1.GetId());
-        InputOutputController.GetInstance().RemoveObject(iron2.GetId());
-        InputOutputController.GetInstance().RemoveObject(water.GetId());
-        InputOutputController.GetInstance().RemoveObject(uranium.GetId());
+        ResourceBaseRepository.GetInstance().Remove(iron1.GetId());
+        ResourceBaseRepository.GetInstance().Remove(iron2.GetId());
+        ResourceBaseRepository.GetInstance().Remove(water.GetId());
+        ResourceBaseRepository.GetInstance().Remove(uranium.GetId());
 
     }
 

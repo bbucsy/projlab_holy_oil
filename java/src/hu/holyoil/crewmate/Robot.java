@@ -3,6 +3,7 @@ package hu.holyoil.crewmate;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.skeleton.Logger;
 
 /**
@@ -27,14 +28,14 @@ public class Robot extends AbstractCrewmate {
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
-        this(startingAsteroid, InputOutputController.GetInstance().GetRandomUnusedName("Robot "));
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Robot "));
     }
 
     public Robot(Asteroid asteroid, String name) {
         id = name;
         onAsteroid = asteroid;
-        Logger.RegisterObject(this, id + ": Robot");
-        InputOutputController.GetInstance().RegisterObject(this, id);
+        AIController.GetInstance().AddRobot(this);
+        SpaceshipBaseRepository.GetInstance().Add(name, this);
         onAsteroid.AddSpaceship(this);
     }
 
@@ -48,7 +49,7 @@ public class Robot extends AbstractCrewmate {
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveRobot(this);
         onAsteroid.RemoveSpaceship(this);
-        InputOutputController.GetInstance().RemoveObject(id);
+        SpaceshipBaseRepository.GetInstance().Remove(id);
         Logger.Return();
 
     }

@@ -9,6 +9,8 @@ import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Settler;
+import hu.holyoil.repository.AsteroidRepository;
+import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
@@ -42,7 +44,7 @@ public class Asteroid implements INeighbour {
      */
     public Asteroid() {
 
-        this(InputOutputController.GetInstance().GetRandomUnusedName("Asteroid "));
+        this(NeighbourBaseRepository.GetIdWithPrefix("Asteroid "));
 
     }
 
@@ -56,8 +58,7 @@ public class Asteroid implements INeighbour {
         isDiscovered = Boolean.FALSE;
         numOfLayersRemaining = 0;
         id = name;
-        InputOutputController.GetInstance().RegisterObject(this, id);
-        Logger.RegisterObject(this, id + ": Asteroid");
+        NeighbourBaseRepository.GetInstance().Add(name, this);
 
     }
 
@@ -123,6 +124,10 @@ public class Asteroid implements INeighbour {
      * <p>Lehet null, akkor az aszteroida üres.</p>
      */
     private AbstractBaseResource resource;
+
+    public Boolean IsDiscovered() {
+        return isDiscovered;
+    }
 
     /**
      * A legénység mozgását kezelő függvény.
@@ -509,11 +514,11 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
         Logger.Log(this, "Removing me from InputOutputController");
-        InputOutputController.GetInstance().RemoveObject(id);
+        NeighbourBaseRepository.GetInstance().Remove(id);
         Logger.Return();
 
         if (resource != null) {
-            InputOutputController.GetInstance().RemoveObject(resource.GetId());
+            resource.ReactToHomeDestroyed();
         }
 
         Logger.Return();

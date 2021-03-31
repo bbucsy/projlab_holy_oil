@@ -3,6 +3,7 @@ package hu.holyoil.crewmate;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.skeleton.Logger;
 
 public class Ufo extends AbstractSpaceship implements IMiner{
@@ -12,7 +13,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
      * @param startingAsteroid az UFO kezdő aszteroidája
      */
     public Ufo(Asteroid startingAsteroid){
-        this(startingAsteroid, InputOutputController.GetInstance().GetRandomUnusedName("Ufo "));
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Ufo "));
     }
 
     public Ufo(Asteroid asteroid, String name) {
@@ -20,8 +21,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         id = name;
         onAsteroid = asteroid;
         onAsteroid.AddSpaceship(this);
-        InputOutputController.GetInstance().RegisterObject(this, id);
-        Logger.RegisterObject(this, id + ": Ufo");
+        SpaceshipBaseRepository.GetInstance().Add(name, this);
 
     }
 
@@ -41,7 +41,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         Logger.Log(this, "Died");
         AIController.GetInstance().RemoveUfo(this);
         onAsteroid.RemoveSpaceship(this);
-        InputOutputController.GetInstance().RemoveObject(id);
+        SpaceshipBaseRepository.GetInstance().Remove(id);
         Logger.Return();
     }
 

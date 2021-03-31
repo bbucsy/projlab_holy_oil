@@ -1,6 +1,10 @@
 package hu.holyoil.skeleton;
 
 import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.repository.NeighbourBaseRepository;
+import hu.holyoil.repository.PlayerStorageBaseRepository;
+import hu.holyoil.repository.ResourceBaseRepository;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 
 /**
  * Absztrakt osztály a tesztesetek közös kezelésére
@@ -50,7 +54,12 @@ public abstract class TestCase {
         // delete resource
         System.out.println("====== " + Name() + " ended ======");
         InputOutputController.GetInstance().WriteState();
-        InputOutputController.GetInstance().ResetObjects();
+
+        NeighbourBaseRepository.GetInstance().Clear();
+        SpaceshipBaseRepository.GetInstance().Clear();
+        ResourceBaseRepository.GetInstance().Clear();
+        PlayerStorageBaseRepository.GetInstance().Clear();
+
         Logger.ClearObjects();
     }
 }

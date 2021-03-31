@@ -2,6 +2,7 @@ package hu.holyoil.resource;
 
 import hu.holyoil.Main;
 import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.skeleton.Logger;
 /**
  * Vas.
@@ -13,13 +14,12 @@ public class Iron extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Iron() {
-        this(InputOutputController.GetInstance().GetRandomUnusedName("Iron "));
+        this(ResourceBaseRepository.GetIdWithPrefix("Iron "));
     }
 
     public Iron(String name) {
         id = name;
-        InputOutputController.GetInstance().RegisterObject(this, id);
-        Logger.RegisterObject(this, id + ": Iron");
+        ResourceBaseRepository.GetInstance().Add(name, this);
     }
 
     /**

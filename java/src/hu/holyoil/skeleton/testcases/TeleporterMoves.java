@@ -20,6 +20,9 @@ public class TeleporterMoves extends TestCase {
     @Override
     protected void load() {
         tp = new TeleportGate("t");
+        TeleportGate pair = new TeleportGate("pair");
+        tp.SetPair(pair);
+        pair.SetPair(tp);
         tp.ReactToSunstorm();
         Logger.RegisterObject(this, "TextFixture");
 
@@ -27,9 +30,11 @@ public class TeleporterMoves extends TestCase {
 
         Asteroid neigh = new Asteroid("neigh");
         if (Logger.GetBoolean(this, "Should new target have a teleporter?")) {
-            neigh.SetTeleporter(new TeleportGate());
+            pair.SetHomeAsteroid(neigh);
+            neigh.SetTeleporter(pair);
         }
         home.AddNeighbourAsteroid(neigh);
+        neigh.AddNeighbourAsteroid(home);
 
         tp.SetHomeAsteroid(home);
         home.SetTeleporter(tp);

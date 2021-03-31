@@ -5,6 +5,7 @@ import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
@@ -109,6 +110,10 @@ public abstract class AbstractBaseResource implements IIdentifiable {
     public void ReactToSunNearby(Asteroid asteroid) {
         Logger.Log(this,"Reacting to nearby sun");
         Logger.Return();
+    }
+
+    public void ReactToHomeDestroyed() {
+        ResourceBaseRepository.GetInstance().Remove(id);
     }
 
 }
