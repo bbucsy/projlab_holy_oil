@@ -75,9 +75,9 @@ public class InputOutputController {
                 break;
             }
             case "step": {
+                AIController.GetInstance().Step();
                 SunController.GetInstance().Step();
                 GameController.GetInstance().Step();
-                AIController.GetInstance().Step();
                 break;
             }
             case "cause_sunstorm": {
