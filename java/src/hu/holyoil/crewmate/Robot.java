@@ -2,8 +2,10 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.skeleton.Logger;
 
 /**
@@ -11,20 +13,13 @@ import hu.holyoil.skeleton.Logger;
  * Leszármazottja az AbstractCrewmate-nek (telepessel való közös tulajdonságai miatt)
  */
 public class Robot extends AbstractCrewmate {
-    /**
-     * Privát paraméter nélküli konstruktor.
-     * Nem hívható kívülről
-     */
-    private Robot() {
-        id = Main.GetId();
-    }
 
     /**
      * Kiírja a robotot emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
      * */
     @Override
     public String toString() {
-        return "ROBOT " + id + " " + onAsteroid.GetId();
+        return "ROBOT (name:)" + id + " (asteroid name:)" + onAsteroid.GetId();
     }
 
     /**
@@ -35,9 +30,15 @@ public class Robot extends AbstractCrewmate {
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
-        id = Main.GetId();
-        onAsteroid = startingAsteroid;
-        Logger.RegisterObject(this, "r: Robot");
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Robot "));
+    }
+
+    //todo: comment
+    public Robot(Asteroid asteroid, String name) {
+        id = name;
+        onAsteroid = asteroid;
+        AIController.GetInstance().AddRobot(this);
+        SpaceshipBaseRepository.GetInstance().Add(name, this);
         TurnController.GetInstance().RegisterEntityWithAction(this);
         onAsteroid.AddSpaceship(this);
     }
@@ -53,6 +54,7 @@ public class Robot extends AbstractCrewmate {
         AIController.GetInstance().RemoveRobot(this);
         onAsteroid.RemoveSpaceship(this);
         TurnController.GetInstance().RemoveEntityWithAction(this);
+        SpaceshipBaseRepository.GetInstance().Remove(id);
         Logger.Return();
 
     }

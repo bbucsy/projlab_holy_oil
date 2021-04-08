@@ -1,6 +1,7 @@
 package hu.holyoil.skeleton.testcases;
 
 import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
@@ -32,24 +33,19 @@ public class AsteroidExplodesWithRobot extends TestCase {
         Logger.RegisterObject(this, "TestFixture");
         Boolean hasTeleport = Logger.GetBoolean(this, "Should Robot move through a teleport?");
 
-        asteroid = new Asteroid();
-        Logger.RegisterObject(asteroid, "a: Asteroid");
+        asteroid = new Asteroid("a");
 
-        robot = new Robot(asteroid);
-        Logger.RegisterObject(robot, "r: Robot");
+        robot = new Robot(asteroid, "r");
 
         SunController.GetInstance().AddAsteroid(asteroid);
         GameController.GetInstance().AddAsteroid(asteroid);
 
         if (hasTeleport) {
-            TeleportGate pair1 = new TeleportGate();
-            Logger.RegisterObject(pair1, "t1: TeleportGate");
+            TeleportGate pair1 = new TeleportGate("t1");
 
-            TeleportGate pair2 = new TeleportGate();
-            Logger.RegisterObject(pair2, "t2: TeleportGate");
+            TeleportGate pair2 = new TeleportGate("t2");
 
-            Asteroid newHome = new Asteroid();
-            Logger.RegisterObject(newHome, "neigh: Asteroid");
+            Asteroid newHome = new Asteroid("neigh");
 
             pair1.SetPair(pair2);
             pair1.SetHomeAsteroid(asteroid);
@@ -61,9 +57,9 @@ public class AsteroidExplodesWithRobot extends TestCase {
             neighbour = pair1;
         }
         else {
-            Asteroid newHome = new Asteroid();
-            Logger.RegisterObject(newHome, "neigh: Asteroid");
+            Asteroid newHome = new Asteroid("neigh");
             asteroid.AddNeighbourAsteroid(newHome);
+            newHome.AddNeighbourAsteroid(asteroid);
 
             SunController.GetInstance().AddAsteroid(newHome);
             GameController.GetInstance().AddAsteroid(newHome);

@@ -2,6 +2,9 @@ package hu.holyoil.resource;
 
 
 import hu.holyoil.Main;
+import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.repository.ResourceBaseRepository;
+import hu.holyoil.skeleton.Logger;
 
 /**
  * Szén.
@@ -13,7 +16,12 @@ public class Coal extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Coal() {
-        id = Main.GetId();
+        this(ResourceBaseRepository.GetIdWithPrefix("Coal "));
+    }
+
+    public Coal(String name) {
+        id = name;
+        ResourceBaseRepository.GetInstance().Add(name, this);
     }
 
     /**
@@ -21,7 +29,7 @@ public class Coal extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "COAL " + id;
+        return "COAL (name:)" + id;
     }
 
     /**

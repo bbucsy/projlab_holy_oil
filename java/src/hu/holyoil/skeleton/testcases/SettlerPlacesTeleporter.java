@@ -18,7 +18,6 @@ import java.util.Scanner;
 public class SettlerPlacesTeleporter extends TestCase {
 
     Settler settler;
-    Scanner scanner = new Scanner(System.in);
 
     @Override
     public String Name() {
@@ -33,27 +32,26 @@ public class SettlerPlacesTeleporter extends TestCase {
 
         boolean doesSettlerHaveTeleporter = Logger.GetBoolean(this, "Does this settler have a teleporter?");
 
-        Asteroid asteroid = new Asteroid();
-        Logger.RegisterObject(asteroid, "onAsteroid: Asteroid");
-        settler = new Settler(asteroid);
-        Logger.RegisterObject(settler, "s: Settler");
-        Logger.RegisterObject(settler.GetStorage(), "storage: PlayerStorage");
+        Asteroid asteroid = new Asteroid("onAsteroid");
+        settler = new Settler(asteroid, "s", "storage");
         settler.SetOnAsteroid(asteroid);
         asteroid.AddSpaceship(settler);
 
         if (isTeleporterHere) {
-            TeleportGate teleportGate = new TeleportGate();
-            Logger.RegisterObject(teleportGate, "teleportGate: TeleportGate");
+            TeleportGate teleportGate = new TeleportGate("teleportGate");
+            TeleportGate pairGate = new TeleportGate("nonExistentPair");
+            teleportGate.SetPair(pairGate);
+            pairGate.SetPair(teleportGate);
+            pairGate.SetHomeStorage(settler.GetStorage());
+            pairGate.SetHomeAsteroid(null);
             asteroid.SetTeleporter(teleportGate);
             teleportGate.SetHomeAsteroid(asteroid);
             teleportGate.SetHomeStorage(null);
         }
 
         if (doesSettlerHaveTeleporter) {
-            TeleportGate t1 = new TeleportGate();
-            Logger.RegisterObject(t1, "t1: TeleportGate");
-            TeleportGate t2 = new TeleportGate();
-            Logger.RegisterObject(t2, "t2: TeleportGate");
+            TeleportGate t1 = new TeleportGate("t1");
+            TeleportGate t2 = new TeleportGate("t2");
             t1.SetPair(t2);
             t2.SetPair(t1);
             settler.GetStorage().AddTeleportGatePair(

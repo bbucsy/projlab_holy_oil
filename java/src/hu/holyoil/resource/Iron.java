@@ -1,6 +1,9 @@
 package hu.holyoil.resource;
 
 import hu.holyoil.Main;
+import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.repository.ResourceBaseRepository;
+import hu.holyoil.skeleton.Logger;
 /**
  * Vas.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.
@@ -11,7 +14,12 @@ public class Iron extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Iron() {
-        id = Main.GetId();
+        this(ResourceBaseRepository.GetIdWithPrefix("Iron "));
+    }
+
+    public Iron(String name) {
+        id = name;
+        ResourceBaseRepository.GetInstance().Add(name, this);
     }
 
     /**
@@ -19,7 +27,7 @@ public class Iron extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "IRON " + id;
+        return "IRON (name:)" + id;
     }
 
     /**

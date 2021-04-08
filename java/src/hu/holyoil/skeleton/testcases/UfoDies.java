@@ -18,12 +18,9 @@ public class UfoDies extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid a = new Asteroid();
-        ufo = new Ufo(a);
+        Asteroid a = new Asteroid("onAsteroid");
+        ufo = new Ufo(a, "ufo");
         AIController.GetInstance().AddUfo(ufo);
-
-        Logger.RegisterObject(a, "onAsteroid: Asteroid");
-        Logger.RegisterObject(ufo, "ufo: Ufo");
     }
 
     @Override

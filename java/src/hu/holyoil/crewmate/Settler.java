@@ -3,11 +3,14 @@ package hu.holyoil.crewmate;
 import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
 import hu.holyoil.recipe.TeleporterRecipe;
+import hu.holyoil.repository.SettlerRepository;
+import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
@@ -18,22 +21,13 @@ import hu.holyoil.storage.PlayerStorage;
  * Implementálja az IStorageCapable-t mert képes tárolásra és gyártásra.
  */
 public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner {
-    /**
-     * Létrehoz egy telepest
-     * <p>Kívülről nem elérhető: nem lehet kezdő aszteroida nélkül példányosítani.
-     * Nem használjuk jelenleg sehol: biztonságból van: ne lehessen storage nélkül létrehozni settlert sehol</p>
-     */
-    private Settler() {
-        storage = new PlayerStorage();
-        id = Main.GetId();
-    }
 
     /**
      * Kiírja a settler-t emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
      * */
     @Override
     public String toString() {
-        return "SETTLER " + id + " " + onAsteroid.GetId() + " " + storage.GetId();
+        return "SETTLER (name:)" + id + " (asteroid name:)" + onAsteroid.GetId() + " (storage name:)" + storage.GetId();
     }
 
     /**
@@ -44,12 +38,28 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      *
      */
     public Settler(Asteroid startingAsteroid) {
-        id = Main.GetId();
-        storage = new PlayerStorage();
-        onAsteroid = startingAsteroid;
-        onAsteroid.AddSpaceship(this);
-        TurnController.GetInstance().RegisterEntityWithAction(this);
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Settler "), null);
     }
+
+    public Settler(Asteroid asteroid, String name) {
+        this(asteroid, name, null);
+    }
+
+    public Settler(Asteroid asteroid, String name, String storageName) {
+
+        id = name;
+        if (storageName == null) {
+            storage = new PlayerStorage();
+        } else {
+            storage = new PlayerStorage(storageName);
+        }
+        onAsteroid = asteroid;
+        onAsteroid.AddSpaceship(this);
+        SpaceshipBaseRepository.GetInstance().Add(name, this);
+        TurnController.GetInstance().RegisterEntityWithAction(this);
+
+    }
+
 
 
     /**
@@ -73,6 +83,9 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
         if (storage.GetOneTeleporter() != null) {
             storage.GetOneTeleporter().Explode();
         }
+        SpaceshipBaseRepository.GetInstance().Remove(id);
+
+        storage.ReactToSettlerDie();
 
         onAsteroid.RemoveSpaceship(this);
 

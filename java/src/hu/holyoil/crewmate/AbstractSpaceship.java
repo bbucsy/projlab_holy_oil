@@ -19,12 +19,12 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
     /**
      * Spaceship egyedi azonosítója
      * */
-    protected int id;
+    protected String id;
 
     /**
      * Visszaadja a hajó egyedi azonosítóját
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 

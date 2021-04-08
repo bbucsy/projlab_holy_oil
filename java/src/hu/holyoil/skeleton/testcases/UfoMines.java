@@ -19,13 +19,9 @@ public class UfoMines extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid a= new Asteroid();
-        ufo= new Ufo(a);
-        Uranium uran= new Uranium();
-
-        Logger.RegisterObject(a, "onAsteroid: Asteroid");
-        Logger.RegisterObject(ufo, "ufo: Ufo");
-        Logger.RegisterObject(uran, "uranium: Uranium");
+        Asteroid a= new Asteroid("onAsteroid");
+        ufo= new Ufo(a, "ufo");
+        Uranium uran= new Uranium("uranium");
 
         a.SetResource(uran);
     }

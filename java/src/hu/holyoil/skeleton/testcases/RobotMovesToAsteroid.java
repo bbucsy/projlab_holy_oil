@@ -23,16 +23,12 @@ public class RobotMovesToAsteroid extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid current = new Asteroid();
-        r = new Robot(current);
-        target =new Asteroid();
+        Asteroid current = new Asteroid("current");
+        r = new Robot(current, "r");
+        target =new Asteroid("target");
 
         current.AddNeighbourAsteroid(target);
         target.AddNeighbourAsteroid(current);
-
-        Logger.RegisterObject(current,"current: Asteroid");
-        Logger.RegisterObject(target,"target: Asteroid");
-        Logger.RegisterObject(r,"r: Robot");
 
     }
 

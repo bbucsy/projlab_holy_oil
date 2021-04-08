@@ -23,12 +23,8 @@ public class RobotDies extends TestCase {
 
     @Override
     protected void load() {
-        asteroid = new Asteroid();
-        robot = new Robot(asteroid);
-
-        Logger.RegisterObject(asteroid, "onAsteroid: Asteroid");
-        Logger.RegisterObject(robot, "r: Robot");
-
+        asteroid = new Asteroid("onAsteroid");
+        robot = new Robot(asteroid, "r");
         AIController.GetInstance().AddRobot(robot);
     }
 

@@ -12,6 +12,7 @@ public class Main {
      */
     public static final Boolean isTestMode = true;
     private static int uniqueId;
+    public static Boolean isRandomEnabled;
 
     public static int GetId() {
 
@@ -27,6 +28,7 @@ public class Main {
     public static void main(String[] args) {
 
         uniqueId = -1;
+        isRandomEnabled = true;
 
         if (isTestMode) {
             TestFramework.getInstance().AddTestcases();

@@ -1,9 +1,13 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
+import hu.holyoil.repository.NeighbourBaseRepository;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
@@ -47,16 +51,20 @@ public class TeleporterRecipe implements IRecipe {
         Logger.Return();
 
         BillOfMaterial billOfMaterial = new BillOfMaterial();
-        Iron iron1 = new Iron();
-        Iron iron2 = new Iron();
-        Uranium uranium = new Uranium();
-        Water water = new Water();
+        Iron iron1 = new Iron(
+                ResourceBaseRepository.GetIdWithPrefix("iron")
+        );
+        Iron iron2 = new Iron(
+                ResourceBaseRepository.GetIdWithPrefix("iron")
+        );
+        Uranium uranium = new Uranium(
+                ResourceBaseRepository.GetIdWithPrefix("uranium")
+        );
+        Water water = new Water(
+                ResourceBaseRepository.GetIdWithPrefix("water")
+        );
 
         Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
-        Logger.RegisterObject(iron1, "iron1: Iron");
-        Logger.RegisterObject(iron2, "iron2: Iron");
-        Logger.RegisterObject(uranium, "uranium: Uranium");
-        Logger.RegisterObject(water, "water: Water");
 
         Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(iron1);
@@ -84,9 +92,11 @@ public class TeleporterRecipe implements IRecipe {
             storage.RemoveBill(billOfMaterial);
             Logger.Return();
 
-            TeleportGate t1 = new TeleportGate(), t2 = new TeleportGate();
-            Logger.RegisterObject(t1, "t1: TeleportGate");
-            Logger.RegisterObject(t2, "t2: TeleportGate");
+            TeleportGate t1 = new TeleportGate(
+                    NeighbourBaseRepository.GetIdWithPrefix("t")
+            ), t2 = new TeleportGate(
+                    NeighbourBaseRepository.GetIdWithPrefix("t")
+            );
 
             Logger.Log(this, "Setting pair of " + Logger.GetName(t1));
             t1.SetPair(t2);
@@ -103,6 +113,12 @@ public class TeleporterRecipe implements IRecipe {
             iStorageCapable.ReactToMoveMade();
 
         }
+
+        ResourceBaseRepository.GetInstance().Remove(iron1.GetId());
+        ResourceBaseRepository.GetInstance().Remove(iron2.GetId());
+        ResourceBaseRepository.GetInstance().Remove(water.GetId());
+        ResourceBaseRepository.GetInstance().Remove(uranium.GetId());
+
     }
 
     /**

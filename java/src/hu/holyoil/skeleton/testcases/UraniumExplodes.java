@@ -27,12 +27,9 @@ public class UraniumExplodes extends TestCase {
     @Override
     protected void load() {
 
-        // magic
-        asteroid = new Asteroid();
-        Logger.RegisterObject(asteroid, "a: Asteroid");
+        asteroid = new Asteroid("a");
 
-        Uranium uranium = new Uranium();
-        Logger.RegisterObject(uranium, "u: Uranium");
+        Uranium uranium = new Uranium("u");
         asteroid.SetResource(uranium);
 
         Logger.RegisterObject(this, "TestFixture");

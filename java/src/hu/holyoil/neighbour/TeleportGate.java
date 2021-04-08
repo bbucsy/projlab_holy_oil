@@ -1,8 +1,9 @@
 package hu.holyoil.neighbour;
 
-import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.AbstractSpaceship;
+import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
@@ -16,22 +17,29 @@ public class TeleportGate implements INeighbour {
      * A létrejövő teleporternek nincs párja, nincs benne semmilyen tárolóban, és nincs rajta egy aszteroidán sem.
      */
     public TeleportGate() {
+        this(NeighbourBaseRepository.GetIdWithPrefix("TeleportGate "));
+    }
+
+    public TeleportGate(String name) {
+
         pair = null;
         homeAsteroid = null;
         homeStorage = null;
         isCrazy = false;
-        id = Main.GetId();
+        id = name;
+        NeighbourBaseRepository.GetInstance().Add(name, this);
+
     }
 
     /**
      * A teleportkaput azonosító egyedi azonosító.
      * */
-    private int id;
+    private String id;
 
     /**
      * Visszaadja a teleportkapu egyedi azonosítóját.
      * */
-    public int GetId() {
+    public String GetId() {
         return id;
     }
 
@@ -40,11 +48,11 @@ public class TeleportGate implements INeighbour {
      * */
     @Override
     public String toString() {
-        return "TELEPORTGATE " + id
-                + " " + isCrazy
-                + " " + pair.GetId()
-                + " " + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
-                + " " + (homeStorage == null ? "null" : homeStorage.GetId());
+        return "TELEPORTGATE (name:)" + id
+                + " (is crazy:)" + isCrazy
+                + " (pair name:)" + pair.GetId()
+                + " (asteroid name:)" + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
+                + " (storage name:)" + (homeStorage == null ? "null" : homeStorage.GetId());
     }
 
     /**
@@ -183,6 +191,7 @@ public class TeleportGate implements INeighbour {
                 AIController.GetInstance().RemoveTeleportGate(this);
             }
         }
+        NeighbourBaseRepository.GetInstance().Remove(id);
     }
 
     /**

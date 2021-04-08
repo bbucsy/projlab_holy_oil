@@ -1,7 +1,10 @@
 package hu.holyoil.resource;
 
 import hu.holyoil.Main;
+import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.skeleton.Logger;
 /**
  * Vízjég.
@@ -13,7 +16,12 @@ public class Water extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Water() {
-        id = Main.GetId();
+        this(ResourceBaseRepository.GetIdWithPrefix("Water "));
+    }
+
+    public Water(String name) {
+        id = name;
+        ResourceBaseRepository.GetInstance().Add(name, this);
     }
 
     /**
@@ -21,7 +29,7 @@ public class Water extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "WATER " + id;
+        return "WATER (name:)" + id;
     }
 
     /**

@@ -30,16 +30,10 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
 
     @Override
     protected void load() {
-        u = new Uranium();
-        a = new Asteroid();
-        s = new Settler(a);
+        u = new Uranium("u");
+        a = new Asteroid("a");
+        s = new Settler(a, "s", "ps");
         PlayerStorage ps = s.GetStorage();
-
-        Logger.RegisterObject(ps, "ps: PlayerStorage");
-        Logger.RegisterObject(u, "u: Uranium");
-
-        Logger.RegisterObject(s, "s: Settler");
-        Logger.RegisterObject(a, "a: Asteroid");
 
         a.AddSpaceship(s);
 
@@ -52,9 +46,8 @@ public class SettlerTriesToFillAsteroidWithUranium extends TestCase {
         a.SetNumOfLayersRemaining(numOfLayersRemaining);
 
         if (Logger.GetBoolean(this, "Is it filled already?")) {
-            Uranium u1 = new Uranium();
+            Uranium u1 = new Uranium("u1");
             a.SetResource(u1);
-            Logger.RegisterObject(u1, "u1: Uranium");
         }
 
     }

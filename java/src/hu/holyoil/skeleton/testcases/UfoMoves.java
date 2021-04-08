@@ -18,12 +18,9 @@ public class UfoMoves extends TestCase {
 
     @Override
     protected void load() {
-        Asteroid home = new Asteroid();
-        ufo = new Ufo(home);
-        target = new Asteroid();
-        Logger.RegisterObject(ufo, "ufo: Ufo");
-        Logger.RegisterObject(home, "home: Asteroid");
-        Logger.RegisterObject(target, "target: Asteroid");
+        Asteroid home = new Asteroid("home");
+        ufo = new Ufo(home, "ufo");
+        target = new Asteroid("target");
 
         home.AddNeighbourAsteroid(target);
         target.AddNeighbourAsteroid(home);

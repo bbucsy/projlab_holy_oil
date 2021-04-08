@@ -2,9 +2,11 @@ package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
@@ -43,14 +45,17 @@ public class RobotRecipe implements IRecipe {
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
 
-        Iron iron = new Iron();
-        Logger.RegisterObject(iron, "iron: Iron");
+        Iron iron = new Iron(
+                ResourceBaseRepository.GetIdWithPrefix("iron")
+        );
 
-        Uranium uranium = new Uranium();
-        Logger.RegisterObject(uranium, "uranium: Uranium");
+        Uranium uranium = new Uranium(
+                ResourceBaseRepository.GetIdWithPrefix("uranium")
+        );
 
-        Coal coal = new Coal();
-        Logger.RegisterObject(coal, "coal: Coal");
+        Coal coal = new Coal(
+                ResourceBaseRepository.GetIdWithPrefix("coal")
+        );
 
         Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(iron);
@@ -77,17 +82,13 @@ public class RobotRecipe implements IRecipe {
             Robot robot = new Robot(asteroid);
             Logger.RegisterObject(robot, "r: Robot");
 
-            Logger.Log(this, "Adding " + Logger.GetName(robot) + " to asteroid " + Logger.GetName(asteroid));
-            asteroid.AddSpaceship(robot);
-            Logger.Return();
-
-            Logger.Log(this, "Registering " + Logger.GetName(robot) + " at the AIcontroller");
-            AIController.GetInstance().AddRobot(robot);
-            Logger.Return();
-
             iStorageCapable.ReactToMoveMade();
 
         }
+
+        ResourceBaseRepository.GetInstance().Remove(iron.GetId());
+        ResourceBaseRepository.GetInstance().Remove(uranium.GetId());
+        ResourceBaseRepository.GetInstance().Remove(coal.GetId());
 
     }
 
