@@ -579,4 +579,10 @@ public class Asteroid implements INeighbour {
 
     }
 
+    public void SetIsDiscovered(Boolean newIsDiscovered) {
+
+        isDiscovered = newIsDiscovered;
+
+    }
+
 }

@@ -101,6 +101,12 @@ public class PlayerStorage implements IIdentifiable {
 
     }
 
+    public void AddTeleportGate(TeleportGate tp) {
+
+        teleporters.add(tp);
+
+    }
+
     /**
      * Visszaadja, hogy jelenleg hány teleportert tárol ez a tároló.
      * @return Tárolt teleporterek száma.

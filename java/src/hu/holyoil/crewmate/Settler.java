@@ -9,6 +9,7 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
 import hu.holyoil.recipe.TeleporterRecipe;
+import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
@@ -66,6 +67,13 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      * A telepes saját inventoryja
      */
     private PlayerStorage storage;
+
+    public void DestroyStorage() {
+
+        PlayerStorageBaseRepository.GetInstance().Remove(storage.GetId());
+        storage = null;
+
+    }
 
     /**
      * A telepes meghal
@@ -240,4 +248,11 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
         Logger.Return();
     }
+
+    public void SetStorage(PlayerStorage playerStorage) {
+
+        storage = playerStorage;
+
+    }
+
 }

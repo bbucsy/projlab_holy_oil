@@ -1,0 +1,37 @@
+package hu.holyoil.commandhandler.createcommand;
+
+import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.crewmate.Settler;
+import hu.holyoil.repository.SettlerRepository;
+import hu.holyoil.storage.PlayerStorage;
+
+public class PlayerStorageCreateCommandHandler implements ICommandHandler {
+    @Override
+    public void Handle(String command) {
+
+        String[] commandParams = command.split(" ");
+
+        if (commandParams.length < 4) {
+
+            System.out.println("Invalid number of arguments");
+            return;
+
+        }
+
+        String name = commandParams[2];
+
+        Settler settler = SettlerRepository.GetInstance().Get(commandParams[3]);
+
+        if (settler == null) {
+
+            System.out.println("No settler exists with name: " + commandParams[3]);
+            return;
+
+        }
+
+        PlayerStorage playerStorage = new PlayerStorage(name);
+
+        settler.SetStorage(playerStorage);
+
+    }
+}

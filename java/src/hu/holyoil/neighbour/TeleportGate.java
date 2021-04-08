@@ -75,6 +75,9 @@ public class TeleportGate implements INeighbour {
         return pair;
     }
 
+    public void SetIsCrazy(boolean newIsCrazy) {
+        isCrazy = newIsCrazy;
+    }
     /**
      * Visszaadja az aszteroidát amin a teleporter található.
      * @return a teleporter homeAsteroid tagváltozója

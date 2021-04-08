@@ -3,6 +3,7 @@ package hu.holyoil.controller;
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.commandhandler.addneighbourcommand.AddNeighbourCommandHandler;
+import hu.holyoil.commandhandler.createcommand.CreateCommandHandler;
 import hu.holyoil.commandhandler.docommand.DoCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
@@ -50,7 +51,7 @@ public class InputOutputController {
                 break;
             }
             case "create": {
-                // todo: handle creation logic
+                new CreateCommandHandler().Handle(line);
                 break;
             }
             case "add_neighbour": {
