@@ -5,13 +5,13 @@ import hu.holyoil.commandhandler.ICommandHandler;
 public class DoCommandHandler implements ICommandHandler {
 
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 3) {
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
         }
 
         switch (commandParams[2].toUpperCase()) {
@@ -66,6 +66,8 @@ public class DoCommandHandler implements ICommandHandler {
             }
 
         }
+
+        return true;
 
     }
 

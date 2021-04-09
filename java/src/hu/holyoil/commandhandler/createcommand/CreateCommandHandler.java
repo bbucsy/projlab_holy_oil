@@ -5,21 +5,21 @@ import hu.holyoil.repository.AbstractBaseRepository;
 
 public class CreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 3) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
         if (AbstractBaseRepository.IsNameUsed(commandParams[2])) {
 
             System.out.println("Object already exists with name: " + commandParams[2]);
-            return;
+            return false;
 
         }
 
@@ -104,5 +104,6 @@ public class CreateCommandHandler implements ICommandHandler {
 
         }
 
+        return true;
     }
 }

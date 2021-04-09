@@ -8,14 +8,14 @@ import hu.holyoil.repository.SpaceshipBaseRepository;
 
 public class MoveDoCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -24,7 +24,7 @@ public class MoveDoCommandHandler implements ICommandHandler {
         if (abstractSpaceship == null) {
 
             System.out.println("No spaceship exists with id: " + commandParams[1]);
-            return;
+            return false;
 
         }
 
@@ -33,11 +33,12 @@ public class MoveDoCommandHandler implements ICommandHandler {
         if (iNeighbour == null) {
 
             System.out.println("No asteroid or teleportgate exists with id: " + commandParams[3]);
-            return;
+            return false;
 
         }
 
         abstractSpaceship.Move(iNeighbour);
 
+        return true;
     }
 }

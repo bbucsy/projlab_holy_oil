@@ -7,14 +7,14 @@ import hu.holyoil.storage.PlayerStorage;
 
 public class PlayerStorageCreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -25,7 +25,7 @@ public class PlayerStorageCreateCommandHandler implements ICommandHandler {
         if (settler == null) {
 
             System.out.println("No settler exists with name: " + commandParams[3]);
-            return;
+            return false;
 
         }
 
@@ -33,5 +33,6 @@ public class PlayerStorageCreateCommandHandler implements ICommandHandler {
 
         settler.SetStorage(playerStorage);
 
+        return true;
     }
 }

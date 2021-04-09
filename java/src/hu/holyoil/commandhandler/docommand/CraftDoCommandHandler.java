@@ -6,14 +6,14 @@ import hu.holyoil.repository.StorageCapableRepository;
 
 public class CraftDoCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -22,7 +22,7 @@ public class CraftDoCommandHandler implements ICommandHandler {
         if (iStorageCapable == null) {
 
             System.out.println("No spaceship with storage exists with id: " + commandParams[1]);
-            return;
+            return false;
 
         }
 
@@ -50,6 +50,7 @@ public class CraftDoCommandHandler implements ICommandHandler {
             }
 
         }
+        return true;
 
     }
 }

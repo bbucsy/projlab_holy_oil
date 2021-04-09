@@ -5,7 +5,7 @@ import hu.holyoil.neighbour.Asteroid;
 
 public class AsteroidCreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
@@ -24,7 +24,7 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
                 if (layerCount < 0 || layerCount > 5) {
 
                     System.out.println("Number of layers must be between 0 and 5");
-                    return;
+                    return false;
 
                 }
 
@@ -34,7 +34,7 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
 
                 System.out.println(layerAmount + " is not a valid integer");
 
-                return;
+                return false;
             }
 
         }
@@ -46,7 +46,7 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
             if (!(nearSun.toUpperCase().equals("TRUE") || nearSun.toUpperCase().equals("FALSE"))) {
 
                 System.out.println(nearSun + " is not a valid boolean. Write \"true\" or \"false\"");
-                return;
+                return false;
 
             }
 
@@ -61,7 +61,7 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
             if (!(isDiscovered.toUpperCase().equals("TRUE") || isDiscovered.toUpperCase().equals("FALSE"))) {
 
                 System.out.println(isDiscovered + " is not a valid boolean. Write \"true\" or \"false\"");
-                return;
+                return false;
 
             }
 
@@ -69,5 +69,6 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
 
         }
 
+        return true;
     }
 }

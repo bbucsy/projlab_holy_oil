@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class StateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
         System.out.println("---STATE---");
 
         ArrayList<IIdentifiable> toWrite = new ArrayList<>();
@@ -28,5 +28,6 @@ public class StateCommandHandler implements ICommandHandler {
         }
 
         System.out.println("---END OF STATE---");
+        return true;
     }
 }

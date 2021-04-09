@@ -6,17 +6,18 @@ import hu.holyoil.repository.AsteroidRepository;
 
 public class ExplodeAsteroidCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
         String[] commandParams = command.split(" ");
         if (commandParams.length < 2) {
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
         }
         Asteroid asteroid = AsteroidRepository.GetInstance().Get(commandParams[1]);
         if (asteroid == null) {
             System.out.println("No Asteroid exists with id: " + commandParams[1]);
-            return;
+            return false;
         }
         asteroid.Explode();
+        return true;
     }
 }

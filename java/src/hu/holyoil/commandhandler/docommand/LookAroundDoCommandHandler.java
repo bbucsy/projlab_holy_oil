@@ -10,7 +10,7 @@ import hu.holyoil.repository.StorageCapableRepository;
 
 public class LookAroundDoCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         // Has access to:
         // All discovered asteroids
@@ -25,7 +25,7 @@ public class LookAroundDoCommandHandler implements ICommandHandler {
         if (abstractSpaceship == null) {
 
             System.out.println("No spaceship exists with name: " + commandParams[1]);
-            return;
+            return false;
 
         }
 
@@ -46,6 +46,7 @@ public class LookAroundDoCommandHandler implements ICommandHandler {
             System.out.println(iStorageCapable.GetStorage().toString());
 
         }
+        return true;
 
     }
 }

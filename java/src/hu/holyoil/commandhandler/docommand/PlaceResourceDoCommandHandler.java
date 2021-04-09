@@ -8,14 +8,14 @@ import hu.holyoil.resource.AbstractBaseResource;
 
 public class PlaceResourceDoCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -24,7 +24,7 @@ public class PlaceResourceDoCommandHandler implements ICommandHandler {
         if (iStorageCapable == null) {
 
             System.out.println("No spaceship with storage exists with id: " + commandParams[1]);
-            return;
+            return false;
 
         }
 
@@ -38,5 +38,6 @@ public class PlaceResourceDoCommandHandler implements ICommandHandler {
 
         iStorageCapable.PlaceResource(abstractBaseResource);
 
+        return true;
     }
 }

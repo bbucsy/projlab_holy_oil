@@ -8,14 +8,14 @@ import hu.holyoil.repository.SettlerRepository;
 
 public class SettlerCreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -26,12 +26,13 @@ public class SettlerCreateCommandHandler implements ICommandHandler {
         if (asteroid == null) {
 
             System.out.println("No asteroid exists with name: " + commandParams[3]);
-            return;
+            return false;
 
         }
 
         Settler settler = new Settler(asteroid, name);
         settler.DestroyStorage();
 
+        return true;
     }
 }

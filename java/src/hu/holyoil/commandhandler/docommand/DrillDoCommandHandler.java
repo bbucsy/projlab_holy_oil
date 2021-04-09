@@ -6,7 +6,7 @@ import hu.holyoil.repository.CrewmateRepository;
 
 public class DrillDoCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
@@ -15,11 +15,12 @@ public class DrillDoCommandHandler implements ICommandHandler {
         if (abstractCrewmate == null) {
 
             System.out.println("No crewmate exists with id: " + commandParams[1]);
-            return;
+            return false;
 
         }
 
         abstractCrewmate.Drill();
 
+        return true;
     }
 }

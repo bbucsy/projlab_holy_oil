@@ -9,12 +9,12 @@ import java.io.InputStream;
 
 public class LoadCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 2) {
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
         }
 
         try {
@@ -23,6 +23,9 @@ public class LoadCommandHandler implements ICommandHandler {
         }
         catch (FileNotFoundException e) {
             System.out.println("Invalid path for file");
+            return false;
         }
+
+        return true;
     }
 }

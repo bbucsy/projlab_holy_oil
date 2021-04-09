@@ -6,7 +6,7 @@ import hu.holyoil.repository.MinerRepository;
 
 public class MineDoCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
@@ -15,11 +15,12 @@ public class MineDoCommandHandler implements ICommandHandler {
         if (iMiner == null) {
 
             System.out.println("No miner exists with id: " + commandParams[1]);
-            return;
+            return false;
 
         }
 
         iMiner.Mine();
 
+        return true;
     }
 }

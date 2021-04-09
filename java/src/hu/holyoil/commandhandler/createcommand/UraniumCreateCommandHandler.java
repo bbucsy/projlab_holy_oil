@@ -10,14 +10,14 @@ import hu.holyoil.storage.PlayerStorage;
 
 public class UraniumCreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -32,7 +32,7 @@ public class UraniumCreateCommandHandler implements ICommandHandler {
         if (asteroid == null && playerStorage == null) {
 
             System.out.println("No asteroid or playerstorage exists with name: " + commandParams[3]);
-            return;
+            return false;
 
         }
 
@@ -41,7 +41,7 @@ public class UraniumCreateCommandHandler implements ICommandHandler {
             if (asteroid.GetResource() != null) {
 
                 System.out.println("Asteroid already has resource");
-                return;
+                return false;
 
             }
 
@@ -54,7 +54,7 @@ public class UraniumCreateCommandHandler implements ICommandHandler {
             if (playerStorage.GetSumResources() > 10) {
 
                 System.out.println("Playerstorage already has 10 resources");
-                return;
+                return false;
 
             }
 
@@ -72,7 +72,7 @@ public class UraniumCreateCommandHandler implements ICommandHandler {
             if (health < 0 || health > 3) {
 
                 System.out.println("Health must be between 0 and 5");
-                return;
+                return false;
 
             }
 
@@ -80,5 +80,6 @@ public class UraniumCreateCommandHandler implements ICommandHandler {
 
         }
 
+        return true;
     }
 }

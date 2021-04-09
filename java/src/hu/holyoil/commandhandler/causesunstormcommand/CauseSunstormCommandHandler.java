@@ -8,10 +8,11 @@ import java.util.List;
 
 public class CauseSunstormCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
         String[] commandParams = command.split(" ");
         if (commandParams.length < 2) {
             System.out.println("Invalid number of arguments");
+            return false;
         }
 
         List<Asteroid> asteroids = new LinkedList<>();
@@ -27,7 +28,11 @@ public class CauseSunstormCommandHandler implements ICommandHandler {
             asteroids.add(asteroid);
         }
 
-        if (correctCommand)
+        if (correctCommand) {
             asteroids.forEach(Asteroid::ReactToSunstorm);
+            return true;
+        }
+        else
+            return false;
     }
 }

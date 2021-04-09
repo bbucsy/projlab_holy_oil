@@ -10,14 +10,14 @@ import hu.holyoil.storage.PlayerStorage;
 
 public class TeleportpairCreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 6) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -26,7 +26,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
         if (AbstractBaseRepository.IsNameUsed(name2)) {
 
             System.out.println("Object already exists with name: " + commandParams[3]);
-            return;
+            return false;
 
         }
 
@@ -41,14 +41,14 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
         if (asteroid1 == null && playerStorage1 == null) {
 
             System.out.println("No asteroid or playerstorage exists with name: " + commandParams[4]);
-            return;
+            return false;
 
         }
 
         if (asteroid2 == null && playerStorage2 == null) {
 
             System.out.println("No asteroid or playerstorage exists with name: " + commandParams[4]);
-            return;
+            return false;
 
         }
 
@@ -61,7 +61,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
             if (asteroid1.GetTeleporter() != null) {
 
                 System.out.println("Asteroid " + asteroid1.GetId() + " already has a teleporter");
-                return;
+                return false;
 
             }
 
@@ -76,7 +76,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
             if (playerStorage1.GetTeleporterCount() >= 3) {
 
                 System.out.println("Playerstorage " + playerStorage1.GetId() + " has no space for teleporter");
-                return;
+                return false;
 
             }
 
@@ -91,7 +91,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
             if (asteroid2.GetTeleporter() != null) {
 
                 System.out.println("Asteroid " + asteroid2.GetId() + " already has a teleporter");
-                return;
+                return false;
 
             }
 
@@ -106,7 +106,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
             if (playerStorage2.GetTeleporterCount() >= 3) {
 
                 System.out.println("Playerstorage " + playerStorage2.GetId() + " has no space for teleporter");
-                return;
+                return false;
 
             }
 
@@ -123,7 +123,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
             if (!(isCrazy.toUpperCase().equals("TRUE") || isCrazy.toUpperCase().equals("FALSE"))) {
 
                 System.out.println(isCrazy + " is not a valid boolean. Write \"true\" or \"false\"");
-                return;
+                return false;
 
             }
 
@@ -138,13 +138,15 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
             if (!(isCrazy.toUpperCase().equals("TRUE") || isCrazy.toUpperCase().equals("FALSE"))) {
 
                 System.out.println(isCrazy + " is not a valid boolean. Write \"true\" or \"false\"");
-                return;
+                return false;
 
             }
 
             t2.SetIsCrazy(isCrazy.toUpperCase().equals("TRUE"));
 
         }
+
+        return true;
 
     }
 }

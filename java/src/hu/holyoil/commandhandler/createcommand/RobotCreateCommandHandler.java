@@ -7,14 +7,14 @@ import hu.holyoil.repository.AsteroidRepository;
 
 public class RobotCreateCommandHandler implements ICommandHandler {
     @Override
-    public void Handle(String command) {
+    public boolean Handle(String command) {
 
         String[] commandParams = command.split(" ");
 
         if (commandParams.length < 4) {
 
             System.out.println("Invalid number of arguments");
-            return;
+            return false;
 
         }
 
@@ -25,11 +25,12 @@ public class RobotCreateCommandHandler implements ICommandHandler {
         if (asteroid == null) {
 
             System.out.println("No asteroid exists with name: " + commandParams[3]);
-            return;
+            return false;
 
         }
 
         Robot robot = new Robot(asteroid, name);
 
+        return true;
     }
 }
