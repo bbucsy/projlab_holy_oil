@@ -4,6 +4,7 @@ import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.commandhandler.addneighbourcommand.AddNeighbourCommandHandler;
 import hu.holyoil.commandhandler.docommand.DoCommandHandler;
+import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
 import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
@@ -29,26 +30,6 @@ public class InputOutputController {
     }
 
     InputOutputController() {
-
-    }
-
-    public void WriteState() {
-
-        System.out.println("---STATE---");
-
-        ArrayList<IIdentifiable> toWrite = new ArrayList<>();
-
-        toWrite.addAll(NeighbourBaseRepository.GetInstance().GetAll());
-        toWrite.addAll(PlayerStorageBaseRepository.GetInstance().GetAll());
-        toWrite.addAll(ResourceBaseRepository.GetInstance().GetAll());
-        toWrite.addAll(SpaceshipBaseRepository.GetInstance().GetAll());
-        toWrite.add(SunController.GetInstance());
-
-        for (IIdentifiable iIdentifiable: toWrite) {
-            System.out.println(iIdentifiable.toString());
-        }
-
-        System.out.println("---END OF STATE---");
 
     }
 
@@ -100,7 +81,7 @@ public class InputOutputController {
                 break;
             }
             case "state": {
-                WriteState();
+                new StateCommandHandler().Handle(line);
                 break;
             }
             default: {
