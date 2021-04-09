@@ -102,7 +102,7 @@ public class InputOutputController {
                 break;
             }
             default: {
-                System.out.println("Command " + line.split(" ")[0] + " not recognized");
+                System.out.println("Command not recognized: " + line.split(" ")[0]);
                 break;
             }
         }
