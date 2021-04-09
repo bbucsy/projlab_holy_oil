@@ -1,5 +1,6 @@
 package hu.holyoil.skeleton;
 
+import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
@@ -53,7 +54,7 @@ public abstract class TestCase {
 
         // delete resource
         System.out.println("====== " + Name() + " ended ======");
-        InputOutputController.GetInstance().WriteState();
+        new StateCommandHandler().Handle("");
 
         NeighbourBaseRepository.GetInstance().Clear();
         SpaceshipBaseRepository.GetInstance().Clear();
