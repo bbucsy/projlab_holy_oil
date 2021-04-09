@@ -43,6 +43,10 @@ public class InputOutputController {
 
             String[] command = line.split(" ");
             switch (command[0]) {
+                case "do": {
+                    isRunning = new DoCommandHandler().Handle(line);
+                    break;
+                }
                 case "create": {
                     isRunning = new CreateCommandHandler().Handle(line);
                     break;
