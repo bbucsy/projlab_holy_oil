@@ -28,6 +28,6 @@ public class CauseSunstormCommandHandler implements ICommandHandler {
         }
 
         if (correctCommand)
-            asteroids.forEach(Asteroid::ReactToSunNearby);
+            asteroids.forEach(Asteroid::ReactToSunstorm);
     }
 }
