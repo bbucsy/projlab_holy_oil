@@ -11,6 +11,7 @@ public class DoCommandHandler implements ICommandHandler {
 
         if (commandParams.length < 3) {
             System.out.println("Invalid number of arguments");
+            return;
         }
 
         switch (commandParams[2].toUpperCase()) {
