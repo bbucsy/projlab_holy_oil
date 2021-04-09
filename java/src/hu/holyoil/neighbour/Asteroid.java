@@ -370,6 +370,10 @@ public class Asteroid implements INeighbour {
      *     A tesztelés alatt akkor kapunk teleportert, ha nincs szomszédos aszteroida, és akkor aszteroidát ha nincs lerakva teleporter.
      * </p>
      * <p>
+     *     Ha kikapcsolt a randomizálás:
+     *     Kapunk aszteroidát.
+     * </p>
+     * <p>
      *     Nem tesztelésnél: Egy logikai változó jelzi hogy adhat-e vissza teleportert. Ha az aszteroidán VAN teleporter és annak a teleporternek VAN párja, adhat.
      *     Egyébként egy akkora intervallumból választunk ahány szomszédja van az aszteroidának. Ha lehet teleporterünk, ez egyel nagyobb.
      * </p>
@@ -389,7 +393,11 @@ public class Asteroid implements INeighbour {
                 return teleporter;
             else
                 return neighbouringAsteroids.get(0);
-        } else {
+        }
+        else if (!Main.isRandomEnabled) {
+            return neighbouringAsteroids.get(0);
+        }
+        else {
 
             Random random = new Random();
             boolean canChooseTeleporter = false;

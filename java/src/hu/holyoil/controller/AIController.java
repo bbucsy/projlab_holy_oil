@@ -3,6 +3,7 @@ package hu.holyoil.controller;
 import hu.holyoil.Main;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
+import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.skeleton.Logger;
 
@@ -110,7 +111,9 @@ public class AIController implements ISteppable {
         if (!Main.isRandomEnabled)
             return;
 
-        // todo
+        robot.Move(robot.GetOnAsteroid().GetRandomNeighbour());
+
+        // todo: proper intelligence
         Logger.Return();
     }
     /**
@@ -123,7 +126,9 @@ public class AIController implements ISteppable {
         if (!Main.isRandomEnabled)
             return;
 
-        // todo
+        ufo.Move(ufo.GetOnAsteroid().GetRandomNeighbour());
+
+        // todo: proper intelligence
         Logger.Return();
     }
     /**
@@ -137,6 +142,9 @@ public class AIController implements ISteppable {
         if (!Main.isRandomEnabled)
             return;
 
+        teleportGate.Move((Asteroid)teleportGate.GetHomeAsteroid().GetRandomNeighbour()); // safety? we know it's an asteroid
+
+        // todo: proper intelligence
         // nice idea for this logic
         /*int chosenIndex= new Random().nextInt(neighbouringAsteroids.size());
         int start = chosenIndex;

@@ -11,6 +11,7 @@ import hu.holyoil.skeleton.Logger;
  * Nem lehet példányosítani, nem tud fúrni
  */
 public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
+
     /**
      * Azon aszteroida amin a Crewmate jelenleg tartózkodik
      */
@@ -52,6 +53,14 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
         }
 
         Logger.Return();
+    }
+
+    /**
+     * Visszaadja a jelenleg elfoglalt aszteroidáját
+     * @return aszteroidája
+     */
+    public Asteroid GetOnAsteroid() {
+        return onAsteroid;
     }
 
     /**
