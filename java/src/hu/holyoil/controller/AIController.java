@@ -1,5 +1,6 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.TeleportGate;
@@ -35,7 +36,13 @@ public class AIController implements ISteppable {
      */
     @Override
     public void Step()  {
-        System.out.println("Stepping");
+        Logger.Log(this, "Steps" + (Main.isRandomEnabled ? "" : " - switched off!"));
+
+        if (Main.isRandomEnabled) {
+            ufos.forEach(this::HandleUfo);
+            robots.forEach(this::HandleRobot);
+            teleporters.forEach(this::HandleTeleportGate);
+        }
     }
 
     /**

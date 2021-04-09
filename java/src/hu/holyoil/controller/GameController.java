@@ -1,5 +1,6 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
@@ -32,7 +33,14 @@ public class GameController implements ISteppable  {
      */
     @Override
     public void Step() {
-        System.out.println("Stepping");
+        Logger.Log(this, "Steps" + (Main.isRandomEnabled ? "" : " - switched off!"));
+
+        if (Main.isRandomEnabled) {
+            CheckWinCondition();
+            CheckLoseCondition();
+            CheckGameCondition();
+        }
+
         TurnController.GetInstance().ResetMoves();
     }
 
