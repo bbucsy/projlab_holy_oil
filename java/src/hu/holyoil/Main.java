@@ -1,5 +1,7 @@
 package hu.holyoil;
 
+import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.skeleton.TestFramework;
 
 /**
@@ -10,7 +12,7 @@ public class Main {
     /**
      * Segéd-tagváltozó, amelynek segítségével be tudjuk állítani, tesztelő üzemmódban induljon a program.
      */
-    public static final Boolean isTestMode = true;
+    public static final Boolean isTestMode = false;
     private static int uniqueId;
     public static Boolean isRandomEnabled;
 
@@ -35,6 +37,7 @@ public class Main {
             TestFramework.getInstance().RunTestcases();
         }
 
+        InputOutputController.GetInstance().ParseCommand(System.in);
     }
 
 }

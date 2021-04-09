@@ -6,6 +6,7 @@ import hu.holyoil.commandhandler.addneighbourcommand.AddNeighbourCommandHandler;
 import hu.holyoil.commandhandler.createcommand.CreateCommandHandler;
 import hu.holyoil.commandhandler.causesunstormcommand.CauseSunstormCommandHandler;
 import hu.holyoil.commandhandler.docommand.DoCommandHandler;
+import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
 import hu.holyoil.repository.NeighbourBaseRepository;
@@ -39,20 +40,20 @@ public class InputOutputController {
 
         Scanner scanner = new Scanner(inputStream);
 
-        String line = scanner.nextLine();
+        boolean isRunning = true;
 
-        if (line.length() <= 0) {
-            return;
-        }
+        while (scanner.hasNextLine() && isRunning) {
+            String line = scanner.nextLine();
 
-        String[] command = line.split(" ");
-        switch (command[0]) {
-            case "do": {
-                new DoCommandHandler().Handle(line);
-                break;
+            if (line.length() <= 0) {
+                continue;
             }
             case "create": {
                 new CreateCommandHandler().Handle(line);
+                break;
+            }
+            case "load": {
+                new LoadCommandHandler().Handle(line);
                 break;
             }
             case "add_neighbour": {
@@ -77,10 +78,6 @@ public class InputOutputController {
                 Main.isRandomEnabled = false;
                 break;
             }
-            case "load": {
-                // todo: handle input
-                break;
-            }
             case "state": {
                 new StateCommandHandler().Handle(line);
                 break;
@@ -90,7 +87,6 @@ public class InputOutputController {
                 break;
             }
         }
-
     }
 
 }
