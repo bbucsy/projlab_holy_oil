@@ -34,7 +34,7 @@ public class InputOutputController {
         Scanner scanner = new Scanner(inputStream);
         boolean isRunning = true;
 
-        while (scanner.hasNextLine() && isRunning) {
+        while (isRunning && scanner.hasNextLine()) {
             String line = scanner.nextLine();
 
             if (line.length() <= 0) {
