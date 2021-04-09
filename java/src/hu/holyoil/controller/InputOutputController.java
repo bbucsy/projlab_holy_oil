@@ -4,6 +4,7 @@ import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.commandhandler.addneighbourcommand.AddNeighbourCommandHandler;
 import hu.holyoil.commandhandler.createcommand.CreateCommandHandler;
+import hu.holyoil.commandhandler.causesunstormcommand.CauseSunstormCommandHandler;
 import hu.holyoil.commandhandler.docommand.DoCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
@@ -65,8 +66,7 @@ public class InputOutputController {
                 break;
             }
             case "cause_sunstorm": {
-                // todo: Get id-s for sunstorm
-                SunController.GetInstance().StartSunstorm();
+                new CauseSunstormCommandHandler().Handle(line);
                 break;
             }
             case "explode_asteroid": {
