@@ -36,13 +36,11 @@ public class AIController implements ISteppable {
      */
     @Override
     public void Step()  {
-        Logger.Log(this, "Steps" + (Main.isRandomEnabled ? "" : " - switched off!"));
+        Logger.Log(this, "Steps");
 
-        if (Main.isRandomEnabled) {
-            ufos.forEach(this::HandleUfo);
-            robots.forEach(this::HandleRobot);
-            teleporters.forEach(this::HandleTeleportGate);
-        }
+        ufos.forEach(this::HandleUfo);
+        robots.forEach(this::HandleRobot);
+        teleporters.forEach(this::HandleTeleportGate);
 
         Logger.Return();
     }
@@ -108,6 +106,10 @@ public class AIController implements ISteppable {
      */
     public void HandleRobot(Robot robot)  {
         Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ ">");
+
+        if (Main.isRandomEnabled)
+            return;
+
         // todo
         Logger.Return();
     }
@@ -117,6 +119,10 @@ public class AIController implements ISteppable {
      */
     public void HandleUfo(Ufo ufo)  {
         Logger.Log(this,"Handle ufo <" +  Logger.GetName(ufo)+ ">");
+
+        if (Main.isRandomEnabled)
+            return;
+
         // todo
         Logger.Return();
     }
@@ -127,6 +133,9 @@ public class AIController implements ISteppable {
     public void HandleTeleportGate(TeleportGate teleportGate)  {
         Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
         // todo
+
+        if (Main.isRandomEnabled)
+            return;
 
         // nice idea for this logic
         /*int chosenIndex= new Random().nextInt(neighbouringAsteroids.size());

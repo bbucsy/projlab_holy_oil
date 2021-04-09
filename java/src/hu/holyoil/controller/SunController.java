@@ -47,25 +47,32 @@ public class SunController implements ISteppable, IIdentifiable {
 
     /**
      * Újraindítja a visszaszámláló turnsUntilNextSunstorm számlálót egy random számra 20 és 50 között
+     * Random kikapcsolásával 30-ra állítódik.
      */
     private void RestartCountdown() {
+        Logger.Log(this, "Restarting sunstorm countdown" + (Main.isRandomEnabled ? "" : " - non-randomly!"));
+        Logger.Return();
+
+        if (Main.isRandomEnabled) {
+            turnsUntilNextSunstorm = 30;
+            return;
+        }
+
         Random random = new Random();
         turnsUntilNextSunstorm = random.nextInt(50 - 20 + 1) + 20;
     }
 
     /**
-     * minden körben végrehajt egy lépést
+     * Minden körben végrehajt egy lépést
      */
     @Override
     public void Step() {
-        Logger.Log(this, "Steps" + (Main.isRandomEnabled ? "" : " - switched off!"));
+        Logger.Log(this, "Steps");
 
-        if (Main.isRandomEnabled) {
-            --turnsUntilNextSunstorm;
-            if (turnsUntilNextSunstorm == 0) {
-                StartSunstorm();
-                RestartCountdown();
-            }
+        --turnsUntilNextSunstorm;
+        if (turnsUntilNextSunstorm == 0) {
+            StartSunstorm();
+            RestartCountdown();
         }
 
         Logger.Return();
