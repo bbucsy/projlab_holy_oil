@@ -78,13 +78,11 @@ public class InputOutputController {
                     break;
                 }
                 case "exit": {
-                    System.out.println("Closing application");
                     isRunning = false;
                     break;
                 }
                 default: {
                     System.out.println("Command not recognized: " + line.split(" ")[0]);
-                    System.out.println("Closing application");
                     isRunning = false;
                     break;
                 }

@@ -38,6 +38,7 @@ public class Main {
         }
 
         InputOutputController.GetInstance().ParseCommand(System.in);
+        System.out.println("Closing application");
     }
 
 }
