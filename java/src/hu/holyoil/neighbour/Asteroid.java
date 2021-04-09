@@ -410,10 +410,16 @@ public class Asteroid implements INeighbour {
     }
 
     /**
-     * Hozzáad egy új szomszédot az aszteroidának
+     * Hozzáad egy új szomszédot az aszteroidának, ha az még nem volt hozzáadva
      * @param asteroid az új szomszéd
      */
     public void AddNeighbourAsteroid(Asteroid asteroid) {
+
+        if (neighbouringAsteroids.contains(asteroid)) {
+            Logger.Log(this, "Asteroid " + asteroid + " already my neighbour");
+            Logger.Return();
+            return;
+        }
 
         Logger.Log(this, "Adding asteroid " + asteroid + " to my neighbours");
         neighbouringAsteroids.add(asteroid);
