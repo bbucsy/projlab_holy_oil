@@ -107,7 +107,7 @@ public class AIController implements ISteppable {
     public void HandleRobot(Robot robot)  {
         Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ ">");
 
-        if (Main.isRandomEnabled)
+        if (!Main.isRandomEnabled)
             return;
 
         // todo
@@ -120,7 +120,7 @@ public class AIController implements ISteppable {
     public void HandleUfo(Ufo ufo)  {
         Logger.Log(this,"Handle ufo <" +  Logger.GetName(ufo)+ ">");
 
-        if (Main.isRandomEnabled)
+        if (!Main.isRandomEnabled)
             return;
 
         // todo
@@ -134,7 +134,7 @@ public class AIController implements ISteppable {
         Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
         // todo
 
-        if (Main.isRandomEnabled)
+        if (!Main.isRandomEnabled)
             return;
 
         // nice idea for this logic

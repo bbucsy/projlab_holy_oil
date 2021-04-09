@@ -53,7 +53,7 @@ public class SunController implements ISteppable, IIdentifiable {
         Logger.Log(this, "Restarting sunstorm countdown" + (Main.isRandomEnabled ? "" : " - non-randomly!"));
         Logger.Return();
 
-        if (Main.isRandomEnabled) {
+        if (!Main.isRandomEnabled) {
             turnsUntilNextSunstorm = 30;
             return;
         }
