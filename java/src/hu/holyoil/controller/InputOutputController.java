@@ -3,6 +3,7 @@ package hu.holyoil.controller;
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.commandhandler.docommand.DoCommandHandler;
+import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
 import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
@@ -86,7 +87,7 @@ public class InputOutputController {
                 break;
             }
             case "explode_asteroid": {
-                // todo: Get asteroid id to explode
+                new ExplodeAsteroidCommandHandler().Handle(line);
                 break;
             }
             case "disable_random": {
