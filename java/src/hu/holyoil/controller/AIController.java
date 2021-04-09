@@ -43,6 +43,8 @@ public class AIController implements ISteppable {
             robots.forEach(this::HandleRobot);
             teleporters.forEach(this::HandleTeleportGate);
         }
+
+        Logger.Return();
     }
 
     /**

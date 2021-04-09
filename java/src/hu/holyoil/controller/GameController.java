@@ -42,6 +42,8 @@ public class GameController implements ISteppable  {
         }
 
         TurnController.GetInstance().ResetMoves();
+
+        Logger.Return();
     }
 
     /**

@@ -67,6 +67,8 @@ public class SunController implements ISteppable, IIdentifiable {
                 RestartCountdown();
             }
         }
+
+        Logger.Return();
     }
 
     /**
