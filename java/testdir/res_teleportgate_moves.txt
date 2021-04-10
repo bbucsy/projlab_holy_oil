@@ -3,7 +3,7 @@ ASTEROID (name:) a1
 	(layers left:) 0
 	(is discovered:) false
 	(resource name:) null
-	(teleporter name:) null
+	(teleporter name:) t1
 	(spaceship names:) []
 	(neighbour asteroid names:) [a2]
 ASTEROID (name:) a2
@@ -11,13 +11,13 @@ ASTEROID (name:) a2
 	(layers left:) 0
 	(is discovered:) true
 	(resource name:) null
-	(teleporter name:) t1
+	(teleporter name:) null
 	(spaceship names:) [s1]
 	(neighbour asteroid names:) [a1]
 TELEPORTGATE (name:) t1
 	(is crazy:) true
 	(pair name:) t2
-	(asteroid name:) a2
+	(asteroid name:) a1
 	(storage name:) null
 TELEPORTGATE (name:) t2
 	(is crazy:) false
@@ -32,3 +32,4 @@ SETTLER (name:) s1
 	(storage name:) storage1
 SUNCONTROLLER (name:) SunController
 	(turns until next sunstorm:) 28
+LOST GAME

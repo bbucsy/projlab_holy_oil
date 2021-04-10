@@ -1,4 +1,6 @@
+echo_off
 disable_random
+
 create asteroid a1 
 create asteroid a2 
 create asteroid a3 

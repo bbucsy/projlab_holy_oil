@@ -22,7 +22,6 @@ ASTEROID (name:) a3
 	(teleporter name:) null
 	(spaceship names:) []
 	(neighbour asteroid names:) [a2]
-IRON (name:) i1
 IRON (name:) i2
 UFO (name:) u1
 	(asteroid name:) a1

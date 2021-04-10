@@ -9,3 +9,4 @@ ASTEROID (name:) a1
 WATER (name:) w1
 SUNCONTROLLER (name:) SunController
 	(turns until next sunstorm:) 29
+LOST GAME

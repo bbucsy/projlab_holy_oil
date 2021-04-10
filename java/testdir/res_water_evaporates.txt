@@ -6,5 +6,7 @@ ASTEROID (name:) a1
 	(teleporter name:) null
 	(spaceship names:) []
 	(neighbour asteroid names:) []
+WATER (name:) w1
 SUNCONTROLLER (name:) SunController
 	(turns until next sunstorm:) 29
+LOST GAME

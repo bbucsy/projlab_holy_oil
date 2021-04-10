@@ -1,2 +1,2 @@
 SUNCONTROLLER (name:) SunController
-        (turns until next sunstorm:) 30
+	(turns until next sunstorm:) 30

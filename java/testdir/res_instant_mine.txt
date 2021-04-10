@@ -1,24 +1,24 @@
 ASTEROID (name:) a1
-        (is near sun:) false
-        (layers left:) 0
-        (is discovered:) false
-        (resource name:) null
-        (teleporter name:) null
-        (spaceship names:) [s1 s2]
-        (neighbour asteroid names:) []
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [s1 s2]
+	(neighbour asteroid names:) []
 PLAYERSTORAGE (name:) ps2
-        (material names:) [resu1]
-        (teleporter names:) []
+	(material names:) [resu1]
+	(teleporter names:) []
 PLAYERSTORAGE (name:) ps1
-        (material names:) []
-        (teleporter names:) []
+	(material names:) []
+	(teleporter names:) []
 URANIUM (name:) resu1
-        (health:) 3
+	(health:) 3
 SETTLER (name:) s1
-        (asteroid name:) a1
-        (storage name:) ps1
+	(asteroid name:) a1
+	(storage name:) ps1
 SETTLER (name:) s2
-        (asteroid name:) a1
-        (storage name:) ps2
+	(asteroid name:) a1
+	(storage name:) ps2
 SUNCONTROLLER (name:) SunController
-        (turns until next sunstorm:) 30
+	(turns until next sunstorm:) 30
