@@ -1,4 +1,3 @@
--------- STATE --------
 ASTEROID (name:) A1
 	(is near sun:) false
 	(layers left:) 4
@@ -18,6 +17,5 @@ ASTEROID (name:) A2
 ROBOT (name:) R1
 	(asteroid name:) A2
 SUNCONTROLLER (name:) SunController
-	(turns until next sunstorm:) 30
------- STATE END ------
-Closing application
+	(turns until next sunstorm:) 28
+LOST GAME

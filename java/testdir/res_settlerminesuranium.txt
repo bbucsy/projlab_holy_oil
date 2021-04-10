@@ -1,4 +1,3 @@
--------- STATE --------
 ASTEROID (name:) A1
 	(is near sun:) false
 	(layers left:) 0
@@ -16,6 +15,5 @@ SETTLER (name:) S1
 	(asteroid name:) A1
 	(storage name:) ST1
 SUNCONTROLLER (name:) SunController
-	(turns until next sunstorm:) 49
------- STATE END ------
-Closing application
+	(turns until next sunstorm:) 29
+LOST GAME
