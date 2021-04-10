@@ -1,0 +1,10 @@
+echo off
+disable_random
+create asteroid a1 0
+create settler s1 a1
+create settler s2 a1
+create storage storage1 s1
+create storage storage2 s2
+create uranium u1 storage2
+do s1 placeresource u1
+state

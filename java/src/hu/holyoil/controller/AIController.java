@@ -135,8 +135,8 @@ public class AIController implements ISteppable {
         Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
         // todo
 
-        if (Main.isRandomEnabled)
-            teleportGate.Move((Asteroid)teleportGate.GetHomeAsteroid().GetRandomNeighbour()); // safety? we know it's an asteroid
+        // if (Main.isRandomEnabled)
+        teleportGate.Move((Asteroid)teleportGate.GetHomeAsteroid().GetRandomNeighbour()); // safety? we know it's an asteroid
 
         // todo: proper intelligence
         // nice idea for this logic
