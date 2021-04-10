@@ -58,6 +58,13 @@ public class DoCommandHandler implements ICommandHandler {
 
             }
 
+            case "PLACETELEPORTGATE": {
+
+                new PlaceTeleportgateDoCommandHandler().Handle(command);
+                break;
+
+            }
+
             default: {
 
                 System.out.println("Command not recognized: " + commandParams[2]);
