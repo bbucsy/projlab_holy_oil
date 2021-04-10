@@ -1,0 +1,17 @@
+ASTEROID (name:) A1
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [S1]
+	(neighbour asteroid names:) []
+PLAYERSTORAGE (name:) ST1
+	(material names:) []
+	(teleporter names:) []
+SETTLER (name:) S1
+	(asteroid name:) A1
+	(storage name:) ST1
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 29
+LOST GAME
