@@ -40,6 +40,7 @@ public abstract class AbstractBaseResource implements IIdentifiable {
 
         asteroid.SetResource(null);
         iMiner.ReactToMoveMade();
+        ReactToGettingDestroyed();
 
         Logger.Return();
     }

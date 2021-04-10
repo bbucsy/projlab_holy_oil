@@ -244,7 +244,6 @@ public class Asteroid implements INeighbour {
             Logger.Log(this, "Resource reacting to mine");
             resource.ReactToMine(this, iMiner);
             Logger.Return();
-            resource.ReactToGettingDestroyed();
 
         }
 
