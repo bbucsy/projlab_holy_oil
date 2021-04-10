@@ -3,6 +3,7 @@ package hu.holyoil.controller;
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.*;
@@ -40,10 +41,6 @@ public class SunController implements ISteppable, IIdentifiable {
      * <p>körönként csökken,napvihar után újra sorsolódik</p>
      */
     private int turnsUntilNextSunstorm;
-    /**
-     * A pályán található összes aszteroidát tartalmazó lista
-     */
-    private List<Asteroid> asteroids;
 
     /**
      * Újraindítja a visszaszámláló turnsUntilNextSunstorm számlálót egy random számra 20 és 50 között
@@ -79,29 +76,9 @@ public class SunController implements ISteppable, IIdentifiable {
             RestartCountdown();
         }
 
-        List<Asteroid> asteroidsShallowCopy = new ArrayList<>(asteroids);
+        List<Asteroid> asteroidsShallowCopy = new ArrayList<>(AsteroidRepository.GetInstance().GetAll());
         asteroidsShallowCopy.forEach(Asteroid::ReactToSunNearby);
 
-        Logger.Return();
-    }
-
-    /**
-     * Hozzáad egy aszteroidát a számontartott aszteroidák listájához
-     * @param asteroid hozzáadja az asteroids tagváltozóhoz
-     */
-    public void AddAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Adding asteroid <" +  Logger.GetName(asteroid)+ ">");
-        asteroids.add(asteroid);
-        Logger.Return();
-    }
-
-    /**
-     * Töröl egy aszteroidát a számontartott aszteroidák listájáról
-     * @param asteroid törli az asteroids tagváltozóról
-     */
-    public void RemoveAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ ">");
-        asteroids.remove(asteroid);
         Logger.Return();
     }
 
@@ -111,6 +88,7 @@ public class SunController implements ISteppable, IIdentifiable {
      */
     public void StartSunstorm()  {
         Logger.Log(this,"Starting sunstorm");
+        List<Asteroid> asteroids = AsteroidRepository.GetInstance().GetAll();
 
         /* Collecting the asteroids to affect */
         Set<Asteroid> chosenAsteroids = new HashSet<>();
@@ -171,7 +149,6 @@ public class SunController implements ISteppable, IIdentifiable {
      */
     private SunController() {
         RestartCountdown();
-        asteroids = new ArrayList<>();
         id = "SunController";
     }
 

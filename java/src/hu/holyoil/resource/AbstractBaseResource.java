@@ -116,7 +116,9 @@ public abstract class AbstractBaseResource implements IIdentifiable {
     }
 
     public void ReactToGettingDestroyed() {
+        Logger.Log(this, "Removing me from Repository");
         ResourceBaseRepository.GetInstance().Remove(id);
+        Logger.Return();
     }
 
 }

@@ -77,6 +77,15 @@ public class PlayerStorage implements IIdentifiable {
      * A teleportereket tartalmazó lista. Egy játékosnál maximum kettő teleporter lehet.
      */
     private List<TeleportGate> teleporters;
+
+    /**
+     * Egyszerű getter a tárolt anyagok listájához
+     * @return tárolt anyagok
+     */
+    public List<AbstractBaseResource> GetStoredMaterials() {
+        return storedMaterials;
+    }
+
     /**
      * A tárolt nyersanyagok listája. Egy játékosnál egyszerre 10 nyersanyag lehet.
      */
@@ -124,10 +133,13 @@ public class PlayerStorage implements IIdentifiable {
      * */
     public void ReactToSettlerDie() {
 
-        storedMaterials.forEach(AbstractBaseResource::ReactToHomeDestroyed);
+        storedMaterials.forEach(AbstractBaseResource::ReactToGettingDestroyed);
         List<TeleportGate> teleportGatesShallowCopy = new ArrayList<>(teleporters);
         teleportGatesShallowCopy.forEach(TeleportGate::Explode);
+
+        Logger.Log(this, "Removing me from Repository");
         PlayerStorageBaseRepository.GetInstance().Remove(id);
+        Logger.Return();
 
     }
 

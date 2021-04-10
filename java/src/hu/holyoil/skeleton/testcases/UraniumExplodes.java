@@ -34,8 +34,6 @@ public class UraniumExplodes extends TestCase {
 
         Logger.RegisterObject(this, "TestFixture");
         asteroid.SetNumOfLayersRemaining(Logger.GetInteger(this, "How many layers does this asteroid have?"));
-        SunController.GetInstance().AddAsteroid(asteroid);
-        GameController.GetInstance().AddAsteroid(asteroid);
 
         asteroid.SetIsNearbySun(Logger.GetBoolean(this, "Is this asteroid nearby sun?"));
         uranium.SetHealth(Logger.GetInteger(this,"How many health does the uranium have?"));

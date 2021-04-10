@@ -55,8 +55,6 @@ public class Asteroid implements INeighbour {
         numOfLayersRemaining = 0;
         id = name;
         NeighbourBaseRepository.GetInstance().Add(name, this);
-        GameController.GetInstance().AddAsteroid(this);
-        SunController.GetInstance().AddAsteroid(this);
 
     }
 
@@ -522,20 +520,12 @@ public class Asteroid implements INeighbour {
 
         }
 
-        Logger.Log(this, "Removing me from GameController");
-        GameController.GetInstance().RemoveAsteroid(this);
-        Logger.Return();
-
-        Logger.Log(this, "Removing me from SunController");
-        SunController.GetInstance().RemoveAsteroid(this);
-        Logger.Return();
-
-        Logger.Log(this, "Removing me from InputOutputController");
+        Logger.Log(this, "Removing me from Repository");
         NeighbourBaseRepository.GetInstance().Remove(id);
         Logger.Return();
 
         if (resource != null) {
-            resource.ReactToHomeDestroyed();
+            resource.ReactToGettingDestroyed();
         }
 
         Logger.Return();
@@ -547,7 +537,7 @@ public class Asteroid implements INeighbour {
      * */
     public void RemoveNeighbouringAsteroid(Asteroid asteroid) {
 
-        Logger.Log(this, "Removing nehgbouring asteroid");
+        Logger.Log(this, "Removing neighbouring asteroid");
         neighbouringAsteroids.remove(asteroid);
         Logger.Return();
 
