@@ -120,7 +120,10 @@ public class AIController implements ISteppable {
     public void HandleUfo(Ufo ufo)  {
         Logger.Log(this,"Handle ufo <" +  Logger.GetName(ufo)+ ">");
 
-        ufo.Move(ufo.GetOnAsteroid().GetRandomNeighbour());
+        if(ufo.GetOnAsteroid().GetLayerCount() == 0 && ufo.GetOnAsteroid().GetResource() != null)
+            ufo.Mine();
+        else
+            ufo.Move(ufo.GetOnAsteroid().GetRandomNeighbour());
 
         // todo: proper intelligence
         Logger.Return();

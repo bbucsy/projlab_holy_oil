@@ -1,0 +1,33 @@
+ASTEROID (name:) a1
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [u1]
+	(neighbour asteroid names:) [a2]
+ASTEROID (name:) a2
+	(is near sun:) false
+	(layers left:) 5
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [u2]
+	(neighbour asteroid names:) [a1 a3]
+ASTEROID (name:) a3
+	(is near sun:) false
+	(layers left:) 5
+	(is discovered:) false
+	(resource name:) i2
+	(teleporter name:) null
+	(spaceship names:) []
+	(neighbour asteroid names:) [a2]
+IRON (name:) i1
+IRON (name:) i2
+UFO (name:) u1
+	(asteroid name:) a1
+UFO (name:) u2
+	(asteroid name:) a2
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 29
+LOST GAME

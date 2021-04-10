@@ -1,0 +1,20 @@
+echo_off
+disable_random
+
+create asteroid a1 0
+create asteroid a2 5 
+create asteroid a3 5
+
+create iron i1 a1
+create iron i2 a3 
+
+add_neighbour a1 a2
+add_neighbour a2 a3 
+
+create ufo u1 a1
+create ufo u2 a3
+
+
+step
+state
+exit
