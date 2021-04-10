@@ -1,11 +1,13 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A játékmenetet kezelő singleton osztály. Implementálja az ISteppable interfacet, amivel a köröket kezeli
@@ -95,6 +97,34 @@ public class GameController implements ISteppable  {
      */
     public void RemoveAsteroid(Asteroid asteroid)  {
         Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ ">");
+
+        for (Asteroid as: asteroids) {
+
+            // if this asteroid has only one neighbour and it is me
+            if (as.GetNeighbours().contains(asteroid) && as.GetNeighbours().size() == 1) {
+
+                Random random = new Random();
+
+                int chosenId = 0;
+                if (Main.isRandomEnabled)
+                    chosenId = random.nextInt(asteroids.size());
+
+                // we search for a random asteroid
+                while (asteroids.get(chosenId).equals(asteroid) || asteroids.get(chosenId).equals(asteroid)) {
+                    if (Main.isRandomEnabled)
+                        chosenId = random.nextInt(asteroids.size());
+                    else
+                        chosenId++;
+                }
+
+                // and make them neighbours
+                asteroids.get(chosenId).AddNeighbourAsteroid(as);;
+                as.AddNeighbourAsteroid(asteroids.get(chosenId));
+
+            }
+
+        }
+
         asteroids.remove(asteroid);
         Logger.Return();
     }
