@@ -1,0 +1,33 @@
+echo_off
+disable_random
+create asteroid A1 5 false true
+create asteroid A2 5 false true
+create asteroid A3 5 false true
+create asteroid A4 5 false true
+create asteroid A5 5 false true
+create asteroid A6 5 false true
+create settler S1 A2
+create storage ST1 S1
+create uranium U1 A1 3
+create uranium U2 A2 3
+create uranium U3 A3 3
+create coal C1 A4
+create coal C2 A5
+create coal C3 A6
+create water W1 ST1 
+create water W2 ST1 
+create water W3 ST1 
+create iron I1 ST1 
+create iron I2 ST1 
+create iron I3 ST1 
+add_neighbour A1 A2
+add_neighbour A1 A3
+add_neighbour A1 A4
+add_neighbour A1 A5
+add_neighbour A1 A6
+add_neighbour A2 A3
+explode_asteroid A6
+step
+
+state
+exit

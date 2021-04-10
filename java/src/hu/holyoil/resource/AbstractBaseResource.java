@@ -40,6 +40,7 @@ public abstract class AbstractBaseResource implements IIdentifiable {
 
         asteroid.SetResource(null);
         iMiner.ReactToMoveMade();
+        ReactToGettingDestroyed();
 
         Logger.Return();
     }
@@ -116,7 +117,9 @@ public abstract class AbstractBaseResource implements IIdentifiable {
     }
 
     public void ReactToGettingDestroyed() {
+        Logger.Log(this, "Removing me from Repository");
         ResourceBaseRepository.GetInstance().Remove(id);
+        Logger.Return();
     }
 
 }

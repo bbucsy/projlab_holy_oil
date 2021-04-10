@@ -1,0 +1,11 @@
+echo_off
+disable_random
+create asteroid a1
+create asteroid a2
+create teleportpair t1 t2 a1 a2
+
+add_neighbour a1 a2
+explode_asteroid a1
+
+state
+exit

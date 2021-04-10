@@ -6,7 +6,7 @@ import hu.holyoil.crewmate.IStorageCapable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageCapableRepository implements IReadWriteRepository<IStorageCapable> {
+public class StorageCapableRepository implements IReadRepository<IStorageCapable> {
 
     private static StorageCapableRepository storageCapableRepository;
 
@@ -22,12 +22,6 @@ public class StorageCapableRepository implements IReadWriteRepository<IStorageCa
 
     private StorageCapableRepository() {
 
-    }
-
-    @Override
-    public void Add(String name, IStorageCapable element) {
-        // Cannot add IStorageCapable directly
-        // Does nothing
     }
 
     @Override
@@ -52,11 +46,5 @@ public class StorageCapableRepository implements IReadWriteRepository<IStorageCa
         }
 
         return toReturn;
-    }
-
-    @Override
-    public void Remove(String id) {
-        // Cannot remove IStorageCapable directly
-        // Does nothing
     }
 }
