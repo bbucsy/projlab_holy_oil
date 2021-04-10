@@ -2,6 +2,7 @@ package hu.holyoil.controller;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
+import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -74,6 +75,9 @@ public class SunController implements ISteppable, IIdentifiable {
             StartSunstorm();
             RestartCountdown();
         }
+
+        List<Asteroid> asteroidsShallowCopy = new ArrayList<>(asteroids);
+        asteroidsShallowCopy.forEach(Asteroid::ReactToSunNearby);
 
         Logger.Return();
     }

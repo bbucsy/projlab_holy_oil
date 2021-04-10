@@ -13,6 +13,7 @@ import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SpaceshipBaseRepository;
+import hu.holyoil.skeleton.Logger;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class InputOutputController {
     public static InputOutputController GetInstance() {
         if (inputOutputController == null) {
             inputOutputController = new InputOutputController();
+        }
+
+        if (Logger.GetName(inputOutputController) == null) {
+            Logger.RegisterObject(inputOutputController, ": InputOutputController");
         }
 
         return inputOutputController;
@@ -43,6 +48,14 @@ public class InputOutputController {
 
             String[] command = line.split(" ");
             switch (command[0]) {
+                case "echo_off": {
+                    Logger.SetEnabled(false);
+                    break;
+                }
+                case "echo_on": {
+                    Logger.SetEnabled(true);
+                    break;
+                }
                 case "do": {
                     isRunning = new DoCommandHandler().Handle(line);
                     break;
@@ -78,6 +91,7 @@ public class InputOutputController {
                     break;
                 }
                 case "state": {
+                    Logger.SetEnabled(true);
                     isRunning = new StateCommandHandler().Handle(line);
                     break;
                 }

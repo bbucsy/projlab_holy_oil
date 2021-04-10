@@ -1,8 +1,10 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.SettlerRepository;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class PlayerStorageCreateCommandHandler implements ICommandHandler {
@@ -30,9 +32,11 @@ public class PlayerStorageCreateCommandHandler implements ICommandHandler {
         }
 
         PlayerStorage playerStorage = new PlayerStorage(name);
+        Logger.Log(InputOutputController.GetInstance(), "CREATE " + name);
 
         settler.SetStorage(playerStorage);
 
+        Logger.Return();
         return true;
     }
 }

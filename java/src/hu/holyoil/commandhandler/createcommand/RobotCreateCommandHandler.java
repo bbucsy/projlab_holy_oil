@@ -1,9 +1,11 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
+import hu.holyoil.skeleton.Logger;
 
 public class RobotCreateCommandHandler implements ICommandHandler {
     @Override
@@ -30,6 +32,8 @@ public class RobotCreateCommandHandler implements ICommandHandler {
         }
 
         Robot robot = new Robot(asteroid, name);
+        Logger.Log(InputOutputController.GetInstance(), "CREATE " + name);
+        Logger.Return();
 
         return true;
     }

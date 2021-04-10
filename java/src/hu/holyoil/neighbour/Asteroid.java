@@ -55,6 +55,8 @@ public class Asteroid implements INeighbour {
         numOfLayersRemaining = 0;
         id = name;
         NeighbourBaseRepository.GetInstance().Add(name, this);
+        GameController.GetInstance().AddAsteroid(this);
+        SunController.GetInstance().AddAsteroid(this);
 
     }
 
@@ -424,12 +426,12 @@ public class Asteroid implements INeighbour {
     public void AddNeighbourAsteroid(Asteroid asteroid) {
 
         if (neighbouringAsteroids.contains(asteroid)) {
-            Logger.Log(this, "Asteroid " + asteroid + " already my neighbour");
+            Logger.Log(this, "Asteroid " + Logger.GetName(asteroid) + " already my neighbour");
             Logger.Return();
             return;
         }
 
-        Logger.Log(this, "Adding asteroid " + asteroid + " to my neighbours");
+        Logger.Log(this, "Adding asteroid " + Logger.GetName(asteroid) + " to my neighbours");
         neighbouringAsteroids.add(asteroid);
         Logger.Return();
 

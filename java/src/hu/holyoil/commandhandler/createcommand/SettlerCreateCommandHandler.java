@@ -1,10 +1,12 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.SettlerRepository;
+import hu.holyoil.skeleton.Logger;
 
 public class SettlerCreateCommandHandler implements ICommandHandler {
     @Override
@@ -31,7 +33,10 @@ public class SettlerCreateCommandHandler implements ICommandHandler {
         }
 
         Settler settler = new Settler(asteroid, name);
+
+        Logger.Log(InputOutputController.GetInstance(), "CREATE " + name);
         settler.DestroyStorage();
+        Logger.Return();
 
         return true;
     }

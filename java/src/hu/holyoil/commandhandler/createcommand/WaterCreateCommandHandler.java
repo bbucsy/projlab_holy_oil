@@ -2,10 +2,12 @@ package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.resource.Water;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class WaterCreateCommandHandler implements ICommandHandler {
@@ -24,6 +26,7 @@ public class WaterCreateCommandHandler implements ICommandHandler {
         String name = commandParams[2];
 
         Water water = new Water(name);
+        Logger.Log(InputOutputController.GetInstance(), "CREATE " + name);
 
         Asteroid asteroid = AsteroidRepository.GetInstance().Get(commandParams[3]);
 
@@ -65,6 +68,7 @@ public class WaterCreateCommandHandler implements ICommandHandler {
 
         }
 
+        Logger.Return();
         return true;
     }
 }

@@ -1,7 +1,8 @@
 package hu.holyoil;
 
 import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
-import hu.holyoil.controller.InputOutputController;
+import hu.holyoil.controller.*;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.skeleton.TestFramework;
 
 /**
@@ -36,6 +37,14 @@ public class Main {
             TestFramework.getInstance().AddTestcases();
             TestFramework.getInstance().RunTestcases();
         }
+
+        // Making sure every controller already existing
+        Logger.SetEnabled(false);
+        SunController.GetInstance();
+        AIController.GetInstance();
+        GameController.GetInstance();
+        TurnController.GetInstance();
+        Logger.SetEnabled(true);
 
         InputOutputController.GetInstance().ParseCommand(System.in);
         System.out.println("Closing application");

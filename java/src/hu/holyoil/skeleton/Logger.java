@@ -96,7 +96,7 @@ public final class Logger {
     public static void Log(Object caller, String msg){
         if (!enabled) return;
         if(!objectNames.containsKey(caller)){
-            System.out.println("Unregistered object calling");
+            System.out.println("Unregistered object calling" + caller.getClass().getName());
             return;
         }
         print(objectNames.get(caller)+": -> " + msg + "\n", indentation++);
@@ -120,7 +120,7 @@ public final class Logger {
      */
     public static int GetInteger(Object caller, String msg){
         if(!objectNames.containsKey(caller)){
-            System.out.println("Unregistered object calling");
+            System.out.println("Unregistered object calling: ");
             return 0;
         }
 

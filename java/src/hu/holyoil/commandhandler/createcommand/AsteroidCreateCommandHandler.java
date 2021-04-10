@@ -1,7 +1,9 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.skeleton.Logger;
 
 public class AsteroidCreateCommandHandler implements ICommandHandler {
     @Override
@@ -12,6 +14,7 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
         String name = commandParams[2];
 
         Asteroid asteroid = new Asteroid(name);
+        Logger.Log(InputOutputController.GetInstance(), "CREATE " + name);
 
         if (commandParams.length > 3) {
 
@@ -69,6 +72,7 @@ public class AsteroidCreateCommandHandler implements ICommandHandler {
 
         }
 
+        Logger.Return();
         return true;
     }
 }

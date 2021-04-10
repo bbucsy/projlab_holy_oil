@@ -1,11 +1,13 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.AbstractBaseRepository;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
+import hu.holyoil.skeleton.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class TeleportpairCreateCommandHandler implements ICommandHandler {
@@ -53,6 +55,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
         }
 
         TeleportGate t1 = new TeleportGate(name1), t2 = new TeleportGate(name2);
+        Logger.Log(InputOutputController.GetInstance(), "CREATE " + name1 + " and " + name2);
         t1.SetPair(t2);
         t2.SetPair(t1);
 
@@ -146,6 +149,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
 
         }
 
+        Logger.Return();
         return true;
 
     }

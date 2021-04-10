@@ -47,18 +47,18 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     }
 
     public Settler(Asteroid asteroid, String name, String storageName) {
-
         id = name;
         if (storageName == null) {
             storage = new PlayerStorage();
-        } else {
+        }
+        else {
             storage = new PlayerStorage(storageName);
         }
         onAsteroid = asteroid;
-        onAsteroid.AddSpaceship(this);
+
         SpaceshipBaseRepository.GetInstance().Add(name, this);
         TurnController.GetInstance().RegisterEntityWithAction(this);
-
+        onAsteroid.AddSpaceship(this);
     }
 
 
