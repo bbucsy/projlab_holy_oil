@@ -1,0 +1,16 @@
+echo_off
+
+create asteroid a1
+create asteroid a2
+create asteroid a3
+
+add_neighbour a1 a2
+add_neighbour a2 a3 
+
+create robot r1 a1
+create robot r2 a3
+
+step
+
+state
+exit

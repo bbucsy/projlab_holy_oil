@@ -1,0 +1,30 @@
+ASTEROID (name:) a1
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) []
+	(neighbour asteroid names:) [a2]
+ASTEROID (name:) a2
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) true
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [r1 r2]
+	(neighbour asteroid names:) [a1 a3]
+ASTEROID (name:) a3
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) []
+	(neighbour asteroid names:) [a2]
+ROBOT (name:) r2
+	(asteroid name:) a2
+ROBOT (name:) r1
+	(asteroid name:) a2
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 29
