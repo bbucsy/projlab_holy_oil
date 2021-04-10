@@ -1,0 +1,10 @@
+in:
+create asteroid a1
+create settler s1 a1
+create playerstorage ps1 s1
+create ufo u1 a1
+explode_asteroid a1
+state
+
+out:
+SUNCONTROLLER ??

@@ -1,0 +1,16 @@
+in:
+create asteroid a1
+create settler s1 a1
+create playerstorage ps1 s1
+create ufo u1 a1
+create playerstorage ps2 u1
+create robot r1 a1
+create teleportpair t1 t2 a1 ps1
+add_neighbour a1 a2 //nem feltétlenül kell?
+asteroid_explode a1
+state
+
+out:
+SUNCONTROLLER ??
+ROBOT r1 a2
+ASTEROID a2 false 5 null null [r1]

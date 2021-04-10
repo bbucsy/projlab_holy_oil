@@ -1,0 +1,11 @@
+in:
+create asteroid a1
+create asteroid a2
+add_neighbour a1 a2
+create teleportpair t1 t2 a1 a2
+explode_asteroid a1
+state
+
+out:
+SUNCONTROLLER ??
+asteroid a2 false 5 null null
