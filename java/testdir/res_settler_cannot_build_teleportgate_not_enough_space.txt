@@ -1,0 +1,31 @@
+ASTEROID (name:) a1
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [s1]
+	(neighbour asteroid names:) []
+TELEPORTGATE (name:) tp1
+	(is crazy:) false
+	(pair name:) tp2
+	(asteroid name:) null
+	(storage name:) storage1
+TELEPORTGATE (name:) tp2
+	(is crazy:) false
+	(pair name:) tp1
+	(asteroid name:) null
+	(storage name:) storage1
+PLAYERSTORAGE (name:) storage1
+	(material names:) [u1 i1 i2 w1]
+	(teleporter names:) [tp1 tp2]
+IRON (name:) i1
+IRON (name:) i2
+WATER (name:) w1
+URANIUM (name:) u1
+	(health:) 3
+SETTLER (name:) s1
+	(asteroid name:) a1
+	(storage name:) storage1
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 35
