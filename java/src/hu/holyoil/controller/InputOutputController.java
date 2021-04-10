@@ -91,8 +91,10 @@ public class InputOutputController {
                     break;
                 }
                 case "state": {
+                    boolean temp = Logger.IsEnabled();
                     Logger.SetEnabled(true);
                     isRunning = new StateCommandHandler().Handle(line);
+                    Logger.SetEnabled(temp);
                     break;
                 }
                 case "exit": {

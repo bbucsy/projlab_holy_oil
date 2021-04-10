@@ -33,7 +33,7 @@ public class SunController implements ISteppable, IIdentifiable {
 
     @Override
     public String toString() {
-        return "SUNCONTROLLER (name:)" + id + " (turns until next sunstorm:)" + turnsUntilNextSunstorm;
+        return "SUNCONTROLLER (name:) " + id + "\n\t(turns until next sunstorm:) " + turnsUntilNextSunstorm;
     }
 
     /**

@@ -59,6 +59,14 @@ public final class Logger {
     }
 
     /**
+     * Visszaadja, be van-e kapcsolva a `Log()`-ok meghívásakor való kiírás
+     * @return a Logger ír-e ki szöveget
+     */
+    public static boolean IsEnabled(){
+        return enabled;
+    }
+
+    /**
      * Eltárolja egy objektumról, hogy a milyen névvel jelenjen meg a teszteset outputjában.
      * Egy objektumnak csak egy neve lehet.
      * @param o Az objektum aminek a nevét tároljuk

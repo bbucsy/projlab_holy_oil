@@ -65,21 +65,21 @@ public class Asteroid implements INeighbour {
      * */
     @Override
     public String toString() {
-        StringBuilder toReturn = new StringBuilder("ASTEROID (name:)" + id
-                + " (is near sun:)" + isNearSun
-                + " (layers left:)" + numOfLayersRemaining
-                + " (is discovered:)" + isDiscovered
-                + " (resource name:)" + (resource == null ? "null" : resource.GetId())
-                + " (teleporter name:)" + (teleporter == null ? "null" : teleporter.GetId()));
+        StringBuilder toReturn = new StringBuilder("ASTEROID (name:) " + id
+                + "\n\t(is near sun:) " + isNearSun
+                + "\n\t(layers left:) " + numOfLayersRemaining
+                + "\n\t(is discovered:) " + isDiscovered
+                + "\n\t(resource name:) " + (resource == null ? "null" : resource.GetId())
+                + "\n\t(teleporter name:) " + (teleporter == null ? "null" : teleporter.GetId()));
 
-        toReturn.append(" (spaceship names:)[");
+        toReturn.append("\n\t(spaceship names:) [");
         for (int i = 0; i < spaceships.size(); i++) {
             toReturn.append(spaceships.get(i).GetId());
             if (i != spaceships.size() - 1) {
                 toReturn.append(" ");
             }
         }
-        toReturn.append("] (neighbour asteroid names:)[");
+        toReturn.append("]\n\t(neighbour asteroid names:) [");
         for (int i = 0; i < neighbouringAsteroids.size(); i++) {
             toReturn.append(neighbouringAsteroids.get(i).GetId());
             if (i != neighbouringAsteroids.size() - 1) {

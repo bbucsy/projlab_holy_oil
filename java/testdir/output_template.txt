@@ -1,0 +1,42 @@
+# You can find the output templates for entities after calling the command `state`.
+
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) #
+
+ASTEROID (name:) ?
+	(is near sun:) true/false
+	(layers left:) #
+	(is discovered:) true/false
+	(resource name:) ?/null
+	(teleporter name:) ?/null
+	(spaceship names:) []
+	(neighbour asteroid names:) []
+
+TELEPORTGATE (name:) ?
+	(is crazy:) true/false
+	(pair name:) ?
+	(asteroid name:) ?/null
+	(storage name:) ?/null
+
+IRON (name:) ?
+
+WATER (name:) ?
+
+COAL (name:) ?
+
+URANIUM (name:) ?
+	(health:) #
+
+PLAYERSTORAGE (name:) ?
+	(material names:) []
+	(teleporter names:) []
+
+SETTLER (name:) ?
+	(asteroid name:) ?
+	(storage name:) ?
+
+ROBOT (name:) ?
+	(asteroid name:) ?
+
+UFO (name:) ?
+	(asteroid name:) ?

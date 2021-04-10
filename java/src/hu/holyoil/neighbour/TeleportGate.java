@@ -48,11 +48,11 @@ public class TeleportGate implements INeighbour {
      * */
     @Override
     public String toString() {
-        return "TELEPORTGATE (name:)" + id
-                + " (is crazy:)" + isCrazy
-                + " (pair name:)" + pair.GetId()
-                + " (asteroid name:)" + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
-                + " (storage name:)" + (homeStorage == null ? "null" : homeStorage.GetId());
+        return "TELEPORTGATE (name:) " + id
+                + "\n\t(is crazy:) " + isCrazy
+                + "\n\t(pair name:) " + pair.GetId()
+                + "\n\t(asteroid name:) " + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
+                + "\n\t(storage name:) " + (homeStorage == null ? "null" : homeStorage.GetId());
     }
 
     /**

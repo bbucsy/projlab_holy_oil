@@ -19,7 +19,7 @@ public class Robot extends AbstractCrewmate {
      * */
     @Override
     public String toString() {
-        return "ROBOT (name:)" + id + " (asteroid name:)" + onAsteroid.GetId();
+        return "ROBOT (name:) " + id + "\n\t(asteroid name:) " + onAsteroid.GetId();
     }
 
     /**

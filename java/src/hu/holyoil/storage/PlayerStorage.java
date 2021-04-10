@@ -51,17 +51,17 @@ public class PlayerStorage implements IIdentifiable {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(
-                "PLAYERSTORAGE (name:)" + id
+                "PLAYERSTORAGE (name:) " + id
         );
 
-        stringBuilder.append(" (material names:)[");
+        stringBuilder.append("\n\t(material names:) [");
         for (int i = 0; i < storedMaterials.size(); i++) {
             stringBuilder.append(storedMaterials.get(i).GetId());
             if (i != storedMaterials.size() - 1) {
                 stringBuilder.append(" ");
             }
         }
-        stringBuilder.append("] (teleporter names:)[");
+        stringBuilder.append("]\n\t(teleporter names:) [");
         for (int i = 0; i < teleporters.size(); i++) {
             stringBuilder.append(teleporters.get(i).GetId());
             if (i != teleporters.size() - 1) {

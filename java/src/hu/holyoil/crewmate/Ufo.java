@@ -32,7 +32,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
      * */
     @Override
     public String toString() {
-        return "UFO (name:)" + id + " (asteroid name:)" + onAsteroid.GetId();
+        return "UFO (name:) " + id + "\n\t(asteroid name:) " + onAsteroid.GetId();
     }
 
     /**
