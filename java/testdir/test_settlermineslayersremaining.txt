@@ -5,7 +5,7 @@ create uranium U1 A1 3
 create settler S1 A1
 create storage ST1 S1
 
-so S1 Mine
+do S1 Mine
 step
 
 state

@@ -1,5 +1,6 @@
+echo_off
 disable_random
-create asteroid A1
+create asteroid A1 5 false true
 create asteroid A2 0
 create robot R1 A1
 add_neighbour A1 A2

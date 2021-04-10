@@ -3,15 +3,14 @@ disable_random
 create asteroid A1 5 false false
 create asteroid A2 0 false false
 create settler S1 A1
+create storage ST1 S1
 add_neighbour A1 A2
-add_neighbour A2 A1
 
 do S1 Drill
 step
 do S1 Move A2
 step
 do S1 Drill
-step
 
 state
 exit

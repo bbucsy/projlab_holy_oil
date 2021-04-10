@@ -1,0 +1,23 @@
+-------- STATE --------
+ASTEROID (name:) A1
+	(is near sun:) false
+	(layers left:) 4
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) []
+	(neighbour asteroid names:) [A2]
+ASTEROID (name:) A2
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) true
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [R1]
+	(neighbour asteroid names:) [A1]
+ROBOT (name:) R1
+	(asteroid name:) A2
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 30
+------ STATE END ------
+Closing application

@@ -1,0 +1,21 @@
+-------- STATE --------
+ASTEROID (name:) A1
+	(is near sun:) false
+	(layers left:) 5
+	(is discovered:) false
+	(resource name:) U1
+	(teleporter name:) null
+	(spaceship names:) [S1]
+	(neighbour asteroid names:) []
+PLAYERSTORAGE (name:) ST1
+	(material names:) []
+	(teleporter names:) []
+URANIUM (name:) U1
+	(health:) 3
+SETTLER (name:) S1
+	(asteroid name:) A1
+	(storage name:) ST1
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 49
+------ STATE END ------
+Closing application

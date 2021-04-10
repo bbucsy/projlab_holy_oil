@@ -16,7 +16,6 @@ create uranium U10 ST1 3
 create uranium U11 ST1 3
 
 do S1 mine
-step
 
 state
 exit
