@@ -1,6 +1,5 @@
 package hu.holyoil.controller;
 
-import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.commandhandler.addneighbourcommand.AddNeighbourCommandHandler;
 import hu.holyoil.commandhandler.createcommand.CreateCommandHandler;
@@ -9,14 +8,9 @@ import hu.holyoil.commandhandler.docommand.DoCommandHandler;
 import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
-import hu.holyoil.repository.NeighbourBaseRepository;
-import hu.holyoil.repository.PlayerStorageBaseRepository;
-import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.skeleton.Logger;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputOutputController {
@@ -88,6 +82,7 @@ public class InputOutputController {
                 }
                 case "disable_random": {
                     Main.isRandomEnabled = false;
+                    SunController.GetInstance().SetCountdown(30);
                     break;
                 }
                 case "state": {

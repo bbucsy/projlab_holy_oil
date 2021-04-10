@@ -2,7 +2,6 @@ package hu.holyoil.controller;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
-import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.skeleton.Logger;
 
@@ -61,6 +60,10 @@ public class SunController implements ISteppable, IIdentifiable {
 
         Random random = new Random();
         turnsUntilNextSunstorm = random.nextInt(50 - 20 + 1) + 20;
+    }
+
+    public void SetCountdown(int newCountdown) {
+        turnsUntilNextSunstorm = newCountdown;
     }
 
     /**
