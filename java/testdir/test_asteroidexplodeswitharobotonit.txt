@@ -1,0 +1,11 @@
+echo_off
+disable_random
+create asteroid a1
+create asteroid a2
+create robot r1 a1ű
+
+add_neighbour a1 a2
+explode_asteroid a1
+
+state
+exit
