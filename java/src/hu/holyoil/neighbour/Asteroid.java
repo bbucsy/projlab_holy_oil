@@ -477,7 +477,8 @@ public class Asteroid implements INeighbour {
     public void KillAllSpaceships() {
 
         Logger.Log(this, "Killing all spaceships");
-        spaceships.forEach(AbstractSpaceship::Die);
+        List<AbstractSpaceship> abstractSpaceshipsShallowCopy = new LinkedList<>(spaceships);
+        abstractSpaceshipsShallowCopy.forEach(AbstractSpaceship::Die);
         Logger.Return();
     }
 
