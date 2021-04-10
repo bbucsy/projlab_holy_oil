@@ -1,0 +1,24 @@
+ASTEROID (name:) a1
+	(is near sun:) false
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) [s1 s2]
+	(neighbour asteroid names:) []
+PLAYERSTORAGE (name:) storage1
+	(material names:) []
+	(teleporter names:) []
+PLAYERSTORAGE (name:) storage2
+	(material names:) [u1]
+	(teleporter names:) []
+URANIUM (name:) u1
+	(health:) 3
+SETTLER (name:) s1
+	(asteroid name:) a1
+	(storage name:) storage1
+SETTLER (name:) s2
+	(asteroid name:) a1
+	(storage name:) storage2
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 30
