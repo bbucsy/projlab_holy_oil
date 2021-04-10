@@ -2,10 +2,13 @@ package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A játékmenetet kezelő singleton osztály. Implementálja az ISteppable interfacet, amivel a köröket kezeli
@@ -26,6 +29,18 @@ public class GameController implements ISteppable  {
      * <p>ép: nem robbant fel</p>
      */
     private List<Asteroid> asteroids;
+    /**
+     * A játék jelenlegi állása: running, lost vagy won
+     */
+    private GameState gameState = GameState.RUNNING;
+
+    /**
+     * Visszaadja a kiírás érdekében a jelenlegi állást
+     * @return játékállás
+     */
+    public GameState GetGameState() {
+        return gameState;
+    }
 
     /**
      * Lépteti a köröket
@@ -44,11 +59,89 @@ public class GameController implements ISteppable  {
     }
 
     /**
+     * Belső osztály a nyersanyag leszámolások megoldására
+     */
+    class CounterVector {
+        long coalCount;
+        long ironCount;
+        long uraniumCount;
+        long waterCount;
+
+        /**
+         * Összeszámolja a kollekcióban található elemeket külön-külön
+         * @param collection a kollekció, ami a nyersanyagokat tartalmazza
+         */
+        private void CountResourcesSeparately(List<AbstractBaseResource> collection) {
+            coalCount = collection
+                    .stream()
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Coal()))
+                    .count();
+            ironCount = collection
+                    .stream()
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Iron()))
+                    .count();
+            uraniumCount = collection
+                    .stream()
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Uranium()))
+                    .count();
+            waterCount = collection
+                    .stream()
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Water()))
+                    .count();
+        }
+
+        /**
+         * Kiszámolja és egy tömbben visszaadja az egyes nyersanyagtípusokból a játékban lévő mennyiséget
+         */
+        private void CountInGameResources() {
+            List<AbstractBaseResource> collection = asteroids
+                    .stream()
+                    .map(Asteroid::GetResource)
+                    .collect(Collectors.toList());
+
+            settlers
+                    .stream()
+                    .map(settler -> settler.GetStorage().GetStoredMaterials())
+                    .forEach(collection::addAll);
+
+            CountResourcesSeparately(collection);
+        }
+
+        private void CountAsteroidsResources(Asteroid asteroid) {
+            List<AbstractBaseResource> collection = new LinkedList<>();
+            settlers
+                    .stream()
+                    .filter(settler -> settler.GetOnAsteroid() == asteroid)
+                    .map(settler -> settler.GetStorage().GetStoredMaterials())
+                    .forEach(collection::addAll);
+
+            CountResourcesSeparately(collection);
+        }
+
+        /**
+         * Visszaadja, képesek-e a telepesek még nyerni, van-e annyi anyag a terepen, amivel megnyerhető a játék
+         * @return megnyerhetősége a játéknak
+         */
+        public boolean CanWin() {
+            return coalCount >= 3 && ironCount >= 3 && uraniumCount >= 3 && waterCount >= 3;
+        }
+    }
+
+    /**
      * Minden kör végén ellenőrzi megnyerték-e a játékot a telepesek
      */
     public void CheckWinCondition()  {
         Logger.Log(this,"Checking win condition");
-        // todo
+
+        for (Asteroid asteroid : asteroids) {
+            CounterVector counterVector = new CounterVector();
+            counterVector.CountAsteroidsResources(asteroid);
+            if (counterVector.CanWin()) {
+                gameState = GameState.WON_GAME;
+                break;
+            }
+        }
+
         Logger.Return();
     }
 
@@ -57,7 +150,11 @@ public class GameController implements ISteppable  {
      */
     public void CheckLoseCondition()  {
         Logger.Log(this,"Checking loose condition");
-        // todo
+
+        if (settlers.size() == 0) {
+            gameState = GameState.LOST_GAME;
+        }
+
         Logger.Return();
     }
 
@@ -66,8 +163,15 @@ public class GameController implements ISteppable  {
      */
     public void CheckGameCondition()  {
         Logger.Log(this,"Checking game condition");
-        // todo
-        Logger.Return(); }
+
+        CounterVector counterVector = new CounterVector();
+        counterVector.CountInGameResources();
+        if (!counterVector.CanWin()) {
+            gameState = GameState.LOST_GAME;
+        }
+
+        Logger.Return();
+    }
 
     /**
      * elindítja a játékot.

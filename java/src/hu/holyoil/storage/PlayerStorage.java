@@ -77,6 +77,15 @@ public class PlayerStorage implements IIdentifiable {
      * A teleportereket tartalmazó lista. Egy játékosnál maximum kettő teleporter lehet.
      */
     private List<TeleportGate> teleporters;
+
+    /**
+     * Egyszerű getter a tárolt anyagok listájához
+     * @return tárolt anyagok
+     */
+    public List<AbstractBaseResource> GetStoredMaterials() {
+        return storedMaterials;
+    }
+
     /**
      * A tárolt nyersanyagok listája. Egy játékosnál egyszerre 10 nyersanyag lehet.
      */
