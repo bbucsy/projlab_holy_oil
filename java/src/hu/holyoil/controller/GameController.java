@@ -96,6 +96,7 @@ public class GameController implements ISteppable  {
         private void CountInGameResources() {
             List<AbstractBaseResource> collection = asteroids
                     .stream()
+                    .filter(asteroid -> asteroid.GetResource() != null)
                     .map(Asteroid::GetResource)
                     .collect(Collectors.toList());
 
@@ -133,12 +134,14 @@ public class GameController implements ISteppable  {
     public void CheckWinCondition()  {
         Logger.Log(this,"Checking win condition");
 
-        for (Asteroid asteroid : asteroids) {
-            CounterVector counterVector = new CounterVector();
-            counterVector.CountAsteroidsResources(asteroid);
-            if (counterVector.CanWin()) {
-                gameState = GameState.WON_GAME;
-                break;
+        if (gameState == GameState.RUNNING) {
+            for (Asteroid asteroid : asteroids) {
+                CounterVector counterVector = new CounterVector();
+                counterVector.CountAsteroidsResources(asteroid);
+                if (counterVector.CanWin()) {
+                    gameState = GameState.WON_GAME;
+                    break;
+                }
             }
         }
 
@@ -151,8 +154,10 @@ public class GameController implements ISteppable  {
     public void CheckLoseCondition()  {
         Logger.Log(this,"Checking loose condition");
 
-        if (settlers.size() == 0) {
-            gameState = GameState.LOST_GAME;
+        if (gameState == GameState.RUNNING) {
+            if (settlers.size() == 0) {
+                gameState = GameState.LOST_GAME;
+            }
         }
 
         Logger.Return();
@@ -164,10 +169,12 @@ public class GameController implements ISteppable  {
     public void CheckGameCondition()  {
         Logger.Log(this,"Checking game condition");
 
-        CounterVector counterVector = new CounterVector();
-        counterVector.CountInGameResources();
-        if (!counterVector.CanWin()) {
-            gameState = GameState.LOST_GAME;
+        if (gameState == GameState.RUNNING) {
+            CounterVector counterVector = new CounterVector();
+            counterVector.CountInGameResources();
+            if (!counterVector.CanWin()) {
+                gameState = GameState.LOST_GAME;
+            }
         }
 
         Logger.Return();

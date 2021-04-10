@@ -133,7 +133,7 @@ public class PlayerStorage implements IIdentifiable {
      * */
     public void ReactToSettlerDie() {
 
-        storedMaterials.forEach(AbstractBaseResource::ReactToHomeDestroyed);
+        storedMaterials.forEach(AbstractBaseResource::ReactToGettingDestroyed);
         List<TeleportGate> teleportGatesShallowCopy = new ArrayList<>(teleporters);
         teleportGatesShallowCopy.forEach(TeleportGate::Explode);
         PlayerStorageBaseRepository.GetInstance().Remove(id);

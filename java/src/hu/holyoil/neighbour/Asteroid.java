@@ -535,7 +535,7 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
         if (resource != null) {
-            resource.ReactToHomeDestroyed();
+            resource.ReactToGettingDestroyed();
         }
 
         Logger.Return();
