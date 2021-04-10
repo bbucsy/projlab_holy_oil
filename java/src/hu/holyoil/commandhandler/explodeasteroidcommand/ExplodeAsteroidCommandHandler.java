@@ -12,12 +12,14 @@ public class ExplodeAsteroidCommandHandler implements ICommandHandler {
             System.out.println("Invalid number of arguments");
             return false;
         }
-        Asteroid asteroid = AsteroidRepository.GetInstance().Get(commandParams[1]);
-        if (asteroid == null) {
-            System.out.println("No Asteroid exists with id: " + commandParams[1]);
-            return false;
+        for (int i = 1; i < commandParams.length; i++) {
+            Asteroid asteroid = AsteroidRepository.GetInstance().Get(commandParams[i]);
+            if (asteroid == null) {
+                System.out.println("No Asteroid exists with id: " + commandParams[i]);
+                return false;
+            }
+            asteroid.Explode();
         }
-        asteroid.Explode();
         return true;
     }
 }

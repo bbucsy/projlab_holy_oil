@@ -1,0 +1,10 @@
+ASTEROID (name:) a1
+	(is near sun:) true
+	(layers left:) 0
+	(is discovered:) false
+	(resource name:) null
+	(teleporter name:) null
+	(spaceship names:) []
+	(neighbour asteroid names:) []
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 29

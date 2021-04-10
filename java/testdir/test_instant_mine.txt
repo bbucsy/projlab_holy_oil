@@ -1,0 +1,14 @@
+echo_off
+disable_random
+create asteroid a1 1
+create uranium resu1 a1
+create settler s1 a1
+create settler s2 a1
+create storage ps1 s1
+create storage ps2 s2
+
+do s1 drill
+do s2 mine
+
+state
+exit

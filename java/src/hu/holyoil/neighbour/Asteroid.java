@@ -477,7 +477,8 @@ public class Asteroid implements INeighbour {
     public void KillAllSpaceships() {
 
         Logger.Log(this, "Killing all spaceships");
-        spaceships.forEach(AbstractSpaceship::Die);
+        List<AbstractSpaceship> abstractSpaceshipsShallowCopy = new LinkedList<>(spaceships);
+        abstractSpaceshipsShallowCopy.forEach(AbstractSpaceship::Die);
         Logger.Return();
     }
 
@@ -521,7 +522,7 @@ public class Asteroid implements INeighbour {
         }
 
         Logger.Log(this, "Removing me from Repository");
-        NeighbourBaseRepository.GetInstance().Remove(id);
+        AsteroidRepository.GetInstance().Remove(id);
         Logger.Return();
 
         if (resource != null) {
