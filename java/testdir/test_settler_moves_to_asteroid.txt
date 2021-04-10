@@ -1,0 +1,8 @@
+disable_random
+create asteroid a1
+create settler s1 a1
+create storage storage1 s1
+create asteroid a2
+add_neighbour a1 a2
+do s1 move a2
+state

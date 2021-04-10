@@ -1,3 +1,4 @@
+disable_random
 create asteroid a1
 create settler s1 a1
 create storage storage1 s1

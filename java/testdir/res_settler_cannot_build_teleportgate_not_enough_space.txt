@@ -28,4 +28,4 @@ SETTLER (name:) s1
 	(asteroid name:) a1
 	(storage name:) storage1
 SUNCONTROLLER (name:) SunController
-	(turns until next sunstorm:) 35
+	(turns until next sunstorm:) 30
