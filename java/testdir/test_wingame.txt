@@ -1,4 +1,5 @@
 echo_off
+disable_random
 create asteroid A1 5 false true
 create asteroid A2 5 false true
 create asteroid A3 5 false true
@@ -23,6 +24,12 @@ create water W3 ST2
 create iron I1 ST3
 create iron I2 ST3
 create iron I3 ST3
+add_neighbour A1 A2
+add_neighbour A1 A3
+add_neighbour A1 A4
+add_neighbour A1 A5
+add_neighbour A1 A6
+add_neighbour A2 A3
 
 step
 do S3 Move A2

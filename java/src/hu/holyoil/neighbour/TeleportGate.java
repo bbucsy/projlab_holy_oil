@@ -75,8 +75,14 @@ public class TeleportGate implements INeighbour {
         return pair;
     }
 
+    /**
+     * Beállítja, hogy meg van-e kergülve a teleportkapu. Igaz esetben be is kerül az AI kontrollerbe, hogy az
+     * gondoskodjon a mozgásáról.
+     * @param newIsCrazy új érték
+     */
     public void SetIsCrazy(boolean newIsCrazy) {
         isCrazy = newIsCrazy;
+        if (isCrazy) AIController.GetInstance().AddTeleportGate(this);
     }
     /**
      * Visszaadja az aszteroidát amin a teleporter található.
@@ -203,7 +209,7 @@ public class TeleportGate implements INeighbour {
     @Override
     public void ReactToSunstorm() {
         Logger.Log(this, "Reacting to Sunstorm");
-        isCrazy = true;
+        SetIsCrazy(true);
         Logger.Return();
     }
     /**

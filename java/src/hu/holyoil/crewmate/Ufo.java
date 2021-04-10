@@ -24,6 +24,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         onAsteroid.AddSpaceship(this);
         TurnController.GetInstance().RegisterEntityWithAction(this);
         SpaceshipBaseRepository.GetInstance().Add(name, this);
+        AIController.GetInstance().AddUfo(this);
 
     }
 

@@ -58,6 +58,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
         SpaceshipBaseRepository.GetInstance().Add(name, this);
         TurnController.GetInstance().RegisterEntityWithAction(this);
+        GameController.GetInstance().AddSettler(this);
         onAsteroid.AddSpaceship(this);
     }
 

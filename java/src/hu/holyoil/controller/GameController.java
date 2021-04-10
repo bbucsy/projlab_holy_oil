@@ -2,6 +2,7 @@ package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 
@@ -74,20 +75,24 @@ public class GameController implements ISteppable  {
         private void CountResourcesSeparately(List<AbstractBaseResource> collection) {
             coalCount = collection
                     .stream()
-                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Coal()))
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Coal("EXAMPLE1")))
                     .count();
             ironCount = collection
                     .stream()
-                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Iron()))
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Iron("EXAMPLE2")))
                     .count();
             uraniumCount = collection
                     .stream()
-                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Uranium()))
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Uranium("EXAMPLE3")))
                     .count();
             waterCount = collection
                     .stream()
-                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Water()))
+                    .filter(abstractBaseResource -> abstractBaseResource.IsSameType(new Water("EXAMPLE4")))
                     .count();
+            ResourceBaseRepository.GetInstance().Remove("EXAMPLE1");
+            ResourceBaseRepository.GetInstance().Remove("EXAMPLE2");
+            ResourceBaseRepository.GetInstance().Remove("EXAMPLE3");
+            ResourceBaseRepository.GetInstance().Remove("EXAMPLE4");
         }
 
         /**
@@ -139,7 +144,9 @@ public class GameController implements ISteppable  {
                 CounterVector counterVector = new CounterVector();
                 counterVector.CountAsteroidsResources(asteroid);
                 if (counterVector.CanWin()) {
+                    Logger.Log(this,"Just won game!");
                     gameState = GameState.WON_GAME;
+                    Logger.Return();
                     break;
                 }
             }
@@ -152,11 +159,13 @@ public class GameController implements ISteppable  {
      * Minden kör végén ellenőrzi elvesztették-e a játékot a telepesek
      */
     public void CheckLoseCondition()  {
-        Logger.Log(this,"Checking loose condition");
+        Logger.Log(this,"Checking lose condition");
 
         if (gameState == GameState.RUNNING) {
             if (settlers.size() == 0) {
+                Logger.Log(this,"Just lost game!");
                 gameState = GameState.LOST_GAME;
+                Logger.Return();
             }
         }
 
@@ -173,7 +182,9 @@ public class GameController implements ISteppable  {
             CounterVector counterVector = new CounterVector();
             counterVector.CountInGameResources();
             if (!counterVector.CanWin()) {
+                Logger.Log(this,"Just lost game!");
                 gameState = GameState.LOST_GAME;
+                Logger.Return();
             }
         }
 
