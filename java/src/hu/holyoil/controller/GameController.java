@@ -2,7 +2,9 @@ package hu.holyoil.controller;
 
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
+import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 
@@ -21,15 +23,6 @@ public class GameController implements ISteppable  {
      * singleton volta miatt szükséges statikus tagváltozó
      */
     private static GameController gameController;
-    /**
-     * A játékban szereplő összes élő játékos listája
-     */
-    private List<Settler> settlers;
-    /**
-     * A pályán található összes ép aszteroida
-     * <p>ép: nem robbant fel</p>
-     */
-    private List<Asteroid> asteroids;
     /**
      * A játék jelenlegi állása: running, lost vagy won
      */
@@ -62,7 +55,7 @@ public class GameController implements ISteppable  {
     /**
      * Belső osztály a nyersanyag leszámolások megoldására
      */
-    class CounterVector {
+    static class CounterVector {
         long coalCount;
         long ironCount;
         long uraniumCount;
@@ -107,7 +100,7 @@ public class GameController implements ISteppable  {
          */
         private void CountAsteroidsResources(Asteroid asteroid) {
             List<AbstractBaseResource> collection = new LinkedList<>();
-            settlers
+            SettlerRepository.GetInstance().GetAll()
                     .stream()
                     .filter(settler -> settler.GetOnAsteroid() == asteroid)
                     .map(settler -> settler.GetStorage().GetStoredMaterials())
@@ -132,7 +125,7 @@ public class GameController implements ISteppable  {
         Logger.Log(this,"Checking win condition");
 
         if (gameState == GameState.RUNNING) {
-            for (Asteroid asteroid : asteroids) {
+            for (Asteroid asteroid : AsteroidRepository.GetInstance().GetAll()) {
                 CounterVector counterVector = new CounterVector();
                 counterVector.CountAsteroidsResources(asteroid);
                 if (counterVector.CanWin()) {
@@ -154,7 +147,7 @@ public class GameController implements ISteppable  {
         Logger.Log(this,"Checking lose condition");
 
         if (gameState == GameState.RUNNING) {
-            if (settlers.size() == 0) {
+            if (SettlerRepository.GetInstance().GetAll().size() == 0) {
                 Logger.Log(this,"Just lost game!");
                 gameState = GameState.LOST_GAME;
                 Logger.Return();
@@ -193,49 +186,6 @@ public class GameController implements ISteppable  {
     }
 
     /**
-     * Hozzáad egy aszteroidát a pályához
-     * @param asteroid hozzáadja az asteroids tagváltozóhoz
-     */
-    public void AddAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Adding Asteroid <" +  Logger.GetName(asteroid)+ ">");
-        asteroids.add(asteroid);
-        Logger.Return();
-    }
-
-    /**
-     * Töröl egy aszteroidát a pályáról
-     * <p>(pl ha felrobban az aszteroida)</p>
-     * @param asteroid törli az asteroids tagváltozóból
-     */
-    public void RemoveAsteroid(Asteroid asteroid)  {
-        Logger.Log(this,"Removing asteroid <" +  Logger.GetName(asteroid)+ ">");
-        asteroids.remove(asteroid);
-        Logger.Return();
-    }
-
-    /**
-     * Felvesz egy új telepest
-     * <p>(a játék kezdetén)</p>
-     * @param settler hozzáadja a telepest a settlers tagváltozóhoz
-     */
-    public void AddSettler(Settler settler)  {
-        Logger.Log(this,"Adding settler <" +  Logger.GetName(settler)+ ">");
-        settlers.add(settler);
-        Logger.Return();
-    }
-
-    /**
-     * Eltávolít egy telepest a játékból
-     * <p>(pl ha a telepes meghal)</p>
-     * @param settler törli a settlers tagváltozóból
-     */
-    public void RemoveSettler(Settler settler)  {
-        Logger.Log(this,"Removing settler <" +  Logger.GetName(settler)+ ">");
-        settlers.remove(settler);
-        Logger.Return();
-    }
-
-    /**
      * Singleton osztályra így lehet hivatkozni
      * @return viszaad egy instance-ot
      */
@@ -256,9 +206,6 @@ public class GameController implements ISteppable  {
      * Nem lehet kívülről meghívni, nem példányosítható.
      * <p>inicializálja a tárolókat üres listákként</p>
      */
-    private GameController() {
-        settlers = new ArrayList<>();
-        asteroids = new ArrayList<>();
-    }
+    private GameController() { }
 
 }

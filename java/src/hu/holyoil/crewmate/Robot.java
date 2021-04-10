@@ -55,7 +55,11 @@ public class Robot extends AbstractCrewmate {
         AIController.GetInstance().RemoveRobot(this);
         onAsteroid.RemoveSpaceship(this);
         TurnController.GetInstance().RemoveEntityWithAction(this);
+
+        Logger.Log(this, "Removing me from Repository");
         SpaceshipBaseRepository.GetInstance().Remove(id);
+        Logger.Return();
+
         Logger.Return();
 
     }

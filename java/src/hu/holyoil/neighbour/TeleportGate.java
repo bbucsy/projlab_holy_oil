@@ -84,6 +84,7 @@ public class TeleportGate implements INeighbour {
         isCrazy = newIsCrazy;
         if (isCrazy) AIController.GetInstance().AddTeleportGate(this);
     }
+
     /**
      * Visszaadja az aszteroidát amin a teleporter található.
      * @return a teleporter homeAsteroid tagváltozója
@@ -168,6 +169,11 @@ public class TeleportGate implements INeighbour {
         Logger.Log(this, "Exploding");
         pair.ExplodePair();
         ActuallyExplode();
+
+        Logger.Log(this, "Removing me from Repository");
+        NeighbourBaseRepository.GetInstance().Remove(this.id);
+        Logger.Return();
+
         Logger.Return();
     }
 
@@ -178,6 +184,11 @@ public class TeleportGate implements INeighbour {
 
         Logger.Log(this, "Being exploded by pair");
         ActuallyExplode();
+
+        Logger.Log(this, "Removing me from Repository");
+        NeighbourBaseRepository.GetInstance().Remove(this.id);
+        Logger.Return();
+
         Logger.Return();
 
     }

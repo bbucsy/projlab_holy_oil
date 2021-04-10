@@ -136,7 +136,10 @@ public class PlayerStorage implements IIdentifiable {
         storedMaterials.forEach(AbstractBaseResource::ReactToGettingDestroyed);
         List<TeleportGate> teleportGatesShallowCopy = new ArrayList<>(teleporters);
         teleportGatesShallowCopy.forEach(TeleportGate::Explode);
+
+        Logger.Log(this, "Removing me from Repository");
         PlayerStorageBaseRepository.GetInstance().Remove(id);
+        Logger.Return();
 
     }
 

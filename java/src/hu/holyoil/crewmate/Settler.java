@@ -58,7 +58,6 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
         SpaceshipBaseRepository.GetInstance().Add(name, this);
         TurnController.GetInstance().RegisterEntityWithAction(this);
-        GameController.GetInstance().AddSettler(this);
         onAsteroid.AddSpaceship(this);
     }
 
@@ -71,8 +70,10 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
     public void DestroyStorage() {
 
+        Logger.Log(this, "Removing me from Repository");
         PlayerStorageBaseRepository.GetInstance().Remove(storage.GetId());
         storage = null;
+        Logger.Return();
 
     }
 
@@ -87,12 +88,13 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     public void Die() {
         Logger.Log(this, "Died");
 
-        GameController.GetInstance().RemoveSettler(this);
-
         if (storage.GetOneTeleporter() != null) {
             storage.GetOneTeleporter().Explode();
         }
+
+        Logger.Log(this, "Removing me from Repository");
         SpaceshipBaseRepository.GetInstance().Remove(id);
+        Logger.Return();
 
         storage.ReactToSettlerDie();
 

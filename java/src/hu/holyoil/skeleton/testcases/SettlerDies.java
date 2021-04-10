@@ -39,8 +39,6 @@ public class SettlerDies extends TestCase {
 
             ps.AddTeleportGatePair(tp, pair);
         }
-        GameController.GetInstance().AddAsteroid(a);
-        GameController.GetInstance().AddSettler(s);
     }
 
     @Override
