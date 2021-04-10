@@ -52,16 +52,16 @@ public class TeleporterRecipe implements IRecipe {
 
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Iron iron1 = new Iron(
-                ResourceBaseRepository.GetIdWithPrefix("iron")
+                ResourceBaseRepository.GetIdWithPrefix("Iron")
         );
         Iron iron2 = new Iron(
-                ResourceBaseRepository.GetIdWithPrefix("iron")
+                ResourceBaseRepository.GetIdWithPrefix("Iron")
         );
         Uranium uranium = new Uranium(
-                ResourceBaseRepository.GetIdWithPrefix("uranium")
+                ResourceBaseRepository.GetIdWithPrefix("Uranium")
         );
         Water water = new Water(
-                ResourceBaseRepository.GetIdWithPrefix("water")
+                ResourceBaseRepository.GetIdWithPrefix("Water")
         );
 
         Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");

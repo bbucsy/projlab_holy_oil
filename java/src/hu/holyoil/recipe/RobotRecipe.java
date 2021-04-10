@@ -46,15 +46,15 @@ public class RobotRecipe implements IRecipe {
         Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
 
         Iron iron = new Iron(
-                ResourceBaseRepository.GetIdWithPrefix("iron")
+                ResourceBaseRepository.GetIdWithPrefix("Iron")
         );
 
         Uranium uranium = new Uranium(
-                ResourceBaseRepository.GetIdWithPrefix("uranium")
+                ResourceBaseRepository.GetIdWithPrefix("Uranium")
         );
 
         Coal coal = new Coal(
-                ResourceBaseRepository.GetIdWithPrefix("coal")
+                ResourceBaseRepository.GetIdWithPrefix("Coal")
         );
 
         Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
@@ -80,7 +80,6 @@ public class RobotRecipe implements IRecipe {
             Logger.Return();
 
             Robot robot = new Robot(asteroid);
-            Logger.RegisterObject(robot, "r: Robot");
 
             iStorageCapable.ReactToMoveMade();
 
