@@ -1,18 +1,14 @@
-in:
+echo_off
+disable_random
 create asteroid a1 1
 create uranium resu1 a1
 create settler s1 a1
 create settler s2 a1
 create playerstorage ps1 s1
 create playerstorage ps2 s2
+
 do s1 drill
 do s2 mine
-state
 
-out:
-SETTLER s1 a1 ps1
-SETTLER s2 a1 ps2
-ASTEROID a1 false 0 null null [s1 s2]
-URANIUM resu1 3
-PLAYERSTORAGE ps1
-PLAYERSTORAGE ps2 resu1
+state
+exit
