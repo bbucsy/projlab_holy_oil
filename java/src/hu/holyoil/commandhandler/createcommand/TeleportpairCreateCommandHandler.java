@@ -49,7 +49,7 @@ public class TeleportpairCreateCommandHandler implements ICommandHandler {
 
         if (asteroid2 == null && playerStorage2 == null) {
 
-            System.out.println("No asteroid or playerstorage exists with name: " + commandParams[4]);
+            System.out.println("No asteroid or playerstorage exists with name: " + commandParams[5]);
             return false;
 
         }
