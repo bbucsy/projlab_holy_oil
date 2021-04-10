@@ -24,11 +24,14 @@ public abstract class AbstractBaseRepository <E> implements IReadWriteRepository
         return new ArrayList<>(storedElements.values());
     }
 
-    public void Remove(String id) {
+    public boolean Remove(String id) {
+        boolean contained = false;
         if (storedElements.containsKey(id)) {
             storedElements.remove(id);
+            contained = true;
             idsUsed.remove(id);
         }
+        return contained;
     }
 
     public static Set<String> idsUsed = new HashSet<>();

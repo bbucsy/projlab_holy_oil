@@ -521,7 +521,7 @@ public class Asteroid implements INeighbour {
         }
 
         Logger.Log(this, "Removing me from Repository");
-        NeighbourBaseRepository.GetInstance().Remove(id);
+        AsteroidRepository.GetInstance().Remove(id);
         Logger.Return();
 
         if (resource != null) {
