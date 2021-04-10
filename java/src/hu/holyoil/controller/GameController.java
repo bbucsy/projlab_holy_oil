@@ -96,23 +96,15 @@ public class GameController implements ISteppable  {
         }
 
         /**
-         * Kiszámolja és egy tömbben visszaadja az egyes nyersanyagtípusokból a játékban lévő mennyiséget
+         * Kiszámolja és beállítja az egyes nyersanyagtípusokból a játékban lévő mennyiséget
          */
         private void CountInGameResources() {
-            List<AbstractBaseResource> collection = asteroids
-                    .stream()
-                    .filter(asteroid -> asteroid.GetResource() != null)
-                    .map(Asteroid::GetResource)
-                    .collect(Collectors.toList());
-
-            settlers
-                    .stream()
-                    .map(settler -> settler.GetStorage().GetStoredMaterials())
-                    .forEach(collection::addAll);
-
-            CountResourcesSeparately(collection);
+            CountResourcesSeparately(ResourceBaseRepository.GetInstance().GetAll());
         }
 
+        /**
+         * Kiszámolja és beállítja az egyes nyersanyagtípusokból az aszteroidán lévő mennyiséget
+         */
         private void CountAsteroidsResources(Asteroid asteroid) {
             List<AbstractBaseResource> collection = new LinkedList<>();
             settlers
