@@ -47,7 +47,6 @@ public class Main {
         Logger.SetEnabled(true);
 
         InputOutputController.GetInstance().ParseCommand(System.in);
-        System.out.println("Closing application");
     }
 
 }

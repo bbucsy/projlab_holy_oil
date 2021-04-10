@@ -15,8 +15,6 @@ import java.util.ArrayList;
 public class StateCommandHandler implements ICommandHandler {
     @Override
     public boolean Handle(String command) {
-        System.out.println("-------- STATE --------");
-
         ArrayList<IIdentifiable> toWrite = new ArrayList<>();
 
         toWrite.addAll(NeighbourBaseRepository.GetInstance().GetAll());
@@ -33,8 +31,7 @@ public class StateCommandHandler implements ICommandHandler {
         if (state != GameState.RUNNING) {
             System.out.println(state.toString());
         }
-        
-        System.out.println("------ STATE END ------");
+
         return true;
     }
 }

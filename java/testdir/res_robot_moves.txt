@@ -28,3 +28,4 @@ ROBOT (name:) r1
 	(asteroid name:) a2
 SUNCONTROLLER (name:) SunController
 	(turns until next sunstorm:) 29
+LOST GAME

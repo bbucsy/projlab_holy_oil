@@ -1,0 +1,3 @@
+SUNCONTROLLER (name:) SunController
+	(turns until next sunstorm:) 27
+LOST GAME

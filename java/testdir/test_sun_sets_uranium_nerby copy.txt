@@ -1,0 +1,12 @@
+echo_off
+disable_random
+
+create asteroid a1 0 TRUE TRUE
+create uranium u1 a1 
+
+step
+step
+step
+
+state
+exit
