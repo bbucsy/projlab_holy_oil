@@ -6,11 +6,7 @@ import java.util.HashMap;
 
 public class NeighbourBaseRepository extends AbstractBaseRepository<INeighbour> {
 
-    HashMap<String, INeighbour> neighbours;
-
-    private NeighbourBaseRepository() {
-        neighbours = new HashMap<>();
-    }
+    private NeighbourBaseRepository() {}
 
     private static NeighbourBaseRepository neighbourBaseRepository;
 

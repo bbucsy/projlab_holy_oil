@@ -2,15 +2,9 @@ package hu.holyoil.repository;
 
 import hu.holyoil.crewmate.AbstractSpaceship;
 
-import java.util.HashMap;
-
 public class SpaceshipBaseRepository extends AbstractBaseRepository<AbstractSpaceship> {
 
-    HashMap<String, AbstractSpaceship> abstractSpaceships;
-
-    private SpaceshipBaseRepository() {
-        abstractSpaceships = new HashMap<>();
-    }
+    private SpaceshipBaseRepository() { }
 
     private static SpaceshipBaseRepository spaceshipBaseRepository;
 
