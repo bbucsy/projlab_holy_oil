@@ -1,16 +1,17 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.Settler;
+import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.repository.AbstractBaseRepository;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.resource.*;
 import hu.holyoil.skeleton.Logger;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +36,16 @@ public class GameController implements ISteppable  {
     public GameState GetGameState() {
         return gameState;
     }
+
+    /**
+     * A játékban lévő játékosok száma. Ennyivel inicializálódik a játék StartGame() hívásakor.
+     * */
+    public int numOfPlayers = 3;
+
+    /**
+     * A játékban lévő ufo-k száma a játék kezdetekor.
+     * */
+    public int numOfUfos = 3;
 
     /**
      * Lépteti a köröket
@@ -182,6 +193,184 @@ public class GameController implements ISteppable  {
     public void StartGame()  {
         Logger.Log(this,"Starting game");
         // todo
+        // Generate between 100 and 500 asteroids
+        Random random = new Random();
+        int numOfAsteroids = 100;
+        if (Main.isRandomEnabled) {
+            numOfAsteroids = random.nextInt(401) + 100;
+        }
+
+        String startingAsteroidName = null;
+        String ufoStartingAsteroidName = null;
+
+        for (int i = 0; i < numOfAsteroids; i++) {
+
+            Asteroid asteroid = new Asteroid(
+                    AbstractBaseRepository.GetIdWithPrefix("Asteroid")
+            );
+
+            if (startingAsteroidName == null)
+                startingAsteroidName = asteroid.GetId();
+
+            ufoStartingAsteroidName = asteroid.GetId();
+
+            asteroid.SetNumOfLayersRemaining(
+                    Main.isRandomEnabled ? random.nextInt(6) : (i % 6)
+            );
+            asteroid.SetIsDiscovered(
+                    false
+            );
+            int generatedResource;
+            if (Main.isRandomEnabled) {
+
+                generatedResource = random.nextInt(5);
+
+            } else {
+
+                generatedResource = i / 20;
+
+            }
+            AbstractBaseResource resource = null;
+
+            switch (generatedResource) {
+                case 1: {
+                    resource = new Coal(
+                            AbstractBaseRepository.GetIdWithPrefix("Coal")
+                    );
+                    break;
+                }
+                case 2: {
+                    resource = new Iron(
+                            AbstractBaseRepository.GetIdWithPrefix("Iron")
+                    );
+                    break;
+                }
+                case 3: {
+                    resource = new Uranium(
+                            AbstractBaseRepository.GetIdWithPrefix("Uranium")
+                    );
+                    break;
+                }
+                case 4: {
+                    resource = new Water(
+                            AbstractBaseRepository.GetIdWithPrefix("Water")
+                    );
+                    break;
+                }
+                default: {
+                    // do nothing
+                    break;
+                }
+            }
+
+            asteroid.SetResource(resource);
+
+        }
+
+        boolean isTraversable = false;
+
+        while (!isTraversable) {
+
+            List<String> asteroidNames = new ArrayList<>();
+            AsteroidRepository.GetInstance().GetAll().forEach(
+                    asteroid -> asteroidNames.add(asteroid.GetId())
+            );
+
+            for (int i = 0; i < asteroidNames.size(); i++) {
+
+                if (Main.isRandomEnabled) {
+
+                    for (int j = 0; j < asteroidNames.size(); j++) {
+
+                        if (i == j) {
+                            break;
+                        }
+
+                        if (random.nextInt(20) == 1) {
+
+                            AsteroidRepository.GetInstance().Get(asteroidNames.get(i)).AddNeighbourAsteroid(
+                                    AsteroidRepository.GetInstance().Get(asteroidNames.get(j))
+                            );
+                            AsteroidRepository.GetInstance().Get(asteroidNames.get(j)).AddNeighbourAsteroid(
+                                    AsteroidRepository.GetInstance().Get(asteroidNames.get(i))
+                            );
+
+                        }
+
+                    }
+
+                } else {
+
+                    int j = i + 1;
+                    if (j == asteroidNames.size()) {
+                        j = 0;
+                    }
+
+                    while (j < asteroidNames.size()) {
+
+                        AsteroidRepository.GetInstance().Get(asteroidNames.get(i)).AddNeighbourAsteroid(
+                                AsteroidRepository.GetInstance().Get(asteroidNames.get(j))
+                        );
+                        AsteroidRepository.GetInstance().Get(asteroidNames.get(j)).AddNeighbourAsteroid(
+                                AsteroidRepository.GetInstance().Get(asteroidNames.get(i))
+                        );
+
+                        j++;
+                        if (j == asteroidNames.size()) {
+                            j = 0;
+                        }
+                    }
+
+                }
+
+            }
+
+            Set<String> toVisit = new HashSet<>();
+            Set<String> visited = new HashSet<>();
+            toVisit.add(startingAsteroidName);
+
+            while (toVisit.size() > 0) {
+
+                String first = (String) toVisit.toArray()[0];
+                toVisit.remove(first);
+
+                for (Asteroid asteroid: AsteroidRepository.GetInstance().Get(first).GetNeighbours()) {
+
+                    if (!visited.contains(asteroid.GetId()))
+                        toVisit.add(asteroid.GetId());
+
+                }
+
+                visited.add(first);
+
+            }
+
+            if (visited.size() == AsteroidRepository.GetInstance().GetAll().size()) {
+
+                isTraversable = true;
+
+            }
+
+        }
+
+        for (int i = 0; i < numOfPlayers; i++) {
+
+            Settler settler = new Settler(
+                    AsteroidRepository.GetInstance().Get(startingAsteroidName),
+                    AbstractBaseRepository.GetIdWithPrefix("Settler")
+            );
+
+        }
+
+        for (int i = 0; i < numOfUfos; i++) {
+
+            Ufo ufo = new Ufo(
+                    AsteroidRepository.GetInstance().Get(ufoStartingAsteroidName),
+                    AbstractBaseRepository.GetIdWithPrefix("Ufo")
+            );
+
+        }
+
         Logger.Return();
     }
 
