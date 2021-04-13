@@ -50,6 +50,7 @@ public class Water extends AbstractBaseResource {
     public void ReactToSunNearby(Asteroid asteroid) {
         Logger.Log(this,"Reacting to Sun nearby");
         asteroid.SetResource(null);
+        ReactToGettingDestroyed();
         Logger.Return();
     }
 }
