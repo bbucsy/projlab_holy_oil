@@ -1,10 +1,7 @@
 package hu.holyoil.resource;
 
 
-import hu.holyoil.Main;
-import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.skeleton.Logger;
 
 /**
  * Szén.

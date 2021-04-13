@@ -1,6 +1,6 @@
 package hu.holyoil.repository;
 
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 import java.util.*;
 

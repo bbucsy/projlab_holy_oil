@@ -5,8 +5,7 @@ import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
-import hu.holyoil.repository.SettlerRepository;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 public class SettlerCreateCommandHandler implements ICommandHandler {
     @Override

@@ -2,7 +2,7 @@ package hu.holyoil.crewmate;
 
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 /**
  * A robot és telepes közös őse, az űrhajó leszármazottja

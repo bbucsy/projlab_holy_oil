@@ -7,7 +7,7 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.resource.Water;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class WaterCreateCommandHandler implements ICommandHandler {

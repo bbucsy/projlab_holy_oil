@@ -3,13 +3,10 @@ package hu.holyoil.repository;
 import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
-import hu.holyoil.skeleton.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static hu.holyoil.repository.AbstractBaseRepository.IsNameUsed;
 
 public class AsteroidRepository implements IReadWriteRepository<Asteroid> {
 

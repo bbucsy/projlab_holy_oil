@@ -1,6 +1,6 @@
 package hu.holyoil.controller;
 
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 import java.util.HashMap;
 

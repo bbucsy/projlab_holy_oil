@@ -1,4 +1,4 @@
-package hu.holyoil.skeleton;
+package hu.holyoil.commandhandler;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
