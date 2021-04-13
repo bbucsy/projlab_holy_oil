@@ -31,9 +31,17 @@ public class LookAroundDoCommandHandler implements ICommandHandler {
 
         for (Asteroid asteroid: AsteroidRepository.GetInstance().GetAll()) {
 
-            if (asteroid.IsDiscovered()) {
+            if (asteroid.IsDiscovered() ||
+                    abstractSpaceship.GetOnAsteroid().GetNeighbours().contains(asteroid)
+            ) {
 
                 System.out.println(asteroid.toString());
+
+                if (asteroid.GetTeleporter() != null) {
+
+                    System.out.println(asteroid.GetTeleporter().toString());
+
+                }
 
             }
 
