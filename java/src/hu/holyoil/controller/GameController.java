@@ -187,17 +187,24 @@ public class GameController implements ISteppable  {
         Logger.Return();
     }
 
+    static int minAsteroidCount = 100;
+    static int maxAsteroidCount = 200;
+    static int minLayerCount = 3;
+    static int maxLayerCount = 5;
+    // chance of asteroids becoming neighbours (%)
+    static int chanceOfNeighbours = 10;
+
     /**
      * elindítja a játékot.
      */
     public void StartGame()  {
         Logger.Log(this,"Starting game");
         // todo
-        // Generate between 100 and 500 asteroids
+        // Generate between minAsteroidCount and maxAsteroidCount asteroids
         Random random = new Random();
-        int numOfAsteroids = 100;
+        int numOfAsteroids = minAsteroidCount;
         if (Main.isRandomEnabled) {
-            numOfAsteroids = random.nextInt(401) + 100;
+            numOfAsteroids += random.nextInt(maxAsteroidCount - minAsteroidCount + 1);
         }
 
         String startingAsteroidName = null;
@@ -205,60 +212,66 @@ public class GameController implements ISteppable  {
 
         for (int i = 0; i < numOfAsteroids; i++) {
 
-            Asteroid asteroid = new Asteroid(
-                    AbstractBaseRepository.GetIdWithPrefix("Asteroid")
-            );
+            Asteroid asteroid = new Asteroid();
 
+            // settlers start at the first asteroid
             if (startingAsteroidName == null)
                 startingAsteroidName = asteroid.GetId();
 
+            // ufos start at the last asteroid
             ufoStartingAsteroidName = asteroid.GetId();
 
-            asteroid.SetNumOfLayersRemaining(
-                    Main.isRandomEnabled ? random.nextInt(6) : (i % 6)
-            );
-            asteroid.SetIsDiscovered(
-                    false
-            );
-            int generatedResource;
+            // this looked ugly in "one" line.
             if (Main.isRandomEnabled) {
 
+                asteroid.SetNumOfLayersRemaining(
+                        random.nextInt(maxLayerCount - minLayerCount) + minLayerCount
+                );
+                
+            } else {
+
+                asteroid.SetNumOfLayersRemaining(
+                        (i % (maxLayerCount - minLayerCount + 1)) + minLayerCount
+                );
+                
+            }
+            
+            asteroid.SetIsDiscovered(false);
+            int generatedResource;
+
+            if (Main.isRandomEnabled) {
+
+                // We generate a resource. There are 4 resources, 0 means no resource.
                 generatedResource = random.nextInt(5);
 
             } else {
 
-                generatedResource = i / 20;
+                // With layers being between 3-5, and this being between 0-4, their smallest common divisor is 1.
+                // Meaning that they will generate every combination of layercount and resource.
+                generatedResource = i % 5;
 
             }
             AbstractBaseResource resource = null;
 
             switch (generatedResource) {
                 case 1: {
-                    resource = new Coal(
-                            AbstractBaseRepository.GetIdWithPrefix("Coal")
-                    );
+                    resource = new Coal(AbstractBaseRepository.GetIdWithPrefix("Coal"));
                     break;
                 }
                 case 2: {
-                    resource = new Iron(
-                            AbstractBaseRepository.GetIdWithPrefix("Iron")
-                    );
+                    resource = new Iron(AbstractBaseRepository.GetIdWithPrefix("Iron"));
                     break;
                 }
                 case 3: {
-                    resource = new Uranium(
-                            AbstractBaseRepository.GetIdWithPrefix("Uranium")
-                    );
+                    resource = new Uranium(AbstractBaseRepository.GetIdWithPrefix("Uranium"));
                     break;
                 }
                 case 4: {
-                    resource = new Water(
-                            AbstractBaseRepository.GetIdWithPrefix("Water")
-                    );
+                    resource = new Water(AbstractBaseRepository.GetIdWithPrefix("Water"));
                     break;
                 }
                 default: {
-                    // do nothing
+                    // do nothing, this asteroid has no resource
                     break;
                 }
             }
@@ -269,6 +282,7 @@ public class GameController implements ISteppable  {
 
         boolean isTraversable = false;
 
+        // we only exit the creation if there are no asteroids without neighbours
         while (!isTraversable) {
 
             List<String> asteroidNames = new ArrayList<>();
@@ -286,7 +300,7 @@ public class GameController implements ISteppable  {
                             break;
                         }
 
-                        if (random.nextInt(20) == 1) {
+                        if (random.nextInt(100) < chanceOfNeighbours) {
 
                             AsteroidRepository.GetInstance().Get(asteroidNames.get(i)).AddNeighbourAsteroid(
                                     AsteroidRepository.GetInstance().Get(asteroidNames.get(j))
@@ -302,11 +316,13 @@ public class GameController implements ISteppable  {
                 } else {
 
                     int j = i + 1;
+                    // if [j] would be out of bounds, we set it to 0
                     if (j == asteroidNames.size()) {
                         j = 0;
                     }
 
-                    while (j < asteroidNames.size()) {
+                    // we add chanceOfNeighbours amount of neighbours to every asteroid
+                    while (j <= chanceOfNeighbours + i) {
 
                         AsteroidRepository.GetInstance().Get(asteroidNames.get(i)).AddNeighbourAsteroid(
                                 AsteroidRepository.GetInstance().Get(asteroidNames.get(j))
@@ -316,15 +332,18 @@ public class GameController implements ISteppable  {
                         );
 
                         j++;
+                        // if [j] would be out of bounds, we set it to 0
                         if (j == asteroidNames.size()) {
                             j = 0;
                         }
+
                     }
 
                 }
 
             }
 
+            // We traverse the created graph using a BFS.
             Set<String> toVisit = new HashSet<>();
             Set<String> visited = new HashSet<>();
             toVisit.add(startingAsteroidName);
@@ -345,6 +364,7 @@ public class GameController implements ISteppable  {
 
             }
 
+            // we only break if the graph is traversable
             if (visited.size() == AsteroidRepository.GetInstance().GetAll().size()) {
 
                 isTraversable = true;
@@ -355,18 +375,21 @@ public class GameController implements ISteppable  {
 
         for (int i = 0; i < numOfPlayers; i++) {
 
+            // We generate numOfPlayers amount of settlers on the settler asteroid
             Settler settler = new Settler(
-                    AsteroidRepository.GetInstance().Get(startingAsteroidName),
-                    AbstractBaseRepository.GetIdWithPrefix("Settler")
+                    AsteroidRepository.GetInstance().Get(startingAsteroidName)
             );
 
         }
+        
+        // the starting asteroid is discovered because there are settlers on it
+        AsteroidRepository.GetInstance().Get(startingAsteroidName).SetIsDiscovered(true);
 
         for (int i = 0; i < numOfUfos; i++) {
 
+            // we generate numOfUfos amount of ufos on the ufo asteroid
             Ufo ufo = new Ufo(
-                    AsteroidRepository.GetInstance().Get(ufoStartingAsteroidName),
-                    AbstractBaseRepository.GetIdWithPrefix("Ufo")
+                    AsteroidRepository.GetInstance().Get(ufoStartingAsteroidName)
             );
 
         }
