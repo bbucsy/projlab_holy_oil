@@ -67,14 +67,14 @@ Parancssorban Windowson (fordítás után):
 0. Írja meg a tesztet a testdir mappában test_*.txt fájlnévvel, ahol a * helyére mehet a teszteset megnevezése ízlés szerint.
 1. Feltételezve van, hogy a projekt könyvtárában megtörtént a fordítás (lásd feljebb).
 2. A projekt könyvtárában a parancsértelmezőjével futtassa a következő parancsot (a * helyére az elkészült tesztfájl megnevezése kerül):
-run.bat < test_*.txt
+run.bat < testdir\test_*.txt
 3. Ha esetleg ki szeretné vezetni másik fájlba az eredményt, futtassa így:
-run.bat < test_*.txt > manual_res_*.txt
+run.bat < testdir\test_*.txt > manual_res_*.txt
 
 ## Egyéb segédparancsok
 
 1. Fájllista generálása bash-ben (git bash vagy linux bash):
-find . \( -path ./testdir -o -path ./.idea -o -path ./out -o -path ./src/hu/holyoil/skeleton \) -prune -o -type f -printf '%f\t%s\t%CF\n' > filelist.txt
+find . \( -path ./testdir -o -path ./.idea -o -path ./out \) -prune -o -type f -printf '%f\t%s\t%CF\n' > filelist.txt
 2. Ezt bemásolod a txt-fájlból egy excel táblába, majd onnan másolod át a doksiba. (formázás ne zavarjon)
 2. Ha van git a gépeden, kell legyen git bash-ed is, add ki ezt a parancsot cmd.exe-ben:
 "%PROGRAMFILES%/git/usr/bin/bash.exe" -i -l
