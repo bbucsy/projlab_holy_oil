@@ -12,7 +12,6 @@ import hu.holyoil.resource.*;
 import hu.holyoil.commandhandler.Logger;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * A játékmenetet kezelő singleton osztály. Implementálja az ISteppable interfacet, amivel a köröket kezeli
