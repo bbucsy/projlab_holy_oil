@@ -110,101 +110,105 @@ public class AIController implements ISteppable {
      */
     public void HandleRobot(Robot robot)  {
         Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ ">");
-
         Asteroid current = robot.GetOnAsteroid();
-        List<Asteroid> neighbouringAsteroids = robot.GetOnAsteroid().GetNeighbours();
-        boolean tpAvailable = current.GetTeleporter()!=null;
-        //napvihar esetén
-        if(SunController.GetInstance().GetTurnsUntilStorm()<2) {
-            if (current.GetResource() == null && current.GetLayerCount() < 2) {
-                robot.Drill(); //call Drill() even if it doesn't do anything to stay in place and simplicity
-                Logger.Return();
-                return;
-            } else {
-                int i = 0;
-                while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetResource() != null
-                        && neighbouringAsteroids.get(i).GetLayerCount() > 1)
-                    i++;
-                if (i < neighbouringAsteroids.size()) {
-                    robot.Move(neighbouringAsteroids.get(i));
-                    Logger.Return();
-                    return;
-                } else if (tpAvailable) {
-                    robot.Move(current.GetTeleporter());
+        if(!Main.isRandomEnabled){
+            robot.Move(current.GetRandomNeighbour());
+        }
+        else {
+
+            List<Asteroid> neighbouringAsteroids = robot.GetOnAsteroid().GetNeighbours();
+            boolean tpAvailable = current.GetTeleporter() != null;
+            //napvihar esetén
+            if (SunController.GetInstance().GetTurnsUntilStorm() < 2) {//sunstorm happens at the end of next turn
+                if (current.GetResource() == null && current.GetLayerCount() < 2) {//if current asteroid is empty and can be drilled, stay
+                    robot.Drill(); //call Drill() even if it doesn't do anything to stay in place and simplicity
                     Logger.Return();
                     return;
                 } else {
-                    i = 0;
-                    while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetTeleporter() != null)
+                    int i = 0;
+                    while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetResource() != null
+                            && neighbouringAsteroids.get(i).GetLayerCount() > 1) //check for neighbour that is empty and could be drilled in time
                         i++;
                     if (i < neighbouringAsteroids.size()) {
                         robot.Move(neighbouringAsteroids.get(i));
                         Logger.Return();
                         return;
+                    } else if (tpAvailable) {//if tp is available, use it, maybe it puts the robot on an empty drilled asteroid
+                        robot.Move(current.GetTeleporter());
+                        Logger.Return();
+                        return;
+                    } else {//look for a neighbour with a teleporter. maybe that will take the robto to an empty asteroid
+                        i = 0;
+                        while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetTeleporter() != null)
+                            i++;
+                        if (i < neighbouringAsteroids.size()) {
+                            robot.Move(neighbouringAsteroids.get(i));
+                            Logger.Return();
+                            return;
+                        }
                     }
                 }
+            }//if all fails continue and hope for best
+            //don't drill if water or uranium would react to the Sun, otherwise drill if makes sense
+            if (current.GetLayerCount() > 0 && !(current.GetIsNearbySun() && current.GetLayerCount() == 1)) {
+                robot.Drill();
+                Logger.Return();
+                return;
             }
-        }
-        if(current.GetLayerCount()>0 && !(current.GetIsNearbySun() && current.GetLayerCount()==1)){
-            robot.Drill();
+
+            Asteroid target;
+            int chosenIndex = new Random().nextInt(neighbouringAsteroids.size());
+            int start = chosenIndex;
+            boolean listOver = false;
+            boolean shouldMove = false;
+            //does NOT account for player movement
+            do {
+                if (chosenIndex == neighbouringAsteroids.size() - 1) {
+                    chosenIndex = -1; //goes through the list but starts at a random index, goes from end to beginning here
+                }
+                chosenIndex++;
+
+                target = neighbouringAsteroids.get(chosenIndex);
+                if (target.GetLayerCount() > 0 && target.GetResource() != null
+                        && !(target.GetIsNearbySun() && target.GetLayerCount() == 1)) {
+                    //look for neighbour that: has layers, isn't near Sun AND would possibly react, isn't empty
+                    shouldMove = true;
+                }
+
+                if (chosenIndex == start) {
+                    //if back at beginning, exit cycle
+                    listOver = true;
+                }
+            } while (!listOver && !shouldMove);
+            start = chosenIndex;
+            listOver = false;
+            while (!listOver && !shouldMove) {//only enters if didn't find suitable neighbour
+
+                if (chosenIndex == neighbouringAsteroids.size() - 1) {
+                    chosenIndex = -1;
+                }
+                chosenIndex++;
+
+                target = neighbouringAsteroids.get(chosenIndex);
+                if (target.GetResource() == null && target.GetLayerCount() > 0) {
+                    //find a drillable empty neighbour
+                    shouldMove = true;
+                }
+
+                if (chosenIndex == start) {
+                    listOver = true;
+                }
+            }
+            if (shouldMove) {//found desirable neighbour
+                robot.Move(neighbouringAsteroids.get(chosenIndex));
+            } else {
+                if (tpAvailable)//go through tp, hope for richer asteroids
+                    robot.Move(current.GetTeleporter());
+                else//everything failed, all neighbours suck, doesn't matter where robot moves
+                    robot.Move(current.GetRandomNeighbour());
+            }
             Logger.Return();
-            return;
         }
-
-        Asteroid target;
-        int chosenIndex = new Random().nextInt(neighbouringAsteroids.size());
-        int start = chosenIndex;
-        boolean listOver=false;
-        boolean shouldMove=false;
-        //nem napviharkor
-        //does NOT account for player movement
-        do {
-            if (chosenIndex == neighbouringAsteroids.size() - 1) {
-                chosenIndex = -1;
-            }
-            chosenIndex++;
-
-            target = neighbouringAsteroids.get(chosenIndex);
-            if (target.GetLayerCount() > 0) {
-                if (target.GetResource() != null) {
-                    if (!(target.GetIsNearbySun() && target.GetLayerCount() == 1)) {
-                        shouldMove = true;
-                    }
-                }
-            }
-
-            if (chosenIndex == start) {
-                listOver = true;
-            }
-        } while (!listOver && !shouldMove);
-        start = chosenIndex;
-        listOver = false;
-        while (!listOver && !shouldMove) {
-
-            if (chosenIndex == neighbouringAsteroids.size() - 1) {
-                chosenIndex = -1;
-            }
-            chosenIndex++;
-
-            target = neighbouringAsteroids.get(chosenIndex);
-            if (target.GetResource() == null && target.GetLayerCount() > 0) {
-                shouldMove = true;
-            }
-
-            if (chosenIndex == start) {
-                listOver = true;
-            }
-        }
-        if (shouldMove) {
-            robot.Move(neighbouringAsteroids.get(chosenIndex));
-        } else {
-            if(tpAvailable)
-                robot.Move(current.GetTeleporter());
-            else
-                robot.Move(current.GetRandomNeighbour());
-        }
-        Logger.Return();
-
     }
     /**
      * Kezeli egy ufo működését
