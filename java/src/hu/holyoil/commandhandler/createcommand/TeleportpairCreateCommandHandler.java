@@ -7,7 +7,7 @@ import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.AbstractBaseRepository;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class TeleportpairCreateCommandHandler implements ICommandHandler {

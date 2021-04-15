@@ -1,7 +1,7 @@
 package hu.holyoil.collection;
 
 import hu.holyoil.resource.AbstractBaseResource;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

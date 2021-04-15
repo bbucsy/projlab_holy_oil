@@ -1,19 +1,15 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.Main;
 import hu.holyoil.controller.AIController;
-import hu.holyoil.controller.GameController;
-import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.recipe.RobotRecipe;
 import hu.holyoil.recipe.TeleporterRecipe;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
-import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 /**

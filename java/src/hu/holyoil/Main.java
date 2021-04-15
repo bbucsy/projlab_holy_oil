@@ -1,9 +1,7 @@
 package hu.holyoil;
 
-import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.controller.*;
-import hu.holyoil.skeleton.Logger;
-import hu.holyoil.skeleton.TestFramework;
+import hu.holyoil.commandhandler.Logger;
 
 /**
  * A program futására írt osztály, amelyben a main metódus lakik.
@@ -11,32 +9,16 @@ import hu.holyoil.skeleton.TestFramework;
 public class Main {
 
     /**
-     * Segéd-tagváltozó, amelynek segítségével be tudjuk állítani, tesztelő üzemmódban induljon a program.
+     * Segéd-tagváltozó, amelynek segítségével be tudjuk állítani, használja-e a randomizálást a program.
      */
-    public static final Boolean isTestMode = false;
-    private static int uniqueId;
     public static Boolean isRandomEnabled;
-
-    public static int GetId() {
-
-        uniqueId++;
-        return uniqueId;
-
-    }
 
     /**
      * A program központi indító függvénye.
      * @param args program indításakor megadott argumentumok
      */
     public static void main(String[] args) {
-
-        uniqueId = -1;
         isRandomEnabled = true;
-
-        if (isTestMode) {
-            TestFramework.getInstance().AddTestcases();
-            TestFramework.getInstance().RunTestcases();
-        }
 
         // Making sure every controller already existing
         Logger.SetEnabled(false);

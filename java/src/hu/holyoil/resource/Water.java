@@ -1,11 +1,8 @@
 package hu.holyoil.resource;
 
-import hu.holyoil.Main;
-import hu.holyoil.controller.InputOutputController;
-import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 /**
  * Vízjég.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.
@@ -50,6 +47,7 @@ public class Water extends AbstractBaseResource {
     public void ReactToSunNearby(Asteroid asteroid) {
         Logger.Log(this,"Reacting to Sun nearby");
         asteroid.SetResource(null);
+        ReactToGettingDestroyed();
         Logger.Return();
     }
 }

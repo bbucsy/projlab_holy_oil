@@ -1,15 +1,11 @@
 package hu.holyoil.neighbour;
 
 import hu.holyoil.Main;
-import hu.holyoil.controller.GameController;
-import hu.holyoil.controller.InputOutputController;
-import hu.holyoil.controller.SunController;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.crewmate.*;
 import hu.holyoil.resource.AbstractBaseResource;
-import hu.holyoil.skeleton.Logger;
-import hu.holyoil.skeleton.TestFramework;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 import java.util.*;
@@ -388,14 +384,11 @@ public class Asteroid implements INeighbour {
     public INeighbour GetRandomNeighbour() {
         Logger.Log(this, "Returning random neighbour");
         Logger.Return();
-        if (Main.isTestMode) {
+        if (!Main.isRandomEnabled) {
             if (neighbouringAsteroids.isEmpty())
                 return teleporter;
             else
                 return neighbouringAsteroids.get(0);
-        }
-        else if (!Main.isRandomEnabled) {
-            return neighbouringAsteroids.get(0);
         }
         else {
 

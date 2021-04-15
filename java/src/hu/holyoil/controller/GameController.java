@@ -9,7 +9,7 @@ import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.resource.*;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -227,15 +227,15 @@ public class GameController implements ISteppable  {
                 asteroid.SetNumOfLayersRemaining(
                         random.nextInt(maxLayerCount - minLayerCount) + minLayerCount
                 );
-                
+
             } else {
 
                 asteroid.SetNumOfLayersRemaining(
                         (i % (maxLayerCount - minLayerCount + 1)) + minLayerCount
                 );
-                
+
             }
-            
+
             asteroid.SetIsDiscovered(false);
             int generatedResource;
 
@@ -381,7 +381,7 @@ public class GameController implements ISteppable  {
             );
 
         }
-        
+
         // the starting asteroid is discovered because there are settlers on it
         AsteroidRepository.GetInstance().Get(startingAsteroidName).SetIsDiscovered(true);
 

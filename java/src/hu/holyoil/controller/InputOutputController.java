@@ -8,7 +8,7 @@ import hu.holyoil.commandhandler.docommand.DoCommandHandler;
 import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 import java.io.InputStream;
 import java.util.Scanner;

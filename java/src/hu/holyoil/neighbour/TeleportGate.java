@@ -1,10 +1,9 @@
 package hu.holyoil.neighbour;
 
 import hu.holyoil.controller.AIController;
-import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.repository.NeighbourBaseRepository;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 /**

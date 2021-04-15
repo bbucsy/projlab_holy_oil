@@ -6,7 +6,7 @@ import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 /**

@@ -4,7 +4,7 @@ import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
-import hu.holyoil.skeleton.Logger;
+import hu.holyoil.commandhandler.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
