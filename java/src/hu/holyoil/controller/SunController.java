@@ -123,6 +123,12 @@ public class SunController implements ISteppable, IIdentifiable {
         Logger.Return();
     }
 
+    public int GetTurnsUntilStorm(){
+        Logger.Log(this, "Returning turns until next Sunstorm: " + turnsUntilNextSunstorm);
+        Logger.Return();
+        return turnsUntilNextSunstorm;
+    }
+
     /**
      * Singleton osztályhoz való hozzáférés miatt kell
      * @return visszaad egy instance-ot

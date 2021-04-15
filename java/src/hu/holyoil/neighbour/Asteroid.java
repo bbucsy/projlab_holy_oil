@@ -146,7 +146,7 @@ public class Asteroid implements INeighbour {
 
     /**
      * Mozgatja a kapott teleportert erre az aszteroidára.
-     * @param comingTeleporter ide a mozgást elvégezni készülő Spaceship
+     * @param comingTeleporter az ide mozgást elvégezni készülő teleporter
      */
     public void ReactToMove(TeleportGate comingTeleporter){
         Logger.Log(this, "Reacting to coming teleporter: " + Logger.GetName(comingTeleporter));
@@ -154,6 +154,7 @@ public class Asteroid implements INeighbour {
         if (teleporter == null) {
             comingTeleporter.GetHomeAsteroid().RemoveTeleporter();
             SetTeleporter(comingTeleporter);
+            comingTeleporter.GetHomeAsteroid().SetTeleporter(null);
             comingTeleporter.SetHomeAsteroid(this);
         }
         else {
@@ -193,6 +194,11 @@ public class Asteroid implements INeighbour {
         isNearSun = newIsNearbySun;
         Logger.Return();
 
+    }
+    public boolean GetIsNearbySun(){
+        Logger.Log(this, "isNearbySun: " + isNearSun.toString());
+        Logger.Return();
+        return isNearSun;
     }
 
     /**

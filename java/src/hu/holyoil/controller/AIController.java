@@ -1,13 +1,17 @@
 package hu.holyoil.controller;
 
+import hu.holyoil.Main;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.commandhandler.Logger;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Az AI-t irányító kontroller. Implementálja az ISteppable interfacet, így az irányított egységek minden körben végrehajtanak egy lépést. Singleton osztály.
@@ -107,10 +111,100 @@ public class AIController implements ISteppable {
     public void HandleRobot(Robot robot)  {
         Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ ">");
 
-        robot.Move(robot.GetOnAsteroid().GetRandomNeighbour());
+        Asteroid current = robot.GetOnAsteroid();
+        List<Asteroid> neighbouringAsteroids = robot.GetOnAsteroid().GetNeighbours();
+        boolean tpAvailable = current.GetTeleporter()!=null;
+        //napvihar esetén
+        if(SunController.GetInstance().GetTurnsUntilStorm()<2) {
+            if (current.GetResource() == null && current.GetLayerCount() < 2) {
+                robot.Drill(); //call Drill() even if it doesn't do anything to stay in place and simplicity
+                Logger.Return();
+                return;
+            } else {
+                int i = 0;
+                while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetResource() != null
+                        && neighbouringAsteroids.get(i).GetLayerCount() > 1)
+                    i++;
+                if (i < neighbouringAsteroids.size()) {
+                    robot.Move(neighbouringAsteroids.get(i));
+                    Logger.Return();
+                    return;
+                } else if (tpAvailable) {
+                    robot.Move(current.GetTeleporter());
+                    Logger.Return();
+                    return;
+                } else {
+                    i = 0;
+                    while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetTeleporter() != null)
+                        i++;
+                    if (i < neighbouringAsteroids.size()) {
+                        robot.Move(neighbouringAsteroids.get(i));
+                        Logger.Return();
+                        return;
+                    }
+                }
+            }
+        }
+        if(current.GetLayerCount()>0 && !(current.GetIsNearbySun() && current.GetLayerCount()==1)){
+            robot.Drill();
+            Logger.Return();
+            return;
+        }
 
-        // todo: proper intelligence
+        Asteroid target;
+        int chosenIndex = new Random().nextInt(neighbouringAsteroids.size());
+        int start = chosenIndex;
+        boolean listOver=false;
+        boolean shouldMove=false;
+        //nem napviharkor
+        //does NOT account for player movement
+        do {
+            if (chosenIndex == neighbouringAsteroids.size() - 1) {
+                chosenIndex = -1;
+            }
+            chosenIndex++;
+
+            target = neighbouringAsteroids.get(chosenIndex);
+            if (target.GetLayerCount() > 0) {
+                if (target.GetResource() != null) {
+                    if (!(target.GetIsNearbySun() && target.GetLayerCount() == 1)) {
+                        shouldMove = true;
+                    }
+                }
+            }
+
+            if (chosenIndex == start) {
+                listOver = true;
+            }
+        } while (!listOver && !shouldMove);
+        start = chosenIndex;
+        listOver = false;
+        while (!listOver && !shouldMove) {
+
+            if (chosenIndex == neighbouringAsteroids.size() - 1) {
+                chosenIndex = -1;
+            }
+            chosenIndex++;
+
+            target = neighbouringAsteroids.get(chosenIndex);
+            if (target.GetResource() == null && target.GetLayerCount() > 0) {
+                shouldMove = true;
+            }
+
+            if (chosenIndex == start) {
+                listOver = true;
+            }
+        }
+        if (shouldMove) {
+            robot.Move(neighbouringAsteroids.get(chosenIndex));
+        } else {
+            if(tpAvailable)
+                robot.Move(current.GetTeleporter());
+            else
+                robot.Move(current.GetRandomNeighbour());
+        }
         Logger.Return();
+
     }
     /**
      * Kezeli egy ufo működését
@@ -124,42 +218,54 @@ public class AIController implements ISteppable {
         else
             ufo.Move(ufo.GetOnAsteroid().GetRandomNeighbour());
 
-        // todo: proper intelligence
         Logger.Return();
     }
     /**
      * Kezeli egy teleporter működését
+     * <p>
+     *     Tesztesetben ha ki van kapcsolva a randomizálás: az első teleporter nélküli szomszédra küldi a teleportert.
+     * </p>
+     * <p>
+     *     Rendes működésben: random szomszédtól kedzve nézi sorban, van-e szomszédjuk.
+     * </p>
+     * <p>
+     *     Mindkét esetben kiléphet mozgás nelkül, ha minden szomszédnak van aszteroidája.
+     * </p>
      * @param teleportGate az adott teleporter
      */
     public void HandleTeleportGate(TeleportGate teleportGate)  {
         Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
-        // todo
 
-        teleportGate.Move((Asteroid)teleportGate.GetHomeAsteroid().GetRandomNeighbour()); // safety? we know it's an asteroid
+        List<Asteroid> neighbouringAsteroids = teleportGate.GetHomeAsteroid().GetNeighbours();
 
-        // todo: proper intelligence
-        // nice idea for this logic
-        /*int chosenIndex= new Random().nextInt(neighbouringAsteroids.size());
-        int start = chosenIndex;
-        boolean canMove = true;
-        while(canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter()!=null){
-            if(chosenIndex==neighbouringAsteroids.size()-1){
-                chosenIndex=-1;
-            }
-            chosenIndex++;
-            if(chosenIndex==start){
-                canMove = false;
-            }
-        }
-        if(canMove){
-            neighbouringAsteroids.get(chosenIndex).SetTeleporter(teleportGate);
-            teleportGate.SetHomeAsteroid(neighbouringAsteroids.get(chosenIndex));
-            teleporter=null;
+        if(!Main.isRandomEnabled){
+            int i=0;
+            while(i<neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetTeleporter()!=null)
+                i++;
+            if(i<neighbouringAsteroids.size())
+                teleportGate.Move(neighbouringAsteroids.get(i));
+
         }
         else {
-            Logger.Log(this, "All neighbours already have a teleporter, cannot move");
-            Logger.Return();
-        }*/
+            int chosenIndex = new Random().nextInt(neighbouringAsteroids.size());
+            int start = chosenIndex;
+            boolean canMove = true;
+            while (canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter() != null) {
+                if (chosenIndex == neighbouringAsteroids.size() - 1) {
+                    chosenIndex = -1;
+                }
+                chosenIndex++;
+                if (chosenIndex == start) {
+                    canMove = false;
+                }
+            }
+            if (canMove) {
+                teleportGate.Move(neighbouringAsteroids.get(chosenIndex));
+            } else {
+                Logger.Log(this, "All neighbours already have a teleporter, cannot move");
+                Logger.Return();
+            }
+        }
 
         Logger.Return();
     }
