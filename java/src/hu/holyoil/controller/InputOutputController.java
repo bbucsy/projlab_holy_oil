@@ -32,6 +32,7 @@ public class InputOutputController {
     public void ParseCommand(InputStream inputStream) {
         Scanner scanner = new Scanner(inputStream);
         boolean isRunning = true;
+        boolean isPlayMode = false;
 
         while (isRunning && scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -96,9 +97,18 @@ public class InputOutputController {
                     isRunning = false;
                     break;
                 }
+                case "play": {
+                    isPlayMode = true;
+                    Logger.SetEnabled(false);
+                    break;
+                }
                 default: {
-                    System.out.println("Command not recognized: " + line.split(" ")[0]);
-                    isRunning = false;
+                    if (isPlayMode) {
+                        System.out.println("Command not recognised. \r\nFor the available commands please refer to the documentation");
+                    } else {
+                        System.out.println("Command not recognized: " + line.split(" ")[0]);
+                        isRunning = false;
+                    }
                     break;
                 }
             }
