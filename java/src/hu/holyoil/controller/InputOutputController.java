@@ -1,21 +1,33 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.Main;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.commandhandler.addneighbourcommand.AddNeighbourCommandHandler;
-import hu.holyoil.commandhandler.createcommand.CreateCommandHandler;
 import hu.holyoil.commandhandler.causesunstormcommand.CauseSunstormCommandHandler;
+import hu.holyoil.commandhandler.createcommand.CreateCommandHandler;
 import hu.holyoil.commandhandler.docommand.DoCommandHandler;
+import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
 import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
-import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
-import hu.holyoil.commandhandler.Logger;
 
 import java.io.InputStream;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputOutputController {
 
     private static InputOutputController inputOutputController;
+    private static List<String> commands = Arrays.asList("echo_off", "echo_on", "do",
+            "create", "load", "add_neighbour",
+            "step", "cause_sunstorm", "explode_asteroid", "disable_random", "state", "exit", "play");
+
+    private static int Distance(String a, String b) {
+        if (a.isEmpty()) return b.length();
+        if (b.isEmpty()) return a.length();
+        int substitution = Distance(a.substring(1), b.substring(1)) + ((a.charAt(0) == b.charAt(0)) ? 0 : 1);
+        int insert = Distance(a, b.substring(1)) + 1;
+        int del = Distance(a.substring(1), b) + 1;
+        return Collections.min(Arrays.asList(substitution, insert, del));
+    }
 
     public static InputOutputController GetInstance() {
         if (inputOutputController == null) {
@@ -104,7 +116,10 @@ public class InputOutputController {
                 }
                 default: {
                     if (isPlayMode) {
-                        System.out.println("Command not recognised. \r\nFor the available commands please refer to the documentation");
+                        System.out.println("Command not recognised.");
+                        System.out.println("For all available commands refer to the documentation");
+                        String closest = Collections.min(commands, Comparator.comparingInt(s -> Distance(s, command[0])));
+                        System.out.println("\t Did you mean: " + closest + " ?");
                     } else {
                         System.out.println("Command not recognized: " + line.split(" ")[0]);
                         isRunning = false;
