@@ -21,12 +21,19 @@ public class InputOutputController {
             "step", "cause_sunstorm", "explode_asteroid", "disable_random", "state", "exit", "play");
 
     private static int Distance(String a, String b) {
-        if (a.isEmpty()) return b.length();
-        if (b.isEmpty()) return a.length();
-        int substitution = Distance(a.substring(1), b.substring(1)) + ((a.charAt(0) == b.charAt(0)) ? 0 : 1);
-        int insert = Distance(a, b.substring(1)) + 1;
-        int del = Distance(a.substring(1), b) + 1;
-        return Collections.min(Arrays.asList(substitution, insert, del));
+        int[][] d = new int[a.length() + 1][b.length() + 1];
+        for (int i = 0; i < a.length() + 1; i++) {
+            for (int j = 0; j < b.length() + 1; j++) {
+                if (i == 0) d[0][j] = j;
+                else if (j == 0) d[i][0] = i;
+                else
+                    d[i][j] = Collections.min(Arrays.asList(
+                            d[i - 1][j] + 1,
+                            d[i][j - 1] + 1,
+                            d[i - 1][j - 1] + (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1)));
+            }
+        }
+        return d[a.length()][b.length()];
     }
 
     public static InputOutputController GetInstance() {
