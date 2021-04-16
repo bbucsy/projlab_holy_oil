@@ -154,7 +154,6 @@ public class Asteroid implements INeighbour {
         if (teleporter == null) {
             comingTeleporter.GetHomeAsteroid().RemoveTeleporter();
             SetTeleporter(comingTeleporter);
-            comingTeleporter.GetHomeAsteroid().SetTeleporter(null);
             comingTeleporter.SetHomeAsteroid(this);
         }
         else {
@@ -195,6 +194,11 @@ public class Asteroid implements INeighbour {
         Logger.Return();
 
     }
+
+    /**
+     * Visszaadja napközeli-e az aszteroida
+     * @return boolean, true: napközeli, false: nem napközeli
+     */
     public boolean GetIsNearbySun(){
         Logger.Log(this, "isNearbySun: " + isNearSun.toString());
         Logger.Return();
@@ -362,6 +366,8 @@ public class Asteroid implements INeighbour {
         Logger.Return();
     }
 
+    private Random random = new Random();
+
     /**
      * Visszaad egy véletlen szomszédot.
      * <p>
@@ -398,7 +404,6 @@ public class Asteroid implements INeighbour {
         }
         else {
 
-            Random random = new Random();
             boolean canChooseTeleporter = false;
             if (teleporter != null) {
                 if (teleporter.GetPair().GetHomeAsteroid() != null) {
@@ -406,8 +411,7 @@ public class Asteroid implements INeighbour {
                 }
             }
 
-            int chosenIndex = random.nextInt() %
-                    (neighbouringAsteroids.size() + (canChooseTeleporter ? 0 : 1));
+            int chosenIndex = random.nextInt((neighbouringAsteroids.size() + (canChooseTeleporter ? 1 : 0)));
 
             return chosenIndex == neighbouringAsteroids.size() ?
                     teleporter :
@@ -579,6 +583,10 @@ public class Asteroid implements INeighbour {
 
     }
 
+    /**
+     * Beállítja az új felfedezettséget
+     * @param newIsDiscovered az isDiscovered új értéke
+     */
     public void SetIsDiscovered(Boolean newIsDiscovered) {
 
         isDiscovered = newIsDiscovered;

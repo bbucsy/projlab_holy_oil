@@ -1,0 +1,26 @@
+echo_off
+
+create asteroid a1
+create asteroid a2
+create asteroid a3
+create asteroid a4
+create asteroid a5
+create asteroid a6
+create settler s1 a1
+create storage storage1 s1
+create teleportpair t1 t2 storage1 storage1
+add_neighbour a1 a2
+add_neighbour a2 a3
+add_neighbour a1 a3
+add_neighbour a3 a4
+add_neighbour a1 a4
+add_neighbour a4 a5
+add_neighbour a1 a5
+add_neighbour a5 a6
+add_neighbour a1 a6
+do s1 placeteleportgate
+step
+do s1 move a2
+cause_sunstorm a1
+step
+state

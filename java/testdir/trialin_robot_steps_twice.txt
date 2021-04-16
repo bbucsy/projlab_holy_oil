@@ -1,0 +1,39 @@
+echo_off
+
+
+create asteroid a1 5
+create asteroid a2 1 true
+create asteroid a3 1 false
+create asteroid a4 4 false
+create asteroid a5 1 true
+create asteroid a6 0
+
+create uranium u1 a2
+create water w1 a6
+create coal c1 a4
+create iron i1 a5
+
+add_neighbour a1 a2
+add_neighbour a1 a3
+add_neighbour a1 a4
+add_neighbour a1 a5
+add_neighbour a1 a6
+add_neighbour a2 a3
+add_neighbour a2 a4
+add_neighbour a2 a5
+add_neighbour a2 a6
+add_neighbour a3 a4
+add_neighbour a3 a5
+add_neighbour a3 a6
+add_neighbour a4 a5
+add_neighbour a4 a6
+add_neighbour a5 a6
+
+
+create robot r1 a6
+
+step
+step
+
+state
+exit

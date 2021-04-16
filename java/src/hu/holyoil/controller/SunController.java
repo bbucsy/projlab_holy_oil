@@ -123,6 +123,10 @@ public class SunController implements ISteppable, IIdentifiable {
         Logger.Return();
     }
 
+    /**
+     * Visszaadja hány kör van még a következő napciharig.
+     * @return int, turnsUntilNextSunstorm
+     */
     public int GetTurnsUntilStorm(){
         Logger.Log(this, "Returning turns until next Sunstorm: " + turnsUntilNextSunstorm);
         Logger.Return();
@@ -130,7 +134,7 @@ public class SunController implements ISteppable, IIdentifiable {
     }
 
     /**
-     * Singleton osztályhoz való hozzáférés miatt kell
+     * Singleton osztályhoz való hozzáférés miatt kell.
      * @return visszaad egy instance-ot
      */
     public static SunController GetInstance() {
@@ -148,7 +152,7 @@ public class SunController implements ISteppable, IIdentifiable {
     }
 
     /**
-     * Privát konstruktor
+     * Privát konstruktor.
      * Nem lehet kívülről meghívni, nem lehet példányosítani.
      * <p>A 100 forduló a következő napviharig egy ad hoc szám, bármi lehet.
      * Inicializálja az aszteroidáka tároló listát.</p>

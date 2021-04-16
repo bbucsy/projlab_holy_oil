@@ -4,11 +4,9 @@ import hu.holyoil.Main;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.commandhandler.Logger;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,6 +32,10 @@ public class AIController implements ISteppable {
      * Az pályán található összes teleporter.
      */
     private List<TeleportGate> teleporters;
+    /**
+     * Az AI viselkedéséhez hozzájárló random tényező.
+     */
+    private Random random = new Random();
     /**
      * Minden robot végrehajt egy lépést
      * <p>Jelenleg nincs realizálva, teszteléshez nem szükséges.</p>
@@ -106,6 +108,17 @@ public class AIController implements ISteppable {
     }
     /**
      * Kezeli egy robot működését
+     * <p>
+     *     Prioritások (lehetséges kilépések): <ol>
+     *         <li>Napvhiarkor bújjon el</li>
+     *         <li>Ha van mit fúrni és NEM egy napközeli, 1 rétegű aszteroidán áll: fúr</li>
+     *         <li>Ha talál fúrható, NEM üres, NEM napközeli ÉS NEM 1 rétegű aszteroidát: oda mozog</li>
+     *         <li>Ha talál fúrható aszteroidát, oda mozog. (Következő körben nem fogja kifúrni úgyse, ha napközeli 1 rétegű)</li>
+     *         <li>Ha semmit nem talált, menjen át egy teleporteren</li>
+     *         <li>Ha nincs teleporter se, lépjen random szomszédra</li>
+     *     </ol>
+     *     Nem számol a játékos mozgásával, feltételezi, hogy előbb lép az összes robot, mint a Nap.
+     * </p>
      * @param robot az adott robot
      */
     public void HandleRobot(Robot robot)  {
@@ -118,8 +131,7 @@ public class AIController implements ISteppable {
 
             List<Asteroid> neighbouringAsteroids = robot.GetOnAsteroid().GetNeighbours();
             boolean tpAvailable = current.GetTeleporter() != null;
-            //napvihar esetén
-            if (SunController.GetInstance().GetTurnsUntilStorm() < 2) {//sunstorm happens at the end of next turn
+            if (SunController.GetInstance().GetTurnsUntilStorm() < 2) {//sunstorm happens at the end of this or next turn
                 if (current.GetResource() == null && current.GetLayerCount() < 2) {//if current asteroid is empty and can be drilled, stay
                     robot.Drill(); //call Drill() even if it doesn't do anything to stay in place and simplicity
                     Logger.Return();
@@ -150,14 +162,15 @@ public class AIController implements ISteppable {
                 }
             }//if all fails continue and hope for best
             //don't drill if water or uranium would react to the Sun, otherwise drill if makes sense
-            if (current.GetLayerCount() > 0 && !(current.GetIsNearbySun() && current.GetLayerCount() == 1)) {
+            if (current.GetLayerCount() > 0 && !(current.GetIsNearbySun() && current.GetLayerCount() == 1
+                    && current.GetResource()!=null)) {
                 robot.Drill();
                 Logger.Return();
                 return;
             }
 
             Asteroid target;
-            int chosenIndex = new Random().nextInt(neighbouringAsteroids.size());
+            int chosenIndex = random.nextInt(neighbouringAsteroids.size());
             int start = chosenIndex;
             boolean listOver = false;
             boolean shouldMove = false;
@@ -190,7 +203,7 @@ public class AIController implements ISteppable {
                 chosenIndex++;
 
                 target = neighbouringAsteroids.get(chosenIndex);
-                if (target.GetResource() == null && target.GetLayerCount() > 0) {
+                if (target.GetLayerCount() > 0) {
                     //find a drillable empty neighbour
                     shouldMove = true;
                 }
@@ -207,8 +220,8 @@ public class AIController implements ISteppable {
                 else//everything failed, all neighbours suck, doesn't matter where robot moves
                     robot.Move(current.GetRandomNeighbour());
             }
-            Logger.Return();
         }
+        Logger.Return();
     }
     /**
      * Kezeli egy ufo működését
@@ -251,7 +264,7 @@ public class AIController implements ISteppable {
 
         }
         else {
-            int chosenIndex = new Random().nextInt(neighbouringAsteroids.size());
+            int chosenIndex = random.nextInt(neighbouringAsteroids.size());
             int start = chosenIndex;
             boolean canMove = true;
             while (canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter() != null) {
