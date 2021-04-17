@@ -252,36 +252,36 @@ public class AIController implements ISteppable {
 
         List<Asteroid> neighbouringAsteroids = teleportGate.GetHomeAsteroid().GetNeighbours();
 
-        if(teleportGate.GetIsCrazy()) {
-            if (!Main.isRandomEnabled) {
-                int i = 0;
-                while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetTeleporter() != null)
-                    i++;
-                if (i < neighbouringAsteroids.size())
-                    teleportGate.Move(neighbouringAsteroids.get(i));
 
-            } else {
-                Random random = new Random();
-                int chosenIndex = random.nextInt(neighbouringAsteroids.size());
-                int start = chosenIndex;
-                boolean canMove = true;
-                while (canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter() != null) {
-                    if (chosenIndex == neighbouringAsteroids.size() - 1) {
-                        chosenIndex = -1;
-                    }
-                    chosenIndex++;
-                    if (chosenIndex == start) {
-                        canMove = false;
-                    }
+        if (!Main.isRandomEnabled) {
+            int i = 0;
+            while (i < neighbouringAsteroids.size() && neighbouringAsteroids.get(i).GetTeleporter() != null)
+                i++;
+            if (i < neighbouringAsteroids.size())
+                teleportGate.Move(neighbouringAsteroids.get(i));
+
+        } else {
+            Random random = new Random();
+            int chosenIndex = random.nextInt(neighbouringAsteroids.size());
+            int start = chosenIndex;
+            boolean canMove = true;
+            while (canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter() != null) {
+                if (chosenIndex == neighbouringAsteroids.size() - 1) {
+                    chosenIndex = -1;
                 }
-                if (canMove) {
-                    teleportGate.Move(neighbouringAsteroids.get(chosenIndex));
-                } else {
-                    Logger.Log(this, "All neighbours already have a teleporter, cannot move");
-                    Logger.Return();
+                chosenIndex++;
+                if (chosenIndex == start) {
+                    canMove = false;
                 }
             }
+            if (canMove) {
+                teleportGate.Move(neighbouringAsteroids.get(chosenIndex));
+            } else {
+                Logger.Log(this, "All neighbours already have a teleporter, cannot move");
+                Logger.Return();
+            }
         }
+
         Logger.Return();
     }
 
