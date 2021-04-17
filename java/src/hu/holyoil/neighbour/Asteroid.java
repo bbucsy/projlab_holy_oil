@@ -366,7 +366,7 @@ public class Asteroid implements INeighbour {
         Logger.Return();
     }
 
-    private Random random = new Random();
+
 
     /**
      * Visszaad egy véletlen szomszédot.
@@ -403,7 +403,7 @@ public class Asteroid implements INeighbour {
                 return neighbouringAsteroids.get(0);
         }
         else {
-
+            Random random = new Random();
             boolean canChooseTeleporter = false;
             if (teleporter != null) {
                 if (teleporter.GetPair().GetHomeAsteroid() != null) {

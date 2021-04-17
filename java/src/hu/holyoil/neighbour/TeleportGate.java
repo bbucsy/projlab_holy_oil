@@ -85,6 +85,16 @@ public class TeleportGate implements INeighbour {
     }
 
     /**
+     * Visszaadja a teleporter kerge állapotát.
+     * @return true: már érte napvihar, false: még nem érte napvihar
+     */
+    public boolean GetIsCrazy(){
+        Logger.Log(this, "Returning teleport craziness: " + isCrazy);
+        Logger.Return();
+        return isCrazy;
+    }
+
+    /**
      * Visszaadja az aszteroidát amin a teleporter található.
      * @return a teleporter homeAsteroid tagváltozója
      */
