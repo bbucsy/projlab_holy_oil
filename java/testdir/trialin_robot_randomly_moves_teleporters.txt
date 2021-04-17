@@ -1,4 +1,4 @@
-echo_off
+
 
 
 create asteroid a1 0 false
@@ -29,8 +29,17 @@ add_neighbour a4 a5
 add_neighbour a4 a6
 add_neighbour a5 a6
 
+create settler s1 a6
+create storage storage1 s1
+create teleportpair t1 t2 storage1 storage1
+
 create robot r1 a6
 
+do s1 placeteleportgate
+step
+do s1 move a2
+step
+do s1 placeteleportgate
 step
 
 state
