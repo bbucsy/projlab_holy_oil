@@ -9,6 +9,7 @@ import hu.holyoil.commandhandler.docommand.DoCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
 import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
+import sun.rmi.runtime.Log;
 
 import java.io.InputStream;
 import java.util.*;
@@ -18,7 +19,7 @@ public class InputOutputController {
     private static InputOutputController inputOutputController;
     private static List<String> commands = Arrays.asList("echo_off", "echo_on", "do",
             "create", "load", "add_neighbour",
-            "step", "cause_sunstorm", "explode_asteroid", "disable_random", "state", "exit", "play");
+            "step", "cause_sunstorm", "explode_asteroid", "disable_random", "state", "exit", "play", "generate");
 
     private static int Distance(String a, String b) {
         int[][] d = new int[a.length() + 1][b.length() + 1];
@@ -120,6 +121,13 @@ public class InputOutputController {
                 case "play": {
                     isPlayMode = true;
                     Logger.SetEnabled(false);
+                    break;
+                }
+                case  "generate": {
+                    boolean temp = Logger.IsEnabled();
+                    Logger.SetEnabled(false);
+                    GameController.GetInstance().StartGame();
+                    Logger.SetEnabled(temp);
                     break;
                 }
                 default: {
