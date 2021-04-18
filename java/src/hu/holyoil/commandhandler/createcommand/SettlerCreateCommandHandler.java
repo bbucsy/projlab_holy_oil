@@ -7,7 +7,16 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.commandhandler.Logger;
 
+/**
+ * Az `create settler name where` parancs megvalósítása.
+ */
 public class SettlerCreateCommandHandler implements ICommandHandler {
+    /**
+     * Létrehozza, regisztrálja a világban az telepest, majd elhelyezi ahova szeretnénk.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

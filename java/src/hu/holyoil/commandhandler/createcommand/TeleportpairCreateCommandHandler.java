@@ -10,7 +10,16 @@ import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Az create teleportpair names where parancs megvalósítása.
+ */
 public class TeleportpairCreateCommandHandler implements ICommandHandler {
+    /**
+     * Létrehoz két teleportkaput, és a megadott helyre beköti.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

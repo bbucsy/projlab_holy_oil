@@ -6,7 +6,16 @@ import hu.holyoil.repository.AsteroidRepository;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Az cause_sunstorm parancs megvalósítása.
+ */
 public class CauseSunstormCommandHandler implements ICommandHandler {
+    /**
+     * A kért aszteroidákon napvihart hív.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
         String[] commandParams = command.split(" ");

@@ -4,7 +4,16 @@ import hu.holyoil.commandhandler.ICommandHandler;
 import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.repository.MinerRepository;
 
+/**
+ * Az `do id craft params` parancs megvalósítása.
+ */
 public class MineDoCommandHandler implements ICommandHandler {
+    /**
+     * A megadott bányászásra képes objektum bányászik.
+     *
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

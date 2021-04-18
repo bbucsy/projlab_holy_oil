@@ -3,7 +3,18 @@ package hu.holyoil.commandhandler.createcommand;
 import hu.holyoil.commandhandler.ICommandHandler;
 import hu.holyoil.repository.AbstractBaseRepository;
 
+/**
+ * Az create kezdetű parancsokat osztja tovább másik parancsfeldolgozó CommandHandler osztálynak megvalósításra.
+ */
 public class CreateCommandHandler implements ICommandHandler {
+    /**
+     * Fogja a bejövő parancs sztringet, megnézi milyen specifikus create commandot kíván hívni a felhasználó,
+     * és továbbhív egy másik osztály Handle függvényén,
+     * pl.: asteroid esetén AsteroidCreateCommandHandler Handle függvényén.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

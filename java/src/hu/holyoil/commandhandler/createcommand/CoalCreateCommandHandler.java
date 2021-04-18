@@ -10,7 +10,16 @@ import hu.holyoil.resource.Coal;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Az `create coal name where` parancs megvalósítása.
+ */
 public class CoalCreateCommandHandler implements ICommandHandler {
+    /**
+     * Létrehozza, regisztrálja a világban a szenet, majd beköti ahova szeretnénk.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

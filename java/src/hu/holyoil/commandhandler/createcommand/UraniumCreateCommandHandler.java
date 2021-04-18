@@ -10,7 +10,16 @@ import hu.holyoil.resource.Uranium;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Az `create uranium name where health` parancs megvalósítása.
+ */
 public class UraniumCreateCommandHandler implements ICommandHandler {
+    /**
+     * Létrehozza, regisztrálja a világban az uránt, majd beköti ahova szeretnénk.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

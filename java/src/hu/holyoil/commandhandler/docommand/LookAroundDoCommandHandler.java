@@ -8,15 +8,22 @@ import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.repository.StorageCapableRepository;
 
+/**
+ * Az `do id craft params` parancs megvalósítása.
+ */
 public class LookAroundDoCommandHandler implements ICommandHandler {
+    /**
+     * Megmutatja a felfedezett és környező aszteroidákat és teleportkaput, azok tulajdonságait, illetve a storage-unkat.
+     *
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 
         // Has access to:
         // All discovered asteroids
         // Own storage
-
-        // idk what else, please expand if you know
 
         String[] commandParams = command.split(" ");
 

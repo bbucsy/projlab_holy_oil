@@ -7,7 +7,16 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.commandhandler.Logger;
 
+/**
+ * Az `create robot name where` parancs megvalósítása.
+ */
 public class RobotCreateCommandHandler implements ICommandHandler {
+    /**
+     * Létrehozza, regisztrálja a világban az robotot, majd elhelyezi ahova szeretnénk.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 
