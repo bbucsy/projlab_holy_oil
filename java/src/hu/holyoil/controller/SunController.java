@@ -2,9 +2,9 @@ package hu.holyoil.controller;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
-import hu.holyoil.commandhandler.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;

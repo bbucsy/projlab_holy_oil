@@ -6,7 +6,16 @@ import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.StorageCapableRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 
+/**
+ * Az `do id craft params` parancs megvalósítása.
+ */
 public class PlaceResourceDoCommandHandler implements ICommandHandler {
+    /**
+     * Fogja a kért nyersanyagot, kikeresi, és lerakatja az IStorageCapable-lel.
+     *
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

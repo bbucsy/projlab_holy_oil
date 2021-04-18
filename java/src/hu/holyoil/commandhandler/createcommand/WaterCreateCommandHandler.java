@@ -2,15 +2,24 @@ package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.resource.Water;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Az `create water name where` parancs megvalósítása.
+ */
 public class WaterCreateCommandHandler implements ICommandHandler {
+    /**
+     * Létrehozza, regisztrálja a világban a vízjeget, majd beköti ahova szeretnénk.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

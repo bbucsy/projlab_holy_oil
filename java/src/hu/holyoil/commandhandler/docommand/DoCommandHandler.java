@@ -2,8 +2,17 @@ package hu.holyoil.commandhandler.docommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
 
+/**
+ * Az do kezdetű parancsokat osztja tovább másik parancsfeldolgozó CommandHandler osztálynak megvalósításra.
+ */
 public class DoCommandHandler implements ICommandHandler {
-
+    /**
+     * Fogja a bejövő parancs sztringet, megnézi milyen specifikus do commandot kíván hívni a felhasználó,
+     * és továbbhív egy másik osztály Handle függvényén.
+     * pl.: craft esetén CraftDoCommandHandler Handle függvényén.
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

@@ -2,7 +2,6 @@ package hu.holyoil.repository;
 
 import hu.holyoil.neighbour.INeighbour;
 
-import java.util.HashMap;
 
 /**
  * <i>INeighbour</i>-öket tároló tároló. Singleton osztály.

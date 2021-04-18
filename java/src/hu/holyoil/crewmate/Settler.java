@@ -1,5 +1,6 @@
 package hu.holyoil.crewmate;
 
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
@@ -9,7 +10,6 @@ import hu.holyoil.recipe.TeleporterRecipe;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 /**

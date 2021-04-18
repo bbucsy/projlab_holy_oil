@@ -4,7 +4,17 @@ import hu.holyoil.commandhandler.ICommandHandler;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.repository.StorageCapableRepository;
 
+/**
+ * Az `do id craft params` parancs megvalósítása.
+ */
 public class CraftDoCommandHandler implements ICommandHandler {
+    /**
+     * Megnézi, ki akar működni, ha IStorageCapable, továbbengedi, illetve azt is nézi, hogy milyen eszközt próbál létrehozni.
+     * Ezután meghívja a megfelelő IStorageCapable-ön a megfelelő craftoló függvényt.
+     *
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

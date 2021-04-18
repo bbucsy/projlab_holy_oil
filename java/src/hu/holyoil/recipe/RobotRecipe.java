@@ -1,12 +1,14 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.resource.*;
-import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.resource.Coal;
+import hu.holyoil.resource.Iron;
+import hu.holyoil.resource.Uranium;
 import hu.holyoil.storage.PlayerStorage;
 
 /**

@@ -1,10 +1,10 @@
 package hu.holyoil.crewmate;
 
 import hu.holyoil.IIdentifiable;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
-import hu.holyoil.commandhandler.Logger;
 
 /**
  * A telepes, robot és UFO közös őse

@@ -1,11 +1,20 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.commandhandler.Logger;
 
+/**
+ * A `create asteroid name params` parancs megvalósítása.
+ */
 public class AsteroidCreateCommandHandler implements ICommandHandler {
+    /**
+     * A kért aszteroidát létrehozza, a játékba regisztrálja
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

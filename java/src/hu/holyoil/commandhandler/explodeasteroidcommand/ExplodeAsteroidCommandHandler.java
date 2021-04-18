@@ -4,7 +4,16 @@ import hu.holyoil.commandhandler.ICommandHandler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 
+/**
+ * Az `explode_asteroid [ids]` parancs megvalósítása.
+ */
 public class ExplodeAsteroidCommandHandler implements ICommandHandler {
+    /**
+     * A kért aszteroidákat felrobbantja.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
         String[] commandParams = command.split(" ");
