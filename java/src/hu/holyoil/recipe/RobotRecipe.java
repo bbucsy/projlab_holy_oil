@@ -74,7 +74,7 @@ public class RobotRecipe implements IRecipe {
         if (storage.HasEnoughOf(billOfMaterial)) {
 
             Logger.Log(this, "Removing bill from storage");
-            storage.RemoveBill(billOfMaterial);
+            storage.RemoveBill(billOfMaterial, true);
             Logger.Return();
 
             Robot robot = new Robot(asteroid);

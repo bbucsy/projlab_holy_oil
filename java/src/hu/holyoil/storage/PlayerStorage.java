@@ -205,6 +205,12 @@ public class PlayerStorage implements IIdentifiable {
      */
     public void RemoveBill(BillOfMaterial billOfMaterial) {
 
+        RemoveBill(billOfMaterial, false);
+
+    }
+
+    public void RemoveBill(BillOfMaterial billOfMaterial, boolean deleteMaterials) {
+
         Logger.Log(this, "Removing bill " + Logger.GetName(billOfMaterial));
 
         storedMaterials.removeAll(billOfMaterial.GetMaterials());
@@ -218,6 +224,10 @@ public class PlayerStorage implements IIdentifiable {
                     storedMaterials.remove(
                             storedResource
                     );
+
+                    if (deleteMaterials) {
+                        storedResource.ReactToGettingDestroyed();
+                    }
 
                     break;
 

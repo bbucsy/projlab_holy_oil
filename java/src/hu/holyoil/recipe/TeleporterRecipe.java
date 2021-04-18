@@ -87,7 +87,7 @@ public class TeleporterRecipe implements IRecipe {
         if (storage.HasEnoughOf(billOfMaterial) && storage.GetTeleporterCount() <= 1) {
 
             Logger.Log(this, "Removing bill");
-            storage.RemoveBill(billOfMaterial);
+            storage.RemoveBill(billOfMaterial, true);
             Logger.Return();
 
             TeleportGate t1 = new TeleportGate(

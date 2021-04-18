@@ -9,7 +9,6 @@ import hu.holyoil.commandhandler.docommand.DoCommandHandler;
 import hu.holyoil.commandhandler.explodeasteroidcommand.ExplodeAsteroidCommandHandler;
 import hu.holyoil.commandhandler.loadcommand.LoadCommandHandler;
 import hu.holyoil.commandhandler.statecommand.StateCommandHandler;
-import sun.rmi.runtime.Log;
 
 import java.io.InputStream;
 import java.util.*;
