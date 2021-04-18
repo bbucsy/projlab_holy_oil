@@ -4,13 +4,8 @@ import hu.holyoil.commandhandler.Logger;
 
 import java.util.HashMap;
 
-/**
- * A köröket irányító singleton kontroller osztály.
- */
 public class TurnController {
-    /**
-     * Singleton osztály statikus tagváltozója amin keresztül el lehet érni.
-     */
+
     private static TurnController turnController;
 
     /**
@@ -65,10 +60,6 @@ public class TurnController {
         movesMade.remove(object);
     }
 
-    /**
-     * Singleton osztályra lehet vele hivatkozni
-     * @return visszaad egy instance-et
-     */
     public static TurnController GetInstance() {
 
         if (turnController == null) {
@@ -83,10 +74,6 @@ public class TurnController {
 
     }
 
-    /**
-     * Privát konstruktor.
-     * Nem lehet kívülről meghívni, nem lehet példányosítani.
-     */
     TurnController() {
         movesMade = new HashMap<>();
     }

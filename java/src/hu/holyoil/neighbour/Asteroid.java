@@ -29,7 +29,10 @@ public class Asteroid implements INeighbour {
     }
 
     /**
-     * Meghívja a konstruktort egy generált id-vel, amennyiben az nincs előre meghatározva.
+     * Konstruktor
+     * Inicializálja a tagváltozókat, a listákat üresen. Az aszteroida létrehozáskor üres, nincs napközelben, és nincs felfedezve a játékosok által.
+     * A kérgének vastagsága 0.
+     * Nincs rajta teleporter.
      */
     public Asteroid() {
 
@@ -37,11 +40,6 @@ public class Asteroid implements INeighbour {
 
     }
 
-    /**
-     * Konstruktor
-     * Inicializálja a tagváltozókat, a listákat üresen.
-     * Az aszteroida létrehozáskor a magja üres, nincs napközelben, nincs felfedezve a játékosok által, a kérgének vastagsága 0 valamint nincs rajta teleporter.
-     */
     public Asteroid(String name) {
 
         neighbouringAsteroids = new ArrayList<>();
@@ -61,7 +59,6 @@ public class Asteroid implements INeighbour {
      * */
     @Override
     public String toString() {
-
         StringBuilder toReturn = new StringBuilder("ASTEROID (name:) " + id
                 + "\n\t(is near sun:) " + isNearSun
                 + "\n\t(layers left:) " + numOfLayersRemaining
@@ -86,7 +83,6 @@ public class Asteroid implements INeighbour {
         toReturn.append("]");
 
         return toReturn.toString();
-
     }
 
     /**
@@ -120,9 +116,7 @@ public class Asteroid implements INeighbour {
      * <p>Lehet null, akkor az aszteroida üres.</p>
      */
     private AbstractBaseResource resource;
-    /**
-     * Akkor igaz, amennyiben az aszteroida már fel lett fedezvea játékosok által.
-     */
+
     public Boolean IsDiscovered() {
         return isDiscovered;
     }
@@ -139,7 +133,6 @@ public class Asteroid implements INeighbour {
      */
     @Override
     public void ReactToMove(Asteroid from, AbstractSpaceship abstractSpaceship) {
-
         Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractSpaceship));
 
         from.RemoveSpaceship(abstractSpaceship);
@@ -149,7 +142,6 @@ public class Asteroid implements INeighbour {
         abstractSpaceship.ReactToMoveMade();
 
         Logger.Return();
-
     }
 
     /**
@@ -157,7 +149,6 @@ public class Asteroid implements INeighbour {
      * @param comingTeleporter az ide mozgást elvégezni készülő teleporter
      */
     public void ReactToMove(TeleportGate comingTeleporter){
-
         Logger.Log(this, "Reacting to coming teleporter: " + Logger.GetName(comingTeleporter));
 
         if (teleporter == null) {
@@ -171,7 +162,6 @@ public class Asteroid implements INeighbour {
         }
 
         Logger.Return();
-
     }
 
     /**
@@ -183,13 +173,11 @@ public class Asteroid implements INeighbour {
      * @param res a lerakni kívánt nyersanyag
      */
     public void PutResource(Settler s, AbstractBaseResource res) {
-
         Logger.Log(this, "Putting down resource from settler to asteroid core.");
         if (numOfLayersRemaining == 0 && resource == null) {
             res.ReactToPlace(this, s);
         }
         Logger.Return();
-
     }
 
     /**
@@ -212,11 +200,9 @@ public class Asteroid implements INeighbour {
      * @return boolean, true: napközeli, false: nem napközeli
      */
     public boolean GetIsNearbySun(){
-
         Logger.Log(this, "isNearbySun: " + isNearSun.toString());
         Logger.Return();
         return isNearSun;
-
     }
 
     /**
@@ -497,7 +483,6 @@ public class Asteroid implements INeighbour {
         List<AbstractSpaceship> abstractSpaceshipsShallowCopy = new LinkedList<>(spaceships);
         abstractSpaceshipsShallowCopy.forEach(AbstractSpaceship::Die);
         Logger.Return();
-
     }
 
     /**
@@ -520,7 +505,6 @@ public class Asteroid implements INeighbour {
      */
     @Override
     public void Explode() {
-
         Logger.Log(this, "Exploding");
 
         Logger.Log(this, "Signaling to spaceships that I am exploding");
@@ -549,7 +533,6 @@ public class Asteroid implements INeighbour {
         }
 
         Logger.Return();
-
     }
 
     /**
@@ -584,11 +567,9 @@ public class Asteroid implements INeighbour {
      * Átállítja az isDiscovered tagváltozót igazra.
      */
     public void Discover(){
-
         Logger.Log(this, "Discovering Asteroid");
         isDiscovered=true;
         Logger.Return();
-
     }
     /**
      * Beállítja a teleportert.
