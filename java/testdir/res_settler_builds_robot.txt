@@ -9,10 +9,6 @@ ASTEROID (name:) a1
 PLAYERSTORAGE (name:) storage1
 	(material names:) []
 	(teleporter names:) []
-IRON (name:) i1
-URANIUM (name:) u1
-	(health:) 3
-COAL (name:) c1
 ROBOT (name:) Robot 1
 	(asteroid name:) a1
 SETTLER (name:) s1
