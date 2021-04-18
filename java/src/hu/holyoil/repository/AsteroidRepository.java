@@ -141,7 +141,7 @@ public class AsteroidRepository implements IReadWriteRepository<Asteroid> {
                     // We check if this graph is connected
                     Set<String> toVisit = new HashSet<>();
                     Set<String> visited = new HashSet<>();
-                    toVisit.add(as.toString());
+                    toVisit.add(as.GetId());
 
                     while (toVisit.size() > 0) {
 
