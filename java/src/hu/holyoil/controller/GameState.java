@@ -1,16 +1,30 @@
 package hu.holyoil.controller;
 
+/**
+ * A játék egy állapotát leíró enum. Három állapota lehet egy játéknak: Éppen
+ * fut, a játékosok nyertek, a játékosk vesztettek
+ */
 public enum GameState {
-    RUNNING(""), WON_GAME("WON GAME"), LOST_GAME("LOST GAME");
+  RUNNING(""),
+  WON_GAME("WON GAME"),
+  LOST_GAME("LOST GAME");
 
-    private final String status;
+  /**
+   * Beszédesebb állapotnevek kiírásához használt string.
+   */
+  private final String status;
 
-    GameState(String _status) {
-        status = _status;
-    }
+  /**
+   * Konstruktor, beállítjuk a toString() híváskor kiírandó státusz szöveget
+   * @param _status Kiírandó státusz szöveg
+   */
+  GameState(String _status) { status = _status; }
 
-    @Override
-    public String toString() {
-        return status;
-    }
+  /**
+   * Beszédes státusz szövegek kiírása
+   */
+  @Override
+  public String toString() {
+    return status;
+  }
 }
