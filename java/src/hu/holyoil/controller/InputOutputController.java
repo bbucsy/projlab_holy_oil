@@ -55,6 +55,7 @@ public class InputOutputController {
 
         while (isRunning && scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            boolean commandSuccess = true;
 
             if (line.length() <= 0) {
                 continue;
@@ -71,19 +72,19 @@ public class InputOutputController {
                     break;
                 }
                 case "do": {
-                    isRunning = new DoCommandHandler().Handle(line);
+                    commandSuccess = new DoCommandHandler().Handle(line);
                     break;
                 }
                 case "create": {
-                    isRunning = new CreateCommandHandler().Handle(line);
+                    commandSuccess = new CreateCommandHandler().Handle(line);
                     break;
                 }
                 case "load": {
-                    isRunning = new LoadCommandHandler().Handle(line);
+                    commandSuccess = new LoadCommandHandler().Handle(line);
                     break;
                 }
                 case "add_neighbour": {
-                    isRunning = new AddNeighbourCommandHandler().Handle(line);
+                    commandSuccess = new AddNeighbourCommandHandler().Handle(line);
                     break;
                 }
                 case "step": {
@@ -93,11 +94,11 @@ public class InputOutputController {
                     break;
                 }
                 case "cause_sunstorm": {
-                    isRunning = new CauseSunstormCommandHandler().Handle(line);
+                    commandSuccess = new CauseSunstormCommandHandler().Handle(line);
                     break;
                 }
                 case "explode_asteroid": {
-                    isRunning = new ExplodeAsteroidCommandHandler().Handle(line);
+                    commandSuccess = new ExplodeAsteroidCommandHandler().Handle(line);
                     break;
                 }
                 case "disable_random": {
@@ -108,7 +109,7 @@ public class InputOutputController {
                 case "state": {
                     boolean temp = Logger.IsEnabled();
                     Logger.SetEnabled(true);
-                    isRunning = new StateCommandHandler().Handle(line);
+                    commandSuccess = new StateCommandHandler().Handle(line);
                     Logger.SetEnabled(temp);
                     break;
                 }
@@ -122,16 +123,21 @@ public class InputOutputController {
                     break;
                 }
                 default: {
-                    if (isPlayMode) {
-                        System.out.println("Command not recognised.");
-                        System.out.println("For all available commands refer to the documentation");
-                        String closest = Collections.min(commands, Comparator.comparingInt(s -> Distance(s, command[0])));
-                        System.out.println("\t Did you mean: " + closest + " ?");
-                    } else {
-                        System.out.println("Command not recognized: " + line.split(" ")[0]);
-                        isRunning = false;
-                    }
+                    commandSuccess = false;
                     break;
+                }
+            }
+            //handle unsuccessful command
+            if(!commandSuccess){
+                if (isPlayMode) {
+                    // play mode -> suggest similar available command
+                    System.out.println("Command not recognised.");
+                    String closest = Collections.min(commands, Comparator.comparingInt(s -> Distance(s, line)));
+                    System.out.println("\t Did you mean: " + closest + " ?");
+                } else {
+                    // not in playmode -> exit with errror message.
+                    System.out.println("Command not recognized: " + line.split(" ")[0]);
+                    isRunning = false;
                 }
             }
         }
