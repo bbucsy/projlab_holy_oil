@@ -1,10 +1,10 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.SettlerRepository;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class PlayerStorageCreateCommandHandler implements ICommandHandler {

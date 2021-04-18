@@ -1,13 +1,13 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.AbstractBaseRepository;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 public class TeleportpairCreateCommandHandler implements ICommandHandler {

@@ -1,11 +1,11 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
-import hu.holyoil.commandhandler.Logger;
 
 public class RobotCreateCommandHandler implements ICommandHandler {
     @Override

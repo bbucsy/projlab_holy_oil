@@ -1,9 +1,9 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.commandhandler.Logger;
 
 public class AsteroidCreateCommandHandler implements ICommandHandler {
     @Override
