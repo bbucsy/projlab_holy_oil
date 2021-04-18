@@ -36,3 +36,15 @@ Parancssori futtatás fordítás után Windowson:
 2. A projekt könyvtárában a parancsértelmezőjével futtassa a következő parancsot:
 java -cp out\production\java hu.holyoil.Main
 3. Alternatív: futtassa a run.bat fájlt, amely ugyanazt a parancsot futtatja le, amelyet fent is említettünk.
+
+## Tesztek futtatása (Windowson)
+
+### Egy teszt futtatása
+
+1. Fő könyvtárában megnyitunk egy parancssort.
+2. Kiadjuk `run_test.bat <teszt fájl útvonal> <elvárt kimenet fájl útvonal>` parancsot.
+
+### Összes teszt futtatása
+
+1. Fő könyvtárában megnyitunk egy parancssort.
+2. Kiadjuk `run_all_tests.bat` parancsot.
