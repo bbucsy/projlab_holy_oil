@@ -14,53 +14,54 @@ public class DoCommandHandler implements ICommandHandler {
             return false;
         }
 
+        boolean result;
         switch (commandParams[2].toUpperCase()) {
 
             case "LOOKAROUND": {
 
-                new LookAroundDoCommandHandler().Handle(command);
+                result = new LookAroundDoCommandHandler().Handle(command);
                 break;
 
             }
 
             case "MOVE": {
 
-                new MoveDoCommandHandler().Handle(command);
+                result = new MoveDoCommandHandler().Handle(command);
                 break;
 
             }
 
             case "DRILL": {
 
-                new DrillDoCommandHandler().Handle(command);
+                result = new DrillDoCommandHandler().Handle(command);
                 break;
 
             }
 
             case "MINE": {
 
-                new MineDoCommandHandler().Handle(command);
+                result = new MineDoCommandHandler().Handle(command);
                 break;
 
             }
 
             case "PLACERESOURCE": {
 
-                new PlaceResourceDoCommandHandler().Handle(command);
+                result = new PlaceResourceDoCommandHandler().Handle(command);
                 break;
 
             }
 
             case "CRAFT": {
 
-                new CraftDoCommandHandler().Handle(command);
+                result = new CraftDoCommandHandler().Handle(command);
                 break;
 
             }
 
             case "PLACETELEPORTGATE": {
 
-                new PlaceTeleportgateDoCommandHandler().Handle(command);
+                result = new PlaceTeleportgateDoCommandHandler().Handle(command);
                 break;
 
             }
@@ -68,13 +69,14 @@ public class DoCommandHandler implements ICommandHandler {
             default: {
 
                 System.out.println("Command not recognized: " + commandParams[2]);
+                result = false;
                 break;
 
             }
 
         }
 
-        return true;
+        return result;
 
     }
 

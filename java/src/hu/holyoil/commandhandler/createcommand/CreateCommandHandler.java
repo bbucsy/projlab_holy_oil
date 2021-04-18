@@ -23,74 +23,75 @@ public class CreateCommandHandler implements ICommandHandler {
 
         }
 
+        boolean result;
         switch (commandParams[1].toUpperCase()) {
 
             case "ASTEROID": {
 
-                new AsteroidCreateCommandHandler().Handle(command);
+                result = new AsteroidCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "COAL": {
 
-                new CoalCreateCommandHandler().Handle(command);
+                result = new CoalCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "IRON": {
 
-                new IronCreateCommandHandler().Handle(command);
+                result = new IronCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "STORAGE": {
 
-                new PlayerStorageCreateCommandHandler().Handle(command);
+                result = new PlayerStorageCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "ROBOT": {
 
-                new RobotCreateCommandHandler().Handle(command);
+                result = new RobotCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "SETTLER": {
 
-                new SettlerCreateCommandHandler().Handle(command);
+                result = new SettlerCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "TELEPORTPAIR": {
 
-                new TeleportpairCreateCommandHandler().Handle(command);
+                result = new TeleportpairCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "UFO": {
 
-                new UfoCreateCommandHandler().Handle(command);
+                result = new UfoCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "URANIUM": {
 
-                new UraniumCreateCommandHandler().Handle(command);
+                result = new UraniumCreateCommandHandler().Handle(command);
                 break;
 
             }
 
             case "WATER": {
 
-                new WaterCreateCommandHandler().Handle(command);
+                result = new WaterCreateCommandHandler().Handle(command);
                 break;
 
             }
@@ -98,12 +99,13 @@ public class CreateCommandHandler implements ICommandHandler {
             default: {
 
                 System.out.println("Command not recognized: " + commandParams[2]);
+                result = false;
                 break;
 
             }
 
         }
 
-        return true;
+        return result;
     }
 }
