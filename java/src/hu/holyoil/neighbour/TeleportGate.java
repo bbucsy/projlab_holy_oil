@@ -11,14 +11,18 @@ import hu.holyoil.storage.PlayerStorage;
  * Implementálja az INegihbour interfacet.
  */
 public class TeleportGate implements INeighbour {
+
     /**
-     * Paraméter nélküli konstruktor.
-     * A létrejövő teleporternek nincs párja, nincs benne semmilyen tárolóban, és nincs rajta egy aszteroidán sem.
+     * Meghívja a konstruktort egy generált id-vel, amennyiben az nincs előre meghatározva.
      */
     public TeleportGate() {
         this(NeighbourBaseRepository.GetIdWithPrefix("TeleportGate"));
     }
 
+    /**
+     * Paraméter nélküli konstruktor.
+     * A létrejövő teleporternek nincs párja, nincs benne semmilyen tárolóban, és nincs rajta egy aszteroidán sem.
+     */
     public TeleportGate(String name) {
 
         pair = null;
@@ -47,11 +51,13 @@ public class TeleportGate implements INeighbour {
      * */
     @Override
     public String toString() {
+
         return "TELEPORTGATE (name:) " + id
                 + "\n\t(is crazy:) " + isCrazy
                 + "\n\t(pair name:) " + pair.GetId()
                 + "\n\t(asteroid name:) " + (homeAsteroid == null ? "null" : homeAsteroid.GetId())
                 + "\n\t(storage name:) " + (homeStorage == null ? "null" : homeStorage.GetId());
+
     }
 
     /**
@@ -80,8 +86,10 @@ public class TeleportGate implements INeighbour {
      * @param newIsCrazy új érték
      */
     public void SetIsCrazy(boolean newIsCrazy) {
+
         isCrazy = newIsCrazy;
         if (isCrazy) AIController.GetInstance().AddTeleportGate(this);
+
     }
 
     /**
@@ -89,9 +97,11 @@ public class TeleportGate implements INeighbour {
      * @return true: már érte napvihar, false: még nem érte napvihar
      */
     public boolean GetIsCrazy(){
+
         Logger.Log(this, "Returning teleport craziness: " + isCrazy);
         Logger.Return();
         return isCrazy;
+
     }
 
     /**
@@ -99,9 +109,11 @@ public class TeleportGate implements INeighbour {
      * @return a teleporter homeAsteroid tagváltozója
      */
     public Asteroid GetHomeAsteroid() {
+
         Logger.Log(this, "Returning home asteroid: "+ Logger.GetName(homeAsteroid));
         Logger.Return();
         return homeAsteroid;
+
     }
 
     /**
@@ -109,9 +121,11 @@ public class TeleportGate implements INeighbour {
      * @param homeAsteroid Az aszteroida amihez a teleporter mostantól tartozni fog.
      */
     public void SetHomeAsteroid(Asteroid homeAsteroid) {
+
         Logger.Log(this, "Setting home asteroid: "+ Logger.GetName(homeAsteroid));
         this.homeAsteroid = homeAsteroid;
         Logger.Return();
+
     }
 
     /**
@@ -147,6 +161,7 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void ReactToMove(Asteroid from, AbstractSpaceship abstractSpaceship) {
+
         Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractSpaceship));
 
         if (pair.GetHomeAsteroid() != null) {
@@ -154,6 +169,7 @@ public class TeleportGate implements INeighbour {
         }
 
         Logger.Return();
+
     }
 
     /**
@@ -161,9 +177,11 @@ public class TeleportGate implements INeighbour {
      * @param newPair a teleporter párja
      */
     public void SetPair(TeleportGate newPair) {
+
         Logger.Log(this, "Setting my pair to " + Logger.GetName(newPair));
         pair = newPair;
         Logger.Return();
+
     }
 
     /**
@@ -175,6 +193,7 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void Explode() {
+
         Logger.Log(this, "Exploding");
         pair.ExplodePair();
         ActuallyExplode();
@@ -184,6 +203,7 @@ public class TeleportGate implements INeighbour {
         Logger.Return();
 
         Logger.Return();
+
     }
 
     /**
@@ -206,6 +226,7 @@ public class TeleportGate implements INeighbour {
      * Törli magát vagy az aszteroidáról amihez tartozik, vagy a tárolóból amiben van. Egy teleporter nem lehete egyszerre aszteroidán és tárolóban.
      */
     private void ActuallyExplode() {
+
         if ((homeAsteroid == null && homeStorage == null) ||(homeAsteroid != null && homeStorage != null)) {
             // Error
             Logger.Log(this, "An error occured");
@@ -221,6 +242,7 @@ public class TeleportGate implements INeighbour {
             }
         }
         NeighbourBaseRepository.GetInstance().Remove(id);
+
     }
 
     /**
@@ -228,14 +250,17 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void ReactToSunstorm() {
+
         Logger.Log(this, "Reacting to Sunstorm");
         SetIsCrazy(true);
         Logger.Return();
+
     }
     /**
      * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere, ha meg van kergülve.
      */
     public void Move(Asteroid asteroid){
+
         Logger.Log(this, "Teleporter Moving to" + Logger.GetName(asteroid));
 
         if (isCrazy && homeAsteroid.GetNeighbours().contains(asteroid)) {
@@ -247,6 +272,7 @@ public class TeleportGate implements INeighbour {
         }
 
         Logger.Return();
+
     }
 
 }
