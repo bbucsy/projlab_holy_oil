@@ -4,12 +4,12 @@ ASTEROID (name:) a1
 	(is discovered:) false
 	(resource name:) null
 	(teleporter name:) null
-	(spaceship names:) [s1 Robot 1]
+	(spaceship names:) [s1 Robot1]
 	(neighbour asteroid names:) []
 PLAYERSTORAGE (name:) storage1
 	(material names:) []
 	(teleporter names:) []
-ROBOT (name:) Robot 1
+ROBOT (name:) Robot1
 	(asteroid name:) a1
 SETTLER (name:) s1
 	(asteroid name:) a1
