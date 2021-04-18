@@ -93,11 +93,8 @@ public class AsteroidRepository implements IReadWriteRepository<Asteroid> {
     @Override
     public boolean Remove(String id) {
 
-        boolean couldRemove = NeighbourBaseRepository.GetInstance().Remove(id);
-
-        if (!couldRemove) {
+        if (Get(id) == null)
             return false;
-        }
 
         Asteroid asteroid = Get(id);
         List<Asteroid> asteroids = GetAll();
@@ -171,6 +168,8 @@ public class AsteroidRepository implements IReadWriteRepository<Asteroid> {
             }
 
         }
+
+        NeighbourBaseRepository.GetInstance().Remove(id);
 
         return true;
 

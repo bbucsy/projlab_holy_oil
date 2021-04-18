@@ -512,24 +512,26 @@ public class Asteroid implements INeighbour {
         spaceshipsShallowCopy.forEach(AbstractSpaceship::ReactToAsteroidExplosion);
         Logger.Return();
 
-        neighbouringAsteroids.forEach(
-                asteroid -> asteroid.RemoveNeighbouringAsteroid(this)
-        );
-
-        if (teleporter != null) {
-
-            Logger.Log(this, "Exploding my teleporter");
-            teleporter.Explode();
-            Logger.Return();
-
-        }
-
         Logger.Log(this, "Removing me from Repository");
         AsteroidRepository.GetInstance().Remove(id);
         Logger.Return();
 
+        Logger.Log(this, "Signaling neighbours that I am exploding");
+        neighbouringAsteroids.forEach(
+                asteroid -> asteroid.RemoveNeighbouringAsteroid(this)
+        );
+        Logger.Return();
+
+        if (teleporter != null) {
+            Logger.Log(this, "Exploding my teleporter");
+            teleporter.Explode();
+            Logger.Return();
+        }
+
         if (resource != null) {
+            Logger.Log(this, "Exploding my resource");
             resource.ReactToGettingDestroyed();
+            Logger.Return();
         }
 
         Logger.Return();
