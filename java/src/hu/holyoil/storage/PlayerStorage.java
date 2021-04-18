@@ -19,7 +19,7 @@ public class PlayerStorage implements IIdentifiable {
      * Inicializálja a tagváltozó listákat.
      */
     public PlayerStorage() {
-        this(PlayerStorageBaseRepository.GetIdWithPrefix("PlayerStorage "));
+        this(PlayerStorageBaseRepository.GetIdWithPrefix("PlayerStorage"));
     }
 
     public PlayerStorage(String name) {

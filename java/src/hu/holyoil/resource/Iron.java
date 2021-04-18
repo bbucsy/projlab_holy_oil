@@ -12,7 +12,7 @@ public class Iron extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Iron() {
-        this(ResourceBaseRepository.GetIdWithPrefix("Iron "));
+        this(ResourceBaseRepository.GetIdWithPrefix("Iron"));
     }
 
     public Iron(String name) {

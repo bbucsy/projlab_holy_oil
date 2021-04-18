@@ -28,7 +28,7 @@ public class Robot extends AbstractCrewmate {
      * @param startingAsteroid a kezdő aszteroida, amin a játékos legyártja
      */
     public Robot(Asteroid startingAsteroid) {
-        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Robot "));
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Robot"));
     }
 
     //todo: comment

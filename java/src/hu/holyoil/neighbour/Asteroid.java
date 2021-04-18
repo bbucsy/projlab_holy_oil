@@ -36,7 +36,7 @@ public class Asteroid implements INeighbour {
      */
     public Asteroid() {
 
-        this(NeighbourBaseRepository.GetIdWithPrefix("Asteroid "));
+        this(NeighbourBaseRepository.GetIdWithPrefix("Asteroid"));
 
     }
 

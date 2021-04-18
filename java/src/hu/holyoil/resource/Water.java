@@ -13,7 +13,7 @@ public class Water extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Water() {
-        this(ResourceBaseRepository.GetIdWithPrefix("Water "));
+        this(ResourceBaseRepository.GetIdWithPrefix("Water"));
     }
 
     public Water(String name) {

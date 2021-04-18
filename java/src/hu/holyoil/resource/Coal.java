@@ -13,7 +13,7 @@ public class Coal extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Coal() {
-        this(ResourceBaseRepository.GetIdWithPrefix("Coal "));
+        this(ResourceBaseRepository.GetIdWithPrefix("Coal"));
     }
 
     public Coal(String name) {

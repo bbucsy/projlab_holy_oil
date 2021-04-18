@@ -19,7 +19,7 @@ public class Uranium extends AbstractBaseResource {
      * Paraméter nélküli konstruktor.
      */
     public Uranium() {
-        this(ResourceBaseRepository.GetIdWithPrefix("Uranium "), 3);
+        this(ResourceBaseRepository.GetIdWithPrefix("Uranium"), 3);
     }
 
     public Uranium(String name) {

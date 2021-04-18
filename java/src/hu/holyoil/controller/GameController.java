@@ -254,19 +254,19 @@ public class GameController implements ISteppable  {
 
             switch (generatedResource) {
                 case 1: {
-                    resource = new Coal(AbstractBaseRepository.GetIdWithPrefix("Coal"));
+                    resource = new Coal();
                     break;
                 }
                 case 2: {
-                    resource = new Iron(AbstractBaseRepository.GetIdWithPrefix("Iron"));
+                    resource = new Iron();
                     break;
                 }
                 case 3: {
-                    resource = new Uranium(AbstractBaseRepository.GetIdWithPrefix("Uranium"));
+                    resource = new Uranium();
                     break;
                 }
                 case 4: {
-                    resource = new Water(AbstractBaseRepository.GetIdWithPrefix("Water"));
+                    resource = new Water();
                     break;
                 }
                 default: {
@@ -375,7 +375,7 @@ public class GameController implements ISteppable  {
         for (int i = 0; i < numOfPlayers; i++) {
 
             // We generate numOfPlayers amount of settlers on the settler asteroid
-            Settler settler = new Settler(
+            new Settler(
                     AsteroidRepository.GetInstance().Get(startingAsteroidName)
             );
 
@@ -387,7 +387,7 @@ public class GameController implements ISteppable  {
         for (int i = 0; i < numOfUfos; i++) {
 
             // we generate numOfUfos amount of ufos on the ufo asteroid
-            Ufo ufo = new Ufo(
+            new Ufo(
                     AsteroidRepository.GetInstance().Get(ufoStartingAsteroidName)
             );
 

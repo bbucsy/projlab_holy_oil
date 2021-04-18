@@ -13,7 +13,7 @@ public class Ufo extends AbstractSpaceship implements IMiner{
      * @param startingAsteroid az UFO kezdő aszteroidája
      */
     public Ufo(Asteroid startingAsteroid){
-        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Ufo "));
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Ufo"));
     }
 
     public Ufo(Asteroid asteroid, String name) {

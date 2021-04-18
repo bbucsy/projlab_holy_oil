@@ -35,7 +35,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      *
      */
     public Settler(Asteroid startingAsteroid) {
-        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Settler "), null);
+        this(startingAsteroid, SpaceshipBaseRepository.GetIdWithPrefix("Settler"), null);
     }
 
     public Settler(Asteroid asteroid, String name) {

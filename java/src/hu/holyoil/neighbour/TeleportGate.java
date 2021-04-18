@@ -16,7 +16,7 @@ public class TeleportGate implements INeighbour {
      * A létrejövő teleporternek nincs párja, nincs benne semmilyen tárolóban, és nincs rajta egy aszteroidán sem.
      */
     public TeleportGate() {
-        this(NeighbourBaseRepository.GetIdWithPrefix("TeleportGate "));
+        this(NeighbourBaseRepository.GetIdWithPrefix("TeleportGate"));
     }
 
     public TeleportGate(String name) {
