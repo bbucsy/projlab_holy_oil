@@ -4,13 +4,10 @@ skinparam SequenceLifeLineBackgroundColor LightYellow
 
 title "Game gets drawn"
 
-participant "JVM" as jvm
+participant ": TurnController" as jvm
 participant "gameFrame: GameFrame" as gameFrame
 
-jvm -> gameFrame ++: paintComponent()
-
-gameFrame -> gameFrame ++: UpdateComponent()
-deactivate gameFrame
+jvm -> gameFrame ++: UpdateComponent()
 
 gameFrame -> jvm --
 
