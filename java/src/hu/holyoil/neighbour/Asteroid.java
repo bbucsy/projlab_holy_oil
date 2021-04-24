@@ -1,14 +1,20 @@
 package hu.holyoil.neighbour;
 
 import hu.holyoil.Main;
+import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.crewmate.AbstractCrewmate;
+import hu.holyoil.crewmate.AbstractSpaceship;
+import hu.holyoil.crewmate.IMiner;
+import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.NeighbourBaseRepository;
-import hu.holyoil.crewmate.*;
 import hu.holyoil.resource.AbstractBaseResource;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Aszteroidákat leíró osztály.

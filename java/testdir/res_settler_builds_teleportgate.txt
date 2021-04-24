@@ -19,11 +19,6 @@ TELEPORTGATE (name:) t2
 PLAYERSTORAGE (name:) storage1
 	(material names:) []
 	(teleporter names:) [t1 t2]
-IRON (name:) i1
-IRON (name:) i2
-WATER (name:) w1
-URANIUM (name:) u1
-	(health:) 3
 SETTLER (name:) s1
 	(asteroid name:) a1
 	(storage name:) storage1

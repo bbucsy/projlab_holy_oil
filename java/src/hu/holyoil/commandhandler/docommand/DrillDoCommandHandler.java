@@ -4,7 +4,16 @@ import hu.holyoil.commandhandler.ICommandHandler;
 import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.repository.CrewmateRepository;
 
+/**
+ * Az `do id craft params` parancs megvalósítása.
+ */
 public class DrillDoCommandHandler implements ICommandHandler {
+    /**
+     * A kért id-jű entitással megcsináltatja a fúrást a jelenlegi aszteroidáján, már ha az irányítani kívánt entitás AbstractCrewmate.
+     *
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

@@ -1,5 +1,11 @@
 # Holy Oil Game
 
+## Projekt leírása
+
+* JDK version: 1.8
+* Recommended IDE: Jetbrains IntelliJ IDEA 
+	* version: 2019.1 <=
+
 ## Fejlesztési utasítások
 
 ### Eclipse IDE
@@ -37,14 +43,38 @@ Parancssori futtatás fordítás után Windowson:
 java -cp out\production\java hu.holyoil.Main
 3. Alternatív: futtassa a run.bat fájlt, amely ugyanazt a parancsot futtatja le, amelyet fent is említettünk.
 
-## Tesztek futtatása (Windowson)
+## Tesztelés
 
-### Egy teszt futtatása
+A testdir mappában test_*.txt fájlnévvel léteznek a dokumentált teszteseteink, ahol a * a teszteset megnevezését referálja.
+Ugyanezen mappában res_*.txt fájlnévvel léteznek a dokumentált tesztesetek várt eredményei.
+
+### Tesztek futtatása (Windowson)
+
+#### Egy teszt futtatása
 
 1. Fő könyvtárában megnyitunk egy parancssort.
 2. Kiadjuk `run_test.bat <teszt fájl útvonal> <elvárt kimenet fájl útvonal>` parancsot.
 
-### Összes teszt futtatása
+#### Összes teszt futtatása
 
 1. Fő könyvtárában megnyitunk egy parancssort.
 2. Kiadjuk `run_all_tests.bat` parancsot.
+
+### Teszt kimenetének egyéni vizsgálata
+
+Parancssorban Windowson (fordítás után):
+
+0. Írja meg a tesztet a testdir mappában test_*.txt fájlnévvel, ahol a * helyére mehet a teszteset megnevezése ízlés szerint.
+1. Feltételezve van, hogy a projekt könyvtárában megtörtént a fordítás (lásd feljebb).
+2. A projekt könyvtárában a parancsértelmezőjével futtassa a következő parancsot (a * helyére az elkészült tesztfájl megnevezése kerül):
+run.bat < testdir\test_*.txt
+3. Ha esetleg ki szeretné vezetni másik fájlba az eredményt, futtassa így:
+run.bat < testdir\test_*.txt > manual_res_*.txt
+
+## Egyéb segédparancsok
+
+1. Fájllista generálása bash-ben (git bash vagy linux bash):
+find . \( -path ./testdir -o -path ./.idea -o -path ./out \) -prune -o -type f -printf '%f\t%s\t%CF\n' > filelist.txt
+2. Ezt bemásolod a txt-fájlból egy excel táblába, majd onnan másolod át a doksiba. (formázás ne zavarjon)
+2. Ha van git a gépeden, kell legyen git bash-ed is, add ki ezt a parancsot cmd.exe-ben:
+"%PROGRAMFILES%/git/usr/bin/bash.exe" -i -l

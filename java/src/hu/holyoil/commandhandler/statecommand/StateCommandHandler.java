@@ -12,7 +12,16 @@ import hu.holyoil.repository.SpaceshipBaseRepository;
 
 import java.util.ArrayList;
 
+/**
+ * Az state parancs megvalósítása.
+ */
 public class StateCommandHandler implements ICommandHandler {
+    /**
+     * Kimutatja a játéktér elemeinek állapotát.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
         ArrayList<IIdentifiable> toWrite = new ArrayList<>();

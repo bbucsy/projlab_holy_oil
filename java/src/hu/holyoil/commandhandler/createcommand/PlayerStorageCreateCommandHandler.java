@@ -1,13 +1,22 @@
 package hu.holyoil.commandhandler.createcommand;
 
 import hu.holyoil.commandhandler.ICommandHandler;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.InputOutputController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.SettlerRepository;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
+/**
+ * Az `create storage name settlerid` parancs megvalósítása.
+ */
 public class PlayerStorageCreateCommandHandler implements ICommandHandler {
+    /**
+     * Hozzácsatol egy playerstorage-ot a settlerhez. Szükséges minden create settler parancshoz ilyet is hívni.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 

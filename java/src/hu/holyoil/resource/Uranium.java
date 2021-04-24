@@ -1,8 +1,8 @@
 package hu.holyoil.resource;
 
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.commandhandler.Logger;
 /**
  * Urán.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.

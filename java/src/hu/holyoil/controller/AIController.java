@@ -1,11 +1,11 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.Main;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
-import hu.holyoil.commandhandler.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

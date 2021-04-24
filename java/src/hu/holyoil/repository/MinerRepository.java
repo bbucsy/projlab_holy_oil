@@ -1,6 +1,5 @@
 package hu.holyoil.repository;
 
-import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.IMiner;
 

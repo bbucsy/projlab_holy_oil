@@ -1,7 +1,7 @@
 package hu.holyoil;
 
-import hu.holyoil.controller.*;
 import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.controller.*;
 
 /**
  * A program futására írt osztály, amelyben a main metódus lakik.

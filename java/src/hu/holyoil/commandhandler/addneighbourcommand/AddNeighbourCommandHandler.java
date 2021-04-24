@@ -4,7 +4,16 @@ import hu.holyoil.commandhandler.ICommandHandler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 
+/**
+ * Az add_neighbour parancs megvalósítása.
+ */
 public class AddNeighbourCommandHandler implements ICommandHandler {
+    /**
+     * A kért aszteroidákat összeköti.
+     *
+     * @param command feldolgozandó parancs
+     * @return parancs lefutásának sikeressége
+     */
     @Override
     public boolean Handle(String command) {
         String[] commandParams = command.split(" ");

@@ -2,11 +2,11 @@ package hu.holyoil.resource;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.collection.BillOfMaterial;
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.IMiner;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.storage.PlayerStorage;
 
 /**

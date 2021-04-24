@@ -6,7 +6,16 @@ import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 
+/**
+ * Az `do id craft params` parancs megvalósítása.
+ */
 public class MoveDoCommandHandler implements ICommandHandler {
+    /**
+     * A kért entitást elmozdítja, ha Spaceship egyáltalán, a kért másik INeighbourre.
+     *
+     * @param command feldolgozandó parancs sora
+     * @return feldolgozás sikeressége
+     */
     @Override
     public boolean Handle(String command) {
 
