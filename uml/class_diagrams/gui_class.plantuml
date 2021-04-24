@@ -1,0 +1,117 @@
+@startuml classdiagram
+
+skinparam ClassAttributeIconSize 0
+skinparam CircledCharacterRadius 0
+skinparam CircledCharacterFontSize 0
+skinparam ClassFontStyle bold
+
+class JFrame {}
+class JPanel {}
+class JPopupMenu {}
+
+' package: viewcomponents
+interface IViewComponent << interface >> {
+  {abstract} + UpdateComponent()
+}
+
+together {
+  class MainFrame {
+    - InitComponent()
+    - InitListeners()
+    + UpdateComponent()
+  }
+
+  class GameFrame {
+    - InitComponent()
+    - InitListeners()
+    + UpdateComponent()
+  }
+}
+
+together {
+  class EnvironmentPanel {
+    - InitComponent()
+    - InitListeners()
+    + UpdateComponent()
+  }
+
+  class InventoryListPanel {
+    - InitComponent()
+    - InitListeners()
+    + UpdateComponent()
+  }
+
+  class PlayerListPanel {
+    - InitComponent()
+    - InitListeners()
+    + UpdateComponent()
+  }
+
+  class LogPanel {
+    - InitComponent()
+    - InitListeners()
+    + UpdateComponent()
+  }
+}
+
+abstract class AbstractPopupMenu {
+  + Show(e: MouseEvent)
+}
+
+together {
+  class AsteroidPopupMenu {
+    + AsteroidPopupMenu(a: Asteroid)
+  }
+
+  class TeleportGatePopupMenu {
+    + TeleportGatePopupMenu(t: TeleportGate)
+  }
+
+  class SettlerActionPopupMenu {
+    + ActionPopupMenu(s: Settler)
+  }
+
+  class PlaceResourcePopupMenu {
+    + PlaceResourcePopupMenu(r: AbstractBaseResource)
+  }
+}
+
+' Interface realizations
+GameFrame .up..|> IViewComponent
+MainFrame .up..|> IViewComponent
+EnvironmentPanel .up..|> IViewComponent
+InventoryListPanel .up..|> IViewComponent
+PlayerListPanel .up..|> IViewComponent
+LogPanel .up..|> IViewComponent
+
+' Inheritance
+GameFrame -up--|> JFrame
+MainFrame -up--|> JFrame
+
+EnvironmentPanel -down--|> JPanel
+InventoryListPanel -down--|> JPanel
+PlayerListPanel -down--|> JPanel
+LogPanel -down--|> JPanel
+
+AbstractPopupMenu -up-|> JPopupMenu
+AsteroidPopupMenu -up-|> AbstractPopupMenu
+TeleportGatePopupMenu -up-|> AbstractPopupMenu
+SettlerActionPopupMenu -up-|> AbstractPopupMenu
+PlaceResourcePopupMenu -up-|> AbstractPopupMenu
+
+' This is for better display
+JPopupMenu -[hidden]up-> JPanel
+
+' Associations
+GameFrame *--- "- environmentPanel 1" EnvironmentPanel
+GameFrame *--- "- inventoryListPanel 1" InventoryListPanel
+GameFrame *--- "- playerListPanel 1" PlayerListPanel
+GameFrame *--- "- logPanel 1" LogPanel
+
+InventoryListPanel --- "- player 1" Settler
+PlayerListPanel --- "- settlers 1..*" Settler
+EnvironmentPanel --- "- player 1" Settler
+' Ez a fenti majd kódolásnál felesleges
+' Turncontroller --> state machine: ki van soron a lépésnél?
+
+@enduml
