@@ -16,15 +16,19 @@ interface IViewComponent << interface >> {
 
 together {
   class MenuFrame {
+    - playerCount: int
     - InitComponent()
     - InitListeners()
-    + UpdateComponent()
+    + MenuFrame()
+    + GetPlayerCount(): int
   }
 
   class GameFrame {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + GameFrame()
+    + GetPlayer(): Settler
   }
 }
 
@@ -33,24 +37,28 @@ together {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + EnvironmentPanel()
   }
 
   class InventoryListPanel {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + InventoryListPanel()
   }
 
   class PlayerListPanel {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + PlayerListPanel()
   }
 
   class LogPanel {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + LogPanel()
   }
 }
 
@@ -83,7 +91,6 @@ together {
 
 ' Interface realizations
 GameFrame .up..|> IViewComponent
-MenuFrame .up..|> IViewComponent
 EnvironmentPanel .up..|> IViewComponent
 InventoryListPanel .up..|> IViewComponent
 PlayerListPanel .up..|> IViewComponent
@@ -113,9 +120,8 @@ GameFrame *--- "- inventoryListPanel 1" InventoryListPanel
 GameFrame *--- "- playerListPanel 1" PlayerListPanel
 GameFrame *--- "- logPanel 1" LogPanel
 
-InventoryListPanel --- "- player 1" Settler
 PlayerListPanel --- "- settlers 1..*" Settler
-EnvironmentPanel --- "- player 1" Settler
+GameFrame --- "- player 1" Settler
 ' Ez a fenti majd kódolásnál felesleges
 ' Turncontroller --> state machine: ki van soron a lépésnél?
 
