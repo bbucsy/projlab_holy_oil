@@ -2,6 +2,8 @@ package hu.holyoil;
 
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.*;
+import hu.holyoil.view.IViewComponent;
+import hu.holyoil.view.frames.MenuFrame;
 
 /**
  * A program futására írt osztály, amelyben a main metódus lakik.
@@ -28,7 +30,8 @@ public class Main {
         TurnController.GetInstance();
         Logger.SetEnabled(true);
 
-        InputOutputController.GetInstance().ParseCommand(System.in);
+        MenuFrame menu = new MenuFrame();
+        menu.setVisible(true);
     }
 
 }
