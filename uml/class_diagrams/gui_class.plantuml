@@ -15,7 +15,7 @@ interface IViewComponent << interface >> {
 }
 
 together {
-  class MainFrame {
+  class MenuFrame {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
@@ -78,7 +78,7 @@ together {
 
 ' Interface realizations
 GameFrame .up..|> IViewComponent
-MainFrame .up..|> IViewComponent
+MenuFrame .up..|> IViewComponent
 EnvironmentPanel .up..|> IViewComponent
 InventoryListPanel .up..|> IViewComponent
 PlayerListPanel .up..|> IViewComponent
@@ -86,7 +86,7 @@ LogPanel .up..|> IViewComponent
 
 ' Inheritance
 GameFrame -up--|> JFrame
-MainFrame -up--|> JFrame
+MenuFrame -up--|> JFrame
 
 EnvironmentPanel -down--|> JPanel
 InventoryListPanel -down--|> JPanel
