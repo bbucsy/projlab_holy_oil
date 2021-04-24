@@ -1,0 +1,24 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "InventoryListPanel gets clicked"
+
+Actor Player as player
+participant "env: InventoryListPanel" as env
+
+player -> env ++: mouseClicked(e)
+
+alt right mouse button and clicked on a resource
+
+    participant "popup: PlaceResourcePopupMenu" as resourcepopup
+    participant "clickedResource: AbstractResource"
+
+    env -> resourcepopup ++: <<create>> ctor(clickedResource, e)
+    resourcepopup -> env --
+
+end
+
+env -> player --
+
+@enduml

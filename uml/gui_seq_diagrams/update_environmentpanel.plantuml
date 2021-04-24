@@ -1,0 +1,27 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "EnvironmentPanel gets updated"
+
+participant "gameFrame: GameFrame" as gameFrame
+participant "env: EnvironmentPanel" as env
+participant ": TurnController" as turnC
+
+gameFrame -> env ++: UpdateComponent()
+env -> gameFrame ++: GetPlayer()
+gameFrame -> env --: player
+
+participant "player: Settler" as settler
+
+env -> settler ++: GetOnAsteroid()
+settler -> env --: onAsteroid
+
+participant "onAsteroid: Asteroid" as asteroid
+
+env -> asteroid ++: GetNeighbours()
+asteroid -> env --: neighbours
+
+env -> gameFrame --
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "EnvironmentPanel gets clicked"
+
+Actor Player as player
+participant "env: EnvironmentPanel" as env
+
+player -> env ++: mouseClicked(e)
+
+alt left mouse button
+
+    alt clicked on an asteroid
+
+        participant "popup: AsteroidPopupMenu" as asteroidpopup
+        participant "clickedAsteroid: Asteroid"
+
+        env -> asteroidpopup ++: <<create>> ctor(clickedAsteroid, e)
+        asteroidpopup -> env --
+
+    end
+
+    alt clicked on a teleportgate
+
+        participant "popup: TeleportGatePopup" as tppopup
+        participant "clickedTeleportGate: TeleportGate"
+
+        env -> tppopup ++: <<create>> ctor(clickedTeleportGate, e)
+        tppopup -> env --
+
+    end
+
+end
+
+alt right mouse button and clicked on an asteroid or a teleportgate
+
+    participant "popup: SettlerActionPopup" as settlerpopup
+    participant "gameFrame: GameFrame" as gameFrame
+    participant "settler: Settler" as settler
+
+    env -> gameFrame ++: GetPlayer()
+    gameFrame -> env --: settler
+
+    env -> settlerpopup ++: <<create>> ctor(settler, e)
+    settlerpopup -> env --
+
+end
+
+env -> player --
+
+@enduml

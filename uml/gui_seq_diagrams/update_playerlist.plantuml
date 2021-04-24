@@ -1,0 +1,18 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "PlayerListPanel gets updated"
+
+participant "gameFrame: GameFrame" as gameFrame
+participant "env: PlayerListPanel" as env
+
+gameFrame -> env ++: UpdateComponent()
+env -> gameFrame ++: GetPlayer()
+gameFrame -> env --: player
+
+participant "player: Settler" as settler
+
+env -> gameFrame --
+
+@enduml

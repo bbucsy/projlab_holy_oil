@@ -1,0 +1,30 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "GameFrame gets updated"
+
+participant "trg: Some_Trigger" as trg
+participant "gameFrame: GameFrame" as gameFrame
+participant "env: EnvironmentPanel" as env
+participant "log: LogPanel" as log
+participant "inv: InventoryListPanel" as inv
+participant "pls: PlayerListPanel" as pls
+
+trg -> gameFrame ++: UpdateComponent()
+
+gameFrame -> env ++: UpdateComponent()
+env -> gameFrame --
+
+gameFrame -> log ++: UpdateComponent()
+log -> gameFrame --
+
+gameFrame -> inv ++: UpdateComponent()
+inv -> gameFrame --
+
+gameFrame -> pls ++: UpdateComponent()
+pls -> gameFrame --
+
+gameFrame -> trg --
+
+@enduml
