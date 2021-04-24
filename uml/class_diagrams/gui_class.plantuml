@@ -55,24 +55,29 @@ together {
 }
 
 abstract class AbstractPopupMenu {
+  {abstract}# InitListeners()
   + Show(e: MouseEvent)
 }
 
 together {
   class AsteroidPopupMenu {
-    + AsteroidPopupMenu(a: Asteroid)
+    # InitListeners()
+    + AsteroidPopupMenu(a: Asteroid, e: MouseEvent)
   }
 
   class TeleportGatePopupMenu {
-    + TeleportGatePopupMenu(t: TeleportGate)
+    # InitListeners()
+    + TeleportGatePopupMenu(t: TeleportGate, e: MouseEvent)
   }
 
   class SettlerActionPopupMenu {
-    + ActionPopupMenu(s: Settler)
+    # InitListeners()
+    + ActionPopupMenu(s: Settler, e: MouseEvent)
   }
 
   class PlaceResourcePopupMenu {
-    + PlaceResourcePopupMenu(r: AbstractBaseResource)
+    # InitListeners()
+    + PlaceResourcePopupMenu(r: AbstractBaseResource, e: MouseEvent)
   }
 }
 
