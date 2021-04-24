@@ -108,4 +108,10 @@ GameFrame *--- "- inventoryListPanel 1" InventoryListPanel
 GameFrame *--- "- playerListPanel 1" PlayerListPanel
 GameFrame *--- "- logPanel 1" LogPanel
 
+InventoryListPanel --- "- player 1" Settler
+PlayerListPanel --- "- settlers 1..*" Settler
+EnvironmentPanel --- "- player 1" Settler
+' Ez a fenti majd kódolásnál felesleges
+' Turncontroller --> state machine: ki van soron a lépésnél?
+
 @enduml
