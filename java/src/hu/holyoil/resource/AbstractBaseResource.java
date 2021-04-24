@@ -121,5 +121,4 @@ public abstract class AbstractBaseResource implements IIdentifiable {
         ResourceBaseRepository.GetInstance().Remove(id);
         Logger.Return();
     }
-
 }
