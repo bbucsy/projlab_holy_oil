@@ -25,7 +25,6 @@ together {
 
   class GameFrame {
     - InitComponent()
-    - InitListeners()
     + UpdateComponent()
     + GameFrame()
   }
