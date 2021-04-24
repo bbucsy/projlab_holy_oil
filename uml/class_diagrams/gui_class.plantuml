@@ -28,7 +28,6 @@ together {
     - InitListeners()
     + UpdateComponent()
     + GameFrame()
-    + GetPlayer(): Settler
   }
 }
 
@@ -89,6 +88,10 @@ together {
   }
 }
 
+class TurnController << singleton >> {
+  + GetCurrentPlayer(): Settler
+}
+
 ' Interface realizations
 GameFrame .up..|> IViewComponent
 EnvironmentPanel .up..|> IViewComponent
@@ -121,8 +124,6 @@ GameFrame *--- "- playerListPanel 1" PlayerListPanel
 GameFrame *--- "- logPanel 1" LogPanel
 
 PlayerListPanel --- "- settlers 1..*" Settler
-GameFrame --- "- player 1" Settler
-' Ez a fenti majd kódolásnál felesleges
-' Turncontroller --> state machine: ki van soron a lépésnél?
+TurnController --- "- player 1" Settler
 
 @enduml
