@@ -1,0 +1,36 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "SettlerActionPopupMenu's Drill or Mine button gets clicked"
+
+Actor Player as player
+participant "btn: Button" as btn
+participant "player: Settler" as settler
+participant ": TurnController" as turn 
+
+player -> btn ++: mouseClicked(e)
+
+    alt clicked on SettlerActionPopupMenu's Drill button
+
+        btn -> turn ++: GetPlayer()
+        return player
+
+        btn -> settler ++: Drill()
+        return
+        
+    end
+
+    alt clicked on SettlerActionPopupMenu's Mine button
+
+        btn -> turn ++: GetPlayer()
+        return player
+
+        btn -> settler ++: Mine()
+        return
+        
+    end
+
+return
+
+@enduml

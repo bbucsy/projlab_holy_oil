@@ -1,0 +1,32 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "PlaceResourcePopupMenu's Place resource here button gets clicked"
+
+Actor Player as player
+participant "btn: Button" as btn
+participant "inv: InventoryListPanel" as env
+
+player -> btn ++: mouseClicked(e)
+
+    alt clicked on Place resource here button
+
+        participant ": TurnController" as turn
+        participant "player: Settler" as settler
+        participant "res: AbstractBaseResource"
+        
+        btn -> turn ++: GetPlayer()
+        return player
+
+        btn -> env ++: GetResourceAt(e)
+        return res
+
+        btn -> settler ++: PlaceResource(res)
+        return
+        
+    end
+
+return
+
+@enduml

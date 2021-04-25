@@ -1,0 +1,24 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Play button gets clicked"
+
+Actor Player as player
+participant "playBtn: Button" as env
+
+player -> env ++: mouseClicked(e)
+
+    alt clicked on play button
+
+        participant ": GameController" as game
+
+        note right: playBtn being child of MenuFrame accesses parent
+        env -> game ++: StartGame(parent.GetPlayerCount())
+        return
+        
+    end
+
+return
+
+@enduml

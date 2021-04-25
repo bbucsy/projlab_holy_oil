@@ -35,6 +35,7 @@ together {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + GetNeighbourAt(e: MouseEvent): INeighbour
     + EnvironmentPanel()
   }
 
@@ -42,6 +43,7 @@ together {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
+    + GetResourceAt(e: MouseEvent): AbstractBaseResource
     + InventoryListPanel()
   }
 

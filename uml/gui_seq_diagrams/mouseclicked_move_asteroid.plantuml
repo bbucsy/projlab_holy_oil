@@ -1,0 +1,32 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "AsteroidPopupMenu's Move button gets clicked"
+
+Actor Player as player
+participant "btn: Button" as btn
+participant "player: Settler" as settler
+participant "env: EnvironmentFrame" as env
+
+player -> btn ++: mouseClicked(e)
+
+    alt clicked on AsteroidPopupMenu's Move button
+
+        participant ": TurnController" as turn
+        participant "asteroid: Asteroid" 
+
+        btn -> turn ++: GetPlayer()
+        return player
+
+        btn -> env ++: GetNeighbourAt(e)
+        return asteroid
+
+        btn -> settler ++: Move(asteroid)
+        return
+        
+    end
+
+return
+
+@enduml

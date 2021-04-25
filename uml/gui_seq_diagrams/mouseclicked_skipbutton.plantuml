@@ -1,0 +1,27 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "Skip button gets clicked"
+
+Actor Player as player
+participant "skipBtn: Button" as env
+
+player -> env ++: mouseClicked(e)
+
+    alt clicked on skip button
+
+        participant "player: Settler" as settler
+        participant ": TurnController" as turn
+
+        env -> turn ++: GetPlayer()
+        return player
+
+        env -> settler ++: ReactToMoveMade()
+        return
+        
+    end
+
+return
+
+@enduml

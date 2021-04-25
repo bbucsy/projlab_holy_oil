@@ -1,0 +1,32 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "TeleportGatePopupMenu's Move button gets clicked"
+
+Actor Player as player
+participant "btn: Button" as btn
+participant "player: Settler" as settler
+participant "env: EnvironmentFrame" as env
+
+player -> btn ++: mouseClicked(e)
+
+    alt clicked on TeleportGatePopupMenu's Move button
+
+        participant ": TurnController" as turn
+        participant "tg: TeleportGate" 
+
+        btn -> turn ++: GetPlayer()
+        return player
+
+        btn -> env ++: GetNeighbourAt(e)
+        return tg
+
+        btn -> settler ++: Move(tg)
+        return
+        
+    end
+
+return
+
+@enduml
