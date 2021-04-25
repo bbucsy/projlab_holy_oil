@@ -5,11 +5,12 @@ skinparam SequenceLifeLineBackgroundColor LightYellow
 title "InventoryListPanel gets updated"
 
 participant "gameFrame: GameFrame" as gameFrame
-participant "env: InventoryListPanel" as env
+participant "inv: InventoryListPanel" as env
+participant ": TurnController" as turn
 
 gameFrame -> env ++: UpdateComponent()
-env -> gameFrame ++: GetPlayer()
-gameFrame -> env --: player
+env -> turn ++: GetPlayer()
+turn -> env --: player
 
 participant "player: Settler" as settler
 

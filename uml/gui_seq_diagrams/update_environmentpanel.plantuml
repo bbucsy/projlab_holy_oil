@@ -9,8 +9,8 @@ participant "env: EnvironmentPanel" as env
 participant ": TurnController" as turnC
 
 gameFrame -> env ++: UpdateComponent()
-env -> gameFrame ++: GetPlayer()
-gameFrame -> env --: player
+env -> turnC ++: GetPlayer()
+turnC -> env --: player
 
 participant "player: Settler" as settler
 

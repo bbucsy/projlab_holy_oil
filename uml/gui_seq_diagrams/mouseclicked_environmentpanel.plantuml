@@ -36,11 +36,11 @@ end
 alt right mouse button and clicked on an asteroid or a teleportgate
 
     participant "popup: SettlerActionPopup" as settlerpopup
-    participant "gameFrame: GameFrame" as gameFrame
+    participant ": TurnController" as turn
     participant "settler: Settler" as settler
 
-    env -> gameFrame ++: GetPlayer()
-    gameFrame -> env --: settler
+    env -> turn ++: GetPlayer()
+    turn -> env --: settler
 
     env -> settlerpopup ++: <<create>> ctor(settler, e)
     settlerpopup -> env --

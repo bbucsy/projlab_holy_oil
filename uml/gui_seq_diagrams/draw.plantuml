@@ -4,11 +4,47 @@ skinparam SequenceLifeLineBackgroundColor LightYellow
 
 title "Game gets drawn"
 
-participant ": TurnController" as jvm
+actor "Player" as player
+participant ": GameController" as game
 participant "gameFrame: GameFrame" as gameFrame
+participant "env: EnvironmentPanel" as env
+participant "log: LogPanel" as log
+participant "inv: InventoryListPanel" as inv
+participant "pls: PlayerListPanel" as pls
 
-jvm -> gameFrame ++: UpdateComponent()
+player -> game ++: startGame()
 
-gameFrame -> jvm --
+    game -> gameFrame ++: <<create>>
+
+        gameFrame -> gameFrame ++: InitComponent()
+
+            participant "button: Button" as button
+            
+            gameFrame -> env ++: <<create>>
+            return
+
+            gameFrame -> log ++: <<create>>
+            return
+
+            gameFrame -> inv ++: <<create>>
+            return
+
+            gameFrame -> pls ++: <<create>>
+            return
+
+            gameFrame -> gameFrame ++: SetPlayerCount(1)
+            deactivate gameFrame
+
+        deactivate gameFrame
+
+        gameFrame -> gameFrame ++: InitListeners()
+        deactivate gameFrame
+
+    return
+
+    game -> gameFrame ++: UpdateComponent()
+    return
+
+return
 
 @enduml

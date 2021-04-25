@@ -5,7 +5,7 @@ skinparam SequenceLifeLineBackgroundColor LightYellow
 title "InventoryListPanel gets clicked"
 
 Actor Player as player
-participant "env: InventoryListPanel" as env
+participant "inv: InventoryListPanel" as env
 
 player -> env ++: mouseClicked(e)
 
