@@ -26,12 +26,10 @@ public class Main {
         Logger.SetEnabled(false);
         SunController.GetInstance();
         AIController.GetInstance();
-        GameController.GetInstance();
         TurnController.GetInstance();
         Logger.SetEnabled(true);
 
-        MenuFrame menu = new MenuFrame();
-        menu.setVisible(true);
+        GameController.GetInstance().StartApp();
     }
 
 }

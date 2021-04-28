@@ -1,5 +1,6 @@
 package hu.holyoil.view.frames;
 
+import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.TurnController;
 
 import javax.swing.*;
@@ -91,12 +92,9 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(thisFrame, "I will start game with " + playerCount + " players!");
+                GameController.GetInstance().StartGame(playerCount);
             }
         });
-    }
-
-    public int getPlayerCount() {
-        return playerCount;
     }
 
     public MenuFrame() {
