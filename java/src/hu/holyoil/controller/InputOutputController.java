@@ -169,7 +169,7 @@ public class InputOutputController {
       case "generate": {
         boolean temp = Logger.IsEnabled();
         Logger.SetEnabled(false);
-        GameController.GetInstance().StartGame();
+        GameController.GetInstance().StartGame(3);
         Logger.SetEnabled(temp);
         break;
       }
