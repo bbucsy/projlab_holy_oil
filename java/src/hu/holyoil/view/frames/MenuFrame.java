@@ -87,11 +87,9 @@ public class MenuFrame extends JFrame {
     private void InitListeners() {
         slider.addChangeListener(e -> playerCount = slider.getValue());
 
-        JFrame thisFrame = this;
         playBtn.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(thisFrame, "I will start game with " + playerCount + " players!");
                 GameController.GetInstance().StartGame(playerCount);
             }
         });
@@ -99,11 +97,11 @@ public class MenuFrame extends JFrame {
 
     public MenuFrame() {
         super();
+        setTitle("Holy Oil Game - welcome");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         InitComponents();
         InitListeners();
         pack();
-        setResizable(false);
         setLocationRelativeTo(null);
     }
 

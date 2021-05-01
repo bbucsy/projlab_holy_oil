@@ -38,11 +38,6 @@ public class GameController implements ISteppable  {
     }
 
     /**
-     * A játékban lévő ufo-k száma a játék kezdetekor.
-     * */
-    public int numOfUfos = 3;
-
-    /**
      * Lépteti a köröket
      */
     @Override
@@ -397,6 +392,7 @@ public class GameController implements ISteppable  {
         // the starting asteroid is discovered because there are settlers on it
         AsteroidRepository.GetInstance().Get(startingAsteroidName).SetIsDiscovered(true);
 
+        int numOfUfos = numOfPlayers * 4;
         for (int i = 0; i < numOfUfos; i++) {
 
             // we generate numOfUfos amount of ufos on the ufo asteroid
