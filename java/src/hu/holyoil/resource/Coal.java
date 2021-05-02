@@ -3,6 +3,9 @@ package hu.holyoil.resource;
 
 import hu.holyoil.repository.ResourceBaseRepository;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Szén.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.

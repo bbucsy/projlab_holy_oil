@@ -208,10 +208,6 @@ public class GameController implements ISteppable  {
     public void StartGame(int numOfPlayers)  {
         Logger.Log(this,"Starting game");
 
-        menu.setVisible(false);
-        GameFrame gameFrame = new GameFrame();
-        gameFrame.setVisible(true);
-
         // Generate between minAsteroidCount and maxAsteroidCount asteroids
         Random random = new Random();
         int numOfAsteroids = minAsteroidCount;
@@ -405,6 +401,14 @@ public class GameController implements ISteppable  {
             );
 
         }
+
+        // ready for turn system to start
+        TurnController.GetInstance().StartTurnSystem();
+
+        // manage UI
+        menu.setVisible(false);
+        GameFrame gameFrame = new GameFrame();
+        gameFrame.setVisible(true);
 
         Logger.Return();
     }
