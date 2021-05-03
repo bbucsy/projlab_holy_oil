@@ -12,12 +12,19 @@ import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.storage.PlayerStorage;
 
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 /**
  * A Telepeseket leíró osztály.
  * Leszármazottja az AbstractCrewmate-nek (robottal közös tulajdonságai miatt).
  * Implementálja az IStorageCapable-t mert képes tárolásra és gyártásra.
  */
 public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner {
+    /**
+     * Statikus, minden telepesre jellemző ikon
+     */
+    protected static Image image = new ImageIcon("assets/settler.gif").getImage();
 
     /**
      * Kiírja a settler-t emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
@@ -254,4 +261,11 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
     }
 
+    /**
+     * Visszaadja az ikonját
+     */
+    @Override
+    public Image GetImage() {
+        return image;
+    }
 }
