@@ -3,6 +3,7 @@ package hu.holyoil.view.panels;
 import hu.holyoil.view.IViewComponent;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PlayerListPanel extends JPanel implements IViewComponent {
     private void InitComponent() {
@@ -20,5 +21,7 @@ public class PlayerListPanel extends JPanel implements IViewComponent {
 
     public PlayerListPanel() {
         super();
+        setPreferredSize(new Dimension(360, 200));
+        setBackground(new Color(4, 4, 13));
     }
 }
