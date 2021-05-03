@@ -27,7 +27,7 @@ public class Main {
         SunController.GetInstance();
         AIController.GetInstance();
         TurnController.GetInstance();
-        Logger.SetEnabled(true);
+        //Logger.SetEnabled(true);
 
         GameController.GetInstance().StartApp();
     }
