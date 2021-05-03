@@ -267,6 +267,12 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         invalidate();
     }
 
+    @Override
+    public void UpdateComponent() {
+        player = TurnController.GetInstance().GetSteppingSettler();
+        sunstormCountLabel.setText(SunController.GetInstance().GetTurnsUntilStorm() + " turn(s)");
+    }
+
     public EnvironmentPanel() {
         super();
         InitComponent();
