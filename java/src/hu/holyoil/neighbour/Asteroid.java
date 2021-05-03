@@ -626,4 +626,11 @@ public class Asteroid implements INeighbour {
         return numOfLayersRemaining;
     }
 
+    /**
+     * Visszaadja az aszteroidán lévő entitásokat
+     * @return aszteroida foglalói
+     */
+    public List<AbstractSpaceship> GetSpaceships() {
+        return spaceships;
+    }
 }
