@@ -26,7 +26,7 @@ public class Water extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "WATER (name:) " + id;
+        return "Water";
     }
 
     /**

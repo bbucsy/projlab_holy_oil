@@ -482,6 +482,10 @@ public class Asteroid implements INeighbour {
 
     }
 
+    public List<AbstractSpaceship> GetSpaceships() {
+        return spaceships;
+    }
+
     /**
      * Elvesz egy Spaceshipt az aszteroidáról
      * @param abstractSpaceship a törlendő telepes vagy robot
