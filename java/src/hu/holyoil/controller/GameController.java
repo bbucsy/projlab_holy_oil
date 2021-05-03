@@ -9,6 +9,8 @@ import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.resource.*;
+import hu.holyoil.view.frames.GameFrame;
+import hu.holyoil.view.frames.MenuFrame;
 
 import java.util.*;
 
@@ -34,16 +36,6 @@ public class GameController implements ISteppable  {
     public GameState GetGameState() {
         return gameState;
     }
-
-    /**
-     * A játékban lévő játékosok száma. Ennyivel inicializálódik a játék StartGame() hívásakor.
-     * */
-    public int numOfPlayers = 3;
-
-    /**
-     * A játékban lévő ufo-k száma a játék kezdetekor.
-     * */
-    public int numOfUfos = 3;
 
     /**
      * Lépteti a köröket
@@ -185,6 +177,18 @@ public class GameController implements ISteppable  {
         Logger.Return();
     }
 
+    /**
+     * Elindított alkalmazás menü ablaka.
+     */
+    private final MenuFrame menu = new MenuFrame();
+
+    /**
+     * Fókuszba keríti a menü ablakát, játéindításra ad lehetőséget.
+     */
+    public void StartApp() {
+        menu.setVisible(true);
+    }
+
     static int minAsteroidCount = 100;
     static int maxAsteroidCount = 200;
     static int minLayerCount = 3;
@@ -194,10 +198,15 @@ public class GameController implements ISteppable  {
 
     /**
      * elindítja a játékot.
+     * @param numOfPlayers A játékban lévő játékosok száma
      */
-    public void StartGame()  {
+    public void StartGame(int numOfPlayers)  {
         Logger.Log(this,"Starting game");
-        // todo
+
+        menu.setVisible(false);
+        GameFrame gameFrame = new GameFrame();
+        gameFrame.setVisible(true);
+
         // Generate between minAsteroidCount and maxAsteroidCount asteroids
         Random random = new Random();
         int numOfAsteroids = minAsteroidCount;
@@ -383,6 +392,7 @@ public class GameController implements ISteppable  {
         // the starting asteroid is discovered because there are settlers on it
         AsteroidRepository.GetInstance().Get(startingAsteroidName).SetIsDiscovered(true);
 
+        int numOfUfos = numOfPlayers * 4;
         for (int i = 0; i < numOfUfos; i++) {
 
             // we generate numOfUfos amount of ufos on the ufo asteroid

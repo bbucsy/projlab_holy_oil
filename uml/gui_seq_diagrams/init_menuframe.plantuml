@@ -1,0 +1,22 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "MenuFrame gets initialized"
+
+participant "Main" as jvm
+participant "menuFrame: MenuFrame" as menuFrame
+
+jvm -> menuFrame ++: <<create>>
+menuFrame -> menuFrame ++: InitComponent()
+
+participant "button: Button" as button
+menuFrame -> button ++: <<create>>
+button -> menuFrame --
+
+menuFrame -> menuFrame ++: SetPlayerCount(4)
+deactivate menuFrame
+
+menuFrame -> jvm --
+
+@enduml

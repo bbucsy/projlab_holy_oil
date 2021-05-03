@@ -19,6 +19,11 @@ public class TurnController {
     public final int NUM_OF_ACTIONS_PER_TURN = 1;
 
     /**
+     * Hány játékos lehet maximum egy játékban
+     */
+    public final int NUM_OF_PLAYERS_MAX = 4;
+
+    /**
      * Eltárolja minden objektumról, hogy hány lépést tett már meg.
      * */
     private HashMap<Object, Integer> movesMade;

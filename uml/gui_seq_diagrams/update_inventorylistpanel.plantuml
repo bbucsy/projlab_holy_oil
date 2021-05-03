@@ -1,0 +1,27 @@
+@startuml seq
+
+skinparam SequenceLifeLineBackgroundColor LightYellow
+
+title "InventoryListPanel gets updated"
+
+participant "gameFrame: GameFrame" as gameFrame
+participant "inv: InventoryListPanel" as env
+participant ": TurnController" as turn
+
+gameFrame -> env ++: UpdateComponent()
+env -> turn ++: GetPlayer()
+turn -> env --: player
+
+participant "player: Settler" as settler
+
+env -> settler ++: GetStorage()
+settler -> env --: storage
+
+participant "storage: PlayerStorage" as storage
+
+env -> storage ++: GetStoredMaterials()
+storage -> env --: materials
+
+env -> gameFrame --
+
+@enduml
