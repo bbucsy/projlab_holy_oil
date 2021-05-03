@@ -26,7 +26,7 @@ public class Coal extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "COAL (name:) " + id;
+        return "Coal";
     }
 
     /**
