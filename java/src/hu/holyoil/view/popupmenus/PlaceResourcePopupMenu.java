@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InventoryPopupMenu extends AbstractPopupMenu {
+public class PlaceResourcePopupMenu extends AbstractPopupMenu {
     PopupMenu inventoryPopupMenu;
     MenuItem place;
 
@@ -17,7 +17,7 @@ public class InventoryPopupMenu extends AbstractPopupMenu {
     protected void InitListeners() {
     }
 
-    public InventoryPopupMenu(Settler settler, AbstractBaseResource resource){
+    public PlaceResourcePopupMenu(Settler settler, AbstractBaseResource resource){
         //létrehozzuk a popupmenu-t
         inventoryPopupMenu = new PopupMenu();
 
@@ -32,16 +32,14 @@ public class InventoryPopupMenu extends AbstractPopupMenu {
     public class inventoryListener implements ActionListener {
         Settler settler;
         AbstractBaseResource resource;
-        Asteroid asteroid;
 
-        inventoryListener(Settler s, AbstractBaseResource abr){
+        public inventoryListener(Settler s, AbstractBaseResource abr){
             settler = s;
             resource = abr;
-            asteroid = settler.GetOnAsteroid();
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            asteroid.PutResource(settler, resource);
+            settler.PlaceResource(resource);
         }
     }
 }
