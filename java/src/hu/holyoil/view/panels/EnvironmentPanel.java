@@ -45,7 +45,33 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private final Map<Asteroid, Point> asteroidPointMap = new HashMap<>();
 
-    private final Map<Rectangle, Image> imageMap = new HashMap<>();
+    //private final Map<Rectangle, Image> imageMap = new HashMap<>();
+    private final List<ImageToRectangle> tupleList = new LinkedList<>();
+
+    private class ImageToRectangle implements Map.Entry<Rectangle, Image> {
+        private Rectangle rectangle;
+        private Image image;
+
+        public ImageToRectangle(Rectangle rectangle, Image image) {
+            this.rectangle = rectangle;
+            this.image = image;
+        }
+
+        @Override
+        public Rectangle getKey() {
+            return null;
+        }
+
+        @Override
+        public Image getValue() {
+            return null;
+        }
+
+        @Override
+        public Image setValue(Image value) {
+            return null;
+        }
+    }
 
     private void InitComponent() {
         JLabel sunstormStaticLabel = new JLabel("Next sunstorm's imminent in: ");
@@ -153,7 +179,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
         // if there's a teleporter, it gets drawn first
         if (asteroid.GetTeleporter() != null) {
-            imageMap.put(new Rectangle(x, y, 20, 20), teleportImg);
+            tupleList.add(new ImageToRectangle(new Rectangle(x, y, 20, 20), teleportImg));
             deltaPhi = 2 * Math.PI / (double)(spaceships.size() + 1);
             phi += deltaPhi;
         }
@@ -161,7 +187,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         for (AbstractSpaceship spaceship : spaceships) {
             x = (int) (Math.cos(phi) * 32) + asteroidPoint.x + 12;
             y = (int) (Math.sin(phi) * 32) + asteroidPoint.y + 12;
-            imageMap.put(new Rectangle(x, y, 20, 20), DefineImageFrom(spaceship));
+            tupleList.add(new ImageToRectangle(new Rectangle(x, y, 20, 20), DefineImageFrom(spaceship)));
             phi += deltaPhi;
         }
     }
@@ -171,12 +197,12 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private void CentralAsteroidToImageMap() {
         // register central asteroid as drawable image
-        imageMap.put(new Rectangle(330, 280, 64, 64), asteroidImg);
+        tupleList.add(new ImageToRectangle(new Rectangle(330, 280, 64, 64), asteroidImg));
 
         // register central asteroid's resource as drawable image
         AbstractBaseResource res = player.GetOnAsteroid().GetResource();
         if (res != null)
-            imageMap.put(new Rectangle(334, 284, 56, 56), DefineImageFrom(res));
+            tupleList.add(new ImageToRectangle(new Rectangle(334, 284, 56, 56), DefineImageFrom(res)));
 
         // register central asteroid's spaceships as drawable image
         List<AbstractSpaceship> spaceships = player.GetOnAsteroid().GetSpaceships();
@@ -185,7 +211,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         for (AbstractSpaceship spaceship : spaceships) {
             int x = (int) (Math.cos(phi) * 50) + 330 + 12;
             int y = (int) (Math.sin(phi) * 50) + 280 + 12;
-            imageMap.put(new Rectangle(x, y, 40, 40), DefineImageFrom(spaceship));
+            tupleList.add(new ImageToRectangle(new Rectangle(x, y, 40, 40), DefineImageFrom(spaceship)));
             phi += deltaPhi;
         }
     }
@@ -195,7 +221,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private void TeleportGateToImageMap() {
         if (player.GetOnAsteroid().GetTeleporter() != null)
-            imageMap.put(new Rectangle(230, 210, 60, 60), teleportImg);
+            tupleList.add(new ImageToRectangle(new Rectangle(230, 210, 60, 60), teleportImg));
     }
 
     /**
@@ -212,12 +238,12 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
             // register neighbour asteroid as drawable image AND clickable element
             asteroidPointMap.put(asteroid, new Point(x, y));
-            imageMap.put(new Rectangle(x, y, 44, 44), asteroidImg);
+            tupleList.add(new ImageToRectangle(new Rectangle(x, y, 44, 44), asteroidImg));
 
             // register neighbour asteroid's resource as drawable image
             AbstractBaseResource res = asteroid.GetResource();
             if (res != null)
-                imageMap.put(new Rectangle(x + 2, y + 2, 40, 40), DefineImageFrom(res));
+                tupleList.add(new ImageToRectangle(new Rectangle(x + 2, y + 2, 40, 40), DefineImageFrom(res)));
 
             // register neighbour asteroid's spaceships (and teleporter if available)
             AsteroidSurroundingToImageMap(asteroid, new Point(x, y));
@@ -232,14 +258,18 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     @Override
     protected void paintComponent(Graphics g) {
-        imageMap.forEach((rectangle, image) -> g.drawImage(image, rectangle.x, rectangle.y, rectangle.width, rectangle.height, this));
+        // leave it as sequential for
+        tupleList.stream().forEachOrdered(imageToRectangle -> {
+            Rectangle rectangle = imageToRectangle.rectangle;
+            g.drawImage(imageToRectangle.image, rectangle.x, rectangle.y, rectangle.width, rectangle.height, this);
+        });
     }
 
     @Override
     public void UpdateComponent() {
         // clearing up data
         asteroidPointMap.clear();
-        imageMap.clear();
+        tupleList.clear();
 
         // get data from model
         player = TurnController.GetInstance().GetSteppingSettler();
@@ -266,12 +296,6 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         exampleWater.ReactToGettingDestroyed();
 
         invalidate();
-    }
-
-    @Override
-    public void UpdateComponent() {
-        player = TurnController.GetInstance().GetSteppingSettler();
-        sunstormCountLabel.setText(SunController.GetInstance().GetTurnsUntilStorm() + " turn(s)");
     }
 
     public EnvironmentPanel() {
