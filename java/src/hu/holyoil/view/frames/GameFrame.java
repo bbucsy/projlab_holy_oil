@@ -17,13 +17,14 @@ public class GameFrame extends JFrame implements IViewComponent {
     private InventoryListPanel inventoryListPanel;
     private PlayerListPanel playerListPanel;
 
-    private final List<IViewComponent> panels = Arrays.asList(logPanel, environmentPanel, inventoryListPanel, playerListPanel);
+    private List<IViewComponent> panels;
 
     private void InitComponent() {
         logPanel = new LogPanel();
         environmentPanel = new EnvironmentPanel();
         inventoryListPanel = new InventoryListPanel();
         playerListPanel = new PlayerListPanel();
+        panels = Arrays.asList(logPanel, environmentPanel, inventoryListPanel, playerListPanel);
 
         JPanel mainPanel = new JPanel();
         GroupLayout mainLayout = new GroupLayout(mainPanel);

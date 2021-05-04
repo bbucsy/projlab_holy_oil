@@ -44,6 +44,8 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private final Map<Asteroid, Point> asteroidPointMap = new HashMap<>();
 
+    private final Map<Rectangle, Image> imageMap = new HashMap<>();
+
     private void InitComponent() {
         JLabel sunstormStaticLabel = new JLabel("Next sunstorm's imminent in: ");
         sunstormStaticLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 14));
@@ -102,11 +104,12 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         });
     }
 
-    /**
-     * Flag, amely segít megállapítani a paintComponent függvénynek, hogy minden inicializáció megtörtént-e.
-     * Thread-safeness flag
-     */
-    boolean canDraw;
+    // Segédobjektumok a kép megállapítására
+    // Megszűnéskor érdemes a repóból eltüntetni őket.
+    private Uranium exampleUranium;
+    private Iron exampleIron;
+    private Coal exampleCoal;
+    private Water exampleWater;
 
     /**
      * Segít megállapítani, melyik képre van szüksége a nyersanyagok képei közül.
@@ -115,13 +118,13 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private Image DefineImageFrom(AbstractBaseResource res) {
         Image image = null;
-        if (res.IsSameType(new Uranium()))
+        if (res.IsSameType(exampleUranium))
             image = uraniumImg;
-        else if (res.IsSameType(new Coal()))
+        else if (res.IsSameType(exampleCoal))
             image = coalImg;
-        else if (res.IsSameType(new Iron()))
+        else if (res.IsSameType(exampleIron))
             image = ironImg;
-        else if (res.IsSameType(new Water()))
+        else if (res.IsSameType(exampleWater))
             image = waterImg;
         return image;
     }
@@ -136,89 +139,132 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
     }
 
     /**
-     * Képernyő invalidációja során lefutó metódus, amely override-ja szükséges a grafikus elemek kirajzolására.
-     * @param g grafikus objektum
+     * Betárolja az imageMap-be a rajzolandó aszteroidát körülvevő elemeket
+     * @param asteroid amit körülveszik a dolgok
+     * @param asteroidPoint az aszteroida kezdőpontja
      */
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    private void AsteroidSurroundingToImageMap(Asteroid asteroid, Point asteroidPoint) {
+        List<AbstractSpaceship> spaceships = asteroid.GetSpaceships();
+        double phi = -0.5 * Math.PI;
+        double deltaPhi = 2 * Math.PI / (double)spaceships.size();
+        int x = (int) (Math.cos(phi) * 32) + asteroidPoint.x + 12;
+        int y = (int) (Math.sin(phi) * 32) + asteroidPoint.y + 12;
 
-        // don't query player before initialized!
-        if (!canDraw)
-            return;
-
-        // draw all asteroids neighbouring
-        List<Asteroid> asteroids = player.GetOnAsteroid().GetNeighbours();
-        for (Asteroid asteroid : asteroids) {
-            Point point = asteroidPointMap.get(asteroid);
-            g.drawImage(asteroidImg, point.x, point.y, 44, 44, this);
-
-            AbstractBaseResource res = asteroid.GetResource();
-            if (res != null)
-                g.drawImage(DefineImageFrom(res), point.x + 2, point.y + 2, 40, 40, this);
-
-            // draw spaceships
-            List<AbstractSpaceship> spaceships = asteroid.GetSpaceships();
-
-            double phi = -0.5 * Math.PI;
-            double deltaPhi = 2 * Math.PI / (double)spaceships.size();
-            int x = (int) (Math.cos(phi) * 32) + point.x + 12;
-            int y = (int) (Math.sin(phi) * 32) + point.y + 12;
-
-            if (asteroid.GetTeleporter() != null) {
-                g.drawImage(teleportImg, x, y, 20, 20, this);
-                deltaPhi = 2 * Math.PI / (double)(spaceships.size() + 1);
-                phi += deltaPhi;
-            }
-
-            for (AbstractSpaceship spaceship : spaceships) {
-                x = (int) (Math.cos(phi) * 32) + point.x + 12;
-                y = (int) (Math.sin(phi) * 32) + point.y + 12;
-                g.drawImage(DefineImageFrom(spaceship), x, y, 20, 20, this);
-                phi += deltaPhi;
-            }
+        // if there's a teleporter, it gets drawn first
+        if (asteroid.GetTeleporter() != null) {
+            imageMap.put(new Rectangle(x, y, 20, 20), teleportImg);
+            deltaPhi = 2 * Math.PI / (double)(spaceships.size() + 1);
+            phi += deltaPhi;
         }
 
-        // draw central asteroid
-        g.drawImage(asteroidImg, 330, 280, 64, 64, this);
+        for (AbstractSpaceship spaceship : spaceships) {
+            x = (int) (Math.cos(phi) * 32) + asteroidPoint.x + 12;
+            y = (int) (Math.sin(phi) * 32) + asteroidPoint.y + 12;
+            imageMap.put(new Rectangle(x, y, 20, 20), DefineImageFrom(spaceship));
+            phi += deltaPhi;
+        }
+    }
+
+    /**
+     * Betárolja a központi aszteroidát az imageMapbe
+     */
+    private void CentralAsteroidToImageMap() {
+        // register central asteroid as drawable image
+        imageMap.put(new Rectangle(330, 280, 64, 64), asteroidImg);
+
+        // register central asteroid's resource as drawable image
         AbstractBaseResource res = player.GetOnAsteroid().GetResource();
         if (res != null)
-            g.drawImage(DefineImageFrom(res), 334, 284, 56, 56, this);
+            imageMap.put(new Rectangle(334, 284, 56, 56), DefineImageFrom(res));
 
-        // draw teleport
-        if (player.GetOnAsteroid().GetTeleporter() != null)
-            g.drawImage(teleportImg, 230, 210, 60, 60, this);
-
-        // draw spaceships
+        // register central asteroid's spaceships as drawable image
         List<AbstractSpaceship> spaceships = player.GetOnAsteroid().GetSpaceships();
         double phi = -0.5 * Math.PI;
         double deltaPhi = 2 * Math.PI / (double)spaceships.size();
         for (AbstractSpaceship spaceship : spaceships) {
             int x = (int) (Math.cos(phi) * 50) + 330 + 12;
             int y = (int) (Math.sin(phi) * 50) + 280 + 12;
-            g.drawImage(DefineImageFrom(spaceship), x, y, 40, 40, this);
+            imageMap.put(new Rectangle(x, y, 40, 40), DefineImageFrom(spaceship));
             phi += deltaPhi;
         }
     }
 
-    @Override
-    public void UpdateComponent() {
-        player = TurnController.GetInstance().GetSteppingSettler();
-        sunstormCountLabel.setText(SunController.GetInstance().GetTurnsUntilStorm() + " turn(s)");
+    /**
+     * Betárolja a központi aszteroida teleportkapuját az imageMapbe
+     */
+    private void TeleportGateToImageMap() {
+        if (player.GetOnAsteroid().GetTeleporter() != null)
+            imageMap.put(new Rectangle(230, 210, 60, 60), teleportImg);
+    }
 
-        // define asteroids place
+    /**
+     * Betárolja a szomszédos aszteroidák hitboxát a kattintható aszteroidák mapjébe, majd
+     * ezen aszteroidákat, nyersanyagukat és körülvevő entitásait az imageMapbe
+     */
+    private void NeighbourAsteroidsToImageMap() {
         List<Asteroid> asteroids = player.GetOnAsteroid().GetNeighbours();
         double phi = 0;
         double deltaPhi = 2 * Math.PI / asteroids.size();
         for (Asteroid asteroid : asteroids) {
             int x = (int) (Math.cos(phi) * 280) + 330;
             int y = (int) (Math.sin(phi) * 220) + 280;
+
+            // register neighbour asteroid as drawable image AND clickable element
             asteroidPointMap.put(asteroid, new Point(x, y));
+            imageMap.put(new Rectangle(x, y, 44, 44), asteroidImg);
+
+            // register neighbour asteroid's resource as drawable image
+            AbstractBaseResource res = asteroid.GetResource();
+            if (res != null)
+                imageMap.put(new Rectangle(x + 2, y + 2, 40, 40), DefineImageFrom(res));
+
+            // register neighbour asteroid's spaceships (and teleporter if available)
+            AsteroidSurroundingToImageMap(asteroid, new Point(x, y));
+
             phi += deltaPhi;
         }
+    }
+
+    /**
+     * Képernyő invalidációja során lefutó metódus, amely override-ja szükséges a grafikus elemek kirajzolására.
+     * @param g grafikus objektum
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        imageMap.forEach((rectangle, image) -> g.drawImage(image, rectangle.x, rectangle.y, rectangle.width, rectangle.height, this));
+    }
+
+    @Override
+    public void UpdateComponent() {
+        // clearing up data
+        asteroidPointMap.clear();
+        imageMap.clear();
+
+        // get data from model
+        player = TurnController.GetInstance().GetSteppingSettler();
+        sunstormCountLabel.setText(SunController.GetInstance().GetTurnsUntilStorm() + " turn(s)");
+
+        // set up example objects for resource comparison and image definition
+        exampleUranium = new Uranium();
+        exampleIron = new Iron();
+        exampleCoal = new Coal();
+        exampleWater = new Water();
+
+        // register drawable items to imageMap
+        NeighbourAsteroidsToImageMap();
+        CentralAsteroidToImageMap();
+        TeleportGateToImageMap();
 
         // update click listener on every player-change
         InitListeners();
+
+        // get rid of example objects
+        exampleCoal.ReactToGettingDestroyed();
+        exampleIron.ReactToGettingDestroyed();
+        exampleUranium.ReactToGettingDestroyed();
+        exampleWater.ReactToGettingDestroyed();
+
+        invalidate();
     }
 
     public EnvironmentPanel() {
@@ -226,7 +272,5 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         InitComponent();
         setPreferredSize(new Dimension(720, 600));
         setOpaque(false);
-        UpdateComponent();
-        canDraw = true;
     }
 }

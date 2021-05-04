@@ -405,6 +405,7 @@ public class GameController implements ISteppable  {
         menu.setVisible(false);
         GameFrame gameFrame = new GameFrame();
         gameFrame.setVisible(true);
+        gameFrame.UpdateComponent();
 
         Logger.Return();
     }
