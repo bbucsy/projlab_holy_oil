@@ -1,5 +1,6 @@
 package hu.holyoil.commandhandler;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -38,6 +39,21 @@ public final class Logger {
     private static boolean enabled = true;
 
     /**
+     * Erre a printstreamre ír a logger
+     * */
+    private static PrintStream printStream = System.out;
+
+    /**
+     * Erre a printstreamre írja ki a logger a hibákat
+     * */
+    private final static PrintStream errorPrintStream = System.out;
+
+    /**
+     * Felülírja a printstreamet
+     * */
+    public static void SetPrintStream(PrintStream ps) { printStream = ps; }
+
+    /**
      * Privát függvény a szöveg megfelelő indentálásához
      * @param msg Indentálandó szöveg
      * @param indentation Indentálás mértéke
@@ -47,7 +63,7 @@ public final class Logger {
         for (int i = 0; i < indentation; ++i) {
             spaces.append("\t");
         }
-        System.out.print(spaces.toString() + msg);
+        printStream.print(spaces.toString() + msg);
     }
 
     /**
@@ -104,7 +120,7 @@ public final class Logger {
     public static void Log(Object caller, String msg){
         if (!enabled) return;
         if(!objectNames.containsKey(caller)){
-            System.out.println("Unregistered object calling");
+            errorPrintStream.println("Unregistered object calling");
             return;
         }
         print(objectNames.get(caller)+": -> " + msg + "\n", indentation++);
@@ -128,7 +144,7 @@ public final class Logger {
      */
     public static int GetInteger(Object caller, String msg){
         if(!objectNames.containsKey(caller)){
-            System.out.println("Unregistered object calling: ");
+            errorPrintStream.println("Unregistered object calling: ");
             return 0;
         }
 
@@ -152,7 +168,7 @@ public final class Logger {
      */
     public static Boolean GetBoolean(Object caller, String msg){
         if(!objectNames.containsKey(caller)){
-            System.out.println("Unregistered object calling");
+            errorPrintStream.println("Unregistered object calling");
             return Boolean.FALSE;
         }
 
