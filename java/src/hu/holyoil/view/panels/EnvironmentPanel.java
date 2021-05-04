@@ -90,9 +90,9 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
                 // checking click on neighbour asteroid, teleportgate or central asteroid
                 if (hitAsteroid[0] != null)
-                    popupMenu = new AsteroidPopupMenu(hitAsteroid[0], e);
+                    popupMenu = new AsteroidPopupMenu(hitAsteroid[0], player, e);
                 else if (HitInBox(hit, new Point(230, 210), 60, 60) && teleportGate != null)
-                    popupMenu = new TeleportGatePopupMenu(teleportGate, e);
+                    popupMenu = new TeleportGatePopupMenu(teleportGate, player, e);
                 else if (HitInBox(hit, new Point(330, 280), 64, 64))
                     popupMenu = new SettlerActionPopupMenu(player, e);
 
