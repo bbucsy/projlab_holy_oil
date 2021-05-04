@@ -130,7 +130,7 @@ GameFrame *--- "- environmentPanel 1" EnvironmentPanel
 GameFrame *--- "- inventoryListPanel 1" InventoryListPanel
 GameFrame *--- "- playerListPanel 1" PlayerListPanel
 GameFrame *--- "- logPanel 1" LogPanel
-InventoryListPanel *--- "- playerList *" PlayerInfoPanel
+PlayerListPanel *--- "- playerList *" PlayerInfoPanel
 
 PlayerListPanel --- "- settlers 1..*" Settler
 TurnController --- "- player 1" Settler

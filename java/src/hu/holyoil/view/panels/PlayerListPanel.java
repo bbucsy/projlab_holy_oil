@@ -37,10 +37,6 @@ public class PlayerListPanel extends JPanel implements IViewComponent {
         }
     }
 
-    private void InitListeners() {
-        //nothing to do here
-    }
-
     @Override
     public void UpdateComponent() {
         playerList.forEach((s, i) -> {
