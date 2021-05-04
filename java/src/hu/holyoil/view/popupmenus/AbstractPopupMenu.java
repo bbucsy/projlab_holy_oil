@@ -7,6 +7,7 @@ public abstract class AbstractPopupMenu extends JPopupMenu {
     protected abstract void InitListeners();
 
     public void Show(MouseEvent e) {
+        setLocation(e.getX(), e.getY());
         setVisible(true);
     }
 
