@@ -5,6 +5,7 @@ import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
@@ -404,6 +405,7 @@ public class GameController implements ISteppable  {
         // manage UI
         menu.setVisible(false);
         GameFrame gameFrame = new GameFrame();
+        TurnController.GetInstance().SetGameFrame(gameFrame);
         gameFrame.setVisible(true);
         gameFrame.UpdateComponent();
 

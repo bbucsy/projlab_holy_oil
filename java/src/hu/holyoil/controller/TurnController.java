@@ -3,6 +3,7 @@ package hu.holyoil.controller;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.SettlerRepository;
+import hu.holyoil.view.frames.GameFrame;
 
 import java.util.HashMap;
 
@@ -31,9 +32,22 @@ public class TurnController {
     private Settler steppingSettler;
 
     /**
+     * Tárolja a játékmenet ablakát, amelyben a játék folyik
+     */
+    private GameFrame gameFrame;
+
+    /**
      * Eltárolja minden objektumról, hogy hány lépést tett már meg.
      * */
     private HashMap<Object, Integer> movesMade;
+
+    public GameFrame GetGameFrame() {
+        return gameFrame;
+    }
+
+    public void SetGameFrame(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+    }
 
     /**
      * Elindítja a lépéskezelő alrendszerét a lépés kontrollernek, azaz léptetésbe kezd a játék.
@@ -50,6 +64,14 @@ public class TurnController {
      */
     public Settler GetSteppingSettler() {
         return steppingSettler;
+    }
+
+    private Settler GetNextSettler() {
+        for (Settler settler : SettlerRepository.GetInstance().GetAll()) {
+            if (!HasNoActionsLeft(settler))
+                return settler;
+        }
+        return null;
     }
 
     /**
@@ -76,6 +98,19 @@ public class TurnController {
      * */
     public void ReactToActionMade(Object object) {
         movesMade.put(object, movesMade.get(object) + 1);
+        Settler temp = GetNextSettler();
+        if (temp == null) {
+            AIController.GetInstance().Step();
+            SunController.GetInstance().Step();
+            GameController.GetInstance().Step();
+            StartTurnSystem();
+        }
+        else {
+            steppingSettler = temp;
+        }
+        gameFrame.UpdateComponent();
+        Logger.Log(this, "SIKER!!!!");
+        Logger.Return();
     }
 
     /**

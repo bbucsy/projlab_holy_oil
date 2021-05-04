@@ -1,5 +1,6 @@
 package hu.holyoil.view.panels;
 
+import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.AbstractSpaceship;
@@ -96,7 +97,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
                 else if (HitInBox(hit, new Point(230, 210), 60, 60) && teleportGate != null)
                     popupMenu = new TeleportGatePopupMenu(teleportGate, e);
                 else if (HitInBox(hit, new Point(330, 280), 64, 64))
-                    popupMenu = new SettlerActionPopupMenu(player, e);
+                    popupMenu = new SettlerActionPopupMenu(e);
 
                 if (popupMenu != null)
                     popupMenu.Show(e);
