@@ -49,7 +49,12 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
         //létrehozzuk a kiírandó stringeket
         String crazyString = "Crazy?: " + teleportGate.GetIsCrazy();
         String idString = " ID: " + asteroid.GetId();
-        String coreString = " Core: " + asteroid.GetResource().toString();
+        String coreString;
+        if(asteroid.GetResource() != null) {
+            coreString = " Core: " + asteroid.GetResource().toString();
+        }else{
+            coreString = " Core: ";
+        }
         String layersString = " Layers: " + asteroid.GetLayerCount();
         String shipsString = " Ships: ";
         for (AbstractSpaceship sp : asteroid.GetSpaceships()) {

@@ -48,7 +48,12 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
     public void lClick(Asteroid asteroid){
         //létrehozzuk a kiírandó stringeket
         String idString = "ID: " + asteroid.GetId();
-        String coreString = "Core: " + asteroid.GetResource().toString();
+        String coreString;
+        if(asteroid.GetResource() != null) {
+            coreString = "Core: " + asteroid.GetResource().toString();
+        }else{
+            coreString = "Core: ";
+        }
         String layersString = "Layers: " + asteroid.GetLayerCount();
         String shipsString = "Ships: ";
         for(AbstractSpaceship sp : asteroid.GetSpaceships()){
