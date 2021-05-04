@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
  * Amikor a játékos egy nyersanyagot próbál lehelyezni, az ahhoz tatozó popupmenu-t hozza létre.
  */
 public class PlaceResourcePopupMenu extends AbstractPopupMenu {
-    PopupMenu inventoryPopupMenu;
-    MenuItem place;
 
     @Override
     protected void InitListeners() {
@@ -29,13 +27,11 @@ public class PlaceResourcePopupMenu extends AbstractPopupMenu {
 
         setVisible(false);
 
-        inventoryPopupMenu = new PopupMenu();
-
         //amennyiben a settler asteroidja üres, csak akkor tud elhelyezni benne nyersanyagot
         if(settler.GetOnAsteroid().GetResource() == null){
-            place = new MenuItem("Place resource here");
+            JMenuItem place = new JMenuItem("Place resource here");
             place.addActionListener(new inventoryListener(settler, resource));
-            inventoryPopupMenu.add(place);
+            this.add(place);
         }
     }
 

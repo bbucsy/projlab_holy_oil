@@ -7,6 +7,7 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 import hu.holyoil.neighbour.TeleportGate;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +17,6 @@ import java.awt.event.MouseEvent;
  * Egy a settler saját asteroira történő kattintáshoz köthető popupmenu-t hozza létre.
  */
 public class SettlerActionPopupMenu extends AbstractPopupMenu {
-    PopupMenu actionPopupMenu;
-    MenuItem mine, drill;
 
     @Override
     protected void InitListeners() {
@@ -32,11 +31,9 @@ public class SettlerActionPopupMenu extends AbstractPopupMenu {
 
         setVisible(false);
 
-        actionPopupMenu = new PopupMenu();
-
         if(e.getButton() == 1){
             lClick(settler.GetOnAsteroid());
-        }else if(e.getButton() == 2){
+        }else if(e.getButton() == 3){
             rClick(settler);
         }
     }
@@ -64,11 +61,11 @@ public class SettlerActionPopupMenu extends AbstractPopupMenu {
         }
 
         //hozzáadjuk a popupmenuhöz a menüelemeket
-        actionPopupMenu.add(idString);
-        actionPopupMenu.add(coreString);
-        actionPopupMenu.add(layersString);
-        actionPopupMenu.add(shipsString);
-        actionPopupMenu.add(nearSunString);
+        this.add(idString);
+        this.add(coreString);
+        this.add(layersString);
+        this.add(shipsString);
+        this.add(nearSunString);
     }
 
     /**
@@ -85,15 +82,15 @@ public class SettlerActionPopupMenu extends AbstractPopupMenu {
 
         //amennyiben az asteroidnak még van kérge, csak fúrható
         if (asteroid.GetLayerCount() > 0) {
-            drill = new MenuItem("drill");
+            JMenuItem drill = new JMenuItem("drill");
             drill.addActionListener(new drillListener(settler));
-            actionPopupMenu.add(drill);
+            this.add(drill);
         } else {
             //amenniyben az asteroidnak nincs kérge és nem üreges a magja akkor bányászható
             if (asteroid.GetResource() != null) {
-                mine = new MenuItem("mine");
+                JMenuItem mine = new JMenuItem("mine");
                 mine.addActionListener(new mineListener(settler));
-                actionPopupMenu.add(mine);
+                this.add(mine);
             }
         }
     }

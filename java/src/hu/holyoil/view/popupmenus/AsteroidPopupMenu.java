@@ -5,6 +5,7 @@ import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,6 @@ import java.awt.event.MouseEvent;
  * Egy a settler sajátjától különböző asteroira történő kattintáshoz köthető popupmenu-t hozza létre.
  */
 public class AsteroidPopupMenu extends AbstractPopupMenu {
-    PopupMenu asteroidPopupMenu;
 
     @Override
     protected void InitListeners() {
@@ -32,11 +32,9 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
 
         setVisible(false);
 
-        asteroidPopupMenu = new PopupMenu();
-
         if(e.getButton() == 1){
             lClick(asteroid);
-        }else if(e.getButton() == 2){
+        }else if(e.getButton() == 3){
             rClick(settler, asteroid);
         }
     }
@@ -64,11 +62,11 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
         }
 
         //hozzáadjuk a stringeket a popupmenu-höz
-        asteroidPopupMenu.add(idString);
-        asteroidPopupMenu.add(coreString);
-        asteroidPopupMenu.add(layersString);
-        asteroidPopupMenu.add(shipsString);
-        asteroidPopupMenu.add(nearSunString);
+        this.add(idString);
+        this.add(coreString);
+        this.add(layersString);
+        this.add(shipsString);
+        this.add(nearSunString);
     }
 
     /**
@@ -79,9 +77,9 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
      * Létrehoz egy menüelemet és hozzárendel egy moveListener actionlistenert.
      */
     public void rClick(Settler settler, Asteroid asteroid){
-        MenuItem travel = new MenuItem("travel here");
+        JMenuItem travel = new JMenuItem("travel here");
         travel.addActionListener(new moveListener(settler, asteroid));
-        asteroidPopupMenu.add(travel);
+        this.add(travel);
     }
 
     /**

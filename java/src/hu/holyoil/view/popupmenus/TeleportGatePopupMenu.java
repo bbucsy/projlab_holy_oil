@@ -5,6 +5,7 @@ import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,6 @@ import java.awt.event.MouseEvent;
  * Egy teleportkapura történő kattintáshoz köthető popupmenu-t hozza létre.
  */
 public class TeleportGatePopupMenu extends AbstractPopupMenu {
-    PopupMenu teleportPopupMenu;
 
     @Override
     protected void InitListeners() {
@@ -29,11 +29,10 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
      */
     public TeleportGatePopupMenu(TeleportGate teleportGate, Settler settler, MouseEvent e) {
         setVisible(false);
-        teleportPopupMenu = new PopupMenu();
 
         if(e.getButton() == 1){
             lClick(teleportGate);
-        }else if(e.getButton() == 2){
+        }else if(e.getButton() == 3){
             rClick(settler, teleportGate);
         }
     }
@@ -64,13 +63,13 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
         }
 
         //hozzáadjuk a stringeket a popupmenu-höz
-        teleportPopupMenu.add(crazyString);
-        teleportPopupMenu.add("To asteroid:");
-        teleportPopupMenu.add(idString);
-        teleportPopupMenu.add(coreString);
-        teleportPopupMenu.add(layersString);
-        teleportPopupMenu.add(shipsString);
-        teleportPopupMenu.add(nearSunString);
+        this.add(crazyString);
+        this.add("To asteroid:");
+        this.add(idString);
+        this.add(coreString);
+        this.add(layersString);
+        this.add(shipsString);
+        this.add(nearSunString);
     }
 
     /**
@@ -81,9 +80,9 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
      * Létrehoz egy menüelemet és hozzárendel egy moveListener actionlistenert.
      */
     public void rClick(Settler settler, TeleportGate teleporter){
-        MenuItem travel = new MenuItem("travel here");
+        JMenuItem travel = new JMenuItem("travel here");
         travel.addActionListener(new moveListener(settler, teleporter));
-        teleportPopupMenu.add(travel);
+        this.add(travel);
     }
 
     /**
