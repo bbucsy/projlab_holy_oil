@@ -6,11 +6,18 @@ import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 /**
  * Robotot leíró osztály.
  * Leszármazottja az AbstractCrewmate-nek (telepessel való közös tulajdonságai miatt)
  */
 public class Robot extends AbstractCrewmate {
+    /**
+     * Statikus, minden robotra jellemző ikon
+     */
+    protected static Image image = new ImageIcon("assets/robot.gif").getImage();
 
     /**
      * Kiírja a robotot emberileg olvasható módon. Az asszociációk helyén id-ket írunk ki.
@@ -71,5 +78,13 @@ public class Robot extends AbstractCrewmate {
         Logger.Log(this, "ReactingToAsteroidExplosion");
         onAsteroid.GetRandomNeighbour().ReactToMove(onAsteroid, this);
         Logger.Return();
+    }
+
+    /**
+     * Visszaadja az ikonját
+     */
+    @Override
+    public Image GetImage() {
+        return image;
     }
 }

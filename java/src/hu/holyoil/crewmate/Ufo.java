@@ -6,7 +6,14 @@ import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.SpaceshipBaseRepository;
 
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 public class Ufo extends AbstractSpaceship implements IMiner{
+    /**
+     * Statikus, minden ufóra jellemző ikon
+     */
+    protected static Image image = new ImageIcon("assets/ufo.gif").getImage();
 
     /**
      * UFO konstruktora. A játék elején jön létre adott számú UFO.
@@ -79,5 +86,13 @@ public class Ufo extends AbstractSpaceship implements IMiner{
         Logger.Log(this, "Mining");
         onAsteroid.ReactToMineBy(this);
         Logger.Return();
+    }
+
+    /**
+     * Visszaadja az ikonját
+     */
+    @Override
+    public Image GetImage() {
+        return image;
     }
 }

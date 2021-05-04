@@ -6,6 +6,8 @@ import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 
+import java.awt.Image;
+
 /**
  * A telepes, robot és UFO közös őse
  * Nem lehet példányosítani, nem tud fúrni
@@ -92,4 +94,8 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
      */
     public abstract void ReactToAsteroidExplosion();
 
+    /**
+     * Visszaadja az ikonját
+     */
+    public abstract Image GetImage();
 }

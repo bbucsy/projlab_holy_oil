@@ -1,6 +1,8 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.crewmate.Settler;
+import hu.holyoil.repository.SettlerRepository;
 
 import java.util.HashMap;
 
@@ -24,9 +26,31 @@ public class TurnController {
     public final int NUM_OF_PLAYERS_MAX = 4;
 
     /**
+     * Tárolja, melyik telepes van éppen soron
+     */
+    private Settler steppingSettler;
+
+    /**
      * Eltárolja minden objektumról, hogy hány lépést tett már meg.
      * */
     private HashMap<Object, Integer> movesMade;
+
+    /**
+     * Elindítja a lépéskezelő alrendszerét a lépés kontrollernek, azaz léptetésbe kezd a játék.
+     * Alapvetően a GameController StartGame metódusa által hívódik.
+     * Beállítja a jelenleg soron lévő telepest a repó első tagjára.
+     */
+    public void StartTurnSystem() {
+        steppingSettler = SettlerRepository.GetInstance().GetAll().get(0);
+    }
+
+    /**
+     * Visszaadja a jelenleg soron lévő játékos telepesét
+     * @return soron lévő telepes
+     */
+    public Settler GetSteppingSettler() {
+        return steppingSettler;
+    }
 
     /**
      * Visszaadja, hogy egy adott elem lelépte-e már a lépéseit.
