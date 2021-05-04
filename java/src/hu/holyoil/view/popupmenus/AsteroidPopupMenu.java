@@ -1,11 +1,18 @@
 package hu.holyoil.view.popupmenus;
 
 import hu.holyoil.crewmate.AbstractSpaceship;
+import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.neighbour.INeighbour;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
+/**
+ * Egy a settler sajátjától különböző asteroira történő kattintáshoz köthető popupmenu-t hozza létre.
+ */
 public class AsteroidPopupMenu extends AbstractPopupMenu {
     PopupMenu asteroidPopupMenu;
 
@@ -14,7 +21,33 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
 
     }
 
-    public AsteroidPopupMenu(Asteroid asteroid, MouseEvent e) {
+
+    /**
+     * Egy a settler sajátjától különböző asteroidra történő jobb és bal kattintást kezeli le.
+     * @param asteroid: az asteroid amire a játékos kattintott
+     * @param settler: a settler aki épp játékban van
+     * @param e
+     */
+    public AsteroidPopupMenu(Asteroid asteroid, Settler settler, MouseEvent e) {
+
+        setVisible(false);
+
+        asteroidPopupMenu = new PopupMenu();
+
+        if(e.getButton() == 1){
+            lClick(asteroid);
+        }else if(e.getButton() == 2){
+            rClick(settler, asteroid);
+        }
+    }
+
+    /**
+     * A bal egérgombbal történő kattintást kezeli le.
+     * @param asteroid: az asteroid amire a játékos kattintott
+     *
+     * Kilistázza a popupmenu-re a kiválasztott asteroid összes fontos információját.
+     */
+    public void lClick(Asteroid asteroid){
         //létrehozzuk a kiírandó stringeket
         String idString = "ID: " + asteroid.GetId();
         String coreString = "Core: " + asteroid.GetResource().toString();
@@ -30,12 +63,51 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
             nearSunString += "false";
         }
 
-        //létrehozzuk a popupmenüt és hozzáadjuk a menüelemeket
-        asteroidPopupMenu = new PopupMenu();
+        //hozzáadjuk a stringeket a popupmenu-höz
         asteroidPopupMenu.add(idString);
         asteroidPopupMenu.add(coreString);
         asteroidPopupMenu.add(layersString);
         asteroidPopupMenu.add(shipsString);
         asteroidPopupMenu.add(nearSunString);
+    }
+
+    /**
+     * A jobb egérgombbal történő kattintást kezeli le.
+     * @param settler: a settler aki épp játékban van
+     * @param asteroid: az asteroid amire a játékos kattintott
+     *
+     * Létrehoz egy menüelemet és hozzárendel egy moveListener actionlistenert.
+     */
+    public void rClick(Settler settler, Asteroid asteroid){
+        MenuItem travel = new MenuItem("travel here");
+        travel.addActionListener(new moveListener(settler, asteroid));
+        asteroidPopupMenu.add(travel);
+    }
+
+    /**
+     * Egy actionlistener, amely feladata hogy érzékelje amikor rákattintottak e majd végrehajtsa a mozgás műveletet.
+     */
+    public static class moveListener implements ActionListener {
+        Asteroid asteroid;
+        Settler settler;
+
+        /**
+         * Az actionlistener konstruktora.
+         * @param s: a settler aki épp játékban van
+         * @param a: az asteroid amire a játékos kattintott
+         */
+        public moveListener(Settler s, Asteroid a){
+            settler = s;
+            asteroid = a;
+        }
+
+        /**
+         * A megadott asteroid-ra meghvja a settler mozgás műveletét.
+         * @param e
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            settler.Move(asteroid);
+        }
     }
 }
