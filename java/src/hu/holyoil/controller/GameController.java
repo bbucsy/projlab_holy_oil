@@ -49,6 +49,10 @@ public class GameController implements ISteppable  {
         CheckLoseCondition();
         CheckGameCondition();
 
+        // THIS IS FOR TESTING, USE IT!!
+        //gameState = GameState.LOST_GAME;
+        //gameState = GameState.WON_GAME;
+
         TurnController.GetInstance().ResetMoves();
 
         Logger.Return();

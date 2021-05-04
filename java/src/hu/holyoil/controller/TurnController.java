@@ -5,6 +5,7 @@ import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.view.frames.GameFrame;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -98,6 +99,10 @@ public class TurnController {
      * */
     public void ReactToActionMade(Object object) {
         movesMade.put(object, movesMade.get(object) + 1);
+    }
+
+    public void ReactToActionMade(Settler object) {
+        movesMade.put(object, movesMade.get(object) + 1);
         Settler temp = GetNextSettler();
         if (temp == null) {
             AIController.GetInstance().Step();
@@ -109,8 +114,19 @@ public class TurnController {
             steppingSettler = temp;
         }
         gameFrame.UpdateComponent();
-        Logger.Log(this, "SIKER!!!!");
-        Logger.Return();
+
+        switch (GameController.GetInstance().GetGameState()) {
+            case WON_GAME:
+                JOptionPane.showMessageDialog(gameFrame, "You've won the game!", "Holy Oil Game", JOptionPane.INFORMATION_MESSAGE);
+                gameFrame.setVisible(false);
+                GameController.GetInstance().StartApp();
+                break;
+            case LOST_GAME:
+                JOptionPane.showMessageDialog(gameFrame, "You've lost the game!", "Holy Oil Game", JOptionPane.ERROR_MESSAGE);
+                gameFrame.setVisible(false);
+                GameController.GetInstance().StartApp();
+                break;
+        }
     }
 
     /**
