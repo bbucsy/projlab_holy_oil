@@ -268,4 +268,11 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
     public Image GetImage() {
         return image;
     }
+
+    /**
+     * Végrehajtott egy műveletet.
+     * */
+    public void ReactToMoveMade() {
+        TurnController.GetInstance().ReactToActionMade(this);
+    }
 }
