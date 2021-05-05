@@ -1,5 +1,6 @@
 package hu.holyoil.view.panels;
 
+import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.Settler;
@@ -20,15 +21,15 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
     private JList<AbstractBaseResource> inventory;
     private JLabel tps;
     private DefaultListModel<AbstractBaseResource> model;
+    private JButton craftRobot;
+    private JButton craftTp;
+    private JButton placeTp;
+    private JButton fill;
 
     private void InitComponent() {
-      /*  GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);*/
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         settler = TurnController.GetInstance().GetSteppingSettler();
         storage = TurnController.GetInstance().GetSteppingSettler().GetStorage();
-        JLabel invTitle = new JLabel("Inventory");
-        invTitle.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 14));
-        invTitle.setForeground(Color.WHITE);
 
         model = new DefaultListModel<AbstractBaseResource>();
         storage.GetStoredMaterials().forEach(abr -> model.addElement(abr));
@@ -42,53 +43,49 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         JScrollPane scrollPane = new JScrollPane(inventory);
         scrollPane.setVerticalScrollBar(new JScrollBar());
         scrollPane.setBackground(new Color(4,4,13));
-        scrollPane.setPreferredSize(new Dimension(150, 200));
+        scrollPane.setPreferredSize(new Dimension(360, 140));
 
-        tps= new JLabel("# of teleporters:\n" + storage.GetTeleporterCount());
+        tps= new JLabel(String.valueOf(storage.GetTeleporterCount()));
+        JLabel tpText = new JLabel("Number of TeleportGates: ");
+        craftRobot = new JButton("Craft Robot");
+        craftTp = new JButton("Craft Teleporter");
+        placeTp = new JButton("Place Teleporter");
+        fill = new JButton("Place Resource");
 
-        JButton craftRobot = new JButton("Craft Robot");
-        craftRobot.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                settler.CraftRobot();
-            }
-        });
-        JButton craftTp = new JButton("Craft Teleporter");
-        craftTp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                settler.CraftTeleportGate();
-            }
-        });
-        JButton placeTp = new JButton("Place Teleporter");
-        placeTp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                settler.PlaceTeleporter();
-            }
-        });
-        JButton fill = new JButton("Fill");
-        fill.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!inventory.isSelectionEmpty())
-                    settler.PlaceResource(inventory.getSelectedValue());
-            }
-        });
+        JPanel panel1 = new JPanel();
+        panel1.setPreferredSize(new Dimension(360, 20));
+        panel1.add(fill);
+        panel1.add(craftRobot);
 
-        add(invTitle);
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+        panel2.setPreferredSize(new Dimension(360, 50));
+        JPanel panel3 = new JPanel();
+        panel3.add(tpText);
+        panel3.add(tps);
+        JPanel panel4 = new JPanel();
+        panel4.add(craftTp);
+        panel4.add(placeTp);
+        panel2.add(panel3);
+        panel2.add(panel4);
+
         add(scrollPane);
-        add(craftRobot);
-        add(craftTp);
-        add(placeTp);
-        add(fill);
-        add(tps);
+        add(panel1);
+        add(panel2);
+
+        add(Box.createVerticalGlue());
 
         setVisible(true);
     }
 
     private void InitListeners() {
-
+        craftRobot.addActionListener(e -> settler.CraftRobot());
+        craftTp.addActionListener(e -> settler.CraftTeleportGate());
+        placeTp.addActionListener(e -> settler.PlaceTeleporter());
+        fill.addActionListener(e -> {
+            if(!inventory.isSelectionEmpty())
+                settler.PlaceResource(inventory.getSelectedValue());
+        });
     }
 
     @Override
@@ -97,16 +94,16 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         storage = TurnController.GetInstance().GetSteppingSettler().GetStorage();
         model.clear();
         storage.GetStoredMaterials().forEach(abr -> model.addElement(abr));
-        tps.setText("# of teleporters:\n" + storage.GetTeleporterCount());
+        tps.setText(String.valueOf(storage.GetTeleporterCount()));
         invalidate();
     }
 
     public InventoryListPanel() {
         super();
         InitComponent();
+        InitListeners();
         setPreferredSize(new Dimension(360, 400));
         setOpaque(false);
         setBackground(new Color(4, 4, 13));
-        UpdateComponent();
     }
 }

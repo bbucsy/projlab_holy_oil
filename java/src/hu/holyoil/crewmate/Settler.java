@@ -187,7 +187,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
             onAsteroid.SetTeleporter(storageTeleporter);
 
             storage.RemoveTeleportGate(storageTeleporter);
-            AIController.GetInstance().AddTeleportGate(storageTeleporter);
+            ReactToMoveMade();
 
         }
     }

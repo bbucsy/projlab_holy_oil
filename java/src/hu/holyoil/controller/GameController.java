@@ -8,6 +8,7 @@ import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.resource.*;
+import hu.holyoil.storage.PlayerStorage;
 import hu.holyoil.view.frames.GameFrame;
 import hu.holyoil.view.frames.MenuFrame;
 
@@ -156,6 +157,17 @@ public class GameController implements ISteppable  {
                 gameState = GameState.LOST_GAME;
             }
         }
+    }
+
+    /**
+     * Törli az összes objektumot a tárolókból, felkészülve egy friss játékra.
+     */
+    private void ResetGame(){
+        NeighbourBaseRepository.GetInstance().Clear();
+        SpaceshipBaseRepository.GetInstance().Clear();
+        PlayerStorageBaseRepository.GetInstance().Clear();
+        ResourceBaseRepository.GetInstance().Clear();
+        gameState=GameState.RUNNING;
     }
 
     /**

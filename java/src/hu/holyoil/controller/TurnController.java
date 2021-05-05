@@ -107,7 +107,8 @@ public class TurnController {
             AIController.GetInstance().Step();
             SunController.GetInstance().Step();
             GameController.GetInstance().Step();
-            StartTurnSystem();
+            if(GameController.GetInstance().GetGameState()==GameState.RUNNING)
+                StartTurnSystem();
         }
         else {
             steppingSettler = temp;
