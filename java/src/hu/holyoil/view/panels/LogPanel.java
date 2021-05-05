@@ -1,14 +1,12 @@
 package hu.holyoil.view.panels;
 
-import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.controller.Logger;
 import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.view.IViewComponent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -46,6 +44,7 @@ public class LogPanel extends JPanel implements IViewComponent {
         jTextArea.setEditable(false);
         jTextArea.setBackground(new Color(4, 4, 13));
         jTextArea.setForeground(Color.GREEN);
+        jTextArea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 13));
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEADING);
         setLayout(flowLayout);

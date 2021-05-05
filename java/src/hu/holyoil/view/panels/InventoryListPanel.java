@@ -1,6 +1,5 @@
 package hu.holyoil.view.panels;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
@@ -9,8 +8,6 @@ import hu.holyoil.storage.PlayerStorage;
 import hu.holyoil.view.IViewComponent;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
 /**

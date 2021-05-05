@@ -1,6 +1,5 @@
 package hu.holyoil.view.panels;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.SunController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.AbstractSpaceship;
