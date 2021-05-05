@@ -2,7 +2,6 @@ package hu.holyoil.storage;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
@@ -98,14 +97,10 @@ public class PlayerStorage implements IIdentifiable {
      * @param teleportGate2 a pár másik fele
      */
     public void AddTeleportGatePair(TeleportGate teleportGate1, TeleportGate teleportGate2) {
-
-        Logger.Log(this, "Adding teleportgate pair of " + Logger.GetName(teleportGate1) + " and " + Logger.GetName(teleportGate2));
         teleportGate1.SetHomeStorage(this);
         teleporters.add(teleportGate1);
         teleportGate2.SetHomeStorage(this);
         teleporters.add(teleportGate2);
-        Logger.Return();
-
     }
 
     public void AddTeleportGate(TeleportGate tp) {
@@ -119,26 +114,17 @@ public class PlayerStorage implements IIdentifiable {
      * @return Tárolt teleporterek száma.
      * */
     public int GetTeleporterCount() {
-
-        Logger.Log(this, "Returning teleporter count");
-        Logger.Return();
         return teleporters.size();
-
     }
 
     /**
      * Elvátolítja a benne lévő objektumokat a játéktérből.
      * */
     public void ReactToSettlerDie() {
-
         storedMaterials.forEach(AbstractBaseResource::ReactToGettingDestroyed);
         List<TeleportGate> teleportGatesShallowCopy = new ArrayList<>(teleporters);
         teleportGatesShallowCopy.forEach(TeleportGate::Explode);
-
-        Logger.Log(this, "Removing me from Repository");
         PlayerStorageBaseRepository.GetInstance().Remove(id);
-        Logger.Return();
-
     }
 
     /**
@@ -146,12 +132,8 @@ public class PlayerStorage implements IIdentifiable {
      * @param teleportGate az eltávolítandó teleporter
      */
     public void RemoveTeleportGate(TeleportGate teleportGate) {
-
-        Logger.Log(this, "Removing teleportgate " + Logger.GetName(teleportGate));
         teleporters.remove(teleportGate);
         teleportGate.SetHomeStorage(null);
-        Logger.Return();
-
     }
 
     /**
@@ -162,17 +144,11 @@ public class PlayerStorage implements IIdentifiable {
      * @return Az első teleporter a listából
      */
     public TeleportGate GetOneTeleporter() {
-
         if (teleporters.size() == 0) {
-            Logger.Log(this, "Returning no teleporter");
-            Logger.Return();
             return null;
         } else {
-            Logger.Log(this, "Returning one teleporter");
-            Logger.Return();
             return teleporters.get(0);
         }
-
     }
 
     /**
@@ -180,11 +156,7 @@ public class PlayerStorage implements IIdentifiable {
      * @return a nyersanyag lista mérete
      */
     public Integer GetSumResources() {
-
-        Logger.Log(this, "Returning sum resources");
-        Logger.Return();
         return storedMaterials.size();
-
     }
 
     /**
@@ -192,11 +164,7 @@ public class PlayerStorage implements IIdentifiable {
      * @param billOfMaterial Az ebben lévő resource-okat adja hozzá a storage-hoz.
      */
     public void AddBill(BillOfMaterial billOfMaterial) {
-
-        Logger.Log(this, "Adding bill " + Logger.GetName(billOfMaterial));
         storedMaterials.addAll(billOfMaterial.GetMaterials());
-        Logger.Return();
-
     }
 
     /**
@@ -210,9 +178,6 @@ public class PlayerStorage implements IIdentifiable {
     }
 
     public void RemoveBill(BillOfMaterial billOfMaterial, boolean deleteMaterials) {
-
-        Logger.Log(this, "Removing bill " + Logger.GetName(billOfMaterial));
-
         storedMaterials.removeAll(billOfMaterial.GetMaterials());
 
         for (AbstractBaseResource billResource : billOfMaterial.GetMaterials()) {
@@ -236,9 +201,6 @@ public class PlayerStorage implements IIdentifiable {
             }
 
         }
-
-        Logger.Return();
-
     }
 
     /**
@@ -250,9 +212,6 @@ public class PlayerStorage implements IIdentifiable {
      * @return Van-e elég a billOfMaterial-ban lévő anyagokból
      */
     public Boolean HasEnoughOf(BillOfMaterial billOfMaterial) {
-
-        Logger.Log(this, "Checking if I have enough of " + Logger.GetName(billOfMaterial));
-
         boolean[] checked = new boolean[storedMaterials.size()];
         for (int i = 0; i < storedMaterials.size(); i++)
             checked[i] = false;
@@ -272,19 +231,11 @@ public class PlayerStorage implements IIdentifiable {
             }
 
             if (!found) {
-                Logger.Log(this, "I do not have enough to complete this bill");
-                Logger.Return();
-                Logger.Return();
                 return false;
             }
 
         }
-
-        Logger.Log(this, "I have enough to complete this bill");
-        Logger.Return();
-        Logger.Return();
         return true;
-
     }
 
 }

@@ -36,13 +36,10 @@ public abstract class AbstractBaseResource implements IIdentifiable {
      * @param iMiner a bányászást megkísérlő ufó
      */
     public void ReactToMine(Asteroid asteroid, IMiner iMiner) {
-        Logger.Log(this,"ReactingToMine by " + Logger.GetName(iMiner));
-
         asteroid.SetResource(null);
         iMiner.ReactToMoveMade();
         ReactToGettingDestroyed();
-
-        Logger.Return();
+        Logger.Log(this,"got mined by a ufo");
     }
 
     /**
@@ -56,10 +53,7 @@ public abstract class AbstractBaseResource implements IIdentifiable {
      * @param storage a telepes tárolója
      */
     public void ReactToMine(Asteroid asteroid, IMiner iMiner, PlayerStorage storage) {
-        Logger.Log(this,"ReactingToMine by " + Logger.GetName(iMiner));
-
         BillOfMaterial billOfMaterial = new BillOfMaterial();
-        Logger.RegisterObject(billOfMaterial, "billOfMaterial: BillOfMaterial");
         billOfMaterial.AddMaterial(this);
         if (storage.GetSumResources() < 10) {
             storage.AddBill(
@@ -68,8 +62,6 @@ public abstract class AbstractBaseResource implements IIdentifiable {
             asteroid.SetResource(null);
             iMiner.ReactToMoveMade();
         }
-
-        Logger.Return();
     }
 
     /**
@@ -82,11 +74,7 @@ public abstract class AbstractBaseResource implements IIdentifiable {
      * @param iStorageCapable a tárolója a telepesnek aki le akarja tenni a nyersanyagot
      */
     public void ReactToPlace(Asteroid asteroid, IStorageCapable iStorageCapable) {
-        Logger.Log(this ,"Reacting to Place by " + Logger.GetName(iStorageCapable));
-
         BillOfMaterial billOfMaterial = new BillOfMaterial();
-        Logger.RegisterObject(billOfMaterial, "billOfMaterial: BillOfMaterial");
-
         billOfMaterial.AddMaterial(this);
 
         if (iStorageCapable.GetStorage().HasEnoughOf(billOfMaterial)) {
@@ -94,8 +82,6 @@ public abstract class AbstractBaseResource implements IIdentifiable {
             asteroid.SetResource(this);
             iStorageCapable.ReactToMoveMade();
         }
-
-        Logger.Return();
     }
 
     /**
@@ -112,13 +98,10 @@ public abstract class AbstractBaseResource implements IIdentifiable {
      * @param asteroid az aszteroida amiben a nyersanyag megtalálható
      */
     public void ReactToSunNearby(Asteroid asteroid) {
-        Logger.Log(this,"Reacting to nearby sun");
-        Logger.Return();
+        // do nothing by default
     }
 
     public void ReactToGettingDestroyed() {
-        Logger.Log(this, "Removing me from Repository");
         ResourceBaseRepository.GetInstance().Remove(id);
-        Logger.Return();
     }
 }

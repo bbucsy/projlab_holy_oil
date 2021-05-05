@@ -1,6 +1,5 @@
 package hu.holyoil.resource;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
 /**
@@ -45,9 +44,7 @@ public class Water extends AbstractBaseResource {
      */
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
-        Logger.Log(this,"Reacting to Sun nearby");
         asteroid.SetResource(null);
         ReactToGettingDestroyed();
-        Logger.Return();
     }
 }

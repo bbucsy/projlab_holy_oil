@@ -1,6 +1,5 @@
 package hu.holyoil.resource;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
 /**
@@ -44,9 +43,7 @@ public class Uranium extends AbstractBaseResource {
     * Beállítja az uránium életét
     */
     public void SetHealth(int hp) {
-        Logger.Log(this,"Setting health to " + hp);
         health = hp;
-        Logger.Return();
     }
 
     /**
@@ -56,8 +53,6 @@ public class Uranium extends AbstractBaseResource {
      */
     @Override
     public Boolean IsSameType(AbstractBaseResource abstractBaseResource) {
-        //Logger.Log(this,"Being compared to " + Logger.GetName(abstractBaseResource));
-        //Logger.Return();
         return abstractBaseResource instanceof Uranium;
     }
 
@@ -67,14 +62,10 @@ public class Uranium extends AbstractBaseResource {
      */
     @Override
     public void ReactToSunNearby(Asteroid asteroid) {
-        Logger.Log(this,"Reacting to Sun nearby");
-        
         SetHealth(health-1);
 
         if(health <= 0) {
             asteroid.Explode();
         }
-
-        Logger.Return();
     }
 }
