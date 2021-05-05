@@ -46,12 +46,6 @@ public class SunController implements ISteppable, IIdentifiable {
      * Random kikapcsolásával 30-ra állítódik.
      */
     private void RestartCountdown() {
-
-        if (!Main.isRandomEnabled) {
-            turnsUntilNextSunstorm = 30;
-            return;
-        }
-
         Random random = new Random();
         turnsUntilNextSunstorm = random.nextInt(50 - 20 + 1) + 20;
     }

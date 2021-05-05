@@ -1,18 +1,11 @@
 package hu.holyoil.view.popupmenus;
 
-import com.sun.org.apache.xml.internal.security.Init;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.neighbour.INeighbour;
-import hu.holyoil.neighbour.TeleportGate;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 /**

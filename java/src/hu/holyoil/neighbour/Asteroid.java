@@ -1,7 +1,7 @@
 package hu.holyoil.neighbour;
 
 import hu.holyoil.Main;
-import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.controller.Logger;
 import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.IMiner;
@@ -330,27 +330,19 @@ public class Asteroid implements INeighbour {
      * @return véletlen szomszéd
      */
     public INeighbour GetRandomNeighbour() {
-        if (!Main.isRandomEnabled) {
-            if (neighbouringAsteroids.isEmpty())
-                return teleporter;
-            else
-                return neighbouringAsteroids.get(0);
-        }
-        else {
-            Random random = new Random();
-            boolean canChooseTeleporter = false;
-            if (teleporter != null) {
-                if (teleporter.GetPair().GetHomeAsteroid() != null) {
-                    canChooseTeleporter = true;
-                }
+        Random random = new Random();
+        boolean canChooseTeleporter = false;
+        if (teleporter != null) {
+            if (teleporter.GetPair().GetHomeAsteroid() != null) {
+                canChooseTeleporter = true;
             }
-
-            int chosenIndex = random.nextInt((neighbouringAsteroids.size() + (canChooseTeleporter ? 1 : 0)));
-
-            return chosenIndex == neighbouringAsteroids.size() ?
-                    teleporter :
-                    neighbouringAsteroids.get(chosenIndex);
         }
+
+        int chosenIndex = random.nextInt((neighbouringAsteroids.size() + (canChooseTeleporter ? 1 : 0)));
+
+        return chosenIndex == neighbouringAsteroids.size() ?
+                teleporter :
+                neighbouringAsteroids.get(chosenIndex);
     }
 
     /**

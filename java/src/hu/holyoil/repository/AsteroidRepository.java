@@ -113,9 +113,7 @@ public class AsteroidRepository implements IReadWriteRepository<Asteroid> {
 
                     Random random = new Random();
 
-                    int chosenId = 0;
-                    if (Main.isRandomEnabled)
-                        chosenId = random.nextInt(asteroids.size());
+                    int chosenId = random.nextInt(asteroids.size());
 
                     // We avoid an infinite loop
                     int loopIterations = 0;
@@ -124,10 +122,7 @@ public class AsteroidRepository implements IReadWriteRepository<Asteroid> {
                      * - is not already my neighbour
                      * */
                     while (asteroids.get(chosenId).equals(asteroid) || asteroids.get(chosenId).equals(as) || as.GetNeighbours().contains(asteroids.get(chosenId))) {
-                        if (Main.isRandomEnabled)
-                            chosenId = random.nextInt(asteroids.size());
-                        else
-                            chosenId++;
+                        chosenId = random.nextInt(asteroids.size());
                         loopIterations++;
                         if (chosenId == asteroids.size() || loopIterations >= 1000) {
                             return false;

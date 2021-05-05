@@ -204,10 +204,7 @@ public class GameController implements ISteppable  {
 
         // Generate between minAsteroidCount and maxAsteroidCount asteroids
         Random random = new Random();
-        int numOfAsteroids = minAsteroidCount;
-        if (Main.isRandomEnabled) {
-            numOfAsteroids += random.nextInt(maxAsteroidCount - minAsteroidCount + 1);
-        }
+        int numOfAsteroids = minAsteroidCount + random.nextInt(maxAsteroidCount - minAsteroidCount + 1);
 
         String startingAsteroidName = null;
         String ufoStartingAsteroidName = null;
@@ -223,36 +220,15 @@ public class GameController implements ISteppable  {
             // ufos start at the last asteroid
             ufoStartingAsteroidName = asteroid.GetId();
 
-            // this looked ugly in "one" line.
-            if (Main.isRandomEnabled) {
-
-                asteroid.SetNumOfLayersRemaining(
-                        random.nextInt(maxLayerCount - minLayerCount) + minLayerCount
-                );
-
-            } else {
-
-                asteroid.SetNumOfLayersRemaining(
-                        (i % (maxLayerCount - minLayerCount + 1)) + minLayerCount
-                );
-
-            }
+            asteroid.SetNumOfLayersRemaining(
+                    random.nextInt(maxLayerCount - minLayerCount) + minLayerCount
+            );
 
             asteroid.SetIsDiscovered(false);
             int generatedResource;
 
-            if (Main.isRandomEnabled) {
-
-                // We generate a resource. There are 4 resources, 0 means no resource.
-                generatedResource = random.nextInt(5);
-
-            } else {
-
-                // With layers being between 3-5, and this being between 0-4, their smallest common divisor is 1.
-                // Meaning that they will generate every combination of layercount and resource.
-                generatedResource = i % 5;
-
-            }
+            // We generate a resource. There are 4 resources, 0 means no resource.
+            generatedResource = random.nextInt(5);
             AbstractBaseResource resource = null;
 
             switch (generatedResource) {
@@ -294,37 +270,13 @@ public class GameController implements ISteppable  {
 
             for (int i = 0; i < asteroidNames.size(); i++) {
 
-                if (Main.isRandomEnabled) {
+                for (int j = 0; j < asteroidNames.size(); j++) {
 
-                    for (int j = 0; j < asteroidNames.size(); j++) {
-
-                        if (i == j) {
-                            break;
-                        }
-
-                        if (random.nextInt(100) < chanceOfNeighbours) {
-
-                            AsteroidRepository.GetInstance().Get(asteroidNames.get(i)).AddNeighbourAsteroid(
-                                    AsteroidRepository.GetInstance().Get(asteroidNames.get(j))
-                            );
-                            AsteroidRepository.GetInstance().Get(asteroidNames.get(j)).AddNeighbourAsteroid(
-                                    AsteroidRepository.GetInstance().Get(asteroidNames.get(i))
-                            );
-
-                        }
-
+                    if (i == j) {
+                        break;
                     }
 
-                } else {
-
-                    int j = i + 1;
-                    // if [j] would be out of bounds, we set it to 0
-                    if (j == asteroidNames.size()) {
-                        j = 0;
-                    }
-
-                    // we add chanceOfNeighbours amount of neighbours to every asteroid
-                    while (j <= chanceOfNeighbours + i) {
+                    if (random.nextInt(100) < chanceOfNeighbours) {
 
                         AsteroidRepository.GetInstance().Get(asteroidNames.get(i)).AddNeighbourAsteroid(
                                 AsteroidRepository.GetInstance().Get(asteroidNames.get(j))
@@ -332,12 +284,6 @@ public class GameController implements ISteppable  {
                         AsteroidRepository.GetInstance().Get(asteroidNames.get(j)).AddNeighbourAsteroid(
                                 AsteroidRepository.GetInstance().Get(asteroidNames.get(i))
                         );
-
-                        j++;
-                        // if [j] would be out of bounds, we set it to 0
-                        if (j == asteroidNames.size()) {
-                            j = 0;
-                        }
 
                     }
 

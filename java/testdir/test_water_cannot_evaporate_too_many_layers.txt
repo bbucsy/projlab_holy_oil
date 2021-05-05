@@ -1,6 +1,0 @@
-echo_off
-disable_random
-create asteroid a1 1 true
-create water w1 a1
-step
-state

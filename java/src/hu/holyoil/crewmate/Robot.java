@@ -1,6 +1,6 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.controller.Logger;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
@@ -62,9 +62,6 @@ public class Robot extends AbstractCrewmate {
         TurnController.GetInstance().RemoveEntityWithAction(this);
 
         SpaceshipBaseRepository.GetInstance().Remove(id);
-
-        Logger.Return();
-
     }
 
     /**
