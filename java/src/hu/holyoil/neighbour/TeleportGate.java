@@ -97,11 +97,7 @@ public class TeleportGate implements INeighbour {
      * @return true: már érte napvihar, false: még nem érte napvihar
      */
     public boolean GetIsCrazy(){
-
-        Logger.Log(this, "Returning teleport craziness: " + isCrazy);
-        Logger.Return();
         return isCrazy;
-
     }
 
     /**
@@ -109,11 +105,7 @@ public class TeleportGate implements INeighbour {
      * @return a teleporter homeAsteroid tagváltozója
      */
     public Asteroid GetHomeAsteroid() {
-
-        Logger.Log(this, "Returning home asteroid: "+ Logger.GetName(homeAsteroid));
-        Logger.Return();
         return homeAsteroid;
-
     }
 
     /**
@@ -121,11 +113,7 @@ public class TeleportGate implements INeighbour {
      * @param homeAsteroid Az aszteroida amihez a teleporter mostantól tartozni fog.
      */
     public void SetHomeAsteroid(Asteroid homeAsteroid) {
-
-        Logger.Log(this, "Setting home asteroid: "+ Logger.GetName(homeAsteroid));
         this.homeAsteroid = homeAsteroid;
-        Logger.Return();
-
     }
 
     /**
@@ -161,15 +149,9 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void ReactToMove(Asteroid from, AbstractSpaceship abstractSpaceship) {
-
-        Logger.Log(this, "Reacting to move from " + Logger.GetName(from) + " by " + Logger.GetName(abstractSpaceship));
-
         if (pair.GetHomeAsteroid() != null) {
             pair.GetHomeAsteroid().ReactToMove(from, abstractSpaceship);
         }
-
-        Logger.Return();
-
     }
 
     /**
@@ -177,11 +159,7 @@ public class TeleportGate implements INeighbour {
      * @param newPair a teleporter párja
      */
     public void SetPair(TeleportGate newPair) {
-
-        Logger.Log(this, "Setting my pair to " + Logger.GetName(newPair));
         pair = newPair;
-        Logger.Return();
-
     }
 
     /**
@@ -193,33 +171,17 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void Explode() {
-
-        Logger.Log(this, "Exploding");
         pair.ExplodePair();
         ActuallyExplode();
-
-        Logger.Log(this, "Removing me from Repository");
         NeighbourBaseRepository.GetInstance().Remove(this.id);
-        Logger.Return();
-
-        Logger.Return();
-
     }
 
     /**
      * A teleporter párja tudja meghívni, ha őt felrobbantja valami. Nem hívja vissza az ő párjának robbantását.
      */
     private void ExplodePair() {
-
-        Logger.Log(this, "Being exploded by pair");
         ActuallyExplode();
-
-        Logger.Log(this, "Removing me from Repository");
         NeighbourBaseRepository.GetInstance().Remove(this.id);
-        Logger.Return();
-
-        Logger.Return();
-
     }
 
     /**
@@ -227,10 +189,6 @@ public class TeleportGate implements INeighbour {
      */
     private void ActuallyExplode() {
 
-        if ((homeAsteroid == null && homeStorage == null) ||(homeAsteroid != null && homeStorage != null)) {
-            // Error
-            Logger.Log(this, "An error occured");
-        }
         if ((homeAsteroid == null && homeStorage != null)) {
             // in storage
             homeStorage.RemoveTeleportGate(this);
@@ -242,6 +200,7 @@ public class TeleportGate implements INeighbour {
             }
         }
         NeighbourBaseRepository.GetInstance().Remove(id);
+        Logger.Log(this, "Exploded");
 
     }
 
@@ -250,29 +209,15 @@ public class TeleportGate implements INeighbour {
      */
     @Override
     public void ReactToSunstorm() {
-
-        Logger.Log(this, "Reacting to Sunstorm");
         SetIsCrazy(true);
-        Logger.Return();
-
     }
     /**
      * Teleport kapu mozog egy olyan szomszédos aszteroidára, aminek nincs teleportere, ha meg van kergülve.
      */
     public void Move(Asteroid asteroid){
-
-        Logger.Log(this, "Teleporter Moving to" + Logger.GetName(asteroid));
-
         if (isCrazy && homeAsteroid.GetNeighbours().contains(asteroid)) {
             asteroid.ReactToMove(this);
         }
-        else {
-            Logger.Log(this, "Cannot move to " + Logger.GetName(asteroid) + ", it is not a neighbour of my asteroid or i am not even crazy");
-            Logger.Return();
-        }
-
-        Logger.Return();
-
     }
 
 }

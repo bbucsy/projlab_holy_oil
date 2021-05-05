@@ -61,9 +61,7 @@ public class Robot extends AbstractCrewmate {
         onAsteroid.RemoveSpaceship(this);
         TurnController.GetInstance().RemoveEntityWithAction(this);
 
-        Logger.Log(this, "Removing me from Repository");
         SpaceshipBaseRepository.GetInstance().Remove(id);
-        Logger.Return();
 
         Logger.Return();
 
@@ -75,9 +73,7 @@ public class Robot extends AbstractCrewmate {
      */
     @Override
     public void ReactToAsteroidExplosion() {
-        Logger.Log(this, "ReactingToAsteroidExplosion");
         onAsteroid.GetRandomNeighbour().ReactToMove(onAsteroid, this);
-        Logger.Return();
     }
 
     /**

@@ -145,17 +145,11 @@ public class Asteroid implements INeighbour {
      */
     @Override
     public void ReactToMove(Asteroid from, AbstractSpaceship abstractSpaceship) {
-
-        Logger.Log(this, "Reacting to move  by " + Logger.GetName(abstractSpaceship));
-
         from.RemoveSpaceship(abstractSpaceship);
         AddSpaceship(abstractSpaceship);
         abstractSpaceship.SetOnAsteroid(this);
 
         abstractSpaceship.ReactToMoveMade();
-
-        Logger.Return();
-
     }
 
     /**
@@ -163,21 +157,11 @@ public class Asteroid implements INeighbour {
      * @param comingTeleporter az ide mozgást elvégezni készülő teleporter
      */
     public void ReactToMove(TeleportGate comingTeleporter){
-
-        Logger.Log(this, "Reacting to coming teleporter: " + Logger.GetName(comingTeleporter));
-
         if (teleporter == null) {
             comingTeleporter.GetHomeAsteroid().RemoveTeleporter();
             SetTeleporter(comingTeleporter);
             comingTeleporter.SetHomeAsteroid(this);
         }
-        else {
-            Logger.Log(this, "I cannot accept teleport, I already have one.");
-            Logger.Return();
-        }
-
-        Logger.Return();
-
     }
 
     /**
@@ -189,13 +173,9 @@ public class Asteroid implements INeighbour {
      * @param res a lerakni kívánt nyersanyag
      */
     public void PutResource(Settler s, AbstractBaseResource res) {
-
-        Logger.Log(this, "Putting down resource from settler to asteroid core.");
         if (numOfLayersRemaining == 0 && resource == null) {
             res.ReactToPlace(this, s);
         }
-        Logger.Return();
-
     }
 
     /**
@@ -206,11 +186,7 @@ public class Asteroid implements INeighbour {
      * @param newIsNearbySun új logikai értéke a napközelségnek, lehet igaz és hamis is
      */
     public void SetIsNearbySun(Boolean newIsNearbySun) {
-
-        Logger.Log(this, "Setting isNearbySun to " + newIsNearbySun.toString());
         isNearSun = newIsNearbySun;
-        Logger.Return();
-
     }
 
     /**
@@ -218,11 +194,7 @@ public class Asteroid implements INeighbour {
      * @return boolean, true: napközeli, false: nem napközeli
      */
     public boolean GetIsNearbySun(){
-
-        Logger.Log(this, "isNearbySun: " + isNearSun.toString());
-        Logger.Return();
         return isNearSun;
-
     }
 
     /**
@@ -230,11 +202,7 @@ public class Asteroid implements INeighbour {
      * @param newNumOfLayersRemaining új értéke a kéreg vastagsnak
      */
     public void SetNumOfLayersRemaining(int newNumOfLayersRemaining) {
-
-        Logger.Log(this, "Setting numOfLayersRemaining to " + newNumOfLayersRemaining);
         numOfLayersRemaining = newNumOfLayersRemaining;
-        Logger.Return();
-
     }
 
     /**
@@ -242,14 +210,8 @@ public class Asteroid implements INeighbour {
      * <p>Erre egy Spaceship képes egy fúrás lépéssel.</p>
      */
     public void DecNumOfLayersRemaining() {
-
-        Logger.Log(this,"Decreasing layer by 1");
-
         if (numOfLayersRemaining > 0)
             numOfLayersRemaining--;
-
-        Logger.Return();
-
     }
 
     /**
@@ -261,18 +223,9 @@ public class Asteroid implements INeighbour {
      * @param iMiner a bányászni készülő ufo
      */
     public void ReactToMineBy(IMiner iMiner) {
-
-        Logger.Log(this, "Reacting to mine by " + Logger.GetName(iMiner));
-        Logger.Return();
-
         if (resource != null && numOfLayersRemaining == 0) {
-
-            Logger.Log(this, "Resource reacting to mine");
             resource.ReactToMine(this, iMiner);
-            Logger.Return();
-
         }
-
     }
 
     /**
@@ -285,18 +238,9 @@ public class Asteroid implements INeighbour {
      * @param storage a telepes tárolója
      */
     public void ReactToMineBy(IMiner iMiner, PlayerStorage storage) {
-
-        Logger.Log(this, "Reacting to mine by " + Logger.GetName(iMiner));
-        Logger.Return();
-
         if (resource != null && numOfLayersRemaining == 0) {
-
-            Logger.Log(this, "Resource reacting to mine");
             resource.ReactToMine(this, iMiner, storage);
-            Logger.Return();
-
         }
-
     }
 
     /**
@@ -306,16 +250,10 @@ public class Asteroid implements INeighbour {
      * </p>
      */
     public void ReactToDrill(AbstractCrewmate abstractCrewmate) {
-
-        Logger.Log(this, "Getting drilled");
-
         if (numOfLayersRemaining>= 1) {
             this.DecNumOfLayersRemaining();
             abstractCrewmate.ReactToMoveMade();
         }
-
-        Logger.Return();
-
     }
 
     /**
@@ -326,22 +264,13 @@ public class Asteroid implements INeighbour {
      * </p>
      */
     public void ReactToSunstorm() {
-
-        Logger.Log(this, "Reacting to sunstorm");
-        Logger.Return();
-
         if (numOfLayersRemaining > 0 || resource != null) {
-
-            Logger.Log(this, "Killing all spaceships");
             KillAllSpaceships();
-            Logger.Return();
-
         }
 
         if (teleporter != null) {
             teleporter.ReactToSunstorm();
         }
-
     }
 
     /**
@@ -352,18 +281,9 @@ public class Asteroid implements INeighbour {
      * </p>
      */
     public void ReactToSunNearby() {
-
-        Logger.Log(this, "Reacting to sun nearby");
-
         if (isNearSun && numOfLayersRemaining == 0 && resource != null) {
-
-            Logger.Log(this, "Resource is reacting to sun nearby");
             resource.ReactToSunNearby(this);
-            Logger.Return();
-
         }
-        Logger.Return();
-
     }
 
     /**
@@ -371,8 +291,6 @@ public class Asteroid implements INeighbour {
      * @return visszaadja a resource tagváltozót
      */
     public AbstractBaseResource GetResource(){
-        Logger.Log(this, "Returning resource");
-        Logger.Return();
         return resource;
     }
 
@@ -381,9 +299,7 @@ public class Asteroid implements INeighbour {
      * @param abstractBaseResource erre a nyersanyagra állítódik a mag
      */
     public void SetResource(AbstractBaseResource abstractBaseResource) {
-        Logger.Log(this, "Setting resource to " + Logger.GetName(abstractBaseResource));
         resource = abstractBaseResource;
-        Logger.Return();
     }
 
 
@@ -414,8 +330,6 @@ public class Asteroid implements INeighbour {
      * @return véletlen szomszéd
      */
     public INeighbour GetRandomNeighbour() {
-        Logger.Log(this, "Returning random neighbour");
-        Logger.Return();
         if (!Main.isRandomEnabled) {
             if (neighbouringAsteroids.isEmpty())
                 return teleporter;
@@ -437,7 +351,6 @@ public class Asteroid implements INeighbour {
                     teleporter :
                     neighbouringAsteroids.get(chosenIndex);
         }
-
     }
 
     /**
@@ -445,17 +358,10 @@ public class Asteroid implements INeighbour {
      * @param asteroid az új szomszéd
      */
     public void AddNeighbourAsteroid(Asteroid asteroid) {
-
         if (neighbouringAsteroids.contains(asteroid)) {
-            Logger.Log(this, "Asteroid " + Logger.GetName(asteroid) + " already my neighbour");
-            Logger.Return();
             return;
         }
-
-        Logger.Log(this, "Adding asteroid " + Logger.GetName(asteroid) + " to my neighbours");
         neighbouringAsteroids.add(asteroid);
-        Logger.Return();
-
     }
 
     /**
@@ -463,11 +369,7 @@ public class Asteroid implements INeighbour {
      * @return a neighbouringAsteroids lista
      */
     public List<Asteroid> GetNeighbours() {
-
-        Logger.Log(this, "Returning my neighbours");
-        Logger.Return();
         return neighbouringAsteroids;
-
     }
 
     /**
@@ -475,11 +377,7 @@ public class Asteroid implements INeighbour {
      * @param abstractSpaceship az aszteroidára lépő telepes vagy robot
      */
     public void AddSpaceship(AbstractSpaceship abstractSpaceship) {
-
-        Logger.Log(this, "Adding new Spaceship: " + Logger.GetName(abstractSpaceship));
         spaceships.add(abstractSpaceship);
-        Logger.Return();
-
     }
 
     /**
@@ -487,34 +385,22 @@ public class Asteroid implements INeighbour {
      * @param abstractSpaceship a törlendő telepes vagy robot
      */
     public void RemoveSpaceship(AbstractSpaceship abstractSpaceship) {
-
-        Logger.Log(this, "Removing Spaceship: " + Logger.GetName(abstractSpaceship));
         spaceships.remove(abstractSpaceship);
-        Logger.Return();
-
     }
 
     /**
      * Megöli az aszteroidán tartózkodó összes egységet.
      */
     public void KillAllSpaceships() {
-
-        Logger.Log(this, "Killing all spaceships");
         List<AbstractSpaceship> abstractSpaceshipsShallowCopy = new LinkedList<>(spaceships);
         abstractSpaceshipsShallowCopy.forEach(AbstractSpaceship::Die);
-        Logger.Return();
-
     }
 
     /**
      * Törli az aszteroidán található teleportert.
      */
     public void RemoveTeleporter() {
-
-        Logger.Log(this, "Removing teleporter");
         teleporter = null;
-        Logger.Return();
-
     }
 
     /**
@@ -526,36 +412,23 @@ public class Asteroid implements INeighbour {
      */
     @Override
     public void Explode() {
-
-        Logger.Log(this, "Exploding");
-
-        Logger.Log(this, "Signaling to spaceships that I am exploding");
         List<AbstractSpaceship> spaceshipsShallowCopy = new ArrayList<>(spaceships);
         spaceshipsShallowCopy.forEach(AbstractSpaceship::ReactToAsteroidExplosion);
-        Logger.Return();
-
         neighbouringAsteroids.forEach(
                 asteroid -> asteroid.RemoveNeighbouringAsteroid(this)
         );
 
         if (teleporter != null) {
-
-            Logger.Log(this, "Exploding my teleporter");
             teleporter.Explode();
-            Logger.Return();
-
         }
-
-        Logger.Log(this, "Removing me from Repository");
         AsteroidRepository.GetInstance().Remove(id);
-        Logger.Return();
-
         if (resource != null) {
             resource.ReactToGettingDestroyed();
         }
 
-        Logger.Return();
-
+        if (isDiscovered) {
+            Logger.Log(this, "Exploded");
+        }
     }
 
     /**
@@ -563,11 +436,7 @@ public class Asteroid implements INeighbour {
      * @param asteroid az eltávolítandó aszteroida
      * */
     public void RemoveNeighbouringAsteroid(Asteroid asteroid) {
-
-        Logger.Log(this, "Removing neighbouring asteroid");
         neighbouringAsteroids.remove(asteroid);
-        Logger.Return();
-
     }
 
     /**
@@ -578,11 +447,7 @@ public class Asteroid implements INeighbour {
      * @return null, vagy az aszteroidán található teleporter
      */
     public TeleportGate GetTeleporter() {
-
-        Logger.Log(this, "Returning Teleporter");
-        Logger.Return();
         return teleporter;
-
     }
 
     /**
@@ -590,22 +455,14 @@ public class Asteroid implements INeighbour {
      * Átállítja az isDiscovered tagváltozót igazra.
      */
     public void Discover(){
-
-        Logger.Log(this, "Discovering Asteroid");
         isDiscovered=true;
-        Logger.Return();
-
     }
     /**
      * Beállítja a teleportert.
      * @param teleportGate az aszteroida új teleportere
      */
     public void SetTeleporter(TeleportGate teleportGate) {
-
-        Logger.Log(this, "Setting teleporter to: " + Logger.GetName(teleportGate));
         teleporter = teleportGate;
-        Logger.Return();
-
     }
 
     /**
@@ -613,9 +470,7 @@ public class Asteroid implements INeighbour {
      * @param newIsDiscovered az isDiscovered új értéke
      */
     public void SetIsDiscovered(Boolean newIsDiscovered) {
-
         isDiscovered = newIsDiscovered;
-
     }
 
     /**

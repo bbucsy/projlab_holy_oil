@@ -1,6 +1,5 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 
@@ -19,15 +18,11 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
 
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
-            Logger.Log(this, "Cannot drill, no more moves left");
-            Logger.Return();
             return;
 
         }
 
-        Logger.Log(this, "Drilling");
         onAsteroid.ReactToDrill(this);
-        Logger.Return();
     }
     /**
      * Beállítja az aszteroidát amin éppen van az űrhajó, és felfedezi azt.
@@ -35,9 +30,7 @@ public abstract class AbstractCrewmate extends AbstractSpaceship{
      */
     @Override
     public void SetOnAsteroid(Asteroid asteroid) {
-        Logger.Log(this, "Setting onAsteroid to " + Logger.GetName(asteroid));
         onAsteroid = asteroid;
         onAsteroid.Discover();
-        Logger.Return();
     }
 }

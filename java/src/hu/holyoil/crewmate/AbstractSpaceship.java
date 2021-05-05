@@ -1,7 +1,6 @@
 package hu.holyoil.crewmate;
 
 import hu.holyoil.IIdentifiable;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
@@ -39,22 +38,15 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
     public void Move(INeighbour neighbour) {
 
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
-            Logger.Log(this, "Cannot move, no more moves left this turn");
-            Logger.Return();
             return;
         }
 
-        Logger.Log(this, "Moving to " + Logger.GetName(neighbour));
 
         //noinspection SuspiciousMethodCalls
         if (onAsteroid.GetNeighbours().contains(neighbour) || onAsteroid.GetTeleporter() == neighbour) {
             neighbour.ReactToMove(onAsteroid, this);
-        } else {
-            Logger.Log(this, "Cannot move to " + Logger.GetName(neighbour) + ", it is not a neighbour of my asteroid");
-            Logger.Return();
         }
 
-        Logger.Return();
     }
 
     /**
@@ -70,9 +62,7 @@ public abstract class AbstractSpaceship implements IStepping, IIdentifiable{
      * @param asteroid A beállítandó aszteroida
      */
     public void SetOnAsteroid(Asteroid asteroid) {
-        Logger.Log(this, "Setting onAsteroid to " + Logger.GetName(asteroid));
         onAsteroid = asteroid;
-        Logger.Return();
     }
 
     /**

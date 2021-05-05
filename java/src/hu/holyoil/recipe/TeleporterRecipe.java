@@ -1,7 +1,6 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
@@ -47,9 +46,6 @@ public class TeleporterRecipe implements IRecipe {
     @Override
     public void Craft(IStorageCapable iStorageCapable, Asteroid asteroid) {
 
-        Logger.Log(this, "Crafting teleportgate pair");
-        Logger.Return();
-
         BillOfMaterial billOfMaterial = new BillOfMaterial();
         Iron iron1 = new Iron(
                 ResourceBaseRepository.GetIdWithPrefix("Iron")
@@ -63,53 +59,23 @@ public class TeleporterRecipe implements IRecipe {
         Water water = new Water(
                 ResourceBaseRepository.GetIdWithPrefix("Water")
         );
-
-        Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
-
-        Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(iron1);
-        Logger.Return();
-
-        Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(iron2);
-        Logger.Return();
-
-        Logger.Log(this, "Adding uranium to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(uranium);
-        Logger.Return();
-
-        Logger.Log(this, "Adding water to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(water);
-        Logger.Return();
-
-        Logger.Log(this, "Getting player storage");
         PlayerStorage storage = iStorageCapable.GetStorage();
-        Logger.Return();
 
         if (storage.HasEnoughOf(billOfMaterial) && storage.GetTeleporterCount() <= 1) {
 
-            Logger.Log(this, "Removing bill");
             storage.RemoveBill(billOfMaterial, true);
-            Logger.Return();
-
             TeleportGate t1 = new TeleportGate(
                     NeighbourBaseRepository.GetIdWithPrefix("t")
             ), t2 = new TeleportGate(
                     NeighbourBaseRepository.GetIdWithPrefix("t")
             );
-
-            Logger.Log(this, "Setting pair of " + Logger.GetName(t1));
             t1.SetPair(t2);
-            Logger.Return();
-
-            Logger.Log(this, "Setting pair of " + Logger.GetName(t2));
             t2.SetPair(t1);
-            Logger.Return();
-
-            Logger.Log(this, "Adding teleportgates to storage");
             storage.AddTeleportGatePair(t1, t2);
-            Logger.Return();
-
             iStorageCapable.ReactToMoveMade();
 
         }
@@ -129,10 +95,6 @@ public class TeleporterRecipe implements IRecipe {
 
         if (teleporterRecipe == null) {
             teleporterRecipe = new TeleporterRecipe();
-        }
-
-        if (Logger.GetName(teleporterRecipe) == null) {
-            Logger.RegisterObject(teleporterRecipe, ": TeleporterRecipe");
         }
 
         return teleporterRecipe;

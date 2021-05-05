@@ -1,6 +1,5 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
@@ -73,10 +72,8 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
     public void DestroyStorage() {
 
-        Logger.Log(this, "Removing me from Repository");
         PlayerStorageBaseRepository.GetInstance().Remove(storage.GetId());
         storage = null;
-        Logger.Return();
 
     }
 
@@ -89,23 +86,17 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void Die() {
-        Logger.Log(this, "Died");
-
         if (storage.GetOneTeleporter() != null) {
             storage.GetOneTeleporter().Explode();
         }
 
-        Logger.Log(this, "Removing me from Repository");
         SpaceshipBaseRepository.GetInstance().Remove(id);
-        Logger.Return();
 
         storage.ReactToSettlerDie();
 
         onAsteroid.RemoveSpaceship(this);
 
         TurnController.GetInstance().RemoveEntityWithAction(this);
-
-        Logger.Return();
     }
 
     /**
@@ -114,9 +105,7 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void ReactToAsteroidExplosion() {
-        Logger.Log(this, "Reacting to asteroid explosion");
         Die();
-        Logger.Return();
     }
 
     /**
@@ -126,18 +115,11 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void CraftRobot() {
-
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
-
-            Logger.Log(this, "Cannot build robot, no more moves left");
-            Logger.Return();
             return;
-
         }
 
-        Logger.Log(this, "Crafting robot");
         RobotRecipe.GetInstance().Craft(this, onAsteroid);
-        Logger.Return();
     }
 
     /**
@@ -147,18 +129,11 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void CraftTeleportGate() {
-
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
-
-            Logger.Log(this, "Cannot build teleportgate, no more moves left");
-            Logger.Return();
             return;
-
         }
 
-        Logger.Log(this, "Crafting teleport gate pair.");
         TeleporterRecipe.GetInstance().Craft(this, onAsteroid);
-        Logger.Return();
     }
 
     /**
@@ -168,18 +143,11 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public void Mine() {
-
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
-
-            Logger.Log(this, "Cannot mine, no more moves left");
-            Logger.Return();
             return;
-
         }
 
-        Logger.Log(this, "Mining");
         onAsteroid.ReactToMineBy(this, storage);
-        Logger.Return();
     }
 
     /**
@@ -187,8 +155,6 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
      */
     @Override
     public PlayerStorage GetStorage() {
-        Logger.Log(this,"Returning " + Logger.GetName(storage));
-        Logger.Return();
         return storage;
     }
 
@@ -207,13 +173,10 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
-            Logger.Log(this, "Cannot place teleporter, no more moves left");
-            Logger.Return();
             return;
 
         }
 
-        Logger.Log(this, "Place teleporter");
 
         TeleportGate storageTeleporter = storage.GetOneTeleporter();
         TeleportGate asteroidTeleporter = onAsteroid.GetTeleporter();
@@ -227,8 +190,6 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
             AIController.GetInstance().AddTeleportGate(storageTeleporter);
 
         }
-
-        Logger.Return();
     }
 
     /**
@@ -242,17 +203,12 @@ public class Settler extends AbstractCrewmate implements IStorageCapable, IMiner
 
         if (TurnController.GetInstance().HasNoActionsLeft(this)) {
 
-            Logger.Log(this, "Cannot place resource, no more moves left");
-            Logger.Return();
             return;
 
         }
 
-        Logger.Log(this, "Placing resource " + Logger.GetName(abstractBaseResource));
         if(onAsteroid.GetResource()==null)
              onAsteroid.PutResource(this, abstractBaseResource);
-
-        Logger.Return();
     }
 
     public void SetStorage(PlayerStorage playerStorage) {

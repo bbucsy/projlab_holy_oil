@@ -1,7 +1,6 @@
 package hu.holyoil.recipe;
 
 import hu.holyoil.collection.BillOfMaterial;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.IStorageCapable;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.neighbour.Asteroid;
@@ -39,11 +38,7 @@ public class RobotRecipe implements IRecipe {
     @Override
     public void Craft(IStorageCapable iStorageCapable, Asteroid asteroid) {
 
-        Logger.Log(this, "Crafting Robot");
-        Logger.Return();
-
         BillOfMaterial billOfMaterial = new BillOfMaterial();
-        Logger.RegisterObject(billOfMaterial, "bill: BillOfMaterial");
 
         Iron iron = new Iron(
                 ResourceBaseRepository.GetIdWithPrefix("Iron")
@@ -57,30 +52,15 @@ public class RobotRecipe implements IRecipe {
                 ResourceBaseRepository.GetIdWithPrefix("Coal")
         );
 
-        Logger.Log(this, "Adding iron to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(iron);
-        Logger.Return();
-
-        Logger.Log(this, "Adding uranium to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(uranium);
-        Logger.Return();
-
-        Logger.Log(this, "Adding coal to " + Logger.GetName(billOfMaterial));
         billOfMaterial.AddMaterial(coal);
-        Logger.Return();
-
-        Logger.Log(this, "Getting player storage");
         PlayerStorage storage = iStorageCapable.GetStorage();
-        Logger.Return();
 
         if (storage.HasEnoughOf(billOfMaterial)) {
 
-            Logger.Log(this, "Removing bill from storage");
             storage.RemoveBill(billOfMaterial, true);
-            Logger.Return();
-
             Robot robot = new Robot(asteroid);
-
             iStorageCapable.ReactToMoveMade();
 
         }
@@ -99,10 +79,6 @@ public class RobotRecipe implements IRecipe {
 
         if (robotRecipe == null) {
             robotRecipe = new RobotRecipe();
-        }
-
-        if (Logger.GetName(robotRecipe) == null) {
-            Logger.RegisterObject(robotRecipe, ": RobotRecipe");
         }
 
         return robotRecipe;
