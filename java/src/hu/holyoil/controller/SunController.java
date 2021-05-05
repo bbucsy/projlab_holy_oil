@@ -2,7 +2,6 @@ package hu.holyoil.controller;
 
 import hu.holyoil.IIdentifiable;
 import hu.holyoil.Main;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 
@@ -47,8 +46,6 @@ public class SunController implements ISteppable, IIdentifiable {
      * Random kikapcsolásával 30-ra állítódik.
      */
     private void RestartCountdown() {
-        Logger.Log(this, "Restarting sunstorm countdown" + (Main.isRandomEnabled ? "" : " - non-randomly!"));
-        Logger.Return();
 
         if (!Main.isRandomEnabled) {
             turnsUntilNextSunstorm = 30;
@@ -68,8 +65,6 @@ public class SunController implements ISteppable, IIdentifiable {
      */
     @Override
     public void Step() {
-        Logger.Log(this, "Steps");
-
         --turnsUntilNextSunstorm;
         if (turnsUntilNextSunstorm == 0) {
             StartSunstorm();
@@ -78,8 +73,6 @@ public class SunController implements ISteppable, IIdentifiable {
 
         List<Asteroid> asteroidsShallowCopy = new ArrayList<>(AsteroidRepository.GetInstance().GetAll());
         asteroidsShallowCopy.forEach(Asteroid::ReactToSunNearby);
-
-        Logger.Return();
     }
 
     /**
@@ -87,7 +80,6 @@ public class SunController implements ISteppable, IIdentifiable {
      * <p>Hatást gyakorol az öv aszteroidáinak nagyjából egyharmadára.</p>
      */
     public void StartSunstorm()  {
-        Logger.Log(this,"Starting sunstorm");
         List<Asteroid> asteroids = AsteroidRepository.GetInstance().GetAll();
 
         /* Collecting the asteroids to affect */
@@ -119,8 +111,6 @@ public class SunController implements ISteppable, IIdentifiable {
 
         /* Calling reaction on collected asteroids */
         chosenAsteroids.forEach(Asteroid::ReactToSunstorm);
-
-        Logger.Return();
     }
 
     /**
@@ -128,8 +118,6 @@ public class SunController implements ISteppable, IIdentifiable {
      * @return int, turnsUntilNextSunstorm
      */
     public int GetTurnsUntilStorm(){
-        Logger.Log(this, "Returning turns until next Sunstorm: " + turnsUntilNextSunstorm);
-        Logger.Return();
         return turnsUntilNextSunstorm;
     }
 
@@ -141,10 +129,6 @@ public class SunController implements ISteppable, IIdentifiable {
 
         if (sunController == null) {
             sunController = new SunController();
-        }
-
-        if (Logger.GetName(sunController) == null) {
-            Logger.RegisterObject(sunController, ": SunController");
         }
 
         return sunController;

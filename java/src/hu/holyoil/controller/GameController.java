@@ -1,11 +1,9 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.Main;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.AsteroidRepository;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.repository.SettlerRepository;
@@ -43,8 +41,6 @@ public class GameController implements ISteppable  {
      */
     @Override
     public void Step() {
-        Logger.Log(this, "Steps");
-
         CheckWinCondition();
         CheckLoseCondition();
         CheckGameCondition();
@@ -54,8 +50,6 @@ public class GameController implements ISteppable  {
         //gameState = GameState.WON_GAME;
 
         TurnController.GetInstance().ResetMoves();
-
-        Logger.Return();
     }
 
     /**
@@ -128,58 +122,40 @@ public class GameController implements ISteppable  {
      * Minden kör végén ellenőrzi megnyerték-e a játékot a telepesek
      */
     public void CheckWinCondition()  {
-        Logger.Log(this,"Checking win condition");
-
         if (gameState == GameState.RUNNING) {
             for (Asteroid asteroid : AsteroidRepository.GetInstance().GetAll()) {
                 CounterVector counterVector = new CounterVector();
                 counterVector.CountAsteroidsResources(asteroid);
                 if (counterVector.CanWin()) {
-                    Logger.Log(this,"Just won game!");
                     gameState = GameState.WON_GAME;
-                    Logger.Return();
                     break;
                 }
             }
         }
-
-        Logger.Return();
     }
 
     /**
      * Minden kör végén ellenőrzi elvesztették-e a játékot a telepesek
      */
     public void CheckLoseCondition()  {
-        Logger.Log(this,"Checking lose condition");
-
         if (gameState == GameState.RUNNING) {
             if (SettlerRepository.GetInstance().GetAll().size() == 0) {
-                Logger.Log(this,"Just lost game!");
                 gameState = GameState.LOST_GAME;
-                Logger.Return();
             }
         }
-
-        Logger.Return();
     }
 
     /**
      * Minden kör végén ellenőrzi nyerhető-e még a játék
      */
     public void CheckGameCondition()  {
-        Logger.Log(this,"Checking game condition");
-
         if (gameState == GameState.RUNNING) {
             CounterVector counterVector = new CounterVector();
             counterVector.CountInGameResources();
             if (!counterVector.CanWin()) {
-                Logger.Log(this,"Just lost game!");
                 gameState = GameState.LOST_GAME;
-                Logger.Return();
             }
         }
-
-        Logger.Return();
     }
 
     /**
@@ -206,8 +182,6 @@ public class GameController implements ISteppable  {
      * @param numOfPlayers A játékban lévő játékosok száma
      */
     public void StartGame(int numOfPlayers)  {
-        Logger.Log(this,"Starting game");
-
         // Generate between minAsteroidCount and maxAsteroidCount asteroids
         Random random = new Random();
         int numOfAsteroids = minAsteroidCount;
@@ -412,8 +386,6 @@ public class GameController implements ISteppable  {
         TurnController.GetInstance().SetGameFrame(gameFrame);
         gameFrame.setVisible(true);
         gameFrame.UpdateComponent();
-
-        Logger.Return();
     }
 
     /**
@@ -423,10 +395,6 @@ public class GameController implements ISteppable  {
     public static GameController GetInstance() {
         if (gameController == null) {
             gameController = new GameController();
-        }
-
-        if (Logger.GetName(gameController) == null) {
-            Logger.RegisterObject(gameController, ": GameController");
         }
 
         return gameController;

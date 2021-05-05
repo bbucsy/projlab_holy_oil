@@ -1,6 +1,5 @@
 package hu.holyoil.controller;
 
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.repository.SettlerRepository;
 import hu.holyoil.view.frames.GameFrame;
@@ -153,10 +152,6 @@ public class TurnController {
 
         if (turnController == null) {
             turnController = new TurnController();
-        }
-
-        if (Logger.GetName(turnController) == null) {
-            Logger.RegisterObject(turnController, ": TurnController");
         }
 
         return turnController;

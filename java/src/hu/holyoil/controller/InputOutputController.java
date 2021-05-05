@@ -65,10 +65,6 @@ public class InputOutputController {
       inputOutputController = new InputOutputController();
     }
 
-    if (Logger.GetName(inputOutputController) == null) {
-      Logger.RegisterObject(inputOutputController, ": InputOutputController");
-    }
-
     return inputOutputController;
   }
 

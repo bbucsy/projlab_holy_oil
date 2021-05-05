@@ -1,7 +1,6 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.Main;
-import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.crewmate.Robot;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
@@ -39,13 +38,11 @@ public class AIController implements ISteppable {
      */
     @Override
     public void Step()  {
-        Logger.Log(this, "Steps");
 
         ufos.forEach(this::HandleUfo);
         robots.forEach(this::HandleRobot);
         teleporters.forEach(this::HandleTeleportGate);
 
-        Logger.Return();
     }
 
     /**
@@ -54,54 +51,42 @@ public class AIController implements ISteppable {
      * @param robot Hozzáadja a robots tagváltozóhoz
      */
     public void AddRobot(Robot robot)  {
-        Logger.Log(this,"Adding robot <" +  Logger.GetName(robot)+ ">");
         robots.add(robot);
-        Logger.Return();
     }
     /**
      * Hozzáad egy ufót a játékhoz.
      * @param ufo Hozzáadja az ufos tagváltozóhoz
      */
     public void AddUfo(Ufo ufo)  {
-        Logger.Log(this,"Adding ufo <" +  Logger.GetName(ufo)+ ">");
         ufos.add(ufo);
-        Logger.Return();
     }
     /**
      * Hozzáad egy teleportert a játékhoz.
      * @param teleportGate Hozzáadja a teleporters tagváltozóhoz
      */
     public void AddTeleportGate(TeleportGate teleportGate)  {
-        Logger.Log(this,"Adding teleporter <" +  Logger.GetName(teleportGate)+ ">");
         teleporters.add(teleportGate);
-        Logger.Return();
     }
     /**
      * Töröl egy robotot a játékból
      * @param robot törli a robotot a robots tagváltozóból
      */
     public void RemoveRobot(Robot robot)  {
-        Logger.Log(this,"Removing robot <" +  Logger.GetName(robot)+ ">");
         robots.remove(robot);
-        Logger.Return();
     }
     /**
      * Töröl egy ufút a játékból
      * @param ufo törli az ufót az ufos tagváltozóból
      */
     public void RemoveUfo(Ufo ufo)  {
-        Logger.Log(this,"Removing ufo <" +  Logger.GetName(ufo)+ ">");
         ufos.remove(ufo);
-        Logger.Return();
     }
     /**
      * Töröl egy teleportert a játékból
      * @param teleportGate törli a teleportert a teleporters tagváltozóból
      */
     public void RemoveTeleportGate(TeleportGate teleportGate)  {
-        Logger.Log(this,"Removing teleporter <" +  Logger.GetName(teleportGate)+ ">");
         teleporters.remove(teleportGate);
-        Logger.Return();
     }
     /**
      * Kezeli egy robot működését
@@ -119,7 +104,6 @@ public class AIController implements ISteppable {
      * @param robot az adott robot
      */
     public void HandleRobot(Robot robot)  {
-        Logger.Log(this,"Handle robot <" +  Logger.GetName(robot)+ ">");
         Asteroid current = robot.GetOnAsteroid();
         if(!Main.isRandomEnabled){
             robot.Move(current.GetRandomNeighbour());
@@ -131,7 +115,6 @@ public class AIController implements ISteppable {
             if (SunController.GetInstance().GetTurnsUntilStorm() < 2) {//sunstorm happens at the end of this or next turn
                 if (current.GetResource() == null && current.GetLayerCount() < 2) {//if current asteroid is empty and can be drilled, stay
                     robot.Drill(); //call Drill() even if it doesn't do anything to stay in place and simplicity
-                    Logger.Return();
                     return;
                 } else {
                     int i = 0;
@@ -140,11 +123,9 @@ public class AIController implements ISteppable {
                         i++;
                     if (i < neighbouringAsteroids.size()) {
                         robot.Move(neighbouringAsteroids.get(i));
-                        Logger.Return();
                         return;
                     } else if (tpAvailable) {//if tp is available, use it, maybe it puts the robot on an empty drilled asteroid
                         robot.Move(current.GetTeleporter());
-                        Logger.Return();
                         return;
                     } else {//look for a neighbour with a teleporter. maybe that will take the robot to an empty asteroid
                         i = 0;
@@ -152,7 +133,6 @@ public class AIController implements ISteppable {
                             i++;
                         if (i < neighbouringAsteroids.size()) {
                             robot.Move(neighbouringAsteroids.get(i));
-                            Logger.Return();
                             return;
                         }
                     }
@@ -162,7 +142,6 @@ public class AIController implements ISteppable {
             if (current.GetLayerCount() > 0 && !(current.GetIsNearbySun() && current.GetLayerCount() == 1
                     && current.GetResource()!=null)) {
                 robot.Drill();
-                Logger.Return();
                 return;
             }
             Random random = new Random();
@@ -218,21 +197,18 @@ public class AIController implements ISteppable {
                     robot.Move(current.GetRandomNeighbour());
             }
         }
-        Logger.Return();
     }
     /**
      * Kezeli egy ufo működését
      * @param ufo az adott ufó
      */
     public void HandleUfo(Ufo ufo)  {
-        Logger.Log(this,"Handle ufo <" +  Logger.GetName(ufo)+ ">");
 
         if(ufo.GetOnAsteroid().GetLayerCount() == 0 && ufo.GetOnAsteroid().GetResource() != null)
             ufo.Mine();
         else
             ufo.Move(ufo.GetOnAsteroid().GetRandomNeighbour());
 
-        Logger.Return();
     }
     /**
      * Kezeli egy teleporter működését
@@ -248,7 +224,6 @@ public class AIController implements ISteppable {
      * @param teleportGate az adott teleporter
      */
     public void HandleTeleportGate(TeleportGate teleportGate)  {
-        Logger.Log(this,"Handle teleporter <" +  Logger.GetName(teleportGate)+ ">");
 
         List<Asteroid> neighbouringAsteroids = teleportGate.GetHomeAsteroid().GetNeighbours();
 
@@ -276,13 +251,9 @@ public class AIController implements ISteppable {
             }
             if (canMove) {
                 teleportGate.Move(neighbouringAsteroids.get(chosenIndex));
-            } else {
-                Logger.Log(this, "All neighbours already have a teleporter, cannot move");
-                Logger.Return();
             }
         }
 
-        Logger.Return();
     }
 
     /**
@@ -293,10 +264,6 @@ public class AIController implements ISteppable {
 
         if (AIController == null) {
             AIController = new AIController();
-        }
-
-        if (Logger.GetName(AIController) == null) {
-            Logger.RegisterObject(AIController, ": AIController");
         }
 
         return AIController;

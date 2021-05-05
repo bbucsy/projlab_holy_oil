@@ -27,10 +27,8 @@ public class BillOfMaterial {
      * Hozzzáad egy nyersanyagot a billhez
      * @param abstractBaseResource a hozzáadandó nyersanyag
      */
-    public void AddMaterial(AbstractBaseResource abstractBaseResource){
-        Logger.Log(this,"Adding Material: " + Logger.GetName(abstractBaseResource));
+    public void AddMaterial(AbstractBaseResource abstractBaseResource) {
         resources.add(abstractBaseResource);
-        Logger.Return();
     }
 
     /**
@@ -38,8 +36,6 @@ public class BillOfMaterial {
      * @return a nyersanyagok listája
      */
     public List<AbstractBaseResource> GetMaterials() {
-        Logger.Log(this,"Returning materials");
-        Logger.Return();
         return resources;
     }
 }
