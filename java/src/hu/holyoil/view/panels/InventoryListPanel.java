@@ -3,11 +3,14 @@ package hu.holyoil.view.panels;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.Settler;
-import hu.holyoil.resource.AbstractBaseResource;
+import hu.holyoil.neighbour.Asteroid;
+import hu.holyoil.resource.*;
 import hu.holyoil.storage.PlayerStorage;
 import hu.holyoil.view.IViewComponent;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
 /**
@@ -76,11 +79,12 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         inventory.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventory.setBackground(new Color(4,4,13)); //lista háttere (nem lehet átlátszó)
         inventory.setForeground(Color.GREEN); //szöveg színe
+        inventory.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 14));
 
         JScrollPane scrollPane = new JScrollPane(inventory);
         scrollPane.setVerticalScrollBar(new JScrollBar());
         scrollPane.setBackground(new Color(4,4,13));
-        scrollPane.setPreferredSize(new Dimension(360, 300));
+        scrollPane.setPreferredSize(new Dimension(320, 300));
 
         JLabel tpText = new JLabel("Number of TeleportGates: ");
         tps= new JLabel(String.valueOf(storage.GetTeleporterCount()));
@@ -92,7 +96,8 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         JPanel panel1 = new JPanel();
         panel1.setOpaque(false);
         panel1.add(fill);
-        panel1.add(craftRobot);
+        fill.setEnabled(false);
+        panel1.add(placeTp);
         //teleporter szöveg és alsó két gomb
         JPanel panel2 = new JPanel();
         panel2.setOpaque(false);
@@ -103,8 +108,8 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         panel3.add(tps);
         JPanel panel4 = new JPanel();
         panel4.setOpaque(false);
+        panel4.add(craftRobot);
         panel4.add(craftTp);
-        panel4.add(placeTp);
         panel2.add(panel3);
         panel2.add(panel4);
 
@@ -131,9 +136,14 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         craftTp.addActionListener(e -> settler.CraftTeleportGate());
         placeTp.addActionListener(e -> settler.PlaceTeleporter());
         fill.addActionListener(e -> {
-            if(!inventory.isSelectionEmpty())
+            if(!inventory.isSelectionEmpty()){
                 settler.PlaceResource(inventory.getSelectedValue());
+            }
         });
+        inventory.addListSelectionListener(e -> fill.setEnabled(!(inventory.isSelectionEmpty())
+                && settler.GetOnAsteroid().GetResource()==null
+                && settler.GetOnAsteroid().GetLayerCount()==0)
+        );
     }
 
     /**
@@ -141,6 +151,9 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
      */
     @Override
     public void UpdateComponent() {
+        Asteroid current= settler.GetOnAsteroid();
+        InitListeners();
+        placeTp.setEnabled(storage.GetTeleporterCount()!=0 && current.GetTeleporter()==null);
         settler = TurnController.GetInstance().GetSteppingSettler();
         storage = TurnController.GetInstance().GetSteppingSettler().GetStorage();
         model.clear();
@@ -160,4 +173,55 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         setOpaque(false);
         setBackground(new Color(4, 4, 13));
     }
+
+    private class InventoryCellRenderer extends DefaultListCellRenderer {
+
+        private JLabel label;
+
+        public InventoryCellRenderer() {
+            label = new JLabel();
+            label.setOpaque(false);
+        }
+
+        private Image DefineImageFrom(AbstractBaseResource res) {
+            Uranium exampleUranium;
+            Iron exampleIron;
+            Coal exampleCoal;
+            Water exampleWater;
+            Image image = null;
+            if (res.IsSameType(exampleUranium))
+                image = uraniumImg;
+            else if (res.IsSameType(exampleCoal))
+                image = coalImg;
+            else if (res.IsSameType(exampleIron))
+                image = ironImg;
+            else if (res.IsSameType(exampleWater))
+                image = waterImg;
+            return image;
+        }
+
+        @Override
+        public Component getListCellRendererComponent(
+                JList list,
+                Object value,
+                int index,
+                boolean selected,
+                boolean expanded) {
+
+            label.setIcon(fileSystemView.getSystemIcon(file));
+            label.setText(fileSystemView.getSystemDisplayName(file));
+            label.setToolTipText(file.getPath());
+
+            if (selected) {
+                label.setBackground(backgroundSelectionColor);
+                label.setForeground(textSelectionColor);
+            } else {
+                label.setBackground(backgroundNonSelectionColor);
+                label.setForeground(textNonSelectionColor);
+            }
+
+            return label;
+        }
+    }
+
 }

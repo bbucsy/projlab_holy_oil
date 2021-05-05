@@ -40,33 +40,38 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
 
         //létrehozzuk a kiírandó stringeket
         String crazyString = "Crazy?: " + teleportGate.GetIsCrazy();
-        String idString = " ID: " + asteroid.GetId();
-        String coreString;
-        if(asteroid.GetResource() != null) {
-            coreString = " Core: " + asteroid.GetResource().toString();
-        }else{
-            coreString = " Core: ";
-        }
-        String layersString = " Layers: " + asteroid.GetLayerCount();
-        StringBuilder shipsString = new StringBuilder(" Ships: ");
-        for (AbstractSpaceship sp : asteroid.GetSpaceships()) {
-            shipsString.append(" ").append(sp.GetId());
-        }
-        String nearSunString = " NearSun?: ";
-        if (asteroid.GetIsNearbySun()) {
-            nearSunString += "true";
-        } else {
-            nearSunString += "false";
-        }
-
         //hozzáadjuk a stringeket a popupmenu-höz
         this.add(crazyString);
         this.add("To asteroid:");
-        this.add(idString);
-        this.add(coreString);
-        this.add(layersString);
-        this.add(shipsString.toString());
-        this.add(nearSunString);
+
+        if (asteroid!=null) {
+            String idString = " ID: " + asteroid.GetId();
+            String coreString;
+            if (asteroid.GetResource() != null) {
+                coreString = " Core: " + asteroid.GetResource().toString();
+            } else {
+                coreString = " Core: ";
+            }
+            String layersString = " Layers: " + asteroid.GetLayerCount();
+            StringBuilder shipsString = new StringBuilder(" Ships: ");
+            for (AbstractSpaceship sp : asteroid.GetSpaceships()) {
+                shipsString.append(" ").append(sp.GetId());
+            }
+            String nearSunString = " NearSun?: ";
+            if (asteroid.GetIsNearbySun()) {
+                nearSunString += "true";
+            } else {
+                nearSunString += "false";
+            }
+            this.add(idString);
+            this.add(coreString);
+            this.add(layersString);
+            this.add(shipsString.toString());
+            this.add(nearSunString);
+        }
+
+
+
     }
 
     /**
