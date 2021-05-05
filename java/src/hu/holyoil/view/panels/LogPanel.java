@@ -6,8 +6,8 @@ import hu.holyoil.view.IViewComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -50,32 +50,12 @@ public class LogPanel extends JPanel implements IViewComponent {
     private void InitListeners() {
 
         jButton.addMouseListener(
-                new MouseListener() {
+                new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         TurnController.GetInstance().ReactToActionMade(
                                 TurnController.GetInstance().GetSteppingSettler()
                         );
-                    }
-
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        // do nothing
-                    }
-
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        // do nothing
-                    }
-
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        // do nothing
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        // do nothing
                     }
                 }
         );
