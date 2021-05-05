@@ -71,20 +71,19 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         storage = TurnController.GetInstance().GetSteppingSettler().GetStorage();
 
         //betölti a nyersanyagok listáját
-        model = new DefaultListModel<AbstractBaseResource>();
+        model = new DefaultListModel<>();
         storage.GetStoredMaterials().forEach(abr -> model.addElement(abr));
         inventory = new JList<>(model);
 
         inventory.setLayoutOrientation(JList.VERTICAL);
         inventory.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventory.setBackground(new Color(4,4,13)); //lista háttere (nem lehet átlátszó)
-        inventory.setForeground(Color.GREEN); //szöveg színe
-        inventory.setFont(new Font(Font.SANS_SERIF,  Font.PLAIN, 14));
+        inventory.setCellRenderer(new InventoryCellRenderer());
 
         JScrollPane scrollPane = new JScrollPane(inventory);
         scrollPane.setVerticalScrollBar(new JScrollBar());
         scrollPane.setBackground(new Color(4,4,13));
-        scrollPane.setPreferredSize(new Dimension(320, 300));
+        scrollPane.setPreferredSize(new Dimension(320, 280));
 
         JLabel tpText = new JLabel("Number of TeleportGates: ");
         tps= new JLabel(String.valueOf(storage.GetTeleporterCount()));
@@ -136,9 +135,7 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         craftTp.addActionListener(e -> settler.CraftTeleportGate());
         placeTp.addActionListener(e -> settler.PlaceTeleporter());
         fill.addActionListener(e -> {
-            if(!inventory.isSelectionEmpty()){
-                settler.PlaceResource(inventory.getSelectedValue());
-            }
+            if(!inventory.isSelectionEmpty()) settler.PlaceResource(inventory.getSelectedValue());
         });
         inventory.addListSelectionListener(e -> fill.setEnabled(!(inventory.isSelectionEmpty())
                 && settler.GetOnAsteroid().GetResource()==null
@@ -175,30 +172,8 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
     }
 
     private class InventoryCellRenderer extends DefaultListCellRenderer {
-
-        private JLabel label;
-
-        public InventoryCellRenderer() {
-            label = new JLabel();
-            label.setOpaque(false);
-        }
-
-        private Image DefineImageFrom(AbstractBaseResource res) {
-            Uranium exampleUranium;
-            Iron exampleIron;
-            Coal exampleCoal;
-            Water exampleWater;
-            Image image = null;
-            if (res.IsSameType(exampleUranium))
-                image = uraniumImg;
-            else if (res.IsSameType(exampleCoal))
-                image = coalImg;
-            else if (res.IsSameType(exampleIron))
-                image = ironImg;
-            else if (res.IsSameType(exampleWater))
-                image = waterImg;
-            return image;
-        }
+        private final Color textSelectionColor = Color.DARK_GRAY;
+        private final Color backgroundSelectionColor = Color.GREEN;
 
         @Override
         public Component getListCellRendererComponent(
@@ -208,16 +183,19 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
                 boolean selected,
                 boolean expanded) {
 
-            label.setIcon(fileSystemView.getSystemIcon(file));
-            label.setText(fileSystemView.getSystemDisplayName(file));
-            label.setToolTipText(file.getPath());
+            AbstractBaseResource res = (AbstractBaseResource)value;
+            JLabel label = new JLabel();
+            label.setIcon(new ImageIcon(res.GetImage()));
+            label.setText(res.toString());
 
             if (selected) {
+                label.setOpaque(true);
                 label.setBackground(backgroundSelectionColor);
                 label.setForeground(textSelectionColor);
-            } else {
-                label.setBackground(backgroundNonSelectionColor);
-                label.setForeground(textNonSelectionColor);
+            }
+            else {
+                label.setOpaque(false);
+                label.setForeground(backgroundSelectionColor);
             }
 
             return label;

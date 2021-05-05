@@ -9,6 +9,8 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
 import hu.holyoil.storage.PlayerStorage;
 
+import java.awt.*;
+
 /**
  * A nyersanyagokat általánosító absztrakt osztály.
  * Nem példányosítható.
@@ -104,4 +106,9 @@ public abstract class AbstractBaseResource implements IIdentifiable {
     public void ReactToGettingDestroyed() {
         ResourceBaseRepository.GetInstance().Remove(id);
     }
+
+    /**
+     * Visszaadja az ikonját
+     */
+    public abstract Image GetImage();
 }

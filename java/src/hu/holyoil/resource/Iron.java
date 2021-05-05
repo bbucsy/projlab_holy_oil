@@ -2,6 +2,9 @@ package hu.holyoil.resource;
 
 import hu.holyoil.repository.ResourceBaseRepository;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Vas.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.
@@ -36,5 +39,18 @@ public class Iron extends AbstractBaseResource {
     @Override
     public Boolean IsSameType(AbstractBaseResource abstractBaseResource) {
         return abstractBaseResource instanceof Iron;
+    }
+
+    /**
+     * Statikus, minden robotra jellemző ikon
+     */
+    protected static Image image = new ImageIcon("assets/iron.gif").getImage();
+
+    /**
+     * Visszaadja az ikonját
+     */
+    @Override
+    public Image GetImage() {
+        return image;
     }
 }

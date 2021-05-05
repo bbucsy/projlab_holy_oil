@@ -34,10 +34,6 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
     // Képek
     private final Image asteroidImg = new ImageIcon("assets/plain_asteroid.png").getImage();
-    private final Image coalImg = new ImageIcon("assets/coal.gif").getImage();
-    private final Image waterImg = new ImageIcon("assets/water.gif").getImage();
-    private final Image ironImg = new ImageIcon("assets/iron.gif").getImage();
-    private final Image uraniumImg = new ImageIcon("assets/uranium.gif").getImage();
     private final Image teleportImg = new ImageIcon("assets/teleporter.gif").getImage();
 
     /**
@@ -131,29 +127,13 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         });
     }
 
-    // Segédobjektumok a kép megállapítására
-    // Megszűnéskor érdemes a repóból eltüntetni őket.
-    private Uranium exampleUranium;
-    private Iron exampleIron;
-    private Coal exampleCoal;
-    private Water exampleWater;
-
     /**
      * Segít megállapítani, melyik képre van szüksége a nyersanyagok képei közül.
      * @param res nyersanyag objektum
      * @return nyersanyag képe
      */
     private Image DefineImageFrom(AbstractBaseResource res) {
-        Image image = null;
-        if (res.IsSameType(exampleUranium))
-            image = uraniumImg;
-        else if (res.IsSameType(exampleCoal))
-            image = coalImg;
-        else if (res.IsSameType(exampleIron))
-            image = ironImg;
-        else if (res.IsSameType(exampleWater))
-            image = waterImg;
-        return image;
+        return res.GetImage();
     }
 
     /**
@@ -275,12 +255,6 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         player = TurnController.GetInstance().GetSteppingSettler();
         sunstormCountLabel.setText(SunController.GetInstance().GetTurnsUntilStorm() + " turn(s)");
 
-        // set up example objects for resource comparison and image definition
-        exampleUranium = new Uranium();
-        exampleIron = new Iron();
-        exampleCoal = new Coal();
-        exampleWater = new Water();
-
         // register drawable items to imageMap
         NeighbourAsteroidsToImageMap();
         CentralAsteroidToImageMap();
@@ -288,12 +262,6 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
         // update click listener on every player-change
         InitListeners();
-
-        // get rid of example objects
-        exampleCoal.ReactToGettingDestroyed();
-        exampleIron.ReactToGettingDestroyed();
-        exampleUranium.ReactToGettingDestroyed();
-        exampleWater.ReactToGettingDestroyed();
 
         invalidate();
     }

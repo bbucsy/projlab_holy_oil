@@ -3,6 +3,9 @@ package hu.holyoil.resource;
 
 import hu.holyoil.repository.ResourceBaseRepository;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Szén.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.
@@ -37,5 +40,18 @@ public class Coal extends AbstractBaseResource {
     @Override
     public Boolean IsSameType(AbstractBaseResource abstractBaseResource) {
         return abstractBaseResource instanceof Coal;
+    }
+
+    /**
+     * Statikus, minden robotra jellemző ikon
+     */
+    protected static Image image = new ImageIcon("assets/coal.gif").getImage();
+
+    /**
+     * Visszaadja az ikonját
+     */
+    @Override
+    public Image GetImage() {
+        return image;
     }
 }
