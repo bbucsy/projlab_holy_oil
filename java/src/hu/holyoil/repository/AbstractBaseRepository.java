@@ -25,7 +25,7 @@ public abstract class AbstractBaseRepository <E> implements IReadWriteRepository
     public void Add(String name, E element) {
         if (!IsNameUsed(name)) {
             storedElements.put(name, element);
-            Logger.RegisterObject(element, name + ": " + element.getClass().getSimpleName());
+            Logger.RegisterObject(element, name);
             idsUsed.add(name);
         }
     }

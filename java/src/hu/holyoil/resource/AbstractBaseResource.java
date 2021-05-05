@@ -41,7 +41,7 @@ public abstract class AbstractBaseResource implements IIdentifiable {
         asteroid.SetResource(null);
         iMiner.ReactToMoveMade();
         ReactToGettingDestroyed();
-        Logger.Log(this,"got mined by a ufo");
+        Logger.Log(iMiner,"I've mined " + this + " of " + asteroid.GetId());
     }
 
     /**

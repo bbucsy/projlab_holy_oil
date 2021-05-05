@@ -54,7 +54,7 @@ public final class Logger {
             return;
         }
 
-        printStream.print(objectNames.get(caller) + ": -> " + msg + "\n");
+        printStream.print("> " + objectNames.get(caller) + ": " + msg + "\n");
     }
 
 }

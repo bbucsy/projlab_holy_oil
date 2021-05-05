@@ -50,10 +50,6 @@ public class SunController implements ISteppable, IIdentifiable {
         turnsUntilNextSunstorm = random.nextInt(50 - 20 + 1) + 20;
     }
 
-    public void SetCountdown(int newCountdown) {
-        turnsUntilNextSunstorm = newCountdown;
-    }
-
     /**
      * Minden körben végrehajt egy lépést
      */
@@ -85,7 +81,7 @@ public class SunController implements ISteppable, IIdentifiable {
         traversingQueue.add(startingAsteroid);
         chosenAsteroids.add(startingAsteroid);
 
-        while (chosenAsteroids.size() < asteroids.size() / 3 && !traversingQueue.isEmpty()) {
+        while (chosenAsteroids.size() < asteroids.size() / 2 && !traversingQueue.isEmpty()) {
             Asteroid currentAsteroid = traversingQueue.remove();
 
             List<Asteroid> untraversedNeighbours = currentAsteroid.GetNeighbours()
@@ -96,7 +92,7 @@ public class SunController implements ISteppable, IIdentifiable {
             traversingQueue.addAll(untraversedNeighbours);
 
             for (Asteroid item : untraversedNeighbours) {
-                if (chosenAsteroids.size() < asteroids.size() / 3)
+                if (chosenAsteroids.size() < asteroids.size() / 2)
                     chosenAsteroids.add(item);
                 else
                     break;

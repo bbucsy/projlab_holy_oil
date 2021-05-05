@@ -5,6 +5,7 @@ import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.SpaceshipBaseRepository;
+import sun.rmi.runtime.Log;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
@@ -71,6 +72,14 @@ public class Robot extends AbstractCrewmate {
     @Override
     public void ReactToAsteroidExplosion() {
         onAsteroid.GetRandomNeighbour().ReactToMove(onAsteroid, this);
+    }
+
+    @Override
+    public void Drill() {
+        super.Drill();
+        if (onAsteroid.GetLayerCount() == 0) {
+            Logger.Log(this, "I've revealed a(n) " + onAsteroid.GetResource().toString() + " on " + onAsteroid.GetId());
+        }
     }
 
     /**
