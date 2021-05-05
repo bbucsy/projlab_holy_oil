@@ -1,6 +1,5 @@
 package hu.holyoil.view.panels;
 
-import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
 import hu.holyoil.commandhandler.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.Settler;
@@ -17,7 +16,6 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
 
     private PlayerStorage storage;
     private Settler settler;
-    //private JTable invTable;
     private JList<AbstractBaseResource> inventory;
     private JLabel tps;
     private DefaultListModel<AbstractBaseResource> model;
@@ -27,7 +25,7 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
     private JButton fill;
 
     private void InitComponent() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new GridBagLayout());
         settler = TurnController.GetInstance().GetSteppingSettler();
         storage = TurnController.GetInstance().GetSteppingSettler().GetStorage();
 
@@ -37,13 +35,13 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
 
         inventory.setLayoutOrientation(JList.VERTICAL);
         inventory.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        inventory.setBackground(new Color(30,60,90));
-        inventory.setForeground(new Color(220, 150, 180)); //this colour is designed specifically to make trisztán angry. Handle with care.
+        inventory.setBackground(new Color(4,4,13));
+        inventory.setForeground(Color.GREEN);
 
         JScrollPane scrollPane = new JScrollPane(inventory);
         scrollPane.setVerticalScrollBar(new JScrollBar());
         scrollPane.setBackground(new Color(4,4,13));
-        scrollPane.setPreferredSize(new Dimension(360, 140));
+        scrollPane.setPreferredSize(new Dimension(360, 300));
 
         tps= new JLabel(String.valueOf(storage.GetTeleporterCount()));
         JLabel tpText = new JLabel("Number of TeleportGates: ");
@@ -53,28 +51,36 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         fill = new JButton("Place Resource");
 
         JPanel panel1 = new JPanel();
-        panel1.setPreferredSize(new Dimension(360, 20));
+        panel1.setOpaque(false);
         panel1.add(fill);
         panel1.add(craftRobot);
 
         JPanel panel2 = new JPanel();
+        panel2.setOpaque(false);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
-        panel2.setPreferredSize(new Dimension(360, 50));
         JPanel panel3 = new JPanel();
+        panel3.setOpaque(false);
         panel3.add(tpText);
         panel3.add(tps);
         JPanel panel4 = new JPanel();
+        panel4.setOpaque(false);
         panel4.add(craftTp);
         panel4.add(placeTp);
         panel2.add(panel3);
         panel2.add(panel4);
 
-        add(scrollPane);
-        add(panel1);
-        add(panel2);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridy=0; c.gridx=0;
+        c.gridwidth=360;
 
-        add(Box.createVerticalGlue());
+        add(scrollPane, c);
+        c.gridy=1;
+        add(panel1, c);
+        c.gridy=2;
+        add(panel2, c);
 
+        setOpaque(false);
         setVisible(true);
     }
 

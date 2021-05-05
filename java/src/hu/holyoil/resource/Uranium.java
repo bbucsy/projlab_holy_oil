@@ -2,6 +2,9 @@ package hu.holyoil.resource;
 
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.ResourceBaseRepository;
+
+import java.util.Collections;
+
 /**
  * Urán.
  * Aszteroida magjában megtalálható nyersanyag egy fajtája.
@@ -36,7 +39,7 @@ public class Uranium extends AbstractBaseResource {
      * */
     @Override
     public String toString() {
-        return "Uranium (health: " + health + ")";
+        return "Uranium " + String.join("", Collections.nCopies(health, "♥"));
     }
 
     /**
