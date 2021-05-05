@@ -118,13 +118,11 @@ public class TurnController {
         switch (GameController.GetInstance().GetGameState()) {
             case WON_GAME:
                 JOptionPane.showMessageDialog(gameFrame, "You've won the game!", "Holy Oil Game", JOptionPane.INFORMATION_MESSAGE);
-                gameFrame.setVisible(false);
-                GameController.GetInstance().StartApp();
+                GameController.GetInstance().CloseGame();
                 break;
             case LOST_GAME:
                 JOptionPane.showMessageDialog(gameFrame, "You've lost the game!", "Holy Oil Game", JOptionPane.ERROR_MESSAGE);
-                gameFrame.setVisible(false);
-                GameController.GetInstance().StartApp();
+                GameController.GetInstance().CloseGame();
                 break;
         }
     }

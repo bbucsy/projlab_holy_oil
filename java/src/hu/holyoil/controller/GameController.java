@@ -169,6 +169,14 @@ public class GameController implements ISteppable  {
     }
 
     /**
+     * Leállítja a játékmenetet.
+     */
+    public void CloseGame() {
+        TurnController.GetInstance().GetGameFrame().setVisible(false);
+        GameController.GetInstance().StartApp();
+    }
+
+    /**
      * Elindított alkalmazás menü ablaka.
      */
     private final MenuFrame menu = new MenuFrame();
@@ -192,6 +200,8 @@ public class GameController implements ISteppable  {
      * @param numOfPlayers A játékban lévő játékosok száma
      */
     public void StartGame(int numOfPlayers)  {
+        ResetGame();
+
         // Generate between minAsteroidCount and maxAsteroidCount asteroids
         Random random = new Random();
         int numOfAsteroids = minAsteroidCount;

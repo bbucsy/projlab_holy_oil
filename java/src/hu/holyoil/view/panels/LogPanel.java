@@ -1,6 +1,7 @@
 package hu.holyoil.view.panels;
 
 import hu.holyoil.commandhandler.Logger;
+import hu.holyoil.controller.GameController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.view.IViewComponent;
 
@@ -18,7 +19,8 @@ public class LogPanel extends JPanel implements IViewComponent {
     final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
     private JScrollPane jScrollPane;
-    private JButton jButton;
+    private JButton skipButton;
+    private JButton giveUpButton;
     private JTextArea jTextArea;
 
     /* see: https://stackoverflow.com/questions/1760654/java-printstream-to-string/1760668 */
@@ -31,35 +33,33 @@ public class LogPanel extends JPanel implements IViewComponent {
             ex.printStackTrace();
         }
 
-        jButton = new JButton("Skip turn", null);
+        skipButton = new JButton("Skip turn", null);
+        giveUpButton = new JButton("Give Up Game", null);
+        skipButton.setPreferredSize(new Dimension(100, 50));
+        giveUpButton.setPreferredSize(new Dimension(140, 50));
+
         jTextArea = new JTextArea(35, 50);
         jScrollPane = new JScrollPane(jTextArea);
-        jScrollPane.setPreferredSize(new Dimension(600, 100));
+        jScrollPane.setPreferredSize(new Dimension(720, 110));
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jTextArea.setVisible(true);
         jTextArea.setEditable(false);
+        jTextArea.setBackground(new Color(4, 4, 13));
+        jTextArea.setForeground(Color.GREEN);
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEADING);
         setLayout(flowLayout);
 
         add(jScrollPane);
-        add(jButton);
-
+        add(Box.createRigidArea(new Dimension(30, 50)));
+        add(skipButton);
+        add(Box.createRigidArea(new Dimension(30, 50)));
+        add(giveUpButton);
     }
 
     private void InitListeners() {
-
-        jButton.addMouseListener(
-                new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        TurnController.GetInstance().ReactToActionMade(
-                                TurnController.GetInstance().GetSteppingSettler()
-                        );
-                    }
-                }
-        );
-
+        skipButton.addActionListener(e -> TurnController.GetInstance().ReactToActionMade(TurnController.GetInstance().GetSteppingSettler()));
+        giveUpButton.addActionListener(e -> GameController.GetInstance().CloseGame());
     }
 
     @Override
@@ -76,7 +76,7 @@ public class LogPanel extends JPanel implements IViewComponent {
     public LogPanel() {
         super();
         setPreferredSize(new Dimension(1080, 120));
-        setBackground(new Color(4, 4, 13));
+        setOpaque(false);
         InitComponent();
         InitListeners();
     }
