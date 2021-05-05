@@ -145,11 +145,12 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
      */
     @Override
     public void UpdateComponent() {
-        Asteroid current= settler.GetOnAsteroid();
-        InitListeners();
-        placeTp.setEnabled(storage.GetTeleporterCount()!=0 && current.GetTeleporter()==null);
         settler = TurnController.GetInstance().GetSteppingSettler();
         storage = TurnController.GetInstance().GetSteppingSettler().GetStorage();
+        Asteroid current = settler.GetOnAsteroid();
+
+        InitListeners();
+        placeTp.setEnabled(storage.GetTeleporterCount()!=0 && current.GetTeleporter()==null);
         model.clear();
         storage.GetStoredMaterials().forEach(abr -> model.addElement(abr));
         tps.setText(String.valueOf(storage.GetTeleporterCount()));
