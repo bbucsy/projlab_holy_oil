@@ -51,9 +51,9 @@ public class LogPanel extends JPanel implements IViewComponent {
         setLayout(flowLayout);
 
         add(jScrollPane);
-        add(Box.createRigidArea(new Dimension(30, 50)));
+        add(Box.createRigidArea(new Dimension(20, 50)));
         add(skipButton);
-        add(Box.createRigidArea(new Dimension(30, 50)));
+        add(Box.createRigidArea(new Dimension(40, 50)));
         add(giveUpButton);
     }
 
