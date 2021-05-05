@@ -4,7 +4,7 @@ import hu.holyoil.IIdentifiable;
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
-import hu.holyoil.resource.AbstractBaseResource;
+import hu.holyoil.resource.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,6 @@ public class PlayerStorage implements IIdentifiable {
         teleporters = new ArrayList<>();
         id = name;
         PlayerStorageBaseRepository.GetInstance().Add(name, this);
-
     }
 
     /**
