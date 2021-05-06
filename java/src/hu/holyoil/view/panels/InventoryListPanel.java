@@ -169,7 +169,10 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         setBackground(new Color(4, 4, 13));
     }
 
-    private class InventoryCellRenderer extends DefaultListCellRenderer {
+    /**
+     * Statikus osztály, amely a lista celláinak renderelését végzi
+     */
+    private static class InventoryCellRenderer extends DefaultListCellRenderer {
         private final Color textSelectionColor = Color.DARK_GRAY;
         private final Color backgroundSelectionColor = Color.GREEN;
 

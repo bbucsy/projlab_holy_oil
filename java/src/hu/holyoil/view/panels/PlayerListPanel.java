@@ -10,10 +10,18 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * A játékban lévő játékosok listáját megjelenítő panel. A panel feltünteti azt a settlert is, akinek a köre van.
+ * Amennyiben egy settlerre bal egérgombbal kattintunk, az feltűnteti annak az aszteroidának a legfőbb tulajdonságait,
+ * amelyen az a settler tartózkodik. Csak az életben lévő settlerek vannak feltűntetve.
+ */
 public class PlayerListPanel extends JPanel implements IViewComponent {
-
-    private HashMap<Settler, PlayerInfoPanel> playerList;
+    /**
+     * A játékosok telepeseit és azok infopaneljét összerendelő map.
+     */
+    private Map<Settler, PlayerInfoPanel> playerList;
 
     public PlayerListPanel() {
         super();

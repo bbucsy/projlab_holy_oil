@@ -18,13 +18,18 @@ public class TurnController {
 
     /**
      * Hány lépést tehet meg egy telepes / robot / ufo egy körben.
-     * */
+     */
     public final int NUM_OF_ACTIONS_PER_TURN = 1;
 
     /**
      * Hány játékos lehet maximum egy játékban
      */
     public final int NUM_OF_PLAYERS_MAX = 4;
+
+    /**
+     * Hány játékos lehet minimum egy játékban
+     */
+    public final int NUM_OF_PLAYERS_MIN = 2;
 
     /**
      * Tárolja, melyik telepes van éppen soron
@@ -38,8 +43,8 @@ public class TurnController {
 
     /**
      * Eltárolja minden objektumról, hogy hány lépést tett már meg.
-     * */
-    private HashMap<Object, Integer> movesMade;
+     */
+    private final HashMap<Object, Integer> movesMade;
 
     public GameFrame GetGameFrame() {
         return gameFrame;
@@ -60,6 +65,7 @@ public class TurnController {
 
     /**
      * Visszaadja a jelenleg soron lévő játékos telepesét
+     *
      * @return soron lévő telepes
      */
     public Settler GetSteppingSettler() {
@@ -76,16 +82,17 @@ public class TurnController {
 
     /**
      * Visszaadja, hogy egy adott elem lelépte-e már a lépéseit.
+     *
      * @param object A vizsgálandó objektum
      * @return Lelépte-e az összes lépését ez az egység.
-     * */
+     */
     public boolean HasNoActionsLeft(Object object) {
         return movesMade.get(object) >= NUM_OF_ACTIONS_PER_TURN;
     }
 
     /**
      * Minden lépésre képes objektum esetén visszaállítja a lépett lépések számát.
-     * */
+     */
     public void ResetMoves() {
         movesMade.replaceAll(
                 (obj, i) -> 0
@@ -94,8 +101,9 @@ public class TurnController {
 
     /**
      * Eltárolja, hogy az adott objektum lépett egyet.
+     *
      * @param object A lépett objektum
-     * */
+     */
     public void ReactToActionMade(Object object) {
         movesMade.put(object, movesMade.get(object) + 1);
     }
@@ -107,10 +115,9 @@ public class TurnController {
             AIController.GetInstance().Step();
             SunController.GetInstance().Step();
             GameController.GetInstance().Step();
-            if(GameController.GetInstance().GetGameState()==GameState.RUNNING)
+            if (GameController.GetInstance().GetGameState() == GameState.RUNNING)
                 StartTurnSystem();
-        }
-        else {
+        } else {
             steppingSettler = temp;
         }
         gameFrame.UpdateComponent();
@@ -129,22 +136,25 @@ public class TurnController {
 
     /**
      * Beregisztrál egy egy objektumot, amely tud lépni.
+     *
      * @param object A beregisztrálandó objektum
-     * */
+     */
     public void RegisterEntityWithAction(Object object) {
         movesMade.put(object, 0);
     }
 
     /**
      * Kitöröl egy objektumot a regisztrált objektumok közül.
+     *
      * @param object A törlendő objektum
-     * */
+     */
     public void RemoveEntityWithAction(Object object) {
         movesMade.remove(object);
     }
 
     /**
      * Singleton osztályra lehet vele hivatkozni
+     *
      * @return visszaad egy instance-et
      */
     public static TurnController GetInstance() {

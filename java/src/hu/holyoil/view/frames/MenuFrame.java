@@ -8,10 +8,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * A játékot indító menüt kijelző panelt implementáló osztály. Itt lehet kiválasztani a játékosok számát, amivel a játék elindul.
+ */
 public class MenuFrame extends JFrame {
     private JButton playBtn;
     private JSlider slider;
-    private int playerCount = 2;
+    private int playerCount = TurnController.GetInstance().NUM_OF_PLAYERS_MIN;
 
     private void InitComponents() {
         // setting background
@@ -41,7 +44,10 @@ public class MenuFrame extends JFrame {
         JLabel sliderLabel = new JLabel("Number of players:");
         sliderLabel.setForeground(Color.white);
 
-        slider = new JSlider(JSlider.HORIZONTAL, 2, TurnController.GetInstance().NUM_OF_PLAYERS_MAX, 2);
+        slider = new JSlider(JSlider.HORIZONTAL,
+                TurnController.GetInstance().NUM_OF_PLAYERS_MIN,
+                TurnController.GetInstance().NUM_OF_PLAYERS_MAX,
+                TurnController.GetInstance().NUM_OF_PLAYERS_MIN);
         slider.setMajorTickSpacing(1);
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);

@@ -11,19 +11,22 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A teljes játékablakot létrehozó osztály. Ő tárol egy a játékosokat listázó panelt, egy a settlernél lévő
+ * nyersanyagokat listázó panelt, egy a pályát megjelenítő panelt és egy az utolsó kör végén történt eseményeket
+ * listázó panelt. Mindig a pillanatnyilag játékban lévő telepeshez tartozó információt jeleníti meg.
+ */
 public class GameFrame extends JFrame implements IViewComponent {
-    private LogPanel logPanel;
-    private EnvironmentPanel environmentPanel;
-    private InventoryListPanel inventoryListPanel;
-    private PlayerListPanel playerListPanel;
-
+    /**
+     * A keretet felépítő panelek gyűjtője
+     */
     private List<IViewComponent> panels;
 
     private void InitComponent() {
-        logPanel = new LogPanel();
-        environmentPanel = new EnvironmentPanel();
-        inventoryListPanel = new InventoryListPanel();
-        playerListPanel = new PlayerListPanel();
+        LogPanel logPanel = new LogPanel();
+        EnvironmentPanel environmentPanel = new EnvironmentPanel();
+        InventoryListPanel inventoryListPanel = new InventoryListPanel();
+        PlayerListPanel playerListPanel = new PlayerListPanel();
         panels = Arrays.asList(logPanel, environmentPanel, inventoryListPanel, playerListPanel);
 
         JPanel mainPanel = new JPanel();

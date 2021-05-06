@@ -22,6 +22,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A pálya képét adó felületet adó osztály. Ez jeleníti meg az összes felületi elemet, az aszteroidákat, a settlerek,
+ * robotok és UFO-k ikonjait, ő írja ki a következő napviharig hátralévő körök számát. Mindig a pillanatnyilag játékban
+ * lévő telepeshez tartozó információt jeleníti meg.
+ */
 public class EnvironmentPanel extends JPanel implements IViewComponent {
     /**
      * Jelenleg soron lévő játékos telepesét tárolja (könnyebb elérhetésért)
@@ -34,21 +39,27 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
     private JLabel sunstormCountLabel;
 
     // Képek
-    private final Image asteroidImg = new ImageIcon("assets/plain_asteroid.png").getImage();
-    private final Image darkImg = new ImageIcon("assets/plain_asteroid_dark.png").getImage();
-    private final Image teleportImg = new ImageIcon("assets/teleporter.gif").getImage();
+    private static final Image asteroidImg = new ImageIcon("assets/plain_asteroid.png").getImage();
+    private static final Image darkImg = new ImageIcon("assets/plain_asteroid_dark.png").getImage();
+    private static final Image teleportImg = new ImageIcon("assets/teleporter.gif").getImage();
 
     /**
      * A szomszédos aszteroidák és azok hitboxának bal felső sarkát tároló map.
      */
     private final Map<Asteroid, Point> asteroidPointMap = new HashMap<>();
 
-    //private final Map<Rectangle, Image> imageMap = new HashMap<>();
+    /**
+     * A körülhatároló téglalap és a kép összerendeléseket tároló lista.
+     */
     private final List<ImageToRectangle> tupleList = new LinkedList<>();
 
+    /**
+     * Olyanfajta objektumok összerendelésére használt osztály, amelyben az egyik tag egy téglalap, a másik a kép,
+     * amely kitölti a téglalapot.
+     */
     private class ImageToRectangle implements Map.Entry<Rectangle, Image> {
-        private Rectangle rectangle;
-        private Image image;
+        private final Rectangle rectangle;
+        private final Image image;
 
         public ImageToRectangle(Rectangle rectangle, Image image) {
             this.rectangle = rectangle;

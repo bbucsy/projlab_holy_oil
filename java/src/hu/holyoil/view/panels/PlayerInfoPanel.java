@@ -3,14 +3,19 @@ package hu.holyoil.view.panels;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * Egy-egy PlayerListPanelbeli item, azaz egy-egy játékos telepesének állapotát reprezentáló felületegység. Figyeli
+ * a telepes játékbeli állapotát, és hogy hol áll.
+ */
 public class PlayerInfoPanel extends JPanel {
-
+    // Images used by panel
     private static final ImageIcon imgDead = new ImageIcon("assets/dead.gif");
     private static final ImageIcon imgSettler = new ImageIcon("assets/settler.gif");
+
     private JLabel playerName;
     private JLabel playerAsteroid;
     private JLabel playerState;
+
     public PlayerInfoPanel() {
         super();
         initComponents();
@@ -48,6 +53,11 @@ public class PlayerInfoPanel extends JPanel {
         this.playerAsteroid.setText(playerAsteroid);
     }
 
+    /**
+     * Metódus gyakran használva az anyaobjektum által (PlayerListPanel), amellyel az update-ek során beállítódnak
+     * a játékos állapota által az InfoPanel tulajdonságai.
+     * @param state
+     */
     public void setPlayerState(PlayerState state) {
         switch (state) {
             case Active:
@@ -64,7 +74,9 @@ public class PlayerInfoPanel extends JPanel {
         }
     }
 
-
+    /**
+     * Enum a játékos állapotának megjelölésére.
+     */
     public enum PlayerState {
         Active,
         Dead,

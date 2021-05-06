@@ -10,18 +10,29 @@ import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+/**
+ * Az utolsó kör befejezése után történt eseményeket kiíró panelt implementáló osztály. Megkapja és kiírja az összes
+ * globális eseményt a játékban, ilyenek lehetnek egy aszteroida felrobbanása, egy robot, egy ufo vagy egy settler
+ * halála. Tartalmaz egy skip gombot is, amivel a lépés megtétele nélkül véget ér a settler számára a kör.
+ */
 public class LogPanel extends JPanel implements IViewComponent {
-
+    /**
+     * A történeseket gyűjtő string
+     */
     private String logString;
 
+    /**
+     * A kimeneti stream
+     */
     final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-    private JScrollPane jScrollPane;
     private JButton skipButton;
     private JButton giveUpButton;
     private JTextArea jTextArea;
 
-    /* see: https://stackoverflow.com/questions/1760654/java-printstream-to-string/1760668 */
+    /**
+     * @link https://stackoverflow.com/questions/1760654/java-printstream-to-string/1760668
+     */
     private void InitComponent() {
         logString = "";
         try {
@@ -37,7 +48,7 @@ public class LogPanel extends JPanel implements IViewComponent {
         giveUpButton.setPreferredSize(new Dimension(140, 50));
 
         jTextArea = new JTextArea(35, 50);
-        jScrollPane = new JScrollPane(jTextArea);
+        JScrollPane jScrollPane = new JScrollPane(jTextArea);
         jScrollPane.setPreferredSize(new Dimension(720, 110));
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jTextArea.setVisible(true);

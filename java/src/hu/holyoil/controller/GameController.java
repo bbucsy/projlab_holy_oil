@@ -14,7 +14,7 @@ import java.util.*;
  * A játékmenetet kezelő singleton osztály. Implementálja az ISteppable interfacet, amivel a köröket kezeli
  * <p>A PROJEKT EZEN FÁZISÁBAN MÉG NINCS KÉSZ, A TESZTELÉSHEZ NEM SZÜKSÉGES. Ennek megfelelően a dokumentáció is csak felszínes megértést nyújt, amennyi a tesztekhez kellhet.</p>
  */
-public class GameController implements ISteppable  {
+public class GameController implements ISteppable {
 
     /**
      * singleton volta miatt szükséges statikus tagváltozó
@@ -27,6 +27,7 @@ public class GameController implements ISteppable  {
 
     /**
      * Visszaadja a kiírás érdekében a jelenlegi állást
+     *
      * @return játékállás
      */
     public GameState GetGameState() {
@@ -60,6 +61,7 @@ public class GameController implements ISteppable  {
 
         /**
          * Összeszámolja a kollekcióban található elemeket külön-külön
+         *
          * @param collection a kollekció, ami a nyersanyagokat tartalmazza
          */
         private void CountResourcesSeparately(List<AbstractBaseResource> collection) {
@@ -108,6 +110,7 @@ public class GameController implements ISteppable  {
 
         /**
          * Visszaadja, képesek-e a telepesek még nyerni, van-e annyi anyag a terepen, amivel megnyerhető a játék
+         *
          * @return megnyerhetősége a játéknak
          */
         public boolean CanWin() {
@@ -118,7 +121,7 @@ public class GameController implements ISteppable  {
     /**
      * Minden kör végén ellenőrzi megnyerték-e a játékot a telepesek
      */
-    public void CheckWinCondition()  {
+    public void CheckWinCondition() {
         if (gameState == GameState.RUNNING) {
             for (Asteroid asteroid : AsteroidRepository.GetInstance().GetAll()) {
                 CounterVector counterVector = new CounterVector();
@@ -134,7 +137,7 @@ public class GameController implements ISteppable  {
     /**
      * Minden kör végén ellenőrzi elvesztették-e a játékot a telepesek
      */
-    public void CheckLoseCondition()  {
+    public void CheckLoseCondition() {
         if (gameState == GameState.RUNNING) {
             if (SettlerRepository.GetInstance().GetAll().size() == 0) {
                 gameState = GameState.LOST_GAME;
@@ -145,7 +148,7 @@ public class GameController implements ISteppable  {
     /**
      * Minden kör végén ellenőrzi nyerhető-e még a játék
      */
-    public void CheckGameCondition()  {
+    public void CheckGameCondition() {
         if (gameState == GameState.RUNNING) {
             CounterVector counterVector = new CounterVector();
             counterVector.CountInGameResources();
@@ -158,14 +161,14 @@ public class GameController implements ISteppable  {
     /**
      * Törli az összes objektumot a tárolókból, felkészülve egy friss játékra.
      */
-    private void ResetGame(){
+    private void ResetGame() {
         //GC should manage these old objects, once we remove the references
         NeighbourBaseRepository.GetInstance().Clear();
         SpaceshipBaseRepository.GetInstance().Clear();
         PlayerStorageBaseRepository.GetInstance().Clear();
         ResourceBaseRepository.GetInstance().Clear();
         AIController.GetInstance().ResetAI();
-        gameState=GameState.RUNNING;
+        gameState = GameState.RUNNING;
     }
 
     /**
@@ -197,9 +200,10 @@ public class GameController implements ISteppable  {
 
     /**
      * elindítja a játékot.
+     *
      * @param numOfPlayers A játékban lévő játékosok száma
      */
-    public void StartGame(int numOfPlayers)  {
+    public void StartGame(int numOfPlayers) {
         ResetGame();
 
         // Generate between minAsteroidCount and maxAsteroidCount asteroids
@@ -301,7 +305,7 @@ public class GameController implements ISteppable  {
                 String first = (String) toVisit.toArray()[0];
                 toVisit.remove(first);
 
-                for (Asteroid asteroid: AsteroidRepository.GetInstance().Get(first).GetNeighbours()) {
+                for (Asteroid asteroid : AsteroidRepository.GetInstance().Get(first).GetNeighbours()) {
 
                     if (!visited.contains(asteroid.GetId()))
                         toVisit.add(asteroid.GetId());
@@ -329,7 +333,7 @@ public class GameController implements ISteppable  {
 
         }
 
-        for(Asteroid asteroid : startingAsteroid.GetNeighbours()){
+        for (Asteroid asteroid : startingAsteroid.GetNeighbours()) {
 
             //Little advantage for players: we discover all neighbours of the starting asteroid
             asteroid.Discover();
@@ -362,6 +366,7 @@ public class GameController implements ISteppable  {
 
     /**
      * Singleton osztályra így lehet hivatkozni
+     *
      * @return viszaad egy instance-ot
      */
     public static GameController GetInstance() {
@@ -377,6 +382,7 @@ public class GameController implements ISteppable  {
      * Nem lehet kívülről meghívni, nem példányosítható.
      * <p>inicializálja a tárolókat üres listákként</p>
      */
-    private GameController() { }
+    private GameController() {
+    }
 
 }
