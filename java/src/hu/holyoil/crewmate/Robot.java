@@ -78,7 +78,7 @@ public class Robot extends AbstractCrewmate {
     public void Drill() {
         super.Drill();
         if (onAsteroid.GetLayerCount() == 0 && onAsteroid.GetResource() != null) {
-            Logger.Log(this, "I've revealed a(n) " + onAsteroid.GetResource().toString() + " on " + onAsteroid.GetId());
+            Logger.Log(this, "I've revealed some " + onAsteroid.GetResource().toString() + " on " + onAsteroid.GetId());
         }
     }
 
