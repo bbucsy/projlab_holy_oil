@@ -1,7 +1,6 @@
 package hu.holyoil.view.popupmenus;
 
 import hu.holyoil.controller.TurnController;
-import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 
@@ -14,66 +13,43 @@ import java.awt.event.MouseEvent;
 public class SettlerActionPopupMenu extends AbstractPopupMenu {
     /**
      * Egy a settler a saját asteroidjára történő jobb és bal kattintást kezeli le.
+     *
      * @param e
      */
     public SettlerActionPopupMenu(MouseEvent e) {
-        if (e.getButton() == 1) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
             lClick(TurnController.GetInstance().GetSteppingSettler().GetOnAsteroid());
-        }
-        else if (e.getButton() == 3) {
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
             rClick();
         }
     }
 
     /**
      * A bal egérgombbal történő kattintást kezeli le.
-     * @param asteroid: az asteroid amire a játékos kattintott
-     *
+     * <p>
      * Kilistázza a popupmenu-re a kiválasztott asteroid összes fontos információját.
+     * </p>
+     *
+     * @param asteroid: az asteroid amire a játékos kattintott
      */
-    public void lClick(Asteroid asteroid){
-        //létrehozzuk a kiírandó stringeket
-        String idString = "ID: " + asteroid.GetId();
-        String coreString;
-        if(asteroid.GetResource() != null) {
-            coreString = "Core: " + asteroid.GetResource().toString();
-        }else{
-            coreString = "Core: ";
-        }
-        String layersString = "Layers: " + asteroid.GetLayerCount();
-        StringBuilder shipsString = new StringBuilder("Ships: ");
-        for(AbstractSpaceship sp : asteroid.GetSpaceships()){
-            shipsString.append(" ").append(sp.GetId());
-        }
-        String nearSunString = "NearSun?: ";
-        if(asteroid.GetIsNearbySun()){
-            nearSunString += "true";
-        }else{
-            nearSunString += "false";
-        }
-
-        //hozzáadjuk a popupmenuhöz a menüelemeket
-        this.add(idString);
-        this.add(coreString);
-        this.add(layersString);
-        this.add(shipsString.toString());
-        this.add(nearSunString);
+    public void lClick(Asteroid asteroid) {
+        AsteroidPopupMenu.AddAsteroidInfoToPopupMenu(asteroid, this);
     }
 
     /**
      * A jobb egérgombbal történő kattintást kezeli le.
      *
      * <p>
-     *      Amennyiben az asteroidnak van még kérge, a 'drill' művelet jelenik meg a popupmenun.
-     *      Amennyiben az asteroidnak nincs kérge és a magja nem üreges, a 'mine' művelet jelenik meg.
-     *      Amennyiben az asteroidnak nincs kérge és a magja üreges, nem jelenik meg művelet.
+     * Amennyiben az asteroidnak van még kérge, a 'drill' művelet jelenik meg a popupmenun.
+     * Amennyiben az asteroidnak nincs kérge és a magja nem üreges, a 'mine' művelet jelenik meg.
+     * Amennyiben az asteroidnak nincs kérge és a magja üreges, nem jelenik meg művelet.
      * </p>
      */
-    public void rClick(){
-        JMenuItem drill = new JMenuItem("drill");
+    public void rClick() {
+        JMenuItem drill = new JMenuItem("> Drill Crust!");
         drill.addActionListener(e -> TurnController.GetInstance().GetSteppingSettler().Drill());
 
-        JMenuItem mine = new JMenuItem("mine");
+        JMenuItem mine = new JMenuItem("> Mine Resource!");
         mine.addActionListener(e -> TurnController.GetInstance().GetSteppingSettler().Mine());
 
         this.add(drill);
@@ -81,12 +57,7 @@ public class SettlerActionPopupMenu extends AbstractPopupMenu {
 
         Settler settler = TurnController.GetInstance().GetSteppingSettler();
 
-        if (settler.GetOnAsteroid().GetLayerCount() == 0) {
-            drill.setEnabled(false);
-        }
-
-        if (settler.GetOnAsteroid().GetLayerCount() > 0 || settler.GetOnAsteroid().GetResource() == null) {
-            mine.setEnabled(false);
-        }
+        drill.setEnabled(settler.GetOnAsteroid().GetLayerCount() != 0);
+        mine.setEnabled(settler.GetOnAsteroid().GetLayerCount() <= 0 && settler.GetOnAsteroid().GetResource() != null);
     }
 }

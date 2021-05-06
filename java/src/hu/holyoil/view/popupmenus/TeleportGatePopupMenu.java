@@ -6,6 +6,7 @@ import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
@@ -14,72 +15,55 @@ import java.awt.event.MouseEvent;
 public class TeleportGatePopupMenu extends AbstractPopupMenu {
     /**
      * Egy teleportkapura történő jobb és bal kattintást kezeli le.
+     *
      * @param teleportGate: a teleportkapu amire a settler kattintott
      * @param e
      */
     public TeleportGatePopupMenu(TeleportGate teleportGate, MouseEvent e) {
-        if(e.getButton() == 1){
+        if (e.getButton() == MouseEvent.BUTTON1) {
             lClick(teleportGate);
-        }else if(e.getButton() == 3){
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
             rClick(teleportGate);
         }
     }
 
     /**
      * A bal egérgombbal történő kattintást kezeli le.
-     * @param teleportGate: az teleportkapu amire a játékos kattintott
      *
+     * <p>
      * Kilistázza a popupmenu-re a kiválasztott teleportkapu és a túloldalán található asteroid összes fontos információját.
+     * </p>
+     *
+     * @param teleportGate: az teleportkapu amire a játékos kattintott
      */
     public void lClick(TeleportGate teleportGate) {
         Asteroid asteroid = teleportGate.GetPair().GetHomeAsteroid();
+        add("ID: " + teleportGate.GetId());
 
-        //létrehozzuk a kiírandó stringeket
-        String crazyString = "Crazy?: " + teleportGate.GetIsCrazy();
-        //hozzáadjuk a stringeket a popupmenu-höz
-        this.add(crazyString);
-
-        if (asteroid!=null) {
-            this.add("To asteroid:");
-            String idString = " ID: " + asteroid.GetId();
-            String coreString;
-            if (asteroid.GetResource() != null) {
-                coreString = " Core: " + asteroid.GetResource().toString();
-            } else {
-                coreString = " Core: ";
-            }
-            String layersString = " Layers: " + asteroid.GetLayerCount();
-            StringBuilder shipsString = new StringBuilder(" Ships: ");
-            for (AbstractSpaceship sp : asteroid.GetSpaceships()) {
-                shipsString.append(" ").append(sp.GetId());
-            }
-            String nearSunString = " NearSun?: ";
-            if (asteroid.GetIsNearbySun()) {
-                nearSunString += "true";
-            } else {
-                nearSunString += "false";
-            }
-            this.add(idString);
-            this.add(coreString);
-            this.add(layersString);
-            this.add(shipsString.toString());
-            this.add(nearSunString);
+        if (teleportGate.GetIsCrazy()) {
+            JMenuItem item = new JMenuItem("Went crazy");
+            item.setForeground(new Color(178, 34, 34));
+            add(item);
         }
 
-
-
+        if (asteroid != null) {
+            add("Leading to...");
+            AsteroidPopupMenu.AddAsteroidInfoToPopupMenu(asteroid, this);
+        }
     }
 
     /**
      * A jobb egérgombbal történő kattintást kezeli le.
-     * @param teleporter: az teleportkapu amire a játékos kattintott
-     *
+     * <p>
      * Létrehoz egy menüelemet és hozzárendel egy moveListener actionlistenert.
+     * </p>
+     *
+     * @param teleportGate: az teleportkapu amire a játékos kattintott
      */
-    public void rClick(TeleportGate teleporter){
-        JMenuItem travel = new JMenuItem("travel here");
-        travel.addActionListener(e -> TurnController.GetInstance().GetSteppingSettler().Move(teleporter));
+    public void rClick(TeleportGate teleportGate) {
+        JMenuItem travel = new JMenuItem("> Travel here!");
+        travel.addActionListener(e -> TurnController.GetInstance().GetSteppingSettler().Move(teleportGate));
         this.add(travel);
-        travel.setEnabled(teleporter.GetPair().GetHomeAsteroid() != null);
+        travel.setEnabled(teleportGate.GetPair().GetHomeAsteroid() != null);
     }
 }

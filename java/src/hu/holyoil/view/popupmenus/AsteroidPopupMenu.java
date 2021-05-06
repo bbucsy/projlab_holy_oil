@@ -5,6 +5,7 @@ import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.neighbour.Asteroid;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
@@ -13,66 +14,75 @@ import java.awt.event.MouseEvent;
 public class AsteroidPopupMenu extends AbstractPopupMenu {
     /**
      * Egy a settler sajátjától különböző asteroidra történő jobb és bal kattintást kezeli le.
+     *
      * @param asteroid: az asteroid amire a játékos kattintott
-     * @param e mouse event
+     * @param e         mouse event
      */
     public AsteroidPopupMenu(Asteroid asteroid, MouseEvent e) {
-        if(e.getButton() == 1){
+        if (e.getButton() == MouseEvent.BUTTON1) {
             lClick(asteroid);
-        }else if(e.getButton() == 3){
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
             rClick(asteroid);
         }
     }
 
     /**
-     * A bal egérgombbal történő kattintást kezeli le.
-     * @param asteroid: az asteroid amire a játékos kattintott
+     * Statikus metódus, amely hozzáadja az aszteroida információt a popupmenühöz
      *
-     * Kilistázza a popupmenu-re a kiválasztott asteroid összes fontos információját.
+     * @param asteroid amelynek az adatait vizsgáljuk
+     * @param popupMenu amelyhez hozzáadódnak az információk
      */
-    public void lClick(Asteroid asteroid){
-        //létrehozzuk a kiírandó stringeket
-        String idString = "ID: " + asteroid.GetId();
-        if(!asteroid.IsDiscovered()){
-            String discovered = "Not discovered yet";
-            this.add(idString);
-            this.add(discovered);
-            return;
-        }
-        String coreString;
-        if(asteroid.GetResource() != null) {
-            coreString = "Core: " + asteroid.GetResource().toString();
-        }else{
-            coreString = "Core: ";
-        }
-        String layersString = "Layers: " + asteroid.GetLayerCount();
-        StringBuilder shipsString = new StringBuilder("Ships: ");
-        for(AbstractSpaceship sp : asteroid.GetSpaceships()){
-            shipsString.append(" ").append(sp.GetId());
-        }
-        String nearSunString = "NearSun?: ";
-        if(asteroid.GetIsNearbySun()){
-            nearSunString += "true";
-        }else{
-            nearSunString += "false";
+    public static void AddAsteroidInfoToPopupMenu(Asteroid asteroid, AbstractPopupMenu popupMenu) {
+        popupMenu.add("ID: " + asteroid.GetId());
+
+        if (asteroid.GetResource() != null) {
+            popupMenu.add("Core: " + asteroid.GetResource().toString());
         }
 
-        //hozzáadjuk a stringeket a popupmenu-höz
-        this.add(idString);
-        this.add(coreString);
-        this.add(layersString);
-        this.add(shipsString.toString());
-        this.add(nearSunString);
+        popupMenu.add("Layers: " + asteroid.GetLayerCount());
+
+        if (asteroid.GetSpaceships().size() != 0) {
+            StringBuilder shipsString = new StringBuilder("Ships: ");
+            for (AbstractSpaceship sp : asteroid.GetSpaceships()) {
+                shipsString.append(" ").append(sp.GetId());
+            }
+            popupMenu.add(shipsString.toString());
+        }
+
+        if (asteroid.GetIsNearbySun()) {
+            JMenuItem item = new JMenuItem("Near sun");
+            item.setForeground(asteroid.GetIsNearbySun() ? new Color(178, 34, 34) : item.getForeground());
+            popupMenu.add(item);
+        }
+    }
+
+    /**
+     * A bal egérgombbal történő kattintást kezeli le.
+     *
+     * <p>
+     * Kilistázza a popupmenu-re a kiválasztott asteroid összes fontos információját.
+     * </p>
+     *
+     * @param asteroid: az asteroid amire a játékos kattintott
+     */
+    public void lClick(Asteroid asteroid) {
+        if (!asteroid.IsDiscovered()) {
+            add("ID: " + asteroid.GetId());
+            this.add("Not discovered yet");
+            return;
+        }
+        AddAsteroidInfoToPopupMenu(asteroid, this);
     }
 
     /**
      * A jobb egérgombbal történő kattintást kezeli le.
-     * @param asteroid: az asteroid amire a játékos kattintott
      *
-     * Létrehoz egy menüelemet és hozzárendel egy moveListener actionlistenert.
+     * @param asteroid: az asteroid amire a játékos kattintott
+     *                  <p>
+     *                  Létrehoz egy menüelemet és hozzárendel egy moveListener actionlistenert.
      */
-    public void rClick(Asteroid asteroid){
-        JMenuItem travel = new JMenuItem("travel here");
+    public void rClick(Asteroid asteroid) {
+        JMenuItem travel = new JMenuItem("> Travel here!");
         travel.addActionListener(e -> {
             TurnController.GetInstance().GetSteppingSettler().Move(asteroid);
 
