@@ -68,13 +68,13 @@ public class SunController implements ISteppable, IIdentifiable {
     }
 
     /**
-     * 25% valószínűséggel napközelbe helyez minden aszteroidát.
+     * 15% valószínűséggel napközelbe helyez minden aszteroidát.
      */
     public void PullAsteroids(){
         List<Asteroid> asteroids = AsteroidRepository.GetInstance().GetAll();
         Random random = new Random();
         asteroids.forEach(asteroid -> {
-            asteroid.SetIsNearbySun(random.nextDouble() < 0.25);
+            asteroid.SetIsNearbySun(random.nextDouble() < 0.15);
         });
     }
 
