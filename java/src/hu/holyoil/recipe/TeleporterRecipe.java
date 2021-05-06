@@ -69,9 +69,9 @@ public class TeleporterRecipe implements IRecipe {
 
             storage.RemoveBill(billOfMaterial, true);
             TeleportGate t1 = new TeleportGate(
-                    NeighbourBaseRepository.GetIdWithPrefix("t")
+                    NeighbourBaseRepository.GetIdWithPrefix("Teleport")
             ), t2 = new TeleportGate(
-                    NeighbourBaseRepository.GetIdWithPrefix("t")
+                    NeighbourBaseRepository.GetIdWithPrefix("Teleport")
             );
             t1.SetPair(t2);
             t2.SetPair(t1);
