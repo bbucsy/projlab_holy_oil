@@ -80,5 +80,6 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
         JMenuItem travel = new JMenuItem("travel here");
         travel.addActionListener(e -> TurnController.GetInstance().GetSteppingSettler().Move(teleporter));
         this.add(travel);
+        travel.setEnabled(teleporter.GetPair().GetHomeAsteroid() != null);
     }
 }
