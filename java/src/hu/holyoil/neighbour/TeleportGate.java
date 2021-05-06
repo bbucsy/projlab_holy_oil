@@ -2,6 +2,7 @@ package hu.holyoil.neighbour;
 
 import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.Logger;
+import hu.holyoil.controller.SunController;
 import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.repository.NeighbourBaseRepository;
 import hu.holyoil.storage.PlayerStorage;
@@ -88,7 +89,10 @@ public class TeleportGate implements INeighbour {
     public void SetIsCrazy(boolean newIsCrazy) {
 
         isCrazy = newIsCrazy;
-        if (isCrazy) AIController.GetInstance().AddTeleportGate(this);
+        if (isCrazy){
+            Logger.Log(SunController.GetInstance(), this.id + " went crazy on " + homeAsteroid.GetId());
+            AIController.GetInstance().AddTeleportGate(this);
+        }
 
     }
 
