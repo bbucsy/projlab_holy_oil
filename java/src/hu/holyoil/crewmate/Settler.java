@@ -1,6 +1,5 @@
 package hu.holyoil.crewmate;
 
-import hu.holyoil.controller.AIController;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
@@ -11,8 +10,8 @@ import hu.holyoil.repository.SpaceshipBaseRepository;
 import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.storage.PlayerStorage;
 
-import javax.swing.ImageIcon;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A Telepeseket leíró osztály.

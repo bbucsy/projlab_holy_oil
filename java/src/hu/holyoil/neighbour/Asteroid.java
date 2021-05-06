@@ -1,6 +1,5 @@
 package hu.holyoil.neighbour;
 
-import hu.holyoil.Main;
 import hu.holyoil.controller.Logger;
 import hu.holyoil.crewmate.AbstractCrewmate;
 import hu.holyoil.crewmate.AbstractSpaceship;

@@ -1,7 +1,9 @@
 package hu.holyoil;
 
-import hu.holyoil.controller.Logger;
-import hu.holyoil.controller.*;
+import hu.holyoil.controller.AIController;
+import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.SunController;
+import hu.holyoil.controller.TurnController;
 
 /**
  * A program futására írt osztály, amelyben a main metódus lakik.

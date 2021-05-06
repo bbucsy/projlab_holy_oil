@@ -1,7 +1,7 @@
 package hu.holyoil.view.panels;
 
-import hu.holyoil.controller.Logger;
 import hu.holyoil.controller.GameController;
+import hu.holyoil.controller.Logger;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.view.IViewComponent;
 

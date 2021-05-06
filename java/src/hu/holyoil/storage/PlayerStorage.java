@@ -4,7 +4,7 @@ import hu.holyoil.IIdentifiable;
 import hu.holyoil.collection.BillOfMaterial;
 import hu.holyoil.neighbour.TeleportGate;
 import hu.holyoil.repository.PlayerStorageBaseRepository;
-import hu.holyoil.resource.*;
+import hu.holyoil.resource.AbstractBaseResource;
 
 import java.util.ArrayList;
 import java.util.List;

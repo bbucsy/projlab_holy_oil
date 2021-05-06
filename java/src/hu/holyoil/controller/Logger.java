@@ -2,8 +2,6 @@ package hu.holyoil.controller;
 
 import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 
 /**

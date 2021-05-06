@@ -5,7 +5,7 @@ import hu.holyoil.controller.TurnController;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 
-import java.awt.Image;
+import java.awt.*;
 
 /**
  * A telepes, robot és UFO közös őse

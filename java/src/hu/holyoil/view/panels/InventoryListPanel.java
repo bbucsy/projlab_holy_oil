@@ -3,7 +3,7 @@ package hu.holyoil.view.panels;
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.resource.*;
+import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.storage.PlayerStorage;
 import hu.holyoil.view.IViewComponent;
 

@@ -1,6 +1,5 @@
 package hu.holyoil.repository;
 
-import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.INeighbour;
 
