@@ -1,7 +1,6 @@
 package hu.holyoil.controller;
 
 import hu.holyoil.IIdentifiable;
-import hu.holyoil.Main;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.AsteroidRepository;
 
@@ -59,6 +58,9 @@ public class SunController implements ISteppable, IIdentifiable {
         if (turnsUntilNextSunstorm == 0) {
             StartSunstorm();
             RestartCountdown();
+        }
+        if(turnsUntilNextSunstorm<=3){
+            Logger.Log(this, "Sunstorm in " + turnsUntilNextSunstorm + " turn(s)");
         }
         PullAsteroids();
         List<Asteroid> asteroidsShallowCopy = new ArrayList<>(AsteroidRepository.GetInstance().GetAll());
@@ -130,6 +132,7 @@ public class SunController implements ISteppable, IIdentifiable {
 
         if (sunController == null) {
             sunController = new SunController();
+            Logger.RegisterObject(sunController, sunController.id);
         }
 
         return sunController;
@@ -144,7 +147,7 @@ public class SunController implements ISteppable, IIdentifiable {
      */
     private SunController() {
         RestartCountdown();
-        id = "SunController";
+        id = "Sun";
     }
 
 }

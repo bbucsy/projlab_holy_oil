@@ -2,14 +2,10 @@ package hu.holyoil.view.popupmenus;
 
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.AbstractSpaceship;
-import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 /**
@@ -42,9 +38,9 @@ public class TeleportGatePopupMenu extends AbstractPopupMenu {
         String crazyString = "Crazy?: " + teleportGate.GetIsCrazy();
         //hozzáadjuk a stringeket a popupmenu-höz
         this.add(crazyString);
-        this.add("To asteroid:");
 
         if (asteroid!=null) {
+            this.add("To asteroid:");
             String idString = " ID: " + asteroid.GetId();
             String coreString;
             if (asteroid.GetResource() != null) {

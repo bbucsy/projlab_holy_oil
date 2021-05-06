@@ -1,12 +1,10 @@
 package hu.holyoil.controller;
 
-import hu.holyoil.Main;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.crewmate.Ufo;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.repository.*;
 import hu.holyoil.resource.*;
-import hu.holyoil.storage.PlayerStorage;
 import hu.holyoil.view.frames.GameFrame;
 import hu.holyoil.view.frames.MenuFrame;
 
@@ -323,12 +321,18 @@ public class GameController implements ISteppable  {
 
         }
 
+        Asteroid startingAsteroid = AsteroidRepository.GetInstance().Get(startingAsteroidName);
         for (int i = 0; i < numOfPlayers; i++) {
 
             // We generate numOfPlayers amount of settlers on the settler asteroid
-            new Settler(
-                    AsteroidRepository.GetInstance().Get(startingAsteroidName)
-            );
+            new Settler(startingAsteroid);
+
+        }
+
+        for(Asteroid asteroid : startingAsteroid.GetNeighbours()){
+
+            //Little advantage for players: we discover all neighbours of the starting asteroid
+            asteroid.Discover();
 
         }
 

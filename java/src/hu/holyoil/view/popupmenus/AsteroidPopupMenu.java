@@ -2,14 +2,9 @@ package hu.holyoil.view.popupmenus;
 
 import hu.holyoil.controller.TurnController;
 import hu.holyoil.crewmate.AbstractSpaceship;
-import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
-import hu.holyoil.neighbour.INeighbour;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 /**
@@ -38,6 +33,12 @@ public class AsteroidPopupMenu extends AbstractPopupMenu {
     public void lClick(Asteroid asteroid){
         //létrehozzuk a kiírandó stringeket
         String idString = "ID: " + asteroid.GetId();
+        if(!asteroid.IsDiscovered()){
+            String discovered = "Not discovered yet";
+            this.add(idString);
+            this.add(discovered);
+            return;
+        }
         String coreString;
         if(asteroid.GetResource() != null) {
             coreString = "Core: " + asteroid.GetResource().toString();

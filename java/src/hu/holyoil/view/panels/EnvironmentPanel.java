@@ -6,7 +6,7 @@ import hu.holyoil.crewmate.AbstractSpaceship;
 import hu.holyoil.crewmate.Settler;
 import hu.holyoil.neighbour.Asteroid;
 import hu.holyoil.neighbour.TeleportGate;
-import hu.holyoil.resource.*;
+import hu.holyoil.resource.AbstractBaseResource;
 import hu.holyoil.view.IViewComponent;
 import hu.holyoil.view.popupmenus.AbstractPopupMenu;
 import hu.holyoil.view.popupmenus.AsteroidPopupMenu;
@@ -17,8 +17,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class EnvironmentPanel extends JPanel implements IViewComponent {
     /**
@@ -33,6 +35,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
     // Képek
     private final Image asteroidImg = new ImageIcon("assets/plain_asteroid.png").getImage();
+    private final Image darkImg = new ImageIcon("assets/plain_asteroid_dark.png").getImage();
     private final Image teleportImg = new ImageIcon("assets/teleporter.gif").getImage();
 
     /**
@@ -217,16 +220,19 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
             // register neighbour asteroid as drawable image AND clickable element
             asteroidPointMap.put(asteroid, new Point(x, y));
-            tupleList.add(new ImageToRectangle(new Rectangle(x, y, 44, 44), asteroidImg));
+            if(!asteroid.IsDiscovered()){
+                tupleList.add(new ImageToRectangle(new Rectangle(x, y, 44, 44), darkImg));
+            }
+            else {
+                tupleList.add(new ImageToRectangle(new Rectangle(x, y, 44, 44), asteroidImg));
+                // register neighbour asteroid's resource as drawable image
+                AbstractBaseResource res = asteroid.GetResource();
+                if (res != null)
+                    tupleList.add(new ImageToRectangle(new Rectangle(x + 2, y + 2, 40, 40), DefineImageFrom(res)));
 
-            // register neighbour asteroid's resource as drawable image
-            AbstractBaseResource res = asteroid.GetResource();
-            if (res != null)
-                tupleList.add(new ImageToRectangle(new Rectangle(x + 2, y + 2, 40, 40), DefineImageFrom(res)));
-
-            // register neighbour asteroid's spaceships (and teleporter if available)
-            AsteroidSurroundingToImageMap(asteroid, new Point(x, y));
-
+                // register neighbour asteroid's spaceships (and teleporter if available)
+                AsteroidSurroundingToImageMap(asteroid, new Point(x, y));
+            }
             phi += deltaPhi;
         }
     }
