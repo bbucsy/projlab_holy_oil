@@ -140,6 +140,7 @@ public class AIController implements ISteppable {
                         && asteroid.GetResource()!=null
                         && !asteroid.GetIsNearbySun()) //look for neighbour that: has layers, isn't near Sun AND would possibly react, isn't empty
                 .collect(Collectors.toList());
+        //find any drillable neighbour
         if (!possibleTargets.isEmpty()){
             robot.Move(possibleTargets.get(random.nextInt(possibleTargets.size())));
             return;
@@ -184,23 +185,14 @@ public class AIController implements ISteppable {
      */
     public void HandleTeleportGate(TeleportGate teleportGate)  {
         List<Asteroid> neighbouringAsteroids = teleportGate.GetHomeAsteroid().GetNeighbours();
-
         Random random = new Random();
-        int chosenIndex = random.nextInt(neighbouringAsteroids.size());
-        int start = chosenIndex;
-        boolean canMove = true;
-        while (canMove && neighbouringAsteroids.get(chosenIndex).GetTeleporter() != null) {
-            if (chosenIndex == neighbouringAsteroids.size() - 1) {
-                chosenIndex = -1;
-            }
-            chosenIndex++;
-            if (chosenIndex == start) {
-                canMove = false;
-            }
-        }
-        if (canMove) {
-            teleportGate.Move(neighbouringAsteroids.get(chosenIndex));
-        }
+
+        List<Asteroid> possibleTargets = neighbouringAsteroids.stream()
+                .filter(asteroid -> asteroid.GetTeleporter()==null)
+                .collect(Collectors.toList());
+
+        if (!possibleTargets.isEmpty())
+            teleportGate.Move(possibleTargets.get(random.nextInt(possibleTargets.size())));
     }
 
     /**
