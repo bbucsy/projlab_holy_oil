@@ -261,4 +261,13 @@ public class AIController implements ISteppable {
         teleporters = new ArrayList<>();
     }
 
+    /**
+     * Játék végén törli az összes AI-t.
+     */
+    public void ResetAI(){
+        robots = new ArrayList<>();
+        ufos = new ArrayList<>();
+        teleporters = new ArrayList<>();
+    }
+
 }

@@ -161,10 +161,12 @@ public class GameController implements ISteppable  {
      * Törli az összes objektumot a tárolókból, felkészülve egy friss játékra.
      */
     private void ResetGame(){
+        //GC should manage these old objects, once we remove the references
         NeighbourBaseRepository.GetInstance().Clear();
         SpaceshipBaseRepository.GetInstance().Clear();
         PlayerStorageBaseRepository.GetInstance().Clear();
         ResourceBaseRepository.GetInstance().Clear();
+        AIController.GetInstance().ResetAI();
         gameState=GameState.RUNNING;
     }
 

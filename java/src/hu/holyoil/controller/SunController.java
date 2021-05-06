@@ -60,9 +60,20 @@ public class SunController implements ISteppable, IIdentifiable {
             StartSunstorm();
             RestartCountdown();
         }
-
+        PullAsteroids();
         List<Asteroid> asteroidsShallowCopy = new ArrayList<>(AsteroidRepository.GetInstance().GetAll());
         asteroidsShallowCopy.forEach(Asteroid::ReactToSunNearby);
+    }
+
+    /**
+     * 25% valószínűséggel napközelbe helyez minden aszteroidát.
+     */
+    public void PullAsteroids(){
+        List<Asteroid> asteroids = AsteroidRepository.GetInstance().GetAll();
+        Random random = new Random();
+        asteroids.forEach(asteroid -> {
+            asteroid.SetIsNearbySun(random.nextDouble() < 0.25);
+        });
     }
 
     /**
