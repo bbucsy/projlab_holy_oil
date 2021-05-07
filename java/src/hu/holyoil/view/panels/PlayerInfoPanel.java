@@ -20,8 +20,8 @@ public class PlayerInfoPanel extends JPanel {
         super();
         initComponents();
         setPlayerState(PlayerState.Dead);
-        setPreferredSize(new Dimension(360, 45));
-        setMaximumSize(new Dimension(360, 45));
+        setPreferredSize(new Dimension(420, 45));
+        setMaximumSize(new Dimension(420, 45));
         setOpaque(false);
     }
 
@@ -32,11 +32,11 @@ public class PlayerInfoPanel extends JPanel {
         playerName.setForeground(Color.WHITE);
         playerName.setVerticalAlignment(JLabel.CENTER);
         playerName.setHorizontalAlignment(JLabel.RIGHT);
-        playerName.setPreferredSize(new Dimension(80, 45));
+        playerName.setPreferredSize(new Dimension(100, 45));
         playerAsteroid = new JLabel();
         playerAsteroid.setForeground(Color.WHITE);
         playerAsteroid.setVerticalAlignment(JLabel.CENTER);
-        playerAsteroid.setPreferredSize(new Dimension(80, 45));
+        playerAsteroid.setPreferredSize(new Dimension(100, 45));
         playerState = new JLabel();
         playerState.setPreferredSize(new Dimension(50, 45));
 

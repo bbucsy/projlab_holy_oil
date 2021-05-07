@@ -84,14 +84,14 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
 
     private void InitComponent() {
         JLabel sunstormStaticLabel = new JLabel("Next sunstorm's imminent in: ");
-        sunstormStaticLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 14));
+        sunstormStaticLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 16));
         sunstormStaticLabel.setForeground(Color.white);
 
         sunstormCountLabel = new JLabel();
-        sunstormCountLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 14));
-        sunstormCountLabel.setForeground(Color.white);
+        sunstormCountLabel.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 16));
+        sunstormCountLabel.setForeground(Color.GREEN);
 
-        FlowLayout layout = new FlowLayout(FlowLayout.LEADING);
+        FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
         setLayout(layout);
         add(sunstormStaticLabel);
         add(sunstormCountLabel);
@@ -129,9 +129,9 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
                 // checking click on neighbour asteroid, teleportgate or central asteroid
                 if (hitAsteroid[0] != null)
                     popupMenu = new AsteroidPopupMenu(hitAsteroid[0], e);
-                else if (HitInBox(hit, new Point(230, 210), 60, 60) && teleportGate != null)
+                else if (HitInBox(hit, new Point(310, 210), 60, 60) && teleportGate != null)
                     popupMenu = new TeleportGatePopupMenu(teleportGate, e);
-                else if (HitInBox(hit, new Point(330, 280), 64, 64))
+                else if (HitInBox(hit, new Point(410, 280), 64, 64))
                     popupMenu = new SettlerActionPopupMenu(e);
 
                 if (popupMenu != null)
@@ -190,19 +190,19 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private void CentralAsteroidToImageMap() {
         // register central asteroid as drawable image
-        tupleList.add(new ImageToRectangle(new Rectangle(330, 280, 64, 64), asteroidImg));
+        tupleList.add(new ImageToRectangle(new Rectangle(410, 280, 64, 64), asteroidImg));
 
         // register central asteroid's resource as drawable image
         AbstractBaseResource res = player.GetOnAsteroid().GetResource();
         if (res != null)
-            tupleList.add(new ImageToRectangle(new Rectangle(334, 284, 56, 56), DefineImageFrom(res)));
+            tupleList.add(new ImageToRectangle(new Rectangle(414, 284, 56, 56), DefineImageFrom(res)));
 
         // register central asteroid's spaceships as drawable image
         List<AbstractSpaceship> spaceships = player.GetOnAsteroid().GetSpaceships();
         double phi = -0.5 * Math.PI;
         double deltaPhi = 2 * Math.PI / (double)spaceships.size();
         for (AbstractSpaceship spaceship : spaceships) {
-            int x = (int) (Math.cos(phi) * 50) + 330 + 12;
+            int x = (int) (Math.cos(phi) * 50) + 410 + 12;
             int y = (int) (Math.sin(phi) * 50) + 280 + 12;
             tupleList.add(new ImageToRectangle(new Rectangle(x, y, 40, 40), DefineImageFrom(spaceship)));
             phi += deltaPhi;
@@ -214,7 +214,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
      */
     private void TeleportGateToImageMap() {
         if (player.GetOnAsteroid().GetTeleporter() != null)
-            tupleList.add(new ImageToRectangle(new Rectangle(230, 210, 60, 60), teleportImg));
+            tupleList.add(new ImageToRectangle(new Rectangle(310, 210, 60, 60), teleportImg));
     }
 
     /**
@@ -226,8 +226,8 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
         double phi = 0;
         double deltaPhi = 2 * Math.PI / asteroids.size();
         for (Asteroid asteroid : asteroids) {
-            int x = (int) (Math.cos(phi) * 280) + 330;
-            int y = (int) (Math.sin(phi) * 220) + 280;
+            int x = (int) (Math.cos(phi) * 320) + 410;
+            int y = (int) (Math.sin(phi) * 240) + 280;
 
             // register neighbour asteroid as drawable image AND clickable element
             asteroidPointMap.put(asteroid, new Point(x, y));
@@ -285,7 +285,7 @@ public class EnvironmentPanel extends JPanel implements IViewComponent {
     public EnvironmentPanel() {
         super();
         InitComponent();
-        setPreferredSize(new Dimension(720, 600));
+        setPreferredSize(new Dimension(860, 600));
         setOpaque(false);
     }
 }

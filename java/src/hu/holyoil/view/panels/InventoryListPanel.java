@@ -80,14 +80,21 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         JScrollPane scrollPane = new JScrollPane(inventory);
         scrollPane.setVerticalScrollBar(new JScrollBar());
         scrollPane.setBackground(new Color(4,4,13));
-        scrollPane.setPreferredSize(new Dimension(320, 280));
+        scrollPane.setPreferredSize(new Dimension(400, 280));
 
         JLabel tpText = new JLabel("Number of TeleportGates: ");
+        tpText.setForeground(Color.white);
         tps= new JLabel(String.valueOf(storage.GetTeleporterCount()));
+        tps.setForeground(Color.white);
         craftRobot = new JButton("Craft Robot");
         craftTp = new JButton("Craft Teleporter");
         placeTp = new JButton("Place Teleporter");
         fill = new JButton("Place Resource");
+
+        craftRobot.setPreferredSize(new Dimension(160, 25));
+        craftTp.setPreferredSize(new Dimension(160, 25));
+        placeTp.setPreferredSize(new Dimension(160, 25));
+        fill.setPreferredSize(new Dimension(160, 25));
         //első két gomb
         JPanel panel1 = new JPanel();
         panel1.setOpaque(false);
@@ -164,7 +171,7 @@ public class InventoryListPanel extends JPanel implements IViewComponent {
         super();
         InitComponent();
         InitListeners();
-        setPreferredSize(new Dimension(360, 400));
+        setPreferredSize(new Dimension(420, 400));
         setOpaque(false);
         setBackground(new Color(4, 4, 13));
     }

@@ -44,12 +44,12 @@ public class LogPanel extends JPanel implements IViewComponent {
 
         skipButton = new JButton("Skip turn", null);
         giveUpButton = new JButton("Give Up Game", null);
-        skipButton.setPreferredSize(new Dimension(100, 50));
-        giveUpButton.setPreferredSize(new Dimension(140, 50));
+        skipButton.setPreferredSize(new Dimension(160, 50));
+        giveUpButton.setPreferredSize(new Dimension(160, 50));
 
         jTextArea = new JTextArea(35, 50);
         JScrollPane jScrollPane = new JScrollPane(jTextArea);
-        jScrollPane.setPreferredSize(new Dimension(720, 110));
+        jScrollPane.setPreferredSize(new Dimension(860, 110));
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jTextArea.setVisible(true);
         jTextArea.setEditable(false);
@@ -63,7 +63,7 @@ public class LogPanel extends JPanel implements IViewComponent {
         add(jScrollPane);
         add(Box.createRigidArea(new Dimension(20, 50)));
         add(skipButton);
-        add(Box.createRigidArea(new Dimension(40, 50)));
+        add(Box.createRigidArea(new Dimension(20, 50)));
         add(giveUpButton);
     }
 
@@ -85,7 +85,7 @@ public class LogPanel extends JPanel implements IViewComponent {
 
     public LogPanel() {
         super();
-        setPreferredSize(new Dimension(1080, 120));
+        setPreferredSize(new Dimension(1280, 120));
         setOpaque(false);
         InitComponent();
         InitListeners();

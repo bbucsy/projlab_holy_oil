@@ -29,6 +29,15 @@ public class GameFrame extends JFrame implements IViewComponent {
         PlayerListPanel playerListPanel = new PlayerListPanel();
         panels = Arrays.asList(logPanel, environmentPanel, inventoryListPanel, playerListPanel);
 
+        JLabel background = new JLabel(new ImageIcon("assets/bckg.png"));
+        setContentPane(background);
+        setLayout(new FlowLayout());
+
+        JPanel framePanel = new JPanel();
+        framePanel.setLayout(new BorderLayout());
+        framePanel.setOpaque(false);
+        add(framePanel);
+
         JPanel mainPanel = new JPanel();
         GroupLayout mainLayout = new GroupLayout(mainPanel);
         mainPanel.setLayout(mainLayout);
@@ -56,9 +65,9 @@ public class GameFrame extends JFrame implements IViewComponent {
                         )
         );
 
-        getContentPane().setBackground(Color.black);
-        add(mainPanel, BorderLayout.CENTER);
-        add(logPanel, BorderLayout.SOUTH);
+        framePanel.add(mainPanel, BorderLayout.CENTER);
+        framePanel.add(logPanel, BorderLayout.SOUTH);
+        add(framePanel);
     }
 
     @Override

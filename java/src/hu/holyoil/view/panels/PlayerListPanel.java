@@ -26,7 +26,7 @@ public class PlayerListPanel extends JPanel implements IViewComponent {
     public PlayerListPanel() {
         super();
         this.InitComponent();
-        setPreferredSize(new Dimension(360, 200));
+        setPreferredSize(new Dimension(420, 200));
         setOpaque(false);
     }
 
