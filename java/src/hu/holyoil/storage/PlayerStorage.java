@@ -177,8 +177,6 @@ public class PlayerStorage implements IIdentifiable {
     }
 
     public void RemoveBill(BillOfMaterial billOfMaterial, boolean deleteMaterials) {
-        storedMaterials.removeAll(billOfMaterial.GetMaterials());
-
         for (AbstractBaseResource billResource : billOfMaterial.GetMaterials()) {
 
             for (AbstractBaseResource storedResource : storedMaterials) {
