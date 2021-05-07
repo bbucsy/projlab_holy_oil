@@ -42,7 +42,6 @@ together {
     - InitComponent()
     - InitListeners()
     + UpdateComponent()
-    + GetNeighbourAt(e: MouseEvent): INeighbour
     + EnvironmentPanel()
   }
 
@@ -55,7 +54,6 @@ together {
   }
 
   class PlayerListPanel {
-    - InitComponent()
     - InitListeners()
     + UpdateComponent()
     + PlayerListPanel()
@@ -70,29 +68,20 @@ together {
 }
 
 abstract class AbstractPopupMenu {
-  {abstract}# InitListeners()
   + Show(e: MouseEvent)
 }
 
 together {
   class AsteroidPopupMenu {
-    # InitListeners()
     + AsteroidPopupMenu(a: Asteroid, e: MouseEvent)
   }
 
   class TeleportGatePopupMenu {
-    # InitListeners()
     + TeleportGatePopupMenu(t: TeleportGate, e: MouseEvent)
   }
 
   class SettlerActionPopupMenu {
-    # InitListeners()
     + ActionPopupMenu(s: Settler, e: MouseEvent)
-  }
-
-  class PlaceResourcePopupMenu {
-    # InitListeners()
-    + PlaceResourcePopupMenu(r: AbstractBaseResource, e: MouseEvent)
   }
 }
 
@@ -114,13 +103,13 @@ MenuFrame -up--|> JFrame
 EnvironmentPanel -down--|> JPanel
 InventoryListPanel -down--|> JPanel
 PlayerListPanel -down--|> JPanel
+PlayerInfoPanel -down--|> JPanel
 LogPanel -down--|> JPanel
 
 AbstractPopupMenu -up-|> JPopupMenu
 AsteroidPopupMenu -up-|> AbstractPopupMenu
 TeleportGatePopupMenu -up-|> AbstractPopupMenu
 SettlerActionPopupMenu -up-|> AbstractPopupMenu
-PlaceResourcePopupMenu -up-|> AbstractPopupMenu
 
 ' This is for better display
 JPopupMenu -[hidden]up-> JPanel
